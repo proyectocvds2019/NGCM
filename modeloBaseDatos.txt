@@ -8,14 +8,16 @@ class Usuarios{
 }
 
 class Laboratorios{
-
+	Entero id
+	Cadena nombre
 }
 
 class Equipos{
-
+	Entero id
 }
 class Elementos{
-
+	Entero id
+	Cadena tipo
 }
 
 Elementos <- Equipos : tiene
