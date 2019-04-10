@@ -19,7 +19,19 @@ class Elementos{
 	Entero id
 	Cadena tipo
 }
+class Mouse{
+	
+}
+class Teclado{
+	
+}
+class CPU{
+	
+}
 
 Elementos "1..*" <- "1" Equipos : tiene
 Equipos "1..*" <- "1" Laboratorios : tiene
+Elementos <|-- Mouse
+Elementos <|-- Teclado
+Elementos <|-- CPU
 @enduml
