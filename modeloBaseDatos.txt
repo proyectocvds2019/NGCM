@@ -20,8 +20,6 @@ class Elementos{
 	Cadena tipo
 }
 
-Elementos <- Equipos : tiene
-Equipos <- Laboratorios : tiene
-Elementos "1..*" - "1" Equipos
-Equipos "1..*" - "1" Laboratorios
+Elementos "1..*" <- "1" Equipos : tiene
+Equipos "1..*" <- "1" Laboratorios : tiene
 @enduml
