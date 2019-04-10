@@ -2,21 +2,22 @@
 class Usuarios{
 	Cadena usuario
 	Cadena estado
-	Tcorreo correo
+	+ Tcorreo correo
 	Cadena contraseña
 	Entero carnet
+	Cadena rol
 }
 
 class Laboratorios{
-	Entero id
+	+ Entero id
 	Cadena nombre
 }
 
 class Equipos{
-	Entero id
+	+ Entero id
 }
 class Elementos{
-	Entero id
+	+ Entero id
 	Cadena tipo
 }
 
