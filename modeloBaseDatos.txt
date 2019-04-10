@@ -25,7 +25,10 @@ class Mouse{
 class Teclado{
 	
 }
-class CPU{
+class Torre{
+	
+}
+class Monitor{
 	
 }
 
@@ -35,5 +38,6 @@ Elementos "1..*" <- "1" Usuarios : registra
 
 Elementos <|-- Mouse
 Elementos <|-- Teclado
-Elementos <|-- CPU
+Elementos <|-- Torre
+Elementos <|-- Monitor
 @enduml

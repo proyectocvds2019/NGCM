@@ -33,11 +33,11 @@ public class App
         Subject usuarioActual = SecurityUtils.getSubject();
         Session session = usuarioActual.getSession();
         if(!usuarioActual.isAuthenticated()) {
-        	System.out.println("no está autenticado");
+        	System.out.println("no esta autenticado");
         	UsernamePasswordToken token = new UsernamePasswordToken("administrador","123");
         	token.setRememberMe(true);
         	usuarioActual.login(token);
-        	System.out.println("ya está autenticdo");
+        	System.out.println("ya estï¿½ autenticdo");
         }
         System.out.println(usuarioActual.isAuthenticated());
         System.exit(0);
