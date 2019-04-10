@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--<settings>
+        <setting name="logImpl" value="LOG4J"/>        
+    </settings>-->
+    
+    <properties resource="config.properties">
+    </properties>
+    <typeAliases>
+        <typeAlias type="edu.eci.cvds.samples.entities.Cliente" alias="Cliente"/>
+        <typeAlias type="edu.eci.cvds.samples.entities.Item" alias="Item"/>
+        <typeAlias type="edu.eci.cvds.samples.entities.ItemRentado" alias="ItemRentado"/>
+        <typeAlias type="edu.eci.cvds.samples.entities.TipoItem" alias="TipoItem"/>
+    </typeAliases>
+
+
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="org.postgresql.Driver" />
+				<property name="url" value="[URL definitiva del punto 8.14, cambiando '&' por '&amp;']"/> 
+				<property name="username" value="[User del punto 8 o del punto 7]" />
+				<property name="password" value="[Contraseña del punto 8 o del punto 7]" />
+			</dataSource>
+		</environment>
+	</environments>
+        
+    <mappers>
+               
+    </mappers> 
+        
+        
+</configuration>
