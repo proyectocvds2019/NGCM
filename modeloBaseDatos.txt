@@ -1,7 +1,25 @@
 @startuml
-Class01 <|-- Class02
-Class03 *-- Class04
-Class05 o-- Class06
-Class07 .. Class08
-Class09 -- Class10
+class Usuarios{
+	Cadena usuario
+	Cadena estado
+	Tcorreo correo
+	Cadena contraseña
+	Entero carnet
+}
+
+class Laboratorios{
+
+}
+
+class Equipos{
+
+}
+class Elementos{
+
+}
+
+Elementos <- Equipos : tiene
+Equipos <- Laboratorios : tiene
+Elementos "1..*" - "1" Equipos
+Equipos "1..*" - "1" Laboratorios
 @enduml
