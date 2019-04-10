@@ -31,6 +31,8 @@ class CPU{
 
 Elementos "1..*" <- "1" Equipos : tiene
 Equipos "1..*" <- "1" Laboratorios : tiene
+Elementos "1..*" <- "1" Usuarios : registra
+
 Elementos <|-- Mouse
 Elementos <|-- Teclado
 Elementos <|-- CPU
