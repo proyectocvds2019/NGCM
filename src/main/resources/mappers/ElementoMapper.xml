@@ -14,7 +14,7 @@
 	</resultMap>
 	
 	<insert parameterType = "map" id = "registrarElemento">	
-		INSERT INTO ELEMENTOS (id, tipo, registradoPor)
+		INSERT INTO elementos (id, tipo, registradoPor)
 		VALUES (#{el.id},#{el.tipo},#{u.correo});
 	</insert>
 	
