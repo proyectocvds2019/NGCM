@@ -1,7 +1,6 @@
 @startuml
 class Usuarios{
-	Cadena usuario
-	Cadena estado
+	Cadena nombre
 	+ Tcorreo correo
 	Cadena contraseña
 	Entero carnet

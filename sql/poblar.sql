@@ -1,0 +1,1 @@
+insert into usuarios (nombre, correo, contrasena, carnet, rol) values ('Andres Gualdron','gualdronsito@hotmail.com','202cb962ac59075b964b07152d234b70',2128884,'admin');
