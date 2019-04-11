@@ -24,7 +24,7 @@ CREATE SEQUENCE id_elemento;
 CREATE TABLE Elementos(
 	id INTEGER PRIMARY KEY NOT NULL DEFAULT nextval('id_elemento'),
 	tipo VARCHAR(100) NOT NULL,
-	idEquipo INTEGER NOT NULL,
+	idEquipo INTEGER,
 	registradoPor VARCHAR(100) NOT NULL
 );
 
