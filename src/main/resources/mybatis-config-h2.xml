@@ -5,8 +5,11 @@
 <configuration>
 	<properties resource="config.properties">
     </properties>
+    	
     <typeAliases>
-        
+        <typeAlias type='edu.eci.cvds.samples.entities.Elemento' alias='Elemento'/>
+        <typeAlias type='edu.eci.cvds.samples.entities.Usuario' alias='Usuario'/>
+        <typeAlias type='edu.eci.cvds.samples.entities.Equipo' alias='Equipo'/>
     </typeAliases>
 	
 	<environments default="development">
@@ -22,6 +25,8 @@
 	</environments>
         
     <mappers>
-               
+		<mapper resource="mappers/ElementoMapper.xml"></mapper>
+        <mapper resource="mappers/EquipoMapper.xml"></mapper>
+        <mapper resource="mappers/UsuarioMapper.xml"></mapper>
     </mappers> 
 </configuration>
