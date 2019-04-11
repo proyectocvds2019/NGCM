@@ -4,7 +4,7 @@ CREATE TABLE Usuarios(
 	nombre VARCHAR(100) NOT NULL,
 	correo VARCHAR(100) PRIMARY KEY NOT NULL,
 	contrasena VARCHAR(100) NOT NULL,
-	rol VARCHAR(100) NOT NULL,
+	rol VARCHAR(20) NOT NULL,
 	carnet INTEGER
 );
 
@@ -23,7 +23,7 @@ CREATE TABLE Equipos(
 CREATE SEQUENCE id_elemento;
 CREATE TABLE Elementos(
 	id INTEGER PRIMARY KEY NOT NULL DEFAULT nextval('id_elemento'),
-	tipo VARCHAR(100) NOT NULL,
+	tipo VARCHAR(10) NOT NULL,
 	idEquipo INTEGER,
 	registradoPor VARCHAR(100) NOT NULL
 );
@@ -46,6 +46,10 @@ ALTER TABLE Elementos ADD CONSTRAINT Elementos_Usuario
 -- Tipo Correo
 ALTER TABLE Usuarios ADD CONSTRAINT Correo
 		CHECK (Usuarios.correo LIKE '%@%.%');
+		
+-- Tipo Elementos
+ALTER TABLE Elementos ADD CONSTRAINT Tipo
+		CHECK (Elementos.tipo IN ('Pantalla','Teclado','Mouse','Torre'));
 
 -- Roles
 /*
