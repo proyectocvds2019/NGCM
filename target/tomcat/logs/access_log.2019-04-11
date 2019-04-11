@@ -1,0 +1,11 @@
+0:0:0:0:0:0:0:1 - - [11/Apr/2019:09:29:17 -0500] "GET / HTTP/1.1" 200 2942 http-bio-8080-exec-1 277
+0:0:0:0:0:0:0:1 - - [11/Apr/2019:09:29:17 -0500] "GET /javax.faces.resource/theme.css.xhtml?ln=primefaces-aristo HTTP/1.1" 304 - http-bio-8080-exec-3 11
+0:0:0:0:0:0:0:1 - - [11/Apr/2019:09:29:17 -0500] "GET /javax.faces.resource/components.css.xhtml?ln=primefaces&v=6.2 HTTP/1.1" 304 - http-bio-8080-exec-2 7
+0:0:0:0:0:0:0:1 - - [11/Apr/2019:09:29:17 -0500] "GET /javax.faces.resource/core.js.xhtml?ln=primefaces&v=6.2 HTTP/1.1" 304 - http-bio-8080-exec-7 4
+0:0:0:0:0:0:0:1 - - [11/Apr/2019:09:29:17 -0500] "GET /javax.faces.resource/components.js.xhtml?ln=primefaces&v=6.2 HTTP/1.1" 304 - http-bio-8080-exec-8 3
+0:0:0:0:0:0:0:1 - - [11/Apr/2019:09:29:17 -0500] "GET /javax.faces.resource/jquery/jquery.js.xhtml?ln=primefaces&v=6.2 HTTP/1.1" 304 - http-bio-8080-exec-4 5
+0:0:0:0:0:0:0:1 - - [11/Apr/2019:09:29:17 -0500] "GET /javax.faces.resource/jquery/jquery-plugins.js.xhtml?ln=primefaces&v=6.2 HTTP/1.1" 304 - http-bio-8080-exec-9 3
+0:0:0:0:0:0:0:1 - - [11/Apr/2019:09:29:17 -0500] "GET /javax.faces.resource/images/ui-icons_38667f_256x240.png.xhtml?ln=primefaces-aristo HTTP/1.1" 304 - http-bio-8080-exec-13 3
+0:0:0:0:0:0:0:1 - - [11/Apr/2019:09:29:27 -0500] "POST /login.xhtml HTTP/1.1" 200 143 http-bio-8080-exec-13 2107
+0:0:0:0:0:0:0:1 - - [11/Apr/2019:09:29:27 -0500] "GET /admin/index.xhtml HTTP/1.1" 200 399 http-bio-8080-exec-13 147
+0:0:0:0:0:0:0:1 - - [11/Apr/2019:09:29:27 -0500] "GET /javax.faces.resource/theme.css.xhtml?ln=primefaces-aristo HTTP/1.1" 304 - http-bio-8080-exec-13 4
