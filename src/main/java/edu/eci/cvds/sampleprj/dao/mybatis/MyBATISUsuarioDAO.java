@@ -1,5 +1,7 @@
 package edu.eci.cvds.sampleprj.dao.mybatis;
 
-public class MyBATISUsuarioDAO {
+import edu.eci.cvds.sampleprj.dao.UsuarioDAO;
+
+public class MyBATISUsuarioDAO implements UsuarioDAO{
 
 }

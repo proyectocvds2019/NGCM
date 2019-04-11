@@ -5,6 +5,12 @@ import java.util.Optional;
 import org.mybatis.guice.XMLMyBatisModule;
 
 import com.google.inject.Injector;
+
+import edu.eci.cvds.sampleprj.dao.ElementoDAO;
+import edu.eci.cvds.sampleprj.dao.UsuarioDAO;
+import edu.eci.cvds.sampleprj.dao.mybatis.MyBATISElementoDAO;
+import edu.eci.cvds.sampleprj.dao.mybatis.MyBATISUsuarioDAO;
+
 import static com.google.inject.Guice.createInjector;
 
 public class ServiciosHistorialFactory {
@@ -13,13 +19,13 @@ public class ServiciosHistorialFactory {
 	
 	private static Optional<Injector> optInjector;
 	
-	private Injector myBatisInjector(String env, String pathResource) {
+	private Injector myBatisInjector(final String env, final String pathResource) {
 	       return createInjector(new XMLMyBatisModule() {
 	           @Override
 	           protected void initialize() {
 	               setEnvironmentId(env);
 	               setClassPathResource(pathResource);
-	               bind(UsuarioDAO.class).to(MyBATISUsuarioDAO.class);               
+	               bind(UsuarioDAO.class).to(MyBATISUsuarioDAO.class);
 	               bind(ElementoDAO.class).to(MyBATISElementoDAO.class);
 	           }
 	       });

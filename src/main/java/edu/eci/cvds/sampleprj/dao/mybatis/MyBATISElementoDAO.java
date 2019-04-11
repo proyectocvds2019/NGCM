@@ -1,5 +1,7 @@
 package edu.eci.cvds.sampleprj.dao.mybatis;
 
-public class MyBATISElementoDAO {
+import edu.eci.cvds.sampleprj.dao.ElementoDAO;
+
+public class MyBATISElementoDAO implements ElementoDAO{
 
 }
