@@ -12,26 +12,26 @@ CREATE TABLE Usuarios(
 CREATE TABLE Laboratorios(
 	id INTEGER PRIMARY KEY NOT NULL DEFAULT nextval('id_lab'),
 	nombre VARCHAR(100) NOT NULL
-);
+);*/
 
 CREATE SEQUENCE id_equipo;
 CREATE TABLE Equipos(
-	id INTEGER PRIMARY KEY NOT NULL DEFAULT nextval('id_equipo'),
-	laboratorio INTEGER NOT NULL
-);*/
+	id INTEGER PRIMARY KEY NOT NULL DEFAULT nextval('id_equipo')
+	--laboratorio INTEGER NOT NULL
+);
 
 CREATE SEQUENCE id_elemento;
 CREATE TABLE Elementos(
 	id INTEGER PRIMARY KEY NOT NULL DEFAULT nextval('id_elemento'),
 	tipo VARCHAR(100) NOT NULL,
-	--idEquipo INTEGER NOT NULL,
+	idEquipo INTEGER NOT NULL,
 	registradoPor VARCHAR(100) NOT NULL
 );
 
 --- Foreigns
-/*ALTER TABLE Elementos ADD CONSTRAINT Elementos_Equipo
+ALTER TABLE Elementos ADD CONSTRAINT Elementos_Equipo
 	FOREIGN KEY (idEquipo)
-	REFERENCES Equipos (id);*/
+	REFERENCES Equipos (id);
 	
 ALTER TABLE Elementos ADD CONSTRAINT Elementos_Usuario
 	FOREIGN KEY (registradoPor)
