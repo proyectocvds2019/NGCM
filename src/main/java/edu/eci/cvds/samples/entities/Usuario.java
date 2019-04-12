@@ -11,11 +11,11 @@ public class Usuario implements Serializable{
 	private String rol;
 	private ArrayList<Elemento> elementos;
 	
-	public Usuario(int id, String nombre, String correo, String contraseña, String rol, ArrayList<Elemento> elementos) {
+	public Usuario(int id, String nombre, String correo, String contrasena, String rol, ArrayList<Elemento> elementos) {
 		this.setId(id);
 		this.setNombre(nombre);
 		this.setCorreo(correo);
-		this.setContraseña(contraseña);
+		this.setContrasena(contrasena);
 		this.setRol(rol);
 		this.setElementos(elementos);
 	}
@@ -24,7 +24,7 @@ public class Usuario implements Serializable{
 		this.setId(id);
 		this.setNombre(nombre);
 		this.setCorreo(correo);
-		this.setContraseña(contrasena);
+		this.setContrasena(contrasena);
 		this.setRol(rol);
 		this.setElementos(new ArrayList<Elemento>());
 	}
@@ -45,11 +45,11 @@ public class Usuario implements Serializable{
 		this.correo = correo;
 	}
 
-	public String getContraseña() {
+	public String getContrasena() {
 		return contrasena;
 	}
 
-	public void setContraseña(String contrasena) {
+	public void setContrasena(String contrasena) {
 		this.contrasena = contrasena;
 	}
 
