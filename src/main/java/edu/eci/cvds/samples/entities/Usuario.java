@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Usuario implements Serializable{
 	private String nombre;
 	private String correo;
-	private String contraseña;
+	private String contrasena;
 	private int id;
 	private String rol;
 	private ArrayList<Elemento> elementos;
@@ -46,11 +46,11 @@ public class Usuario implements Serializable{
 	}
 
 	public String getContraseña() {
-		return contraseña;
+		return contrasena;
 	}
 
 	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+		this.contrasena = contraseña;
 	}
 
 	public int getId() {
