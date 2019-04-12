@@ -20,11 +20,11 @@ public class Usuario implements Serializable{
 		this.setElementos(elementos);
 	}
 	
-	public Usuario(int id, String nombre, String correo, String contraseña, String rol) {
+	public Usuario(int id, String nombre, String correo, String contrasena, String rol) {
 		this.setId(id);
 		this.setNombre(nombre);
 		this.setCorreo(correo);
-		this.setContraseña(contraseña);
+		this.setContraseña(contrasena);
 		this.setRol(rol);
 		this.setElementos(new ArrayList<Elemento>());
 	}
@@ -49,8 +49,8 @@ public class Usuario implements Serializable{
 		return contrasena;
 	}
 
-	public void setContraseña(String contraseña) {
-		this.contrasena = contraseña;
+	public void setContraseña(String contrasena) {
+		this.contrasena = contrasena;
 	}
 
 	public int getId() {
