@@ -44,6 +44,8 @@
 						<ul class="nav navbar-nav navbar-right">
 					        <li> <h:outputLink style="display: inline-block;" value="/logout"><span class=""></span>Salir <i style="color: gray; display: inline-block;" class="fas fa-sign-out-alt"></i></h:outputLink></li>
 					      </ul>
+
+
 					</div>
 				</div>
 			</nav>
@@ -59,10 +61,15 @@
 			    <h:panelGrid class="col-xs-12" columns="2" cellpadding="5">
 			        <p:outputLabel for="tipoElemento" value="Tipo de elemento:" />
 
-					<p:selectOneMenu id="tipoElemento" value="#{adminBean.tipo}" style="width:196px">
-	                    <f:selectItems value="#{adminBean.tipos}"/>
+					<p:selectOneMenu id="tipoElemento" value="#{adminBean.tipoElemento}" style="width:196px">
+	                    <f:selectItems value="#{adminBean.tipoElementos}"/>
 	                </p:selectOneMenu>
 			       
+
+			       <p:outputLabel for="Equipo" value="Equipo:" />
+			       <p:selectOneMenu id="Equipo" value="#{adminBean.equipo}" style="width:196px">
+	                    <f:selectItems value="#{adminBean.getEquipos()}"/>
+	                </p:selectOneMenu>
 
 			 
 			    </h:panelGrid>

@@ -7,6 +7,7 @@ import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import org.apache.shiro.crypto.hash.Sha256Hash;
@@ -19,16 +20,18 @@ import javax.servlet.http.HttpServlet;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 
 @ManagedBean(name = "loginBean")
 @ViewScoped
 public class loginBean implements Serializable {
     private static final Logger log = LoggerFactory.getLogger(loginBean.class);
-
     private String username;
     private String password;
     private Boolean rememberMe;
+
 
     public loginBean() {
     }
@@ -116,6 +119,9 @@ public class loginBean implements Serializable {
     public void setRememberMe(Boolean lembrar) {
         this.rememberMe = lembrar;
     }
+    
+    
+    
     
 
 }

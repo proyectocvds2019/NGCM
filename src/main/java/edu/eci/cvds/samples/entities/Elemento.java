@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public class Elemento implements Serializable{
 	private int id;
-	private String tipo;
+	private tipoElemento tipo;
 	
-	public Elemento(int id, String tipo) {
+	public Elemento(int id, tipoElemento tipo) {
 		this.setId(id);
 		this.setTipo(tipo);
 	}
@@ -19,11 +19,11 @@ public class Elemento implements Serializable{
 		this.id = id;
 	}
 
-	public String getTipo() {
+	public tipoElemento getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(String tipo) {
+	public void setTipo(tipoElemento tipo) {
 		this.tipo = tipo;
 	}
 

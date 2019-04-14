@@ -17,9 +17,13 @@ class Equipos{
 }
 class Elementos{
 	+ Entero id
-	Cadena tipo
 }
 
+class TipoElemento{
+	+ nombre Cadena
+}
+
+Elementos "1..*" -> "1" tipoElemento : tiene
 Elementos "1..*" <- "1" Equipos : tiene
 Equipos "1..*" <- "1" Laboratorios : tiene
 Elementos "1..*" <- "1" Usuarios : registra

@@ -8,40 +8,56 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import com.google.inject.Inject;
+
+import edu.eci.cvds.samples.entities.Elemento;
+import edu.eci.cvds.samples.entities.Equipo;
+import edu.eci.cvds.samples.entities.tipoElemento;
+import edu.eci.cvds.samples.services.ServiciosHistorial;
+
+
 @ManagedBean(name = "adminBean")
 @ViewScoped
 public class adminBean implements Serializable{
-	private List<String> tipos;
-	private String tipoSeleccionado;
-	private String tipo;
+	private Elemento elemento;
+	private tipoElemento tipoElemento;
+	private Equipo equipo;
+	private tipoElemento tipoSeleccionado;
+    @Inject
+    private ServiciosHistorial ServiciosHistorial;
 	
-	@PostConstruct
-    public void init() {
-        tipos = new ArrayList<String>();
-        tipos.add("Mouse");
-        tipos.add("Teclado");
-        tipos.add("Torre");
-        tipos.add("Monitor");
-    }
 	
 	public void registrar() {
 		
 	}
-	public String getTipo() {
-		return this.tipo;
+	public tipoElemento getTipoElemento() {
+		return this.tipoElemento;
 	}
-	public void setTipo(String i) {
-		this.tipo = i;
+	public void setTipo(tipoElemento i) {
+		this.tipoElemento = i;
 	}
-	public List getTipos() {
-		return this.tipos;
+	public tipoElemento[] getTipoElementos() {
+		return this.tipoElemento.values();
 	}
 	
-	public void setTipoSeleccionado(String s) {
+	public void setTipoSeleccionado(tipoElemento s) {
 		this.tipoSeleccionado = s;
 	}
 	
-	public String getTipoSeleccionado() {
+	public tipoElemento getTipoSeleccionado() {
 		return this.tipoSeleccionado;
 	}
+	
+	public List<Equipo> getEquipos(){
+		//return this.ServiciosHistorial.consultarEquipos();
+		return null;
+	}
+	public Equipo getEquipo() {
+		return this.equipo;
+	}
+	public void setEquipo(Equipo e) {
+		this.equipo = e;
+	}
+
+	
 }
