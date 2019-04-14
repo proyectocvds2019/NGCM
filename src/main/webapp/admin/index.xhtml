@@ -5,12 +5,12 @@
 <h:head>
 	<link rel="stylesheet" type="text/css" href="../css/plugins/bootstrap.min.css" media="screen"/>
     <link rel="stylesheet" type="text/css" href="../css/plugins/bootstrap-theme.min.css" media="screen"/>
-    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"/>
     
     <link rel="stylesheet" type="text/css" href="../css/admin.css" media="screen"/>
     
     
-    <script src="../js/plugins/jquery.min.js"></script>
+    <!-- <script src="../js/plugins/jquery.min.js"></script> -->
     <script src="../js/plugins/bootstrap.min.js"></script>
 
 
@@ -42,7 +42,7 @@
 							<li data-toggle="collapse" data-target="#registrarElemento" class=""><a href="#">Registrar Elemento</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
-					        <li><h:outputLink value="/logout"><span class="glyphicon glyphicon-log-out"></span>Salir</h:outputLink></li>
+					        <li> <h:outputLink style="display: inline-block;" value="/logout"><span class=""></span>Salir <i style="color: gray; display: inline-block;" class="fas fa-sign-out-alt"></i></h:outputLink></li>
 					      </ul>
 					</div>
 				</div>
@@ -58,17 +58,16 @@
 			 
 			    <h:panelGrid class="col-xs-12" columns="2" cellpadding="5">
 			        <p:outputLabel for="tipoElemento" value="Tipo de elemento:" />
-			        <p:selectOneRadio required="required" id="tipoElemento" value="#{adminBean.tipoSeleccionado}"  layout="grid" columns="4">
-			            <f:selectItems value="#{adminBean.tipos}" var="c" itemLabel="#{tipo}" itemValue="#{tipo}"/>
-			        </p:selectOneRadio>
 
-
+					<p:selectOneMenu id="tipoElemento" value="#{adminBean.tipo}" style="width:196px">
+	                    <f:selectItems value="#{adminBean.tipos}"/>
+	                </p:selectOneMenu>
 			       
 
 			 
 			    </h:panelGrid>
 			 
-			    <p:commandButton class="btn btn-default btn-success" value="Registrar" />
+			    <p:commandButton icon="fa fa-check" class="btn btn-default btn-success" value="Registrar" />
 			</h:form>
 		</div>
 	</div>
