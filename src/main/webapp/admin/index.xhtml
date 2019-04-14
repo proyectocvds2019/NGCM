@@ -1,9 +1,79 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
 <h:head>
-    <h:outputLabel>Bienvenido ADMIN!</h:outputLabel>
+	<link rel="stylesheet" type="text/css" href="../css/plugins/bootstrap.min.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="../css/plugins/bootstrap-theme.min.css" media="screen"/>
+    
+    
+    <link rel="stylesheet" type="text/css" href="../css/admin.css" media="screen"/>
+    
+    
+    <script src="../js/plugins/jquery.min.js"></script>
+    <script src="../js/plugins/bootstrap.min.js"></script>
+
+
+
+    <!--<h:outputLabel>Bienvenido </h:outputLabel>
+    <h:outputText value="#{sessionScope.correo}"/>
     <br></br>
-    <h:outputLink value="/logout">logout</h:outputLink>
+    <h:outputLink value="/logout">logout</h:outputLink>-->
 </h:head>
+<h:body>
+	<div class="container">
+		<div class="col-xs-12">
+			<h:outputLabel class="titulo col-xs-9">Bienvenido: <h:outputText value="#{sessionScope.correo}"/></h:outputLabel>
+			<img class="img img-responsive col-xs-3" src="https://www.escuelaing.edu.co/uploads/descargables/1110_logotipo_institucional_vm300px.png"/>
+		</div>
+		<div class="col-xs-12">
+			<nav class="navbar navbar-inverse">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-target="#myNavbar">
+							<span class="icon-bar"></span>
+					        <span class="icon-bar"></span>
+					        <span class="icon-bar"></span> 
+						</button>
+						<a class="navbar-brand" href="#">Opciones</a>
+					</div>
+					<div class="collapse navbar-collapse" id="myNavbar">
+						<ul class="nav navbar-nav">
+							<li data-toggle="collapse" data-target="#registrarElemento" class="active"><a href="#">Registrar Elemento</a></li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+					        <li><h:outputLink value="/logout"><span class="glyphicon glyphicon-log-out"></span>Salir</h:outputLink></li>
+					      </ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</div>
+	<div class="container collapse" id="registrarElemento">
+		<div class="col-xs-12">
+			<h:form>
+			    <p:messages>
+			        <p:autoUpdate />
+			    </p:messages>
+			 
+			    <h:panelGrid class="col-xs-12" columns="2" cellpadding="5">
+			        <p:outputLabel for="tipoElemento" value="Tipo de elemento:" />
+			        <p:selectOneRadio required="required" id="tipoElemento" value="#{adminBean.tipoSeleccionado}"  layout="grid" columns="4">
+			            <f:selectItems value="#{adminBean.tipos}" var="c" itemLabel="#{tipo}" itemValue="#{tipo}"/>
+			        </p:selectOneRadio>
+
+
+			       
+
+			 
+			    </h:panelGrid>
+			 
+			    <p:commandButton class="btn btn-default btn-success" value="Submit" />
+			</h:form>
+		</div>
+	</div>
+</h:body>
+<footer>
+
+</footer>
 </html>

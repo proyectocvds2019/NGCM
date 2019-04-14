@@ -3,6 +3,8 @@ package edu.eci.cvds.sampleprj.dao.mybatis;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.sql.SQLException;
+import java.util.List;
+
 import edu.eci.cvds.sampleprj.dao.ElementoDAO;
 import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.samples.entities.Elemento;
@@ -17,5 +19,6 @@ public class MyBATISElementoDAO implements ElementoDAO{
 		ElementoMapper.registrarElemento(elemento);
 		
 	}
+
 
 }

@@ -7,10 +7,16 @@ import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import org.apache.shiro.crypto.hash.Sha256Hash;
+import org.apache.shiro.session.Session;
+
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServlet;
+
 import java.io.IOException;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
@@ -25,7 +31,6 @@ public class loginBean implements Serializable {
     private Boolean rememberMe;
 
     public loginBean() {
-        
     }
 
     public Subject getSubject() {
@@ -38,12 +43,13 @@ public class loginBean implements Serializable {
     public void doLogin() {
         Subject subject = SecurityUtils.getSubject();
 
-        UsernamePasswordToken token = new UsernamePasswordToken(getUsername(), new Sha256Hash(getPassword()).toHex(), getRememberMe());
+        UsernamePasswordToken token = new UsernamePasswordToken(getUsername(), getPassword(), getRememberMe());
 
         try {
             subject.login(token);
 
             if (subject.hasRole("admin")) {
+            	subject.getSession().setAttribute("correo", username);
                 FacesContext.getCurrentInstance().getExternalContext().redirect("admin/index.xhtml");
             }
             else if(subject.hasRole("employee")){
@@ -100,7 +106,7 @@ public class loginBean implements Serializable {
     }
 
     public void setPassword(String senha) {
-        this.password = senha;
+        this.password = new Sha256Hash(senha).toHex();
     }
 
     public Boolean getRememberMe() {
@@ -110,4 +116,6 @@ public class loginBean implements Serializable {
     public void setRememberMe(Boolean lembrar) {
         this.rememberMe = lembrar;
     }
+    
+
 }

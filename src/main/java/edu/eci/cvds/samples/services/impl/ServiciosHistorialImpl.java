@@ -1,5 +1,7 @@
 package edu.eci.cvds.samples.services.impl;
 
+import java.util.List;
+
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -22,5 +24,7 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 			throw new ExcepcionServiciosHistorial("No se pudo registrar el elemento.");
 		}
 	}
+
+
 
 }
