@@ -13,6 +13,7 @@ import com.google.inject.Inject;
 import edu.eci.cvds.samples.entities.Elemento;
 import edu.eci.cvds.samples.entities.Equipo;
 import edu.eci.cvds.samples.entities.tipoElemento;
+import edu.eci.cvds.samples.services.ExcepcionServiciosHistorial;
 import edu.eci.cvds.samples.services.ServiciosHistorial;
 
 
@@ -24,11 +25,12 @@ public class adminBean implements Serializable{
 	private Equipo equipo;
 	private tipoElemento tipoSeleccionado;
     @Inject
-    private ServiciosHistorial ServiciosHistorial;
+    private ServiciosHistorial serviciosHistorial;
 	
 	
-	public void registrar() {
-		
+	public void registrar() throws ExcepcionServiciosHistorial {
+		elemento = new Elemento(1,tipoElemento);
+		serviciosHistorial.registrarElemento(elemento);
 	}
 	public tipoElemento getTipoElemento() {
 		return this.tipoElemento;
