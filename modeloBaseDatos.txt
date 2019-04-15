@@ -20,7 +20,7 @@ class Elementos{
 }
 
 class TipoElemento{
-	+ nombre Cadena
+	+ Cadena nombre
 }
 
 Elementos "1..*" -> "1" tipoElemento : tiene
