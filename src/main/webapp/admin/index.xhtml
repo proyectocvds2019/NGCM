@@ -68,6 +68,7 @@
 
 			       <p:outputLabel for="Equipo" value="Equipo:" />
 			       <p:selectOneMenu id="Equipo" value="#{adminBean.equipo}" style="width:196px">
+			       		<f:selectItem itemLabel="NULL" itemValue="NULL"/>
 	                    <f:selectItems value="#{adminBean.getEquipos()}"/>
 	                </p:selectOneMenu>
 
