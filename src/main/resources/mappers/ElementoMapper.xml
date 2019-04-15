@@ -13,7 +13,7 @@
 		<result property = 'registradoPor' column = 'registradoPor'/>
 	</resultMap>
 	
-	<insert parameterType = "map" id = "registrarElemento">	
+	<insert parameterType = "map" id = "registrarElemento">
 		INSERT INTO elementos (id, tipo, registradoPor)
 		VALUES (#{el.id},#{el.tipo},#{el.correo});
 	</insert>

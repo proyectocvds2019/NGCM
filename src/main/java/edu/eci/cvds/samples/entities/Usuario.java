@@ -7,12 +7,10 @@ public class Usuario implements Serializable{
 	private String nombre;
 	private String correo;
 	private String contrasena;
-	private int id;
 	private String rol;
 	private ArrayList<Elemento> elementos;
 	
-	public Usuario(int id, String nombre, String correo, String contrasena, String rol, ArrayList<Elemento> elementos) {
-		this.setId(id);
+	public Usuario(String nombre, String correo, String contrasena, String rol, ArrayList<Elemento> elementos) {
 		this.setNombre(nombre);
 		this.setCorreo(correo);
 		this.setContrasena(contrasena);
@@ -20,8 +18,7 @@ public class Usuario implements Serializable{
 		this.setElementos(elementos);
 	}
 	
-	public Usuario(int id, String nombre, String correo, String contrasena, String rol) {
-		this.setId(id);
+	public Usuario(String nombre, String correo, String contrasena, String rol) {
 		this.setNombre(nombre);
 		this.setCorreo(correo);
 		this.setContrasena(contrasena);
@@ -51,14 +48,6 @@ public class Usuario implements Serializable{
 
 	public void setContrasena(String contrasena) {
 		this.contrasena = contrasena;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getRol() {

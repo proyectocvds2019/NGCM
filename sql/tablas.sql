@@ -10,19 +10,19 @@ CREATE TABLE Usuarios(
 
 /*CREATE SEQUENCE id_lab;
 CREATE TABLE Laboratorios(
-	id INTEGER PRIMARY KEY NOT NULL DEFAULT nextval('id_lab'),
+	id INTEGER PRIMARY KEY NOT NULL DEFAULT ,
 	nombre VARCHAR(100) NOT NULL
 );*/
 
 CREATE SEQUENCE id_equipo;
 CREATE TABLE Equipos(
-	id INTEGER PRIMARY KEY NOT NULL DEFAULT nextval('id_equipo')
+	id INTEGER PRIMARY KEY NOT NULL
 	--laboratorio INTEGER NOT NULL
 );
 
 CREATE SEQUENCE id_elemento;
 CREATE TABLE Elementos(
-	id INTEGER PRIMARY KEY NOT NULL DEFAULT nextval('id_elemento'),
+	id INTEGER PRIMARY KEY NOT NULL,
 	tipo VARCHAR(10) NOT NULL,
 	idEquipo INTEGER,
 	registradoPor VARCHAR(100) NOT NULL
@@ -44,12 +44,12 @@ ALTER TABLE Elementos ADD CONSTRAINT Elementos_Usuario
 --- Checks
 
 -- Tipo Correo
-ALTER TABLE Usuarios ADD CONSTRAINT Correo
-		CHECK (Usuarios.correo LIKE '%@%.%');
+/*ALTER TABLE Usuarios ADD CONSTRAINT Correo
+		CHECK (Usuarios.correo LIKE '%@%.%');*/
 		
 -- Tipo Elementos
 ALTER TABLE Elementos ADD CONSTRAINT Tipo
-		CHECK (Elementos.tipo IN ('Pantalla','Teclado','Mouse','Torre'));
+		CHECK (Elementos.tipo IN ('PANTALLA','TECLADO','MOUSE','TORRE'));
 
 -- Roles
 /*
