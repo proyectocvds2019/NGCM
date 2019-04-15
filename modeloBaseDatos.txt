@@ -24,8 +24,8 @@ class Elementos{
 	+ Entero id
 }
 
-Elementos "1..*" -> "1" tipoElemento : tiene
 Elementos "1..*" <- "1" Equipos : tiene
 Equipos "1..*" <- "1" Laboratorios : tiene
 Elementos "1..*" <- "1" Usuarios : registra
+Elementos "1..*" -> "1" TipoElemento : tiene
 @enduml
