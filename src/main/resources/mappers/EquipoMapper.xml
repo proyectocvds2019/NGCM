@@ -10,4 +10,11 @@
 		<id property = 'id' column = 'id'/>
 	</resultMap>
 	
+	<select id="consultarEquipos" resultMap="EquiposResult">
+		SELECT
+				equipos.id
+		FROM
+				equipos;
+	</select>
+	
 </mapper>
