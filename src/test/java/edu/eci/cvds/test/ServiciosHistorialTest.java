@@ -37,5 +37,19 @@ public class ServiciosHistorialTest {
 			}
 		});
 	}
+	
+	@Test
+	public void deberiaConsultarEquipos() {
+		qt().forAll(EquipoGenerator.genEquipos()).check(eq -> {
+			try {
+				this.serviciosHistorial.consultarEquipos();
+				return true;
+			}catch(ExcepcionServiciosHistorial e) {
+				System.out.println("jajaja");
+				e.printStackTrace();
+				return false;
+			}
+		});
+	}
 
 }
