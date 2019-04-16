@@ -36,7 +36,6 @@ public class ServiciosHistorialFactory {
 	               bind(UsuarioDAO.class).to(MyBATISUsuarioDAO.class);
 	               bind(ElementoDAO.class).to(MyBATISElementoDAO.class);
 	               bind(EquipoDAO.class).to(MyBATISEquipoDAO.class);
-	               System.out.println("hola");
 	           }
 	       });
 	   }
@@ -58,6 +57,7 @@ public class ServiciosHistorialFactory {
 	
 	private ServiciosHistorialFactory() {
 		optInjector = Optional.empty(); 
+		optInjectorTest = Optional.empty();
 	}
 	
 	public ServiciosHistorial getServiciosHistorial() {

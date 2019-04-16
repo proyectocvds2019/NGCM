@@ -2,7 +2,10 @@ package edu.eci.cvds.test;
 
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
+import org.quicktheories.core.Gen;
+
 import static org.quicktheories.QuickTheory.qt;
+import static org.quicktheories.generators.SourceDSL.strings;
 
 import com.google.inject.Inject;
 
@@ -21,17 +24,18 @@ public class ServiciosHistorialTest {
 		this.serviciosHistorial = ServiciosHistorialFactory.getInstance().getServiciosHistorialTest();
 	}
 	
-	/*@Test
+	@Test
 	public void deberiaRegistrarElementos() {
 		qt().forAll(ElementoGenerator.genElementos()).check(elem -> {
 			try {
-				serviciosHistorial.registrarElemento(elem);
+				this.serviciosHistorial.registrarElemento(elem, "gualdronsito@hotmail.com", null);
 				return true;
 			}catch(ExcepcionServiciosHistorial e) {
+				System.out.println("jajaja");
 				e.printStackTrace();
 				return false;
 			}
 		});
-	}*/
+	}
 
 }

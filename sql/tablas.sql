@@ -44,15 +44,17 @@ ALTER TABLE Elementos ADD CONSTRAINT Elementos_Usuario
 --- Checks
 
 -- Tipo Correo
-/*ALTER TABLE Usuarios ADD CONSTRAINT Correo
-		CHECK (Usuarios.correo LIKE '%@%.%');*/
+ALTER TABLE Usuarios ADD CONSTRAINT Correo
+		CHECK (Usuarios.correo LIKE '%@%.%');
 		
 -- Tipo Elementos
-ALTER TABLE Elementos ADD CONSTRAINT Tipo
-		CHECK (Elementos.tipo IN ('PANTALLA') OR Elementos.tipo IN ('TECLADO') OR Elementos.tipo IN ('MOUSE') OR Elementos.tipo IN('TORRE'));
+/*ALTER TABLE Elementos ADD CONSTRAINT Tipo
+		CHECK (Elementos.tipo IN ('PANTALLA') OR Elementos.tipo IN ('TECLADO') OR Elementos.tipo IN ('MOUSE') OR Elementos.tipo IN('TORRE'));*/
 
 -- Roles
 /*
 ALTER TABLE Usuarios ADD CONSTRAINT Rol
 		CHECK (Usuarios.rol IN());
 */
+--El administrador para las pruebas
+insert into usuarios (nombre, correo, contrasena, carnet, rol) values ('Andres Gualdron','gualdronsito@hotmail.com','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3',2128884,'admin');
