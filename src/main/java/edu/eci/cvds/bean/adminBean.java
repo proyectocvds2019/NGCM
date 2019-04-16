@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
@@ -40,10 +42,22 @@ public class adminBean implements Serializable{
     
 	public void registrar() throws ExcepcionServiciosHistorial {
 		Elemento elemento = new Elemento(1,tipoSeleccionado);
-		System.out.println(tipoSeleccionado+" "+this.correo+" "+this.equipo);
-		serviciosHistorial.registrarElemento(elemento,this.correo,this.equipo);
+		try {
+			serviciosHistorial.registrarElemento(elemento,this.correo,this.equipo);
+			this.mensajeCorrecto();
+		}catch(Exception e) {
+			this.mensajeError();
+		}
 	}
-
+	
+	
+	public void mensajeCorrecto() {
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro Elemento registrado satisfactoriamente", "Elemento registrado satisfactoriamente"));
+	}
+	
+	public void mensajeError() {
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error! No se pudo registrar el elemento", "No se pudo registrar el elemento"));
+	}
 
 	public TipoElemento[] getTipoElementos() {
 		return TipoElemento.values();
