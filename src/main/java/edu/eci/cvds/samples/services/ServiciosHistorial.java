@@ -9,6 +9,6 @@ public interface ServiciosHistorial {
 	
 	public abstract void registrarElemento(Elemento elemento, String correoUsuario, String equipo) throws ExcepcionServiciosHistorial;
 
-	public abstract Equipo consultarEquipos() throws ExcepcionServiciosHistorial;
+	public abstract List<Equipo> consultarEquipos() throws ExcepcionServiciosHistorial;
 	
 }

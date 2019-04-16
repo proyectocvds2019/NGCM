@@ -26,7 +26,7 @@ public class MyBATISEquipoDAO implements EquipoDAO{
 	}
 
 	public List<Equipo> consultarEquipos() throws PersistenceException {
-		equipoMapper.consultarEquipos();
+		return equipoMapper.consultarEquipos();
 	}
 	
 	

@@ -14,6 +14,4 @@ public interface EquipoMapper {
 	
 	public List<Equipo> consultarEquipos();
 
-	void consultarEquipos();
-
 }

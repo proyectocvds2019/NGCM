@@ -30,9 +30,9 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 	}
 
 	@Override
-	public Equipo consultarEquipos() throws ExcepcionServiciosHistorial {
+	public List<Equipo> consultarEquipos() throws ExcepcionServiciosHistorial {
 		try {
-			equipoDAO.consultarEquipos();
+			return equipoDAO.consultarEquipos();
 		} catch(PersistenceException e) {
 			throw new ExcepcionServiciosHistorial("No se pudo consultar los equipos.");
 		}
