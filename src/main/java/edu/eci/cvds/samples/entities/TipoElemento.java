@@ -1,9 +1,9 @@
 package edu.eci.cvds.samples.entities;
 
-public enum tipoElemento {
+public enum TipoElemento {
 	TECLADO,MOUSE,TORRE,MONITOR;
 	
-	tipoElemento() {
+	TipoElemento() {
 		
 	}
 }

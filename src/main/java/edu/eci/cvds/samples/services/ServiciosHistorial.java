@@ -6,7 +6,7 @@ import edu.eci.cvds.samples.entities.Elemento;
 
 public interface ServiciosHistorial {
 	
-	public abstract void registrarElemento(Elemento elemento) throws ExcepcionServiciosHistorial;
+	public abstract void registrarElemento(Elemento elemento, String correoUsuario, String equipo) throws ExcepcionServiciosHistorial;
 	
 	
 }

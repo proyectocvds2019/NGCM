@@ -8,45 +8,52 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
+
 import com.google.inject.Inject;
 
 import edu.eci.cvds.samples.entities.Elemento;
 import edu.eci.cvds.samples.entities.Equipo;
-import edu.eci.cvds.samples.entities.tipoElemento;
+import edu.eci.cvds.samples.entities.TipoElemento;
 import edu.eci.cvds.samples.services.ExcepcionServiciosHistorial;
 import edu.eci.cvds.samples.services.ServiciosHistorial;
+import edu.eci.cvds.samples.services.ServiciosHistorialFactory;
 
 
 @ManagedBean(name = "adminBean")
 @ViewScoped
 public class adminBean implements Serializable{
-	private Elemento elemento;
-	private tipoElemento tipoElemento;
-	private Equipo equipo;
-	private tipoElemento tipoSeleccionado;
+	private String equipo;
+	private TipoElemento tipoSeleccionado;
+	private String correo;
     @Inject
     private ServiciosHistorial serviciosHistorial;
 	
-	
+	public adminBean() {
+		Subject subject = SecurityUtils.getSubject();
+		this.correo = (String) subject.getSession().getAttribute("correo");
+		this.serviciosHistorial = ServiciosHistorialFactory.getInstance().getServiciosHistorial();
+		//System.out.println("hola");
+	}
+    
 	public void registrar() throws ExcepcionServiciosHistorial {
-		elemento = new Elemento(1,tipoElemento);
-		serviciosHistorial.registrarElemento(elemento);
+		Elemento elemento = new Elemento(1,tipoSeleccionado);
+		System.out.println(tipoSeleccionado+" "+this.correo+" "+this.equipo);
+		serviciosHistorial.registrarElemento(elemento,this.correo,this.equipo);
 	}
-	public tipoElemento getTipoElemento() {
-		return this.tipoElemento;
-	}
-	public void setTipo(tipoElemento i) {
-		this.tipoElemento = i;
-	}
-	public tipoElemento[] getTipoElementos() {
-		return this.tipoElemento.values();
+
+
+	public TipoElemento[] getTipoElementos() {
+		return TipoElemento.values();
 	}
 	
-	public void setTipoSeleccionado(tipoElemento s) {
+	public void setTipoSeleccionado(TipoElemento s) {
 		this.tipoSeleccionado = s;
 	}
 	
-	public tipoElemento getTipoSeleccionado() {
+	public TipoElemento getTipoSeleccionado() {
 		return this.tipoSeleccionado;
 	}
 	
@@ -54,10 +61,13 @@ public class adminBean implements Serializable{
 		//return this.ServiciosHistorial.consultarEquipos();
 		return null;
 	}
-	public Equipo getEquipo() {
+	public String getEquipo() {
 		return this.equipo;
 	}
-	public void setEquipo(Equipo e) {
+	public void setEquipo(String e) {
+		if(e.equals("null")) {
+			e = null;
+		}
 		this.equipo = e;
 	}
 

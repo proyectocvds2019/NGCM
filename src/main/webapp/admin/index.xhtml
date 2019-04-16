@@ -61,21 +61,21 @@
 			    <h:panelGrid class="col-xs-12" columns="2" cellpadding="5">
 			        <p:outputLabel for="tipoElemento" value="Tipo de elemento:" />
 
-					<p:selectOneMenu id="tipoElemento" value="#{adminBean.tipoElemento}" style="width:196px">
+					<p:selectOneMenu id="tipoElemento" value="#{adminBean.tipoSeleccionado}" style="width:196px">
 	                    <f:selectItems value="#{adminBean.tipoElementos}"/>
 	                </p:selectOneMenu>
 			       
 
 			       <p:outputLabel for="Equipo" value="Equipo:" />
 			       <p:selectOneMenu id="Equipo" value="#{adminBean.equipo}" style="width:196px">
-			       		<f:selectItem itemLabel="NULL" itemValue="NULL"/>
+			       		<f:selectItem itemLabel="NULL" itemValue="null"/>
 	                    <f:selectItems value="#{adminBean.getEquipos()}"/>
 	                </p:selectOneMenu>
 
 			 
 			    </h:panelGrid>
 			 
-			    <p:commandButton icon="fa fa-check" class="btn btn-default btn-success" value="Registrar" />
+			    <p:commandButton action="#{adminBean.registrar()}" icon="fa fa-check" class="btn btn-default btn-success" value="Registrar" />
 			</h:form>
 		</div>
 	</div>

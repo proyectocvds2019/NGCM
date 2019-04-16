@@ -3,17 +3,13 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-    <!--<settings>
-        <setting name="logImpl" value="LOG4J"/>        
-    </settings>-->
     
-    <properties resource="config.properties">
-    </properties>
     
     <typeAliases>
-        <typeAlias type='edu.eci.cvds.samples.entities.Elemento' alias='Elemento'/>
-        <typeAlias type='edu.eci.cvds.samples.entities.Usuario' alias='Usuario'/>
-        <typeAlias type='edu.eci.cvds.samples.entities.Equipo' alias='Equipo'/>
+        <typeAlias type="edu.eci.cvds.samples.entities.Elemento" alias="Elemento"/>
+        <typeAlias type="edu.eci.cvds.samples.entities.TipoElemento" alias="TipoElemento"/>
+        <typeAlias type="edu.eci.cvds.samples.entities.Usuario" alias="Usuario"/>
+        <typeAlias type="edu.eci.cvds.samples.entities.Equipo" alias="Equipo"/>
     </typeAliases>
 
 
@@ -22,9 +18,9 @@
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
 				<property name="driver" value="org.postgresql.Driver" />
-				<property name="url" value="[URL definitiva del punto 8.14, cambiando '&' por '&amp;']"/> 
-				<property name="username" value="[User del punto 8 o del punto 7]" />
-				<property name="password" value="[Contraseña del punto 8 o del punto 7]" />
+				<property name="url" value="jdbc:postgresql://ec2-23-21-129-125.compute-1.amazonaws.com:5432/da26mbohfkf53q?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/> 
+				<property name="username" value="prnpijhptnhkhp" />
+				<property name="password" value="480528ad435a1d0b719611ec200c43faf4d6452889b53543d9a0e4e3aa76116c" />
 			</dataSource>
 		</environment>
 	</environments>

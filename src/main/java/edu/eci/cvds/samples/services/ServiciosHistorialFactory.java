@@ -8,9 +8,12 @@ import org.mybatis.guice.datasource.helper.JdbcHelper;
 import com.google.inject.Injector;
 
 import edu.eci.cvds.sampleprj.dao.ElementoDAO;
+import edu.eci.cvds.sampleprj.dao.EquipoDAO;
 import edu.eci.cvds.sampleprj.dao.UsuarioDAO;
 import edu.eci.cvds.sampleprj.dao.mybatis.MyBATISElementoDAO;
+import edu.eci.cvds.sampleprj.dao.mybatis.MyBATISEquipoDAO;
 import edu.eci.cvds.sampleprj.dao.mybatis.MyBATISUsuarioDAO;
+import edu.eci.cvds.samples.services.impl.ServiciosHistorialImpl;
 
 import static com.google.inject.Guice.createInjector;
 
@@ -29,8 +32,11 @@ public class ServiciosHistorialFactory {
 	        	   install(JdbcHelper.PostgreSQL);
 	               setEnvironmentId(env);
 	               setClassPathResource(pathResource);
+	               bind(ServiciosHistorial.class).to(ServiciosHistorialImpl.class);
 	               bind(UsuarioDAO.class).to(MyBATISUsuarioDAO.class);
 	               bind(ElementoDAO.class).to(MyBATISElementoDAO.class);
+	               bind(EquipoDAO.class).to(MyBATISEquipoDAO.class);
+	               System.out.println("hola");
 	           }
 	       });
 	   }
@@ -42,8 +48,10 @@ public class ServiciosHistorialFactory {
 	        	   install(JdbcHelper.PostgreSQL);
 	               setEnvironmentId(env);
 	               setClassPathResource(pathResource);
+	               bind(ServiciosHistorial.class).to(ServiciosHistorialImpl.class);
 	               bind(UsuarioDAO.class).to(MyBATISUsuarioDAO.class);
 	               bind(ElementoDAO.class).to(MyBATISElementoDAO.class);
+	               bind(EquipoDAO.class).to(MyBATISEquipoDAO.class);
 	           }
 	       });
 	   }
@@ -56,7 +64,8 @@ public class ServiciosHistorialFactory {
 		if(!optInjector.isPresent()) {
 			optInjector = Optional.of(myBatisInjector("development","mybatis-config.xml"));
 		}
-		return optInjector.get().getInstance(ServiciosHistorial.class);
+		ServiciosHistorial s= optInjector.get().getInstance(ServiciosHistorial.class);
+		return s;
 	}
 	
 	public ServiciosHistorial getServiciosHistorialTest() {

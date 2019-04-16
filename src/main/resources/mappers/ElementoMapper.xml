@@ -6,16 +6,14 @@
  
 <mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.ElementoMapper">
 
-	<resultMap type = 'Elementos' id = 'ElementosResult'>
+	<resultMap type = 'Elemento' id = 'ElementosResult'>
 		<id property = 'id' column = 'id'/>
 		<result property = 'tipo' column = 'tipo'/>
-		<result property = 'idEquipo' column = 'idEquipo'/>
-		<result property = 'registradoPor' column = 'registradoPor'/>
 	</resultMap>
 	
 	<insert parameterType = "map" id = "registrarElemento">
-		INSERT INTO elementos (id, tipo, registradoPor)
-		VALUES (#{el.id},#{el.tipo},#{el.correo});
+		INSERT INTO elementos (id, tipo, registradoPor,idEquipo)
+		VALUES (nextval('id_elemento'),#{el.tipo},#{correo},#{equipo});
 	</insert>
 	
 </mapper>

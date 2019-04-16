@@ -17,9 +17,9 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 	@Inject
 	private ElementoDAO elementoDAO;
 
-	public void registrarElemento(Elemento elemento) throws ExcepcionServiciosHistorial {
+	public void registrarElemento(Elemento elemento, String correoUsuario, String equipo) throws ExcepcionServiciosHistorial {
 		try {
-			elementoDAO.registrarElemento(elemento);
+			elementoDAO.registrarElemento(elemento,correoUsuario,equipo);
 		} catch (PersistenceException e) {
 			throw new ExcepcionServiciosHistorial("No se pudo registrar el elemento.");
 		}

@@ -49,7 +49,7 @@ ALTER TABLE Elementos ADD CONSTRAINT Elementos_Usuario
 		
 -- Tipo Elementos
 ALTER TABLE Elementos ADD CONSTRAINT Tipo
-		CHECK (Elementos.tipo IN ('PANTALLA','TECLADO','MOUSE','TORRE'));
+		CHECK (Elementos.tipo IN ('PANTALLA') OR Elementos.tipo IN ('TECLADO') OR Elementos.tipo IN ('MOUSE') OR Elementos.tipo IN('TORRE'));
 
 -- Roles
 /*

@@ -6,7 +6,7 @@
  
 <mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.UsuarioMapper">
 
-	<resultMap type = 'Usuarios' id = 'UsuariosResult'>
+	<resultMap type = 'Usuario' id = 'UsuariosResult'>
 		<id property = 'correo' column = 'correo'/>
 		<result property = 'nombre' column = 'nombre'/>
 		<result property = 'contrasena' column = 'contrasena'/>
