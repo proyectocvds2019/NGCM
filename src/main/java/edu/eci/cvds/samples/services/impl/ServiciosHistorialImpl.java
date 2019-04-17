@@ -38,6 +38,15 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 		}
 	}
 
+	@Override
+	public List<Elemento> consultarElementos() throws ExcepcionServiciosHistorial {
+		try {
+			return elementoDAO.consultarElementos();
+		}catch(PersistenceException e) {
+			throw new ExcepcionServiciosHistorial("no se pudo consultar los elementos");
+		}
+	}
+
 
 
 }

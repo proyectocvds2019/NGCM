@@ -68,7 +68,7 @@
 
 			       <p:outputLabel for="Equipo" value="Equipo:" />
 			       <p:selectOneMenu id="Equipo" value="#{adminBean.equipo}" style="width:196px">
-			       		<f:selectItem itemLabel="NULL" itemValue="null"/>
+			       		<f:selectItem itemLabel="NULL" itemValue="-1"/>
 	                    <f:selectItems value="#{adminBean.getEquipos()}"/>
 	                </p:selectOneMenu>
 
@@ -80,14 +80,23 @@
 
 			</h:form>
 		</div>
-	</div>
-	<div class="container">
-		<div class="col-md-12 col-xs-12">
-			<h:panelGrid class="col-xs-12" columns="3" cellpadding="5">
-				<h:outputText value="ID"/>
-				<h:outputText value="REGISTRADO POR"/>
-				<h:outputText value="EQUIPO ASIGNADO"/>
-			</h:panelGrid>
+		<div class="col-xs-12">
+			<div class="col-md-12 col-xs-12">
+				<h:form id="carForm">
+					<p:fieldset id="tablaElementos" legend="Tabla de elementos">
+				        <p:dataTable id="elementos" var="elemento" value="#{adminBean.consultarElementos()}">
+				 
+				            <p:column headerText="Id">
+				                <h:outputText value="#{elemento.id}" />
+				            </p:column>
+				 
+				            <p:column headerText="Tipo">
+				                <h:outputText value="#{elemento.tipo}" />
+				            </p:column>
+				        </p:dataTable>
+				    </p:fieldset>
+				</h:form>
+			</div>
 		</div>
 	</div>
 </h:body>

@@ -8,5 +8,7 @@ public interface ElementoDAO {
 
 	public void registrarElemento(Elemento elemento, String correoUsuario, Integer equipo) throws PersistenceException;
 	
+	public List<Elemento> consultarElementos() throws PersistenceException;
+	
 
 }

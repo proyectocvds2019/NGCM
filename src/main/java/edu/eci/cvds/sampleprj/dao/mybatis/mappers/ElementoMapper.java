@@ -15,5 +15,7 @@ public interface ElementoMapper {
 	
 	public void registrarElemento(@Param("el") Elemento elemento, @Param("correo")String correoUsuario, @Param("equipo")Integer equipo);
 	
+	public List<Elemento> consultarElementos();
+	
 
 }

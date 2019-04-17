@@ -20,4 +20,11 @@ public class MyBATISElementoDAO implements ElementoDAO{
 		
 	}
 
+	@Override
+	public List<Elemento> consultarElementos() throws PersistenceException {
+		return ElementoMapper.consultarElementos();
+	}
+	
+	
+
 }

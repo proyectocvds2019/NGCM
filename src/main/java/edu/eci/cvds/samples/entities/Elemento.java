@@ -3,10 +3,14 @@ package edu.eci.cvds.samples.entities;
 import java.io.Serializable;
 
 public class Elemento implements Serializable{
-	private int id;
+	private Integer id;
 	private TipoElemento tipo;
 	
-	public Elemento(int id, TipoElemento tipo) {
+	public Elemento() {
+		
+	}
+	
+	public Elemento(Integer id, TipoElemento tipo) {
 		this.setId(id);
 		this.setTipo(tipo);
 	}

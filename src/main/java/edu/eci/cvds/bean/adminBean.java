@@ -73,6 +73,16 @@ public class adminBean implements Serializable{
 		return this.tipoSeleccionado;
 	}
 	
+	public List<Elemento> consultarElementos(){
+		try {
+			return this.serviciosHistorial.consultarElementos();
+		} catch (ExcepcionServiciosHistorial e) {
+			// TODO Bloque catch generado automáticamente
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	public List<SelectItem> getEquipos(){
 		List<SelectItem> lis = new ArrayList<SelectItem>();
 		try {

@@ -15,5 +15,9 @@
 		INSERT INTO elementos (id, tipo, registradoPor,idEquipo)
 		VALUES (nextval('id_elemento'),#{el.tipo},#{correo},#{equipo});
 	</insert>
+
+	<select id = "consultarElementos" resultMap="ElementosResult">
+		SELECT elementos.id, elementos.tipo FROM elementos;
+	</select>
 	
 </mapper>

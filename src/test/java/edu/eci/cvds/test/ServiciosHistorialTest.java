@@ -31,7 +31,6 @@ public class ServiciosHistorialTest {
 				this.serviciosHistorial.registrarElemento(elem, "gualdronsito@hotmail.com", null);
 				return true;
 			}catch(ExcepcionServiciosHistorial e) {
-				System.out.println("jajaja");
 				e.printStackTrace();
 				return false;
 			}
