@@ -113,8 +113,8 @@ public class adminBean implements Serializable{
 		return this.equipo;
 	}
 	public void setEquipo(Integer equipo) {
-		if(e == -1) {
-			e = null;
+		if(equipo == -1) {
+			equipo = null;
 		}
 		this.equipo = equipo;
 	}
