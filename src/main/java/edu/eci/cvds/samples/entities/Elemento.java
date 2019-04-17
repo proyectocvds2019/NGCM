@@ -3,6 +3,10 @@ package edu.eci.cvds.samples.entities;
 import java.io.Serializable;
 
 public class Elemento implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7381594049177090273L;
 	private Integer id;
 	private TipoElemento tipo;
 	

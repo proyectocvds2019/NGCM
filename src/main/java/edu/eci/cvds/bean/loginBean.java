@@ -1,6 +1,5 @@
 package edu.eci.cvds.bean;
 
-import java.io.File;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
@@ -8,19 +7,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import org.apache.shiro.crypto.hash.Sha256Hash;
-import org.apache.shiro.session.Session;
 
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServlet;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 

@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Equipo implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4250247578117025104L;
 	private int id;
 	private ArrayList<Elemento> elementos;
 	

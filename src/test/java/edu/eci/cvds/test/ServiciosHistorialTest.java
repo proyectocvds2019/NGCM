@@ -1,22 +1,15 @@
 package edu.eci.cvds.test;
 
-import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
-import org.quicktheories.core.Gen;
 
 import static org.quicktheories.QuickTheory.qt;
-import static org.quicktheories.generators.SourceDSL.strings;
 
-import com.google.inject.Inject;
 
 import edu.eci.cvds.samples.services.ExcepcionServiciosHistorial;
 import edu.eci.cvds.samples.services.ServiciosHistorial;
 import edu.eci.cvds.samples.services.ServiciosHistorialFactory;
 
 public class ServiciosHistorialTest {
-	
-	@Inject
-	private SqlSession sqlSession;
 	
 	private ServiciosHistorial serviciosHistorial;
 	

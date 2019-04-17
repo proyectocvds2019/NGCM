@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -12,7 +11,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 
 import com.google.inject.Inject;
@@ -28,6 +26,10 @@ import edu.eci.cvds.samples.services.ServiciosHistorialFactory;
 @ManagedBean(name = "adminBean")
 @ViewScoped
 public class adminBean implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6362614236013128488L;
 	private Integer equipo;
 	private TipoElemento tipoSeleccionado;
 	private String correo;

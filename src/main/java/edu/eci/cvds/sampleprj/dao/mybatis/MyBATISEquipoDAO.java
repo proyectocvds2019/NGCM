@@ -1,8 +1,6 @@
 package edu.eci.cvds.sampleprj.dao.mybatis;
 
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
-import java.sql.SQLException;
 import java.util.List;
 
 import edu.eci.cvds.sampleprj.dao.EquipoDAO;

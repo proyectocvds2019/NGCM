@@ -1,8 +1,5 @@
 package edu.eci.cvds.sampleprj.dao.mybatis;
 
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
-import java.sql.SQLException;
 import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.sampleprj.dao.UsuarioDAO;
 import edu.eci.cvds.samples.entities.Usuario;
