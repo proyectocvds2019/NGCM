@@ -13,7 +13,7 @@ import edu.eci.cvds.samples.entities.Elemento;
 
 public interface ElementoMapper {
 	
-	public void registrarElemento(@Param("el") Elemento elemento, @Param("correo")String correoUsuario, @Param("equipo")String equipo);
+	public void registrarElemento(@Param("el") Elemento elemento, @Param("correo")String correoUsuario, @Param("equipo")Integer equipo);
 	
 
 }

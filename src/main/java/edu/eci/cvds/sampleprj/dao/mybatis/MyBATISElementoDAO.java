@@ -15,10 +15,9 @@ public class MyBATISElementoDAO implements ElementoDAO{
 	@Inject
 	private ElementoMapper ElementoMapper;
 	
-	public void registrarElemento(Elemento elemento, String correoUsuario, String equipo)  throws PersistenceException{
+	public void registrarElemento(Elemento elemento, String correoUsuario, Integer equipo)  throws PersistenceException{
 		ElementoMapper.registrarElemento(elemento,correoUsuario,equipo);
 		
 	}
-
 
 }

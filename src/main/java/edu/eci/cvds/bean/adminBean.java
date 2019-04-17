@@ -28,7 +28,7 @@ import edu.eci.cvds.samples.services.ServiciosHistorialFactory;
 @ManagedBean(name = "adminBean")
 @ViewScoped
 public class adminBean implements Serializable{
-	private String equipo;
+	private Integer equipo;
 	private TipoElemento tipoSeleccionado;
 	private String correo;
     @Inject
@@ -47,6 +47,7 @@ public class adminBean implements Serializable{
 			serviciosHistorial.registrarElemento(elemento,this.correo,this.equipo);
 			this.mensajeCorrecto();
 		}catch(Exception e) {
+			e.printStackTrace();
 			this.mensajeError();
 		}
 	}
@@ -86,11 +87,11 @@ public class adminBean implements Serializable{
 			return null;
 		}
 	}
-	public String getEquipo() {
+	public Integer getEquipo() {
 		return this.equipo;
 	}
-	public void setEquipo(String e) {
-		if(e.equals("null")) {
+	public void setEquipo(Integer e) {
+		if(e == -1) {
 			e = null;
 		}
 		this.equipo = e;

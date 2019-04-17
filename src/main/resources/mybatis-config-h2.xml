@@ -6,6 +6,7 @@
     	
     <typeAliases>
         <typeAlias type='edu.eci.cvds.samples.entities.Elemento' alias='Elemento'/>
+        <typeAlias type="edu.eci.cvds.samples.entities.TipoElemento" alias="TipoElemento"/>
         <typeAlias type='edu.eci.cvds.samples.entities.Usuario' alias='Usuario'/>
         <typeAlias type='edu.eci.cvds.samples.entities.Equipo' alias='Equipo'/>
     </typeAliases>
