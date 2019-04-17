@@ -9,6 +9,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
@@ -71,9 +72,19 @@ public class adminBean implements Serializable{
 		return this.tipoSeleccionado;
 	}
 	
-	public List<Equipo> getEquipos(){
-		//return this.ServiciosHistorial.consultarEquipos();
-		return null;
+	public List<SelectItem> getEquipos(){
+		List<SelectItem> lis = new ArrayList<SelectItem>();
+		try {
+			List<Equipo> l = this.serviciosHistorial.consultarEquipos();
+			for(Equipo e: l) {
+				lis.add(new SelectItem(e.getId()));
+			}
+			return lis;
+		} catch (ExcepcionServiciosHistorial e) {
+			// TODO Bloque catch generado automáticamente
+			e.printStackTrace();
+			return null;
+		}
 	}
 	public String getEquipo() {
 		return this.equipo;
@@ -84,6 +95,7 @@ public class adminBean implements Serializable{
 		}
 		this.equipo = e;
 	}
+	
 
 	
 }
