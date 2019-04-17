@@ -112,11 +112,11 @@ public class adminBean implements Serializable{
 	public Integer getEquipo() {
 		return this.equipo;
 	}
-	public void setEquipo(Integer e) {
+	public void setEquipo(Integer equipo) {
 		if(e == -1) {
 			e = null;
 		}
-		this.equipo = e;
+		this.equipo = equipo;
 	}
 	
 
