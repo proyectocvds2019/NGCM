@@ -30,5 +30,7 @@ public class Elemento implements Serializable{
 	public void setTipo(TipoElemento tipo) {
 		this.tipo = tipo;
 	}
+	
+	
 
 }

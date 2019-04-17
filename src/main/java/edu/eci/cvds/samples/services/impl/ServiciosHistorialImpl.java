@@ -47,6 +47,16 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 		}
 	}
 
+	@Override
+	public List<Elemento> consultarElementosDisponibles() throws ExcepcionServiciosHistorial {
+		// TODO Apéndice de método generado automáticamente
+		try {
+			return elementoDAO.consultarElementosDisponibles();
+		}catch(PersistenceException e) {
+			throw new ExcepcionServiciosHistorial("no se pudo consultar los elementos disponibles");
+		}
+	}
+
 
 
 }

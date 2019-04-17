@@ -24,6 +24,12 @@ public class MyBATISElementoDAO implements ElementoDAO{
 	public List<Elemento> consultarElementos() throws PersistenceException {
 		return ElementoMapper.consultarElementos();
 	}
+
+	@Override
+	public List<Elemento> consultarElementosDisponibles() throws PersistenceException {
+		// TODO Apéndice de método generado automáticamente
+		return ElementoMapper.consultarElementosDisponibles();
+	}
 	
 	
 

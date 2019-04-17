@@ -17,5 +17,7 @@ public interface ElementoMapper {
 	
 	public List<Elemento> consultarElementos();
 	
+	public List<Elemento> consultarElementosDisponibles();
+	
 
 }

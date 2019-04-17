@@ -19,5 +19,9 @@
 	<select id = "consultarElementos" resultMap="ElementosResult">
 		SELECT elementos.id, elementos.tipo FROM elementos;
 	</select>
+
+	<select id="consultarElementosDisponibles" resultMap="ElementosResult">
+		SELECT * FROM elementos WHERE idequipo IS NULL;
+	</select>
 	
 </mapper>

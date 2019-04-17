@@ -52,7 +52,7 @@
 		</div>
 	</div>
 	<div class="container collapse" id="registrarElemento">
-		<div class="col-xs-12">
+		<div class="row col-xs-12">
 			<h:form>
 			    <p:messages>
 			        <p:autoUpdate />
@@ -80,11 +80,30 @@
 
 			</h:form>
 		</div>
-		<div class="col-xs-12">
+		<hr/>
+		<div class="row col-xs-12">
 			<div class="col-md-12 col-xs-12">
-				<h:form id="carForm">
+				<h:form id="formElementos">
 					<p:fieldset id="tablaElementos" legend="Tabla de elementos">
 				        <p:dataTable id="elementos" var="elemento" value="#{adminBean.consultarElementos()}">
+				 
+				            <p:column headerText="Id">
+				                <h:outputText value="#{elemento.id}" />
+				            </p:column>
+				 
+				            <p:column headerText="Tipo">
+				                <h:outputText value="#{elemento.tipo}" />
+				            </p:column>
+				        </p:dataTable>
+				    </p:fieldset>
+				</h:form>
+			</div>
+		</div>
+		<div class="row col-xs-12">
+			<div class="col-md-12 col-xs-12">
+				<h:form id="formElementosDisponibles">
+					<p:fieldset id="tablaElementosDisponibles" legend="Tabla de elementos disponibles">
+				        <p:dataTable id="elementos" var="elemento" value="#{adminBean.consultarElementosDisponibles()}">
 				 
 				            <p:column headerText="Id">
 				                <h:outputText value="#{elemento.id}" />
