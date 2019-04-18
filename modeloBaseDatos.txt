@@ -5,17 +5,24 @@ class Usuarios{
 	Cadena contraseña
 	Entero carnet
 	Cadena rol
+	Fecha fechaRegistro
+	Fecha fechaEliminacion[0..1]
 }
 
 class Laboratorios{
 	+ Entero id
 	Cadena nombre
 	Boolean activo
+	Fecha
+	Fecha fechaRegistro
+	Fecha fechaEliminacion[0..1]
 }
 
 class Equipos{
 	+ Entero id
 	Boolean activo
+	Fecha fechaRegistro
+	Fecha fechaEliminacion[0..1]
 }
 
 class TipoElemento{
@@ -25,6 +32,8 @@ class TipoElemento{
 class Elementos{
 	+ Entero id
 	Boolean activo
+	Fecha fechaRegistor
+	Fecha fechaEliminacion[0..1]
 }
 
 Elementos "1..*" <- "1" Equipos : tiene
