@@ -10,10 +10,12 @@ class Usuarios{
 class Laboratorios{
 	+ Entero id
 	Cadena nombre
+	Boolean activo
 }
 
 class Equipos{
 	+ Entero id
+	Boolean activo
 }
 
 class TipoElemento{
@@ -22,6 +24,7 @@ class TipoElemento{
 
 class Elementos{
 	+ Entero id
+	Boolean activo
 }
 
 Elementos "1..*" <- "1" Equipos : tiene

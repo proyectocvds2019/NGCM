@@ -1,4 +1,4 @@
-	package edu.eci.cvds.test;
+package edu.eci.cvds.test;
 
 import org.junit.Test;
 

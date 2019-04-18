@@ -57,6 +57,12 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 		}
 	}
 
+	@Override
+	public void registrarEquipo(Integer laboratorio) throws ExcepcionServiciosHistorial {
+		// TODO Apéndice de método generado automáticamente
+		
+	}
+
 
 
 }
