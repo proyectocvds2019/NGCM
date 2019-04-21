@@ -33,6 +33,11 @@ public class adminBean implements Serializable{
 	private Integer equipo;
 	private TipoElemento tipoSeleccionado;
 	private String correo;
+	private Integer laboratorioSeleccionado;
+	private Integer monitorSeleccionado;
+	private Integer mouseSeleccionado;
+	private Integer torreSeleccionada;
+	private Integer tecladoSeleccionado;
     @Inject
     private ServiciosHistorial serviciosHistorial;
 	
@@ -43,7 +48,7 @@ public class adminBean implements Serializable{
 		//System.out.println("hola");
 	}
     
-	public void registrar() throws ExcepcionServiciosHistorial {
+	public void registrarElemento() throws ExcepcionServiciosHistorial {
 		Elemento elemento = new Elemento(1,tipoSeleccionado);
 		try {
 			serviciosHistorial.registrarElemento(elemento,this.correo,this.equipo);
@@ -52,27 +57,6 @@ public class adminBean implements Serializable{
 			e.printStackTrace();
 			this.mensajeError();
 		}
-	}
-	
-	
-	public void mensajeCorrecto() {
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro Elemento registrado satisfactoriamente", "Elemento registrado satisfactoriamente"));
-	}
-	
-	public void mensajeError() {
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error! No se pudo registrar el elemento", "No se pudo registrar el elemento"));
-	}
-
-	public TipoElemento[] getTipoElementos() {
-		return TipoElemento.values();
-	}
-	
-	public void setTipoSeleccionado(TipoElemento s) {
-		this.tipoSeleccionado = s;
-	}
-	
-	public TipoElemento getTipoSeleccionado() {
-		return this.tipoSeleccionado;
 	}
 	
 	public List<Elemento> consultarElementos(){
@@ -95,6 +79,27 @@ public class adminBean implements Serializable{
 		}
 	}
 	
+	public void registrarEquipo() {
+		
+	}
+	
+	
+	public void mensajeCorrecto() {
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro Elemento registrado satisfactoriamente", "Elemento registrado satisfactoriamente"));
+	}
+	
+	public void mensajeError() {
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error! No se pudo registrar el elemento", "No se pudo registrar el elemento"));
+	}
+
+	public TipoElemento[] getTipoElementos() {
+		return TipoElemento.values();
+	}
+	
+	public TipoElemento getTipoSeleccionado() {
+		return this.tipoSeleccionado;
+	}
+	
 	public List<SelectItem> getEquipos(){
 		List<SelectItem> lis = new ArrayList<SelectItem>();
 		try {
@@ -109,6 +114,36 @@ public class adminBean implements Serializable{
 			return null;
 		}
 	}
+	
+	public List<SelectItem> laboratoriosDisponibles(){
+		return null;
+	}
+	
+	public List<SelectItem> monitoresDisponibles(){
+		return null;
+	}
+	
+	public List<SelectItem> mousesDisponibles(){
+		return null;
+	}
+	
+	public List<SelectItem> torresDisponibles(){
+		return null;
+	}
+	
+	public List<SelectItem> tecladosDisponibles(){
+		return null;
+	}
+	
+	
+	
+	
+	//GETS Y SETS
+	
+	
+	
+	
+	
 	public Integer getEquipo() {
 		return this.equipo;
 	}
@@ -117,6 +152,49 @@ public class adminBean implements Serializable{
 			equipo = null;
 		}
 		this.equipo = equipo;
+	}
+	
+	public Integer getLaboratorioSeleccionado() {
+		return this.laboratorioSeleccionado;
+	}
+	
+	public void setTipoSeleccionado(TipoElemento s) {
+		this.tipoSeleccionado = s;
+	}
+	
+	public void setLaboratorioSeleccionado(Integer laboratorio) {
+		this.laboratorioSeleccionado = laboratorio;
+	}
+	
+	public void setMonitorSeleccionado(Integer monitor) {
+		this.monitorSeleccionado = monitor;
+	}
+	
+	public Integer getMonitorSeleccionado() {
+		return this.monitorSeleccionado;
+	}
+	
+	public Integer getMouseSeleccionado() {
+		return this.mouseSeleccionado;
+	}
+	
+	public void setMouseSeleccionado(Integer mouse) {
+		this.mouseSeleccionado = mouse;
+	}
+	
+	public void setTorreSeleccionada(Integer torre) {
+		this.torreSeleccionada = torre;
+	}
+	public Integer getTorreSeleccionada() {
+		return this.torreSeleccionada;
+	}
+	
+	public Integer getTecladoSeleccionado() {
+		return this.tecladoSeleccionado;
+	}
+	
+	public void setTecladoSeleccionado(Integer teclado) {
+		this.tecladoSeleccionado = teclado;
 	}
 	
 

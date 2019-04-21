@@ -8,16 +8,16 @@ CREATE TABLE Usuarios(
 	carnet INTEGER
 );
 
-/*CREATE SEQUENCE id_lab;
-CREATE TABLE Laboratorios(
-	id INTEGER PRIMARY KEY NOT NULL DEFAULT ,
-	nombre VARCHAR(100) NOT NULL
-);*/
+-- CREATE SEQUENCE id_lab;
+-- CREATE TABLE Laboratorios(
+-- 	id INTEGER PRIMARY KEY NOT NULL,
+-- 	nombre VARCHAR(100) NOT NULL
+-- );
 
 CREATE SEQUENCE id_equipo;
 CREATE TABLE Equipos(
 	id INTEGER PRIMARY KEY NOT NULL
-	--laboratorio INTEGER NOT NULL
+	-- laboratorio INTEGER NOT NULL
 );
 
 CREATE SEQUENCE id_elemento;

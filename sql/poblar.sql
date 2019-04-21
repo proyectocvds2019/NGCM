@@ -2,4 +2,7 @@
 
 
 /*insert into elementos (id,tipo,idequipo,registradopor) values (nextval('id_elemento'),'TECLADO',null,'gualdronsito@hotmail.com');*/
+insert into equipos (id) values (nextval('id_equipo'));
+select * from equipos;
+
 select * from elementos;
