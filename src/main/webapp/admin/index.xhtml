@@ -129,6 +129,7 @@
 			    <h:panelGrid class="col-xs-12" columns="2" cellpadding="5">
 			    	<p:outputLabel for="laboratorio" value="Laboratorio:" />
 			    	<p:selectOneMenu id="laboratorio" value="#{adminBean.laboratorioSeleccionado}" style="width:196px">
+			    	<f:selectItem itemLabel="NULL" itemValue="null"/>
 	                    <f:selectItems value="#{adminBean.laboratoriosDisponibles()}"/>
 	                </p:selectOneMenu>
 
