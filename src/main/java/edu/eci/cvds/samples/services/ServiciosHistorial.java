@@ -14,6 +14,7 @@ public interface ServiciosHistorial {
 	public abstract List<Elemento> consultarElementosDisponibles() throws ExcepcionServiciosHistorial;
 
 	public abstract List<Equipo> consultarEquipos() throws ExcepcionServiciosHistorial;
+
 	
 	public abstract void registrarEquipo(Integer laboratorio) throws ExcepcionServiciosHistorial;
 	

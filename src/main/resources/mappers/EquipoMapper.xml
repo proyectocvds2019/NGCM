@@ -9,6 +9,10 @@
 	<resultMap type = 'Equipo' id = 'EquiposResult'>
 		<id property = 'id' column = 'id'/>
 	</resultMap>
+	<resultMap type = 'Equipo' id = 'EquiposResult2'>
+		<id property = 'id' column = 'idEquipo'/>
+	</resultMap>
+
 	
 	<select id="consultarEquipos" resultMap="EquiposResult">
 		SELECT

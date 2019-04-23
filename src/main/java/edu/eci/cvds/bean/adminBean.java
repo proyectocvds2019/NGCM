@@ -82,6 +82,10 @@ public class adminBean implements Serializable{
 	public void registrarEquipo() {
 		
 	}
+
+	public void enlazarElemento(Elemento elemento){
+
+	}
 	
 	
 	public void mensajeCorrecto() {
@@ -113,6 +117,10 @@ public class adminBean implements Serializable{
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	public List<SelectItem> getEquiposDisponibles(){
+		return null;
 	}
 
 	

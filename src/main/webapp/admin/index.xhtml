@@ -94,7 +94,7 @@
 				                <h:outputText value="#{elemento.tipo}" />
 				            </p:column>
 							<p:column headerText="Equipo">
-								<h:outputText value="falta"/>
+								<h:outputText value="#{elemento.equipoAsignado.id}"/>
 							</p:column>
 				        </p:dataTable>
 				    </p:fieldset>
@@ -126,13 +126,29 @@
 										<div class="modal-content">
 											<div class="modal-header">
 
-												<h4 class="modal-title">Modal Header</h4>
+												<h4 class="modal-title">Enlazar equipo al elemento</h4>
 											</div>
 											<div class="modal-body">
-												<p><h:outputText value="#{elemento.id}"/></p>
+												<h:form class="container-fluid" id="formularioEnlazarElemento#{elemento.id}">
+													<p:messages>
+														<p:autoUpdate />
+													</p:messages>
+													<div class="row" style="padding:25px;">
+														<p:outputLabel class="col-xs-12 col-md-6" value="Elemento"/>
+														<input type="text" class="col-xs-12 col-md-6" value="#{elemento.id}" disabled="disabled"/>
+														<hr/>
+														<p:outputLabel class="col-xs-12 col-md-4" for="equipoAsociar" value="Seleccionar Equipo"/>
+														<p:selectOneMenu class="col-xs-12 col-md-4" id="equipoAsociar" value="#{adminBean.equipo}">
+															<f:selectItems value="#{adminBean.getEquiposDisponibles()}"/>
+														</p:selectOneMenu>
+														<center>
+															<p:commandButton  action="#{adminBean.enlazarElemento(elemento)}" class="btn btn-default btn-success btn-responsive col-xs-12 col-md-3" value="Enlazar" />
+														</center>
+													</div>
+												</h:form>
 											</div>
 											<div class="modal-footer">
-												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+												<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 											</div>
 										</div>
 
