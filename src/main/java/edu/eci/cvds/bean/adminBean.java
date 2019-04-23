@@ -63,7 +63,7 @@ public class adminBean implements Serializable{
 		try {
 			return this.serviciosHistorial.consultarElementos();
 		} catch (ExcepcionServiciosHistorial e) {
-			// TODO Bloque catch generado automáticamente
+			// TODO Bloque catch generado automï¿½ticamente
 			e.printStackTrace();
 			return null;
 		}
@@ -73,7 +73,7 @@ public class adminBean implements Serializable{
 		try {
 			return this.serviciosHistorial.consultarElementosDisponibles();
 		} catch (ExcepcionServiciosHistorial e) {
-			// TODO Bloque catch generado automáticamente
+			// TODO Bloque catch generado automï¿½ticamente
 			e.printStackTrace();
 			return null;
 		}
@@ -109,11 +109,12 @@ public class adminBean implements Serializable{
 			}
 			return lis;
 		} catch (ExcepcionServiciosHistorial e) {
-			// TODO Bloque catch generado automáticamente
+			// TODO Bloque catch generado automï¿½ticamente
 			e.printStackTrace();
 			return null;
 		}
 	}
+
 	
 	public List<SelectItem> laboratoriosDisponibles(){
 		return null;

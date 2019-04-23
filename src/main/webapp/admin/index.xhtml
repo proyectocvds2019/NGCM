@@ -93,9 +93,13 @@
 				            <p:column headerText="Tipo">
 				                <h:outputText value="#{elemento.tipo}" />
 				            </p:column>
+							<p:column headerText="Equipo">
+								<h:outputText value="falta"/>
+							</p:column>
 				        </p:dataTable>
 				    </p:fieldset>
 				</h:form>
+				<hr/>
 			</div>
 		</div>
 		<div class="row col-xs-12">
@@ -111,6 +115,30 @@
 				            <p:column headerText="Tipo">
 				                <h:outputText value="#{elemento.tipo}" />
 				            </p:column>
+							<p:column headerText="Enlazar">
+								<center>
+								<button data-toggle="modal" data-target="#botonEnlazarEquipo#{elemento.id}" type="button" class="btn btn-default btn-responsive btn-primary"><i class="fas fa-star"></i>Enlazar equipo</button>
+								</center>
+								<div class="modal fade" id="botonEnlazarEquipo#{elemento.id}" role="dialog">
+									<div class="modal-dialog">
+
+										<!-- Modal content-->
+										<div class="modal-content">
+											<div class="modal-header">
+
+												<h4 class="modal-title">Modal Header</h4>
+											</div>
+											<div class="modal-body">
+												<p><h:outputText value="#{elemento.id}"/></p>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</p:column>
 				        </p:dataTable>
 				    </p:fieldset>
 				</h:form>
