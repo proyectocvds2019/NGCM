@@ -14,18 +14,19 @@ public class MyBATISEquipoDAO implements EquipoDAO{
 	private EquipoMapper equipoMapper;
 
 	public void registrarEquipo(Equipo equipo) throws PersistenceException {
-		// TODO Auto-generated method stub
+		equipoMapper.registrarEquipo(equipo);
 		
 	}
 
-	public Equipo cargarEquipo(int id) throws PersistenceException {
-		// TODO Auto-generated method stub
-		return null;
+	public Equipo consultarEquipo(int id) throws PersistenceException {
+		return equipoMapper.consultarEquipo(id);
 	}
 
 	public List<Equipo> consultarEquipos() throws PersistenceException {
 		return equipoMapper.consultarEquipos();
 	}
+
+	
 	
 	
 

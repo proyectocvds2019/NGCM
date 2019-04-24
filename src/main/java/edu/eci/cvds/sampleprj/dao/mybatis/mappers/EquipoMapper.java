@@ -13,5 +13,9 @@ import edu.eci.cvds.samples.entities.Equipo;
 public interface EquipoMapper {
 	
 	public List<Equipo> consultarEquipos();
+	
+	public Equipo consultarEquipo(int id);
+	
+	public void registrarEquipo(Equipo equipo);
 
 }
