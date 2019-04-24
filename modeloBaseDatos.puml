@@ -27,7 +27,8 @@ class Equipos{
 
 
 class Elementos{
-	+ Entero id
+	+ Cadena id
+	Cadena nombre
 	Boolean activo
 	Cadena tipo
 	Fecha fechaRegistor

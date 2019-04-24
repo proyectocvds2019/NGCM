@@ -14,7 +14,8 @@ public class MyBATISElementoDAO implements ElementoDAO{
 	private ElementoMapper ElementoMapper;
 	
 	public void registrarElemento(Elemento elemento, String correoUsuario, Integer equipo)  throws PersistenceException{
-		ElementoMapper.registrarElemento(elemento,correoUsuario,equipo);
+		ElementoMapper.registrarElemento(
+				elemento,correoUsuario,equipo);
 		
 	}
 
@@ -25,7 +26,7 @@ public class MyBATISElementoDAO implements ElementoDAO{
 
 	@Override
 	public List<Elemento> consultarElementosDisponibles() throws PersistenceException {
-		// TODO Apéndice de método generado automáticamente
+		// TODO Apï¿½ndice de mï¿½todo generado automï¿½ticamente
 		return ElementoMapper.consultarElementosDisponibles();
 	}
 	

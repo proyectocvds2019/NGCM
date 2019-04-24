@@ -7,31 +7,33 @@ public class Elemento implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 7381594049177090273L;
-	private Integer id;
+	private String id;
 	private TipoElemento tipo;
 	private Equipo equipoAsignado;
+	private String nombre;
 
 	
 	public Elemento() {
 
 	}
 
-	public Elemento(Integer id,TipoElemento tipo){
+	public Elemento(String id,TipoElemento tipo, String nombre){
 		setId(id);
 		setTipo(tipo);
+		setNombre(nombre);
 	}
 
-	public Elemento(Integer id, TipoElemento tipo, Equipo equipoAsignado){
+	public Elemento(String id, TipoElemento tipo, Equipo equipoAsignado){
 		setId(id);
 		setTipo(tipo);
 		setEquipoAsignado(equipoAsignado);
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -48,6 +50,14 @@ public class Elemento implements Serializable{
 	}
 	public Equipo getEquipoAsignado(){
 		return this.equipoAsignado;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 	
 

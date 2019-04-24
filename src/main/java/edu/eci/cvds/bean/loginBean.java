@@ -7,11 +7,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.context.ExternalContext;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -25,6 +27,7 @@ public class loginBean implements Serializable {
     private String username;
     private String password;
     private Boolean rememberMe;
+    private Subject subject;
 
 
     public loginBean() {
@@ -38,7 +41,7 @@ public class loginBean implements Serializable {
      * Try and authenticate the user
      */
     public void doLogin() {
-        Subject subject = SecurityUtils.getSubject();
+       subject = SecurityUtils.getSubject();
 
         UsernamePasswordToken token = new UsernamePasswordToken(getUsername(), getPassword(), getRememberMe());
 
@@ -88,6 +91,13 @@ public class loginBean implements Serializable {
      */
     private void facesError(String message) {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
+    }
+
+    public void verificarInicioSesion()throws IOException{
+        if(SecurityUtils.getSubject().getSession().getAttribute("correo") != null){
+            ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+            ec.redirect(ec.getRequestContextPath() + "/admin/index.xhtml");
+        }
     }
 
     public String getUsername() {

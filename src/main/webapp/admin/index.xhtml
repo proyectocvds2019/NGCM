@@ -58,15 +58,21 @@
 			    </p:messages>
 			 
 			    <h:panelGrid class="col-xs-12" columns="2" cellpadding="5">
+					<p:outputLabel for="idElemento" value="Id del elemento:" />
+					<p:inputText required="true" id="idElemento" value="#{adminBean.idElemento}"/>
+
+					<p:outputLabel for="nombreElemento" value="Nombre del elemento:" />
+					<p:inputText required="true" id="nombreElemento" value="#{adminBean.nombreElemento}"/>
+
 			        <p:outputLabel for="tipoElemento" value="Tipo de elemento:" />
 
-					<h:selectOneMenu id="tipoElemento" value="#{adminBean.tipoSeleccionado}" style="width:196px">
+					<h:selectOneMenu required="true" id="tipoElemento" value="#{adminBean.tipoSeleccionado}" style="width:196px">
 	                    <f:selectItems value="#{adminBean.tipoElementos}"/>
 	                </h:selectOneMenu>
 			       	
 	
 			       <p:outputLabel for="Equipo" value="Equipo:" />
-			       <h:selectOneMenu id="Equipo" value="#{adminBean.equipo}" style="width:196px">
+			       <h:selectOneMenu required="true" id="Equipo" value="#{adminBean.equipo}" style="width:196px">
 			       		<f:selectItem itemLabel="NULL" itemValue="-1"/>
 	                    <f:selectItems value="#{adminBean.getEquipos()}"/>
 	                </h:selectOneMenu>
@@ -78,23 +84,38 @@
 
 
 			</h:form>
+			<p:ajaxStatus onstart="PF('cargando').show()" onsuccess="PF('cargando').hide()" />
+			<p:dialog widgetVar="cargando" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+				<img class="img-responsive img-thumbnail" src="/img/cargando.gif" alt="" style="width:100%;height:50%"/>
+			</p:dialog>
 			<hr/>
 		</div>
 		<div class="row col-xs-12">
 			<div class="col-md-12 col-xs-12">
 				<h:form id="formElementos">
 					<p:fieldset id="tablaElementos" legend="Tabla de elementos">
-				        <p:dataTable id="elementos" var="elemento" value="#{adminBean.consultarElementos()}">
-				 
+						<p:dialog widgetVar="cargando" modal="false" draggable="false" closable="false" resizable="false" showHeader="false">
+							<img class="img-responsive" src="/img/cargando2.gif" alt="" style="width:70px;height:70px"/>
+						</p:dialog>
+				        <p:dataTable id="elementos" var="elemento" value="#{adminBean.consultarElementos()}" rows="10" paginator="true"
+									 paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}">
+
 				            <p:column headerText="Id">
 				                <h:outputText value="#{elemento.id}" />
 				            </p:column>
-				 
+							<p:column headerText="Nombre">
+								<h:outputText value="#{elemento.nombre}" />
+							</p:column>
 				            <p:column headerText="Tipo">
 				                <h:outputText value="#{elemento.tipo}" />
 				            </p:column>
 							<p:column headerText="Equipo">
 								<h:outputText value="#{elemento.equipoAsignado.id}"/>
+							</p:column>
+							<p:column headerText="Eliminar">
+								<center>
+									<h:commandButton action="#{adminBean.eliminarElemento(elemento)}" class="btn btn-default btn-danger" value="ELIMINAR"/>
+								</center>
 							</p:column>
 				        </p:dataTable>
 				    </p:fieldset>
@@ -106,11 +127,16 @@
 			<div class="col-md-12 col-xs-12">
 				<h:form id="formElementosDisponibles">
 					<p:fieldset id="tablaElementosDisponibles" legend="Tabla de elementos disponibles">
-				        <p:dataTable id="elementos" var="elemento" value="#{adminBean.consultarElementosDisponibles()}">
+				        <p:dataTable id="elementos" var="elemento" value="#{adminBean.consultarElementosDisponibles()}" rows="10" paginator="true"
+									 paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}">
 				 
 				            <p:column headerText="Id">
 				                <h:outputText value="#{elemento.id}" />
 				            </p:column>
+
+							<p:column headerText="Nombre">
+								<h:outputText value="#{elemento.nombre}" />
+							</p:column>
 				 
 				            <p:column headerText="Tipo">
 				                <h:outputText value="#{elemento.tipo}" />
@@ -137,11 +163,12 @@
 														<p:outputLabel class="col-xs-12 col-md-6" value="Elemento"/>
 														<input type="text" class="col-xs-12 col-md-6" value="#{elemento.id}" disabled="disabled"/>
 														<hr/>
-														<p:outputLabel class="col-xs-12 col-md-4" value="Seleccionar Equipo"/>
-														<h:selectOneMenu style="" dynamic="true" class="col-xs-12 col-md-4" id="equipoAsociar#{elemento.id}" value="#{adminBean.equipo}">
+														<p:outputLabel class="col-xs-12 col-md-6" value="Seleccionar Equipo"/>
+														<h:selectOneMenu style="" dynamic="true" class="col-xs-12 col-md-6" id="equipoAsociar#{elemento.id}" value="#{adminBean.equipo}">
 															<f:selectItems value="#{adminBean.getEquiposDisponibles(elemento)}"/>
 														</h:selectOneMenu>
-														<p:commandButton  action="#{adminBean.enlazarElemento(elemento)}" class="btn btn-default btn-success btn-responsive col-xs-12 col-md-3" value="Enlazar" />
+														<hr class="col-xs-11"/>
+														<h:commandButton  action="#{adminBean.enlazarElemento(elemento)}" class="btn btn-default btn-success btn-responsive col-xs-12 col-md-12" value="Enlazar" />
 													</div>
 												</h:form>
 											</div>

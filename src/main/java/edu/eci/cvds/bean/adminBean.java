@@ -33,6 +33,8 @@ public class adminBean implements Serializable{
 	private Integer equipo;
 	private TipoElemento tipoSeleccionado;
 	private String correo;
+	private String idElemento;
+	private String nombreElemento;
 	private Integer laboratorioSeleccionado;
 	private Integer monitorSeleccionado;
 	private Integer mouseSeleccionado;
@@ -49,7 +51,7 @@ public class adminBean implements Serializable{
 	}
     
 	public void registrarElemento() throws ExcepcionServiciosHistorial {
-		Elemento elemento = new Elemento(1,tipoSeleccionado);
+		Elemento elemento = new Elemento(idElemento,tipoSeleccionado,nombreElemento);
 		try {
 			serviciosHistorial.registrarElemento(elemento,this.correo,this.equipo);
 			this.mensajeCorrecto();
@@ -84,6 +86,10 @@ public class adminBean implements Serializable{
 	}
 
 	public void enlazarElemento(Elemento elemento){
+
+	}
+
+	public void eliminarElemento(Elemento elemento){
 
 	}
 	
@@ -214,6 +220,22 @@ public class adminBean implements Serializable{
 	
 	public void setTecladoSeleccionado(Integer teclado) {
 		this.tecladoSeleccionado = teclado;
+	}
+
+	public String getIdElemento() {
+		return idElemento;
+	}
+
+	public void setIdElemento(String idElemento) {
+		this.idElemento = idElemento;
+	}
+
+	public String getNombreElemento() {
+		return nombreElemento;
+	}
+
+	public void setNombreElemento(String nombreElemento) {
+		this.nombreElemento = nombreElemento;
 	}
 	
 
