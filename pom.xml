@@ -95,7 +95,14 @@
             <artifactId>shiro-web</artifactId>
             <version>1.4.0</version>
         </dependency>
-		<dependency>
+	  <!-- https://mvnrepository.com/artifact/org.ops4j.pax.shiro/pax-shiro-faces -->
+	  <dependency>
+		  <groupId>org.ops4j.pax.shiro</groupId>
+		  <artifactId>pax-shiro-faces</artifactId>
+		  <version>0.1.0</version>
+	  </dependency>
+
+	  <dependency>
 		  <groupId>org.slf4j</groupId>
 		  <artifactId>slf4j-api</artifactId>
 		  <version>1.7.26</version>

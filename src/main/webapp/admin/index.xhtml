@@ -60,16 +60,16 @@
 			    <h:panelGrid class="col-xs-12" columns="2" cellpadding="5">
 			        <p:outputLabel for="tipoElemento" value="Tipo de elemento:" />
 
-					<p:selectOneMenu id="tipoElemento" value="#{adminBean.tipoSeleccionado}" style="width:196px">
+					<h:selectOneMenu id="tipoElemento" value="#{adminBean.tipoSeleccionado}" style="width:196px">
 	                    <f:selectItems value="#{adminBean.tipoElementos}"/>
-	                </p:selectOneMenu>
+	                </h:selectOneMenu>
 			       	
 	
 			       <p:outputLabel for="Equipo" value="Equipo:" />
-			       <p:selectOneMenu id="Equipo" value="#{adminBean.equipo}" style="width:196px">
+			       <h:selectOneMenu id="Equipo" value="#{adminBean.equipo}" style="width:196px">
 			       		<f:selectItem itemLabel="NULL" itemValue="-1"/>
 	                    <f:selectItems value="#{adminBean.getEquipos()}"/>
-	                </p:selectOneMenu>
+	                </h:selectOneMenu>
 
 			 
 			    </h:panelGrid>
@@ -117,7 +117,7 @@
 				            </p:column>
 							<p:column headerText="Enlazar">
 								<center>
-								<button data-toggle="modal" data-target="#botonEnlazarEquipo#{elemento.id}" type="button" class="btn btn-default btn-responsive btn-primary"><i class="fas fa-star"></i>Enlazar equipo</button>
+									<button data-toggle="modal" data-target="#botonEnlazarEquipo#{elemento.id}" type="button" class="btn btn-default btn-responsive btn-primary"><i class="fas fa-star"></i>Enlazar equipo</button>
 								</center>
 								<div class="modal fade" id="botonEnlazarEquipo#{elemento.id}" role="dialog">
 									<div class="modal-dialog">
@@ -138,10 +138,10 @@
 														<input type="text" class="col-xs-12 col-md-6" value="#{elemento.id}" disabled="disabled"/>
 														<hr/>
 														<p:outputLabel class="col-xs-12 col-md-4" value="Seleccionar Equipo"/>
-														<p:selectOneMenu style="" dynamic="true" class="col-xs-12 col-md-4" id="equipoAsociar#{elemento.id}" value="#{adminBean.equipo}">
+														<h:selectOneMenu style="" dynamic="true" class="col-xs-12 col-md-4" id="equipoAsociar#{elemento.id}" value="#{adminBean.equipo}">
 															<f:selectItems value="#{adminBean.getEquiposDisponibles(elemento)}"/>
-														</p:selectOneMenu>
-                                                        <p:commandButton  action="#{adminBean.enlazarElemento(elemento)}" class="btn btn-default btn-success btn-responsive col-xs-12 col-md-3" value="Enlazar" />
+														</h:selectOneMenu>
+														<p:commandButton  action="#{adminBean.enlazarElemento(elemento)}" class="btn btn-default btn-success btn-responsive col-xs-12 col-md-3" value="Enlazar" />
 													</div>
 												</h:form>
 											</div>
@@ -170,34 +170,34 @@
 
 			    <h:panelGrid class="col-xs-12" columns="2" cellpadding="5">
 			    	<p:outputLabel for="laboratorio" value="Laboratorio:" />
-			    	<p:selectOneMenu id="laboratorio" value="#{adminBean.laboratorioSeleccionado}" style="width:196px">
+			    	<h:selectOneMenu id="laboratorio" value="#{adminBean.laboratorioSeleccionado}" style="width:196px">
 			    	<f:selectItem itemLabel="NULL" itemValue="null"/>
 	                    <f:selectItems value="#{adminBean.laboratoriosDisponibles()}"/>
-	                </p:selectOneMenu>
+	                </h:selectOneMenu>
 
 
 	                <p:outputLabel for="monitor" value="Monitor:" />
-			    	<p:selectOneMenu id="monitor" value="#{adminBean.monitorSeleccionado}" style="width:196px">
+			    	<h:selectOneMenu id="monitor" value="#{adminBean.monitorSeleccionado}" style="width:196px">
 	                    <f:selectItems value="#{adminBean.monitoresDisponibles()}"/>
-	                </p:selectOneMenu>
+	                </h:selectOneMenu>
 
 
 	                <p:outputLabel for="mouse" value="Mouse:" />
-			    	<p:selectOneMenu id="mouse" value="#{adminBean.mouseSeleccionado}" style="width:196px">
+			    	<h:selectOneMenu id="mouse" value="#{adminBean.mouseSeleccionado}" style="width:196px">
 	                    <f:selectItems value="#{adminBean.mousesDisponibles()}"/>
-	                </p:selectOneMenu>
+	                </h:selectOneMenu>
 
 
 	                <p:outputLabel for="torre" value="Torre:" />
-			    	<p:selectOneMenu id="torre" value="#{adminBean.tecladoSeleccionado}" style="width:196px">
+			    	<h:selectOneMenu id="torre" value="#{adminBean.tecladoSeleccionado}" style="width:196px">
 	                    <f:selectItems value="#{adminBean.torresDisponibles()}"/>
-	                </p:selectOneMenu>
+	                </h:selectOneMenu>
 
 
 	                <p:outputLabel for="teclado" value="Teclado:" />
-			    	<p:selectOneMenu id="teclado" value="#{adminBean.tecladoSeleccionado}" style="width:196px">
+			    	<h:selectOneMenu id="teclado" value="#{adminBean.tecladoSeleccionado}" style="width:196px">
 	                    <f:selectItems value="#{adminBean.tecladosDisponibles()}"/>
-	                </p:selectOneMenu>
+	                </h:selectOneMenu>
 				</h:panelGrid>
 
 				<p:commandButton action="#{adminBean.registrarEquipo()}" icon="fa fa-check" class="btn btn-default btn-success" value="Registrar" />
