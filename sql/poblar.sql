@@ -6,3 +6,8 @@ insert into equipos (id) values (nextval('id_equipo'));
 select * from equipos;
 
 select * from elementos;
+
+select equipos.id from equipos where equipos.id not in (select elementos.idequipo from elementos where elementos.tipo = 'MONITOR' and elementos.idequipo is not null group by elementos.idequipo);
+select * from equipos,elementos where equipos.id = elementos.idequipo;
+select elementos.idequipo from elementos where elementos.tipo = 'TORRE' and elementos.idequipo is not null group by elementos.idequipo;
+select equipos.id, elementos.id as idE from equipos,elementos where(elementos.idequipo is null and elementos.tipo = 'MONITOR') group by equipos.id,elementos.id;
