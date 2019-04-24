@@ -9,7 +9,7 @@ public interface EquipoDAO {
 
 	public void registrarEquipo(Equipo equipo) throws PersistenceException;
 	
-	public Equipo cargarEquipo(int id) throws PersistenceException;
+	public Equipo consultarEquipo(int id) throws PersistenceException;
 	
 	public List<Equipo> consultarEquipos() throws PersistenceException;
 

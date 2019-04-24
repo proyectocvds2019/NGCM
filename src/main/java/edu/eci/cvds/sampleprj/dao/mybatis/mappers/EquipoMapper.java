@@ -15,6 +15,10 @@ import org.apache.ibatis.annotations.Param;
 public interface EquipoMapper {
 	
 	public List<Equipo> consultarEquipos();
+	
+	public Equipo consultarEquipo(int id);
+	
+	public void registrarEquipo(Equipo equipo);
 
 	public List<Equipo> consultarEquiposDisponibles(@Param("tipo") TipoElemento tipo);
 
