@@ -27,13 +27,9 @@ public class MyBATISEquipoDAO implements EquipoDAO{
 		return equipoMapper.consultarEquipos();
 	}
 
-<<<<<<< HEAD
 	public List<Equipo> consultarEquiposDisponibles(TipoElemento tipo) throws PersistenceException{
 		return equipoMapper.consultarEquiposDisponibles(tipo);
 	}
-=======
-	
->>>>>>> 187c1764ed950fd25f6d3390a0566b937bf0e7c5
 	
 	
 
