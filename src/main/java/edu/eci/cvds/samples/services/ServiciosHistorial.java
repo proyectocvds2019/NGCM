@@ -4,6 +4,7 @@ import java.util.List;
 
 import edu.eci.cvds.samples.entities.Elemento;
 import edu.eci.cvds.samples.entities.Equipo;
+import edu.eci.cvds.samples.entities.TipoElemento;
 
 public interface ServiciosHistorial {
 	
@@ -15,6 +16,7 @@ public interface ServiciosHistorial {
 
 	public abstract List<Equipo> consultarEquipos() throws ExcepcionServiciosHistorial;
 
+	public abstract List<Equipo> consultarEquiposDisponibles(TipoElemento tipo) throws ExcepcionServiciosHistorial;
 	
 	public abstract void registrarEquipo(Integer laboratorio) throws ExcepcionServiciosHistorial;
 	

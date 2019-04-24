@@ -119,8 +119,18 @@ public class adminBean implements Serializable{
 		}
 	}
 
-	public List<SelectItem> getEquiposDisponibles(){
-		return null;
+	public List<SelectItem> getEquiposDisponibles(Elemento elemento){
+		List<SelectItem> lista = new ArrayList<SelectItem>();
+		try{
+			List<Equipo> l = this.serviciosHistorial.consultarEquiposDisponibles(elemento.getTipo());
+			for(Equipo e: l){
+				lista.add(new SelectItem(e.getId()));
+			}
+			return lista;
+		}catch (ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	

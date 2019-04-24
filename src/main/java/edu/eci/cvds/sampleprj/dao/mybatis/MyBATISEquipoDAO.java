@@ -7,6 +7,7 @@ import edu.eci.cvds.sampleprj.dao.EquipoDAO;
 import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.EquipoMapper;
 import edu.eci.cvds.samples.entities.Equipo;
+import edu.eci.cvds.samples.entities.TipoElemento;
 
 public class MyBATISEquipoDAO implements EquipoDAO{
 	
@@ -25,6 +26,10 @@ public class MyBATISEquipoDAO implements EquipoDAO{
 
 	public List<Equipo> consultarEquipos() throws PersistenceException {
 		return equipoMapper.consultarEquipos();
+	}
+
+	public List<Equipo> consultarEquiposDisponibles(TipoElemento tipo) throws PersistenceException{
+		return equipoMapper.consultarEquiposDisponibles(tipo);
 	}
 	
 	

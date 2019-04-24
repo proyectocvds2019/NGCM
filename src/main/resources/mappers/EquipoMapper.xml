@@ -20,5 +20,11 @@
 		FROM
 				equipos;
 	</select>
+
+	<select parameterType="map" id="consultarEquiposDisponibles" resultMap="EquiposResult">
+		select equipos.id
+		from equipos
+		where equipos.id not in (select elementos.idequipo from elementos where elementos.tipo = #{tipo} and elementos.idequipo is not null group by elementos.idequipo);
+	</select>
 	
 </mapper>

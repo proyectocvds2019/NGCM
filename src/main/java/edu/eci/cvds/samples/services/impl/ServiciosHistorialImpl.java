@@ -10,6 +10,7 @@ import edu.eci.cvds.sampleprj.dao.EquipoDAO;
 import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.samples.entities.Elemento;
 import edu.eci.cvds.samples.entities.Equipo;
+import edu.eci.cvds.samples.entities.TipoElemento;
 import edu.eci.cvds.samples.services.ExcepcionServiciosHistorial;
 import edu.eci.cvds.samples.services.ServiciosHistorial;
 
@@ -49,7 +50,7 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 
 	@Override
 	public List<Elemento> consultarElementosDisponibles() throws ExcepcionServiciosHistorial {
-		// TODO Apéndice de método generado automáticamente
+		// TODO Apï¿½ndice de mï¿½todo generado automï¿½ticamente
 		try {
 			return elementoDAO.consultarElementosDisponibles();
 		}catch(PersistenceException e) {
@@ -59,8 +60,17 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 
 	@Override
 	public void registrarEquipo(Integer laboratorio) throws ExcepcionServiciosHistorial {
-		// TODO Apéndice de método generado automáticamente
+		// TODO Apï¿½ndice de mï¿½todo generado automï¿½ticamente
 		
+	}
+
+	@Override
+	public List<Equipo> consultarEquiposDisponibles(TipoElemento tipo) throws ExcepcionServiciosHistorial{
+		try{
+			return equipoDAO.consultarEquiposDisponibles(tipo);
+		}catch (PersistenceException e){
+			throw new ExcepcionServiciosHistorial("No se pudo consultar los equipos disponibles");
+		}
 	}
 
 
