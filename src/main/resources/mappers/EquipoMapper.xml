@@ -11,21 +11,28 @@
 		<result property="activo" column="activo"/>
 		<association property="laboratorio" javaType="Laboratorio" resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.LaboratorioMapper.LaboratoriosResult2"/>
 	</resultMap>
-	<resultMap type = 'Equipo' id = 'EquiposResult2'>
-		<id property = 'id' column = 'idEquipo'/>
-		<result property="activo" column="activo"/>
-		<association property="laboratorio" javaType="Laboratorio" resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.LaboratorioMapper.LaboratoriosResult2"/>
-	</resultMap>
+
 
 	
 	<select id="consultarEquipos" resultMap="EquiposResult">
-		SELECT * FROM Equipos;
+		SELECT equipos.id, equipos.activo, equipos.laboratorio, laboratorios.nombre as laboratorioNombre,
+		laboratorios.activo as laboratorioActivo
+		FROM Equipos,laboratorios
+		WHERE equipos.laboratorio = laboratorios.id;
 	</select>
 
-	<select parameterType="map" id="consultarEquiposDisponibles" resultMap="EquiposResult">
-		select equipos.id
+	<select parameterType="map" id="consultarEquiposDisponiblesParaElemento" resultMap="EquiposResult">
+		select *
 		from equipos
 		where equipos.id not in (select elementos.idequipo from elementos where elementos.tipo = #{tipo} and elementos.idequipo is not null group by elementos.idequipo);
+	</select>
+
+	<select id="consultarEquipoDeElemento" parameterType="map" resultMap="EquiposResult">
+		SELECT equipos.id, equipos.activo, equipos.laboratorio, laboratorios.nombre as laboratorioNombre,
+		laboratorios.activo as laboratorioActivo
+		FROM Equipos, laboratorios
+		WHERE (equipos.id = (select elementos.idEquipo from elementos where elementos.id = #{elemento.id})) AND
+		equipos.laboratorio = laboratorios.id;
 	</select>
 	
 </mapper>

@@ -80,6 +80,16 @@ public class adminBean implements Serializable{
 			return null;
 		}
 	}
+	public Integer consultarEquipoDeElemento(Elemento elemento){
+		try{
+			Equipo equi = this.serviciosHistorial.consultarEquipoDeElemento(elemento);
+			if(equi == null) return null;
+			else return equi.getId();
+		}catch (ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+			return null;
+		}
+	}
 	
 	public void registrarEquipo() {
 		
@@ -92,6 +102,16 @@ public class adminBean implements Serializable{
 	public void eliminarElemento(Elemento elemento){
 
 	}
+
+	public void eliminarEquipo(Equipo equipo){
+
+	}
+
+	public String consultarElementoDelEquipo(TipoElemento tipo, Equipo equipo){
+		return null;
+	}
+
+
 	
 	
 	public void mensajeCorrecto() {
@@ -134,10 +154,10 @@ public class adminBean implements Serializable{
 		}
 	}
 
-	public List<SelectItem> getEquiposDisponibles(Elemento elemento){
+	public List<SelectItem> getEquiposDisponiblesParaElemento(Elemento elemento){
 		List<SelectItem> lista = new ArrayList<SelectItem>();
 		try{
-			List<Equipo> l = this.serviciosHistorial.consultarEquiposDisponibles(elemento.getTipo());
+			List<Equipo> l = this.serviciosHistorial.consultarEquiposDisponiblesParaElemento(elemento.getTipo());
 			for(Equipo e: l){
 				lista.add(new SelectItem(e.getId()));
 			}

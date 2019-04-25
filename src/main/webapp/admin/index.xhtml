@@ -113,11 +113,12 @@
 				                <h:outputText value="#{elemento.tipo}" />
 				            </p:column>
 							<p:column headerText="Equipo">
-								<h:outputText value="#{elemento.equipoAsignado.id}"/>
+								<h:outputText value="#{adminBean.consultarEquipoDeElemento(elemento)}"/>
 							</p:column>
 							<p:column headerText="Activo">
 								<h:outputText value="#{elemento.activo}"/>
 							</p:column>
+
 							<p:column headerText="Eliminar">
 								<center>
 									<h:commandButton action="#{adminBean.eliminarElemento(elemento)}" class="btn btn-default btn-danger" value="ELIMINAR"/>
@@ -171,7 +172,7 @@
 														<hr/>
 														<p:outputLabel class="col-xs-12 col-md-6" value="Seleccionar Equipo"/>
 														<h:selectOneMenu style="" dynamic="true" class="col-xs-12 col-md-6" id="equipoAsociar#{elemento.id}" value="#{adminBean.equipo}">
-															<f:selectItems value="#{adminBean.getEquiposDisponibles(elemento)}"/>
+															<f:selectItems value="#{adminBean.getEquiposDisponiblesParaElemento(elemento)}"/>
 														</h:selectOneMenu>
 														<hr class="col-xs-11"/>
 														<h:commandButton  action="#{adminBean.enlazarElemento(elemento)}" class="btn btn-default btn-success btn-responsive col-xs-12 col-md-12" value="Enlazar" />
@@ -253,12 +254,122 @@
 							<h:outputText value="#{equipo.activo}" />
 						</p:column>
 						<p:column headerText="Laboratorio">
-							<h:outputText value="#{equipo.laboratorio.id}" />
+							<h:outputText value="#{equipo.laboratorio.nombre}" />
+							<button type="button" data-toggle="modal" data-target="#cambiarLaboratorioModal#{equipo.id}" class="btn btn-default btn-info btn-block col-xs-12">Cambiar</button>
+							<div class="modal fade" id="cambiarLaboratorioModal#{equipo.id}" role="dialog">
+								<div class="modal-dialog">
+
+									<!-- Modal content-->
+									<div class="modal-content">
+										<div class="modal-header">
+											<h4 class="modal-title">CAMBIAR LABORATORIO</h4>
+										</div>
+										<div class="modal-body">
+
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+										</div>
+									</div>
+
+								</div>
+							</div>
 						</p:column>
+
+						<p:column headerText="Teclado">
+							<h:outputText value="#{adminBean.consultarElementoDelEquipo(TipoElemento.TECLADO,equipo)}"/>
+							<button data-toggle="modal" data-target="#cambiarTeclado#{equipo.id}" type="button" class="btn btn-default btn-info btn-block col-xs-12">Cambiar</button>
+							<div class="modal fade" id="cambiarTeclado#{equipo.id}" role="dialog">
+								<div class="modal-dialog">
+
+									<!-- Modal content-->
+									<div class="modal-content">
+										<div class="modal-header">
+											<h4 class="modal-title">CAMBIAR TECLADO</h4>
+										</div>
+										<div class="modal-body">
+
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</p:column>
+						<p:column headerText="Torre">
+							<h:outputText value="#{adminBean.consultarElementoDelEquipo(TipoElemento.TORRE,equipo)}"/>
+							<button data-toggle="modal" data-target="#cambiarTorre#{equipo.id}" type="button" class="btn btn-default btn-info btn-block col-xs-12">Cambiar</button>
+							<div class="modal fade" id="cambiarTorre#{equipo.id}" role="dialog">
+								<div class="modal-dialog">
+
+									<!-- Modal content-->
+									<div class="modal-content">
+										<div class="modal-header">
+											<h4 class="modal-title">CAMBIAR TORRE</h4>
+										</div>
+										<div class="modal-body">
+
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</p:column>
+						<p:column headerText="Mouse">
+							<h:outputText value="#{adminBean.consultarElementoDelEquipo(TipoElemento.MOUSE,equipo)}"/>
+							<button data-toggle="modal" data-target="#cambiarMouse#{equipo.id}" type="button" class="btn btn-default btn-info col-xs-12">Cambiar</button>
+							<div class="modal fade" id="cambiarMouse#{equipo.id}" role="dialog">
+								<div class="modal-dialog">
+
+									<!-- Modal content-->
+									<div class="modal-content">
+										<div class="modal-header">
+											<h4 class="modal-title">CAMBIAR MOUSE</h4>
+										</div>
+										<div class="modal-body">
+
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</p:column>
+						<p:column headerText="Monitor">
+							<h:outputText class="col-xs-12" value="#{adminBean.consultarElementoDelEquipo(TipoElemento.MONITOR,equipo)}"/>
+							<button data-toggle="modal" data-target="#cambiarMonitor#{equipo.id}" type="button" class="btn btn-default btn-info btn-block col-xs-12">Cambiar</button>
+							<div class="modal fade" id="cambiarMonitor#{equipo.id}" role="dialog">
+								<div class="modal-dialog">
+
+									<!-- Modal content-->
+									<div class="modal-content">
+										<div class="modal-header">
+											<h4 class="modal-title">CAMBIAR MONITOR</h4>
+										</div>
+										<div class="modal-body">
+
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</p:column>
+
 						<p:column headerText="Eliminar">
 							<center>
 								<h:commandButton action="#{adminBean.eliminarEquipo(equipo)}" class="btn btn-default btn-danger" value="ELIMINAR"/>
 							</center>
+
 						</p:column>
 					</p:dataTable>
 				</p:fieldset>

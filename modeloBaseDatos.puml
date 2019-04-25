@@ -13,7 +13,6 @@ class Laboratorios{
 	+ Entero id
 	Cadena nombre
 	Boolean activo
-	Fecha
 	Fecha fechaRegistro
 	Fecha fechaEliminacion[0..1]
 }

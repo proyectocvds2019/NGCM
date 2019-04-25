@@ -65,11 +65,20 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 	}
 
 	@Override
-	public List<Equipo> consultarEquiposDisponibles(TipoElemento tipo) throws ExcepcionServiciosHistorial{
+	public List<Equipo> consultarEquiposDisponiblesParaElemento(TipoElemento tipo) throws ExcepcionServiciosHistorial{
 		try{
-			return equipoDAO.consultarEquiposDisponibles(tipo);
+			return equipoDAO.consultarEquiposDisponiblesParaElemento(tipo);
 		}catch (PersistenceException e){
 			throw new ExcepcionServiciosHistorial("No se pudo consultar los equipos disponibles");
+		}
+	}
+
+	@Override
+	public  Equipo consultarEquipoDeElemento(Elemento elemento) throws  ExcepcionServiciosHistorial{
+		try{
+			return equipoDAO.consultarEquipoDeElemento(elemento);
+		}catch (PersistenceException e){
+			throw new ExcepcionServiciosHistorial("No se pudo consultar el equipo asociado al elemento: "+elemento.getId());
 		}
 	}
 

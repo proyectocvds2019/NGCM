@@ -6,12 +6,19 @@
  
 <mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.ElementoMapper">
 
+	<resultMap type = 'Elemento' id = 'ElementosResult2'>
+		<id property = 'id' column = 'idElemento'/>
+		<result property = 'tipo' column = 'tipoElemento'/>
+		<result property="nombre" column="nombreElemento"/>
+		<result property="activo" column="activoElemento"/>
+	</resultMap>
+
+
 	<resultMap type = 'Elemento' id = 'ElementosResult'>
 		<id property = 'id' column = 'id'/>
 		<result property = 'tipo' column = 'tipo'/>
 		<result property="nombre" column="nombre"/>
 		<result property="activo" column="activo"/>
-		<association property="equipoAsignado" javaType="Equipo" resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.EquipoMapper.EquiposResult2"></association>
 	</resultMap>
 	
 	<insert parameterType = "map" id = "registrarElemento">

@@ -8,6 +8,8 @@
 
     <resultMap type = 'Laboratorio' id = 'LaboratoriosResult2'>
         <id property = 'id' column = 'laboratorio'/>
+        <result property="nombre" column="laboratorioNombre"/>
+        <result property="activo" column="laboratorioActivo"/>
     </resultMap>
 
 
