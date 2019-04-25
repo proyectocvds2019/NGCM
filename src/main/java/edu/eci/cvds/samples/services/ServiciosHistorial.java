@@ -15,10 +15,12 @@ public interface ServiciosHistorial {
 	public abstract List<Elemento> consultarElementosDisponibles() throws ExcepcionServiciosHistorial;
 
 	public abstract List<Equipo> consultarEquipos() throws ExcepcionServiciosHistorial;
+	
+	public abstract Equipo consultarEquipo(int id) throws ExcepcionServiciosHistorial;
 
 	public abstract List<Equipo> consultarEquiposDisponiblesParaElemento(TipoElemento tipo) throws ExcepcionServiciosHistorial;
 	
-	public abstract void registrarEquipo(Integer laboratorio) throws ExcepcionServiciosHistorial;
+	public abstract void registrarEquipo(Equipo equipo) throws ExcepcionServiciosHistorial;
 
 	public abstract Equipo consultarEquipoDeElemento(Elemento elemento) throws ExcepcionServiciosHistorial;
 	

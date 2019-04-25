@@ -50,18 +50,29 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 
 	@Override
 	public List<Elemento> consultarElementosDisponibles() throws ExcepcionServiciosHistorial {
-		// TODO Ap�ndice de m�todo generado autom�ticamente
 		try {
 			return elementoDAO.consultarElementosDisponibles();
 		}catch(PersistenceException e) {
-			throw new ExcepcionServiciosHistorial("no se pudo consultar los elementos disponibles");
+			throw new ExcepcionServiciosHistorial("No se pudo consultar los elementos disponibles");
 		}
 	}
 
 	@Override
-	public void registrarEquipo(Integer laboratorio) throws ExcepcionServiciosHistorial {
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-		
+	public void registrarEquipo(Equipo equipo) throws ExcepcionServiciosHistorial {
+		try {
+			equipoDAO.registrarEquipo(equipo);
+		}catch(PersistenceException e) {
+			throw new ExcepcionServiciosHistorial("No se pudo registrar el equipo");
+		}
+	}
+	
+	@Override
+	public Equipo consultarEquipo(int id) throws ExcepcionServiciosHistorial {
+		try {
+			return equipoDAO.consultarEquipo(id);
+		}catch(PersistenceException e) {
+			throw new ExcepcionServiciosHistorial("No se pudo consultar el equipo solicitado.");
+		}
 	}
 
 	@Override
