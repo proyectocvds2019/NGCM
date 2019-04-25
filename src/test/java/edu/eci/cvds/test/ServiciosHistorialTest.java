@@ -19,7 +19,7 @@ public class ServiciosHistorialTest {
 	
 	@Test
 	public void deberiaRegistrarElementos() {
-		qt().forAll(ElementoGenerator.genElementos()).check(elem -> {
+		qt().forAll(ElementoGenerator.genElementos()).check((elem) -> {
 			try {
 				this.serviciosHistorial.registrarElemento(elem, "gualdronsito@hotmail.com", null);
 				return true;

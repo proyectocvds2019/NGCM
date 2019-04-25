@@ -11,6 +11,9 @@ public class Laboratorio {
         setId(id);
         setNombre(nombre);
     }
+    public Laboratorio(){
+
+    }
 
 
     public String getNombre() {

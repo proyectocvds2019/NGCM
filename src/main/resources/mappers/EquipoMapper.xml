@@ -8,19 +8,18 @@
 
 	<resultMap type = 'Equipo' id = 'EquiposResult'>
 		<id property = 'id' column = 'id'/>
+		<result property="activo" column="activo"/>
 		<association property="laboratorio" javaType="Laboratorio" resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.LaboratorioMapper.LaboratoriosResult2"/>
 	</resultMap>
 	<resultMap type = 'Equipo' id = 'EquiposResult2'>
 		<id property = 'id' column = 'idEquipo'/>
 		<result property="activo" column="activo"/>
+		<association property="laboratorio" javaType="Laboratorio" resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.LaboratorioMapper.LaboratoriosResult2"/>
 	</resultMap>
 
 	
 	<select id="consultarEquipos" resultMap="EquiposResult">
-		SELECT
-				equipos.id, equipos.activo
-		FROM
-				equipos;
+		SELECT * FROM Equipos;
 	</select>
 
 	<select parameterType="map" id="consultarEquiposDisponibles" resultMap="EquiposResult">
