@@ -62,7 +62,7 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 		try {
 			equipoDAO.registrarEquipo(equipo);
 		}catch(PersistenceException e) {
-			throw new ExcepcionServiciosHistorial("No se pudo registrar el equipo");
+			throw new ExcepcionServiciosHistorial("No se pudo registrar el equipo.");
 		}
 	}
 	
