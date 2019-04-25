@@ -59,7 +59,7 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 	}
 
 	@Override
-	public void registrarEquipo(Integer laboratorio) throws ExcepcionServiciosHistorial {
+	public void registrarEquipo(Equipo equipo) throws ExcepcionServiciosHistorial {
 		// TODO Ap�ndice de m�todo generado autom�ticamente
 		
 	}
