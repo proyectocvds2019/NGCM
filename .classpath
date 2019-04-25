@@ -28,5 +28,16 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/2128728/.m2/repository/org/quicktheories/quicktheories/0.26/quicktheories-0.26.jar" sourcepath="C:/Users/2128728/.m2/repository/org/quicktheories/quicktheories/0.26/quicktheories-0.26-sources.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="test" value="true"/>
+			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
+			<attribute name="maven.groupId" value="org.quicktheories"/>
+			<attribute name="maven.artifactId" value="quicktheories"/>
+			<attribute name="maven.version" value="0.26"/>
+			<attribute name="maven.scope" value="test"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

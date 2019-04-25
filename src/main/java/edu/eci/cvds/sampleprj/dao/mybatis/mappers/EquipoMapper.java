@@ -17,9 +17,9 @@ public interface EquipoMapper {
 	
 	public List<Equipo> consultarEquipos();
 	
-	public Equipo consultarEquipo(int id);
+	public Equipo consultarEquipo(@Param("id") int id);
 	
-	public void registrarEquipo(Equipo equipo);
+	public void registrarEquipo(@Param("equipo") Equipo equipo);
 
 	public List<Equipo> consultarEquiposDisponiblesParaElemento(@Param("tipo") TipoElemento tipo);
 

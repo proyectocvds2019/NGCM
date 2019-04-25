@@ -20,6 +20,17 @@
 		FROM Equipos,laboratorios
 		WHERE equipos.laboratorio = laboratorios.id;
 	</select>
+	
+	<select id ="consultarEquipo" resultMap="EquiposResult">
+		SELECT equipos.id, equipos.activo, equipos.laboratorio
+		FROM equipos
+		WHERE equipos.id = #{id};
+	</select>
+	
+	<insert parameterType = "map" id = "registrarEquipo">
+		INSERT INTO equipos (id, activo, laboratorio)
+		VALUES (#{equipo.id},#{equipo.activo},#{equipo.laboratorio});
+	</insert>
 
 	<select parameterType="map" id="consultarEquiposDisponiblesParaElemento" resultMap="EquiposResult">
 		select *
