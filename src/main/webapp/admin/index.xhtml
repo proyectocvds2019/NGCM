@@ -234,7 +234,11 @@
 	                </h:selectOneMenu>
 				</h:panelGrid>
 
-				<p:commandButton action="#{adminBean.registrarEquipo()}" icon="fa fa-check" class="btn btn-default btn-success" value="Registrar" />
+				<p:commandButton  action="#{adminBean.registrarEquipo()}" icon="fa fa-check" class="btn btn-default btn-success" value="Registrar" />
+				<p:ajaxStatus onstart="PF('cargando').show()" onsuccess="PF('cargando').hide()" />
+				<p:dialog widgetVar="cargando" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+					<img class="img-responsive img-thumbnail" src="/img/cargando.gif" alt="" style="width:100%;height:50%"/>
+				</p:dialog>
 			</h:form>
 			<hr/>
 		</div>
