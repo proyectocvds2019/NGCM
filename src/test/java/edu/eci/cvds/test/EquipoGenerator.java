@@ -1,5 +1,6 @@
 package edu.eci.cvds.test;
 
+import edu.eci.cvds.samples.entities.Laboratorio;
 import org.quicktheories.core.Gen;
 import static org.quicktheories.generators.SourceDSL.integers;
 
@@ -10,7 +11,9 @@ public class EquipoGenerator {
 	public static Gen<Equipo> genEquipos(){
 		return source->{
 			int id = genId().generate(source);
-			return new Equipo(id);
+			LaboratorioGenerator ge = new LaboratorioGenerator();
+			Laboratorio lab = ge.genLaboratorio().generate(source);
+			return new Equipo(id,true,lab);
 		};
 	}
 	

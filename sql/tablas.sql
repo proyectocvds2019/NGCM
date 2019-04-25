@@ -8,16 +8,18 @@ CREATE TABLE Usuarios(
 	carnet INTEGER
 );
 
--- CREATE SEQUENCE id_lab;
--- CREATE TABLE Laboratorios(
--- 	id INTEGER PRIMARY KEY NOT NULL,
--- 	nombre VARCHAR(100) NOT NULL
--- );
+CREATE SEQUENCE id_lab;
+CREATE TABLE Laboratorios(
+id INTEGER PRIMARY KEY NOT NULL,
+nombre VARCHAR(100) NOT NULL,
+activo BOOLEAN NOT NULL
+);
 
 CREATE SEQUENCE id_equipo;
 CREATE TABLE Equipos(
-	id INTEGER PRIMARY KEY NOT NULL
-	-- laboratorio INTEGER NOT NULL
+	id INTEGER PRIMARY KEY NOT NULL,
+	activo boolean NOT null,
+	laboratorio INTEGER NOT NULL
 );
 
 CREATE SEQUENCE id_elemento;
@@ -25,6 +27,7 @@ CREATE TABLE Elementos(
 	id VARCHAR(100) PRIMARY KEY NOT NULL,
 	nombre VARCHAR(100) NOT NULL,
 	tipo VARCHAR(10) NOT NULL,
+	activo boolean NOT NULL,
 	idEquipo INTEGER,
 	registradoPor VARCHAR(100) NOT NULL
 );
@@ -38,9 +41,9 @@ ALTER TABLE Elementos ADD CONSTRAINT Elementos_Usuario
 	FOREIGN KEY (registradoPor)
 	REFERENCES Usuarios (correo);
 	
-/*ALTER TABLE Equipos ADD CONSTRAINT Equipo_Laboratorio
+ALTER TABLE Equipos ADD CONSTRAINT Equipo_Laboratorio
 	FOREIGN KEY (laboratorio)
-	REFERENCES Laboratorios (id);*/
+	REFERENCES Laboratorios (id);
 
 --- Checks
 
@@ -60,4 +63,5 @@ ALTER TABLE Usuarios ADD CONSTRAINT Rol
 --El administrador para las pruebas
 insert into usuarios (nombre, correo, contrasena, carnet, rol) values ('Andres Gualdron','gualdronsito@hotmail.com','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3',2128884,'admin');
 --El equipo para las pruebas
-insert into equipos (id) values (nextval('id_equipo'));
+insert into laboratorios (id,nombre,activo) values (nextval('id_lab'),'laboratorio de redes',true);
+insert into equipos (id,activo,laboratorio) values (nextval('id_equipo'),true,1);

@@ -7,6 +7,9 @@ body{
 }
 
 .titulo{
-	font-size: 40px;
+	font-size: 35px;
 	font-family: Algerian;
+}
+.tituloNombre{
+    font-size:25px;
 }

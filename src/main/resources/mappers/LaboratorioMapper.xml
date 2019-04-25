@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.LaboratorioMapper">
+
+    <resultMap type = 'Laboratorio' id = 'LaboratoriosResult2'>
+        <id property = 'id' column = 'laboratorio'/>
+        <result property="nombre" column="nombre"/>
+        <result property="activo" column="activo"/>
+    </resultMap>
+
+
+</mapper>

@@ -51,7 +51,7 @@ public class adminBean implements Serializable{
 	}
     
 	public void registrarElemento() throws ExcepcionServiciosHistorial {
-		Elemento elemento = new Elemento(idElemento,tipoSeleccionado,nombreElemento);
+		Elemento elemento = new Elemento(idElemento,tipoSeleccionado,nombreElemento,true);
 		try {
 			serviciosHistorial.registrarElemento(elemento,this.correo,this.equipo);
 			this.mensajeCorrecto();
@@ -110,7 +110,7 @@ public class adminBean implements Serializable{
 		return this.tipoSeleccionado;
 	}
 	
-	public List<SelectItem> getEquipos(){
+	public List<SelectItem> getEquiposSelectItem(){
 		List<SelectItem> lis = new ArrayList<SelectItem>();
 		try {
 			List<Equipo> l = this.serviciosHistorial.consultarEquipos();
@@ -120,6 +120,15 @@ public class adminBean implements Serializable{
 			return lis;
 		} catch (ExcepcionServiciosHistorial e) {
 			// TODO Bloque catch generado autom�ticamente
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public List<Equipo> getEquipos(){
+		try{
+			return this.serviciosHistorial.consultarEquipos();
+		}catch (ExcepcionServiciosHistorial e){
 			e.printStackTrace();
 			return null;
 		}

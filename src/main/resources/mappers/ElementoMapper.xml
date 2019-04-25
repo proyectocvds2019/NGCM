@@ -10,12 +10,13 @@
 		<id property = 'id' column = 'id'/>
 		<result property = 'tipo' column = 'tipo'/>
 		<result property="nombre" column="nombre"/>
+		<result property="activo" column="activo"/>
 		<association property="equipoAsignado" javaType="Equipo" resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.EquipoMapper.EquiposResult2"></association>
 	</resultMap>
 	
 	<insert parameterType = "map" id = "registrarElemento">
-		INSERT INTO elementos (id, tipo, registradoPor,idEquipo,nombre)
-		VALUES (#{el.id},#{el.tipo},#{correo},#{equipo},#{el.nombre});
+		INSERT INTO elementos (id, tipo, registradoPor,idEquipo,nombre,activo)
+		VALUES (#{el.id},#{el.tipo},#{correo},#{equipo},#{el.nombre},#{el.activo});
 	</insert>
 
 	<select id = "consultarElementos" resultMap="ElementosResult">
@@ -23,7 +24,7 @@
 	</select>
 
 	<select id="consultarElementosDisponibles" resultMap="ElementosResult">
-		SELECT * FROM elementos WHERE idequipo IS NULL;
+		SELECT * FROM elementos WHERE idequipo IS NULL AND activo = true;
 	</select>
 	
 </mapper>

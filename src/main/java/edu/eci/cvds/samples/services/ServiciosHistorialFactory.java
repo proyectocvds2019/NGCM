@@ -2,6 +2,8 @@ package edu.eci.cvds.samples.services;
 
 import java.util.Optional;
 
+import edu.eci.cvds.sampleprj.dao.LaboratorioDAO;
+import edu.eci.cvds.sampleprj.dao.mybatis.MyBATISLaboratorioDAO;
 import org.mybatis.guice.XMLMyBatisModule;
 import org.mybatis.guice.datasource.helper.JdbcHelper;
 
@@ -36,6 +38,7 @@ public class ServiciosHistorialFactory {
 	               bind(UsuarioDAO.class).to(MyBATISUsuarioDAO.class);
 	               bind(ElementoDAO.class).to(MyBATISElementoDAO.class);
 	               bind(EquipoDAO.class).to(MyBATISEquipoDAO.class);
+	               bind(LaboratorioDAO.class).to(MyBATISLaboratorioDAO.class);
 	           }
 	       });
 	   }
@@ -51,6 +54,7 @@ public class ServiciosHistorialFactory {
 	               bind(UsuarioDAO.class).to(MyBATISUsuarioDAO.class);
 	               bind(ElementoDAO.class).to(MyBATISElementoDAO.class);
 	               bind(EquipoDAO.class).to(MyBATISEquipoDAO.class);
+				   bind(LaboratorioDAO.class).to(MyBATISLaboratorioDAO.class);
 	           }
 	       });
 	   }

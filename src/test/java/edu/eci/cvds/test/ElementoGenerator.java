@@ -32,7 +32,7 @@ public class ElementoGenerator {
 			String id = genId().generate(source);
 			String nombre = genNombre().generate(source);
 			TipoElemento tipoElemento = genTipoElemento().generate(source);
-			return new Elemento(id,tipoElemento,nombre);
+			return new Elemento(id,tipoElemento,nombre,true);
 		};
 	}
 

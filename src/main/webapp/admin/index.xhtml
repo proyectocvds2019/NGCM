@@ -18,7 +18,8 @@
 <h:body>
 	<div class="container">
 		<div class="col-xs-12">
-			<h:outputLabel class="titulo col-xs-9">Bienvenido: <h:outputText value="#{sessionScope.correo}"/></h:outputLabel>
+			<h1 class="titulo col-xs-12">Historial de Laboratorios</h1>
+			<h:outputLabel class="titulo tituloNombre col-xs-9">Bienvenido: <h:outputText value="#{sessionScope.correo}"/></h:outputLabel>
 			<img class="img img-responsive col-xs-3" src="https://www.escuelaing.edu.co/uploads/descargables/1110_logotipo_institucional_vm300px.png"/>
 		</div>
 		<div class="col-xs-12">
@@ -33,9 +34,9 @@
 					</div>
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<ul class="nav navbar-nav">
-							<li id="botonRegistrarElemento" data-toggle="collapse" data-target="#registrarElemento" class="active botonMenu"><a href="#">Registrar Elemento</a></li>
+							<li id="botonRegistrarElemento" data-toggle="collapse" data-target="#registrarElemento" class="active botonMenu"><a href="#">Elementos</a></li>
 
-							<li id="botonRegistrarEquipo" data-toggle="collapse" data-target="#registrarEquipo" class="botonMenu"><a href="#">Registrar Equipo</a></li>
+							<li id="botonRegistrarEquipo" data-toggle="collapse" data-target="#registrarEquipo" class="botonMenu"><a href="#">Equipos</a></li>
 
 
 
@@ -51,6 +52,8 @@
 		</div>
 	</div>
 	<div class="container collapse in" id="registrarElemento">
+		<h1>Registrar Elemento</h1>
+		<hr/>
 		<div class="row col-xs-12">
 			<h:form>
 			    <p:messages>
@@ -58,7 +61,7 @@
 			    </p:messages>
 			 
 			    <h:panelGrid class="col-xs-12" columns="2" cellpadding="5">
-					<p:outputLabel for="idElemento" value="Id del elemento:" />
+					<p:outputLabel for="idElemento" value="Id del elemento:"/>
 					<p:inputText required="true" id="idElemento" value="#{adminBean.idElemento}"/>
 
 					<p:outputLabel for="nombreElemento" value="Nombre del elemento:" />
@@ -74,7 +77,7 @@
 			       <p:outputLabel for="Equipo" value="Equipo:" />
 			       <h:selectOneMenu required="true" id="Equipo" value="#{adminBean.equipo}" style="width:196px">
 			       		<f:selectItem itemLabel="NULL" itemValue="-1"/>
-	                    <f:selectItems value="#{adminBean.getEquipos()}"/>
+	                    <f:selectItems value="#{adminBean.getEquiposSelectItem()}"/>
 	                </h:selectOneMenu>
 
 			 
@@ -94,7 +97,7 @@
 			<div class="col-md-12 col-xs-12">
 				<h:form id="formElementos">
 					<p:fieldset id="tablaElementos" legend="Tabla de elementos">
-						<p:dialog widgetVar="cargando" modal="false" draggable="false" closable="false" resizable="false" showHeader="false">
+						<p:dialog widgetVar="cargando2" modal="false" draggable="false" closable="false" resizable="false" showHeader="false">
 							<img class="img-responsive" src="/img/cargando2.gif" alt="" style="width:70px;height:70px"/>
 						</p:dialog>
 				        <p:dataTable id="elementos" var="elemento" value="#{adminBean.consultarElementos()}" rows="10" paginator="true"
@@ -111,6 +114,9 @@
 				            </p:column>
 							<p:column headerText="Equipo">
 								<h:outputText value="#{elemento.equipoAsignado.id}"/>
+							</p:column>
+							<p:column headerText="Activo">
+								<h:outputText value="#{elemento.activo}"/>
 							</p:column>
 							<p:column headerText="Eliminar">
 								<center>
@@ -229,8 +235,34 @@
 
 				<p:commandButton action="#{adminBean.registrarEquipo()}" icon="fa fa-check" class="btn btn-default btn-success" value="Registrar" />
 			</h:form>
+			<hr/>
+		</div>
+		<div class="container">
+			<h:form id="formEquipos">
+				<p:fieldset id="tablaEquipos" legend="Tabla de equipos">
+					<p:dialog widgetVar="cargando2" modal="false" draggable="false" closable="false" resizable="false" showHeader="false">
+						<img class="img-responsive" src="/img/cargando2.gif" alt="" style="width:70px;height:70px"/>
+					</p:dialog>
+					<p:dataTable id="equipos" var="equipo" value="#{adminBean.getEquipos()}" rows="10" paginator="true"
+								 paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}">
 
-
+						<p:column headerText="Id">
+							<h:outputText value="#{equipo.id}" />
+						</p:column>
+						<p:column headerText="Activo">
+							<h:outputText value="#{equipo.activo}" />
+						</p:column>
+						<p:column headerText="Laboratorio">
+							<h:outputText value="#{equipo.laboratorio}" />
+						</p:column>
+						<p:column headerText="Eliminar">
+							<center>
+								<h:commandButton action="#{adminBean.eliminarEquipo(equipo)}" class="btn btn-default btn-danger" value="ELIMINAR"/>
+							</center>
+						</p:column>
+					</p:dataTable>
+				</p:fieldset>
+			</h:form>
 		</div>
 	</div>
 

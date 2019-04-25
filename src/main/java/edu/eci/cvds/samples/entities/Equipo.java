@@ -10,6 +10,8 @@ public class Equipo implements Serializable{
 	private static final long serialVersionUID = -4250247578117025104L;
 	private Integer id;
 	private ArrayList<Elemento> elementos;
+	private boolean activo;
+	private Laboratorio laboratorio;
 
 	public Equipo(){
 
@@ -20,9 +22,11 @@ public class Equipo implements Serializable{
 		this.setElementos(elementos);
 	}
 	
-	public Equipo(Integer id) {
+	public Equipo(Integer id, boolean activo, Laboratorio laboratorio) {
 		this.setId(id);
 		this.setElementos(new ArrayList<Elemento>());
+		this.setActivo(activo);
+		this.setLaboratorio(laboratorio);
 	}
 
 	public ArrayList<Elemento> getElementos() {
@@ -39,6 +43,22 @@ public class Equipo implements Serializable{
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}
+
+	public Laboratorio getLaboratorio() {
+		return laboratorio;
+	}
+
+	public void setLaboratorio(Laboratorio laboratorio) {
+		this.laboratorio = laboratorio;
 	}
 	
 }
