@@ -1,8 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:p="http://primefaces.org/ui"
-     xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<link rel="stylesheet" type="text/css" href="../css/plugins/bootstrap.min.css" media="screen"/>
     <link rel="stylesheet" type="text/css" href="../css/plugins/bootstrap-theme.min.css" media="screen"/>
@@ -207,7 +206,7 @@
 			    	<p:outputLabel for="laboratorio" value="Laboratorio:" />
 			    	<h:selectOneMenu id="laboratorio" value="#{adminBean.laboratorioSeleccionado}" style="width:196px">
 			    	<f:selectItem itemLabel="NULL" itemValue="null"/>
-	                    <f:selectItems value="#{adminBean.laboratoriosDisponibles()}"/>
+	                    <f:selectItems  value="#{adminBean.laboratoriosDisponibles()}" var="laboratorio" itemLabel="#{laboratorio.nombre}" itemValue="#{laboratorio.id}"/>
 	                </h:selectOneMenu>
 
 

@@ -18,6 +18,8 @@ public interface ElementoMapper {
 	public List<Elemento> consultarElementos();
 	
 	public List<Elemento> consultarElementosDisponibles();
+
+	public Elemento consultarElemento(@Param("id") String id);
 	
 
 }

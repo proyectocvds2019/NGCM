@@ -29,6 +29,11 @@ public class MyBATISElementoDAO implements ElementoDAO{
 		// TODO Ap�ndice de m�todo generado autom�ticamente
 		return ElementoMapper.consultarElementosDisponibles();
 	}
+
+	@Override
+	public Elemento consultarElemento(String id) throws PersistenceException{
+		return ElementoMapper.consultarElemento(id);
+	}
 	
 	
 

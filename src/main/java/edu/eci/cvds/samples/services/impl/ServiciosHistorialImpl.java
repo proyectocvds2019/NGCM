@@ -7,9 +7,11 @@ import com.google.inject.Singleton;
 
 import edu.eci.cvds.sampleprj.dao.ElementoDAO;
 import edu.eci.cvds.sampleprj.dao.EquipoDAO;
+import edu.eci.cvds.sampleprj.dao.LaboratorioDAO;
 import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.samples.entities.Elemento;
 import edu.eci.cvds.samples.entities.Equipo;
+import edu.eci.cvds.samples.entities.Laboratorio;
 import edu.eci.cvds.samples.entities.TipoElemento;
 import edu.eci.cvds.samples.services.ExcepcionServiciosHistorial;
 import edu.eci.cvds.samples.services.ServiciosHistorial;
@@ -20,7 +22,9 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 	@Inject
 	private ElementoDAO elementoDAO;
 	@Inject
-	private EquipoDAO equipoDAO; 
+	private EquipoDAO equipoDAO;
+	@Inject
+	private LaboratorioDAO laboratorioDAO;
 
 	public void registrarElemento(Elemento elemento, String correoUsuario, Integer equipo) throws ExcepcionServiciosHistorial {
 		try {
@@ -90,6 +94,23 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 			return equipoDAO.consultarEquipoDeElemento(elemento);
 		}catch (PersistenceException e){
 			throw new ExcepcionServiciosHistorial("No se pudo consultar el equipo asociado al elemento: "+elemento.getId());
+		}
+	}
+
+	@Override
+	public Elemento consultarElemento(String id) throws ExcepcionServiciosHistorial{
+		try{
+			return elementoDAO.consultarElemento(id);
+		}catch (PersistenceException e){
+			throw new ExcepcionServiciosHistorial("No se pudo consultar el elemento");
+		}
+	}
+	@Override
+	public Laboratorio consultarLaboratorio(Integer id) throws ExcepcionServiciosHistorial{
+		try{
+			return laboratorioDAO.consultarLaboratorio(id);
+		}catch (PersistenceException e){
+			throw new ExcepcionServiciosHistorial("No se pudo consultar el laboratorio");
 		}
 	}
 

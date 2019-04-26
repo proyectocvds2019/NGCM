@@ -10,6 +10,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
+import edu.eci.cvds.samples.entities.Laboratorio;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 
@@ -36,10 +37,10 @@ public class adminBean implements Serializable{
 	private String idElemento;
 	private String nombreElemento;
 	private Integer laboratorioSeleccionado;
-	private Integer monitorSeleccionado;
-	private Integer mouseSeleccionado;
-	private Integer torreSeleccionada;
-	private Integer tecladoSeleccionado;
+	private String monitorSeleccionado;
+	private String mouseSeleccionado;
+	private String torreSeleccionada;
+	private String tecladoSeleccionado;
     @Inject
     private ServiciosHistorial serviciosHistorial;
 	
@@ -92,7 +93,19 @@ public class adminBean implements Serializable{
 	}
 	
 	public void registrarEquipo() {
-		
+		try{
+			Elemento torre = this.serviciosHistorial.consultarElemento(this.torreSeleccionada);
+			Elemento mouse = this.serviciosHistorial.consultarElemento(this.mouseSeleccionado);
+			Elemento teclado = this.serviciosHistorial.consultarElemento(this.tecladoSeleccionado);
+			Elemento monitor = this.serviciosHistorial.consultarElemento(this.monitorSeleccionado);
+			ArrayList<Elemento> lista = new ArrayList<Elemento>();
+			lista.add(torre);lista.add(mouse);lista.add(teclado);lista.add(monitor);
+			Laboratorio laboratorio = this.serviciosHistorial.consultarLaboratorio(laboratorioSeleccionado);
+			Equipo equipo = new Equipo(1,lista,true,laboratorio);
+			this.serviciosHistorial.registrarEquipo(equipo);
+		}catch (ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+		}
 	}
 
 	public void enlazarElemento(Elemento elemento){
@@ -169,8 +182,10 @@ public class adminBean implements Serializable{
 	}
 
 	
-	public List<SelectItem> laboratoriosDisponibles(){
-		return null;
+	public List<Laboratorio> laboratoriosDisponibles(){
+		List<Laboratorio> lis = new ArrayList<Laboratorio>();
+		lis.add(new Laboratorio(1,"laboratorio de redes",true));
+		return lis;
 	}
 	
 	public List<SelectItem> monitoresDisponibles(){
@@ -220,34 +235,34 @@ public class adminBean implements Serializable{
 		this.laboratorioSeleccionado = laboratorio;
 	}
 	
-	public void setMonitorSeleccionado(Integer monitor) {
+	public void setMonitorSeleccionado(String monitor) {
 		this.monitorSeleccionado = monitor;
 	}
 	
-	public Integer getMonitorSeleccionado() {
+	public String getMonitorSeleccionado() {
 		return this.monitorSeleccionado;
 	}
 	
-	public Integer getMouseSeleccionado() {
+	public String getMouseSeleccionado() {
 		return this.mouseSeleccionado;
 	}
 	
-	public void setMouseSeleccionado(Integer mouse) {
+	public void setMouseSeleccionado(String mouse) {
 		this.mouseSeleccionado = mouse;
 	}
 	
-	public void setTorreSeleccionada(Integer torre) {
+	public void setTorreSeleccionada(String torre) {
 		this.torreSeleccionada = torre;
 	}
-	public Integer getTorreSeleccionada() {
+	public String getTorreSeleccionada() {
 		return this.torreSeleccionada;
 	}
 	
-	public Integer getTecladoSeleccionado() {
+	public String getTecladoSeleccionado() {
 		return this.tecladoSeleccionado;
 	}
 	
-	public void setTecladoSeleccionado(Integer teclado) {
+	public void setTecladoSeleccionado(String teclado) {
 		this.tecladoSeleccionado = teclado;
 	}
 

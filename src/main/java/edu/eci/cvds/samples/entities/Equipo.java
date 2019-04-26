@@ -17,9 +17,11 @@ public class Equipo implements Serializable{
 
 	}
 	
-	public Equipo(Integer id, ArrayList<Elemento> elementos) {
+	public Equipo(Integer id, ArrayList<Elemento> elementos, boolean activo, Laboratorio laboratorio) {
 		this.setId(id);
 		this.setElementos(elementos);
+		this.setActivo(activo);
+		this.setLaboratorio(laboratorio);
 	}
 	
 	public Equipo(Integer id, boolean activo, Laboratorio laboratorio) {
