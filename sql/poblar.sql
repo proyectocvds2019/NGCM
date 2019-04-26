@@ -11,3 +11,10 @@ select equipos.id from equipos where equipos.id not in (select elementos.idequip
 select * from equipos,elementos where equipos.id = elementos.idequipo;
 select elementos.idequipo from elementos where elementos.tipo = 'TORRE' and elementos.idequipo is not null group by elementos.idequipo;
 select equipos.id, elementos.id as idE from equipos,elementos where(elementos.idequipo is null and elementos.tipo = 'MONITOR') group by equipos.id,elementos.id;
+
+
+SELECT equipos.id, equipos.activo, equipos.laboratorio, laboratorios.nombre as laboratorioNombre,
+		laboratorios.activo as laboratorioActivo
+		FROM Equipos, laboratorios
+		WHERE (equipos.id = (select elementos.idEquipo from elementos where elementos.id = 'asdf')) AND
+		equipos.laboratorio = laboratorios.id;

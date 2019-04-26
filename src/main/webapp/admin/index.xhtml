@@ -82,24 +82,19 @@
 
 			 
 			    </h:panelGrid>
+				
 			 
-			    <p:commandButton action="#{adminBean.registrarElemento()}" icon="fa fa-check" class="btn btn-default btn-success" value="Registrar" />
-
+			    <p:commandButton  action="#{adminBean.registrarElemento()}" icon="fa fa-check" class="btn btn-default btn-success" value="Registrar" />
+				
 
 			</h:form>
-			<p:ajaxStatus onstart="PF('cargando').show()" onsuccess="PF('cargando').hide()" />
-			<p:dialog widgetVar="cargando" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
-				<img class="img-responsive img-thumbnail" src="/img/cargando.gif" alt="" style="width:100%;height:50%"/>
-			</p:dialog>
+			
 			<hr/>
 		</div>
 		<div class="row col-xs-12">
 			<div class="col-md-12 col-xs-12">
 				<h:form id="formElementos">
 					<p:fieldset id="tablaElementos" legend="Tabla de elementos">
-						<p:dialog widgetVar="cargando2" modal="false" draggable="false" closable="false" resizable="false" showHeader="false">
-							<img class="img-responsive" src="/img/cargando2.gif" alt="" style="width:70px;height:70px"/>
-						</p:dialog>
 				        <p:dataTable id="elementos" var="elemento" value="#{adminBean.consultarElementos()}" rows="10" paginator="true"
 									 paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}">
 
@@ -235,19 +230,12 @@
 				</h:panelGrid>
 
 				<p:commandButton  action="#{adminBean.registrarEquipo()}" icon="fa fa-check" class="btn btn-default btn-success" value="Registrar" />
-				<p:ajaxStatus onstart="PF('cargando').show()" onsuccess="PF('cargando').hide()" />
-				<p:dialog widgetVar="cargando" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
-					<img class="img-responsive img-thumbnail" src="/img/cargando.gif" alt="" style="width:100%;height:50%"/>
-				</p:dialog>
 			</h:form>
 			<hr/>
 		</div>
 		<div class="container">
 			<h:form id="formEquipos">
 				<p:fieldset id="tablaEquipos" legend="Tabla de equipos">
-					<p:dialog widgetVar="cargando2" modal="false" draggable="false" closable="false" resizable="false" showHeader="false">
-						<img class="img-responsive" src="/img/cargando2.gif" alt="" style="width:70px;height:70px"/>
-					</p:dialog>
 					<p:dataTable id="equipos" var="equipo" value="#{adminBean.getEquipos()}" rows="10" paginator="true"
 								 paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}">
 
