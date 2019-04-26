@@ -252,7 +252,7 @@
 								 paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}">
 
 						<p:column headerText="Id">
-							<h:outputText value="#{equipo.id}" />
+							<h:outputText value="#{equipo.id}"/>
 						</p:column>
 						<p:column headerText="Activo">
 							<h:outputText value="#{equipo.activo}" />
@@ -269,10 +269,18 @@
 											<h4 class="modal-title">CAMBIAR LABORATORIO</h4>
 										</div>
 										<div class="modal-body">
-
+                                            <h:form>
+                                                <div class="form-group">
+                                                    <p:outputLabel for="nuevoLaboratorio" value="Seleccione el nuevo laboratorio:"/>
+                                                    <h:selectOneMenu id="nuevoLaboratorio" value="#{adminBean.laboratorioSeleccionado}">
+                                                        <f:selectItems var="laboratorio" value="#{adminBean.laboratoriosDisponibles()}" itemLabel="#{laboratorio.nombre}" itemValue="#{laboratorio.id}" />
+                                                    </h:selectOneMenu>
+                                                </div>
+                                                <h:commandButton class="btn btn-default btn-success btn-block" value="Cambiar" type="button" action="#{adminBean.actualizarLaboratorioDeEquipo(equipo)}" />
+                                            </h:form>
 										</div>
 										<div class="modal-footer">
-											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+											<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 										</div>
 									</div>
 
@@ -292,10 +300,16 @@
 											<h4 class="modal-title">CAMBIAR TECLADO</h4>
 										</div>
 										<div class="modal-body">
-
+                                            <div class="form-group">
+                                                <h:outputLabel for="cambiarTeclado" value="Seleccione el nuevo teclado:"/>
+                                                <h:selectOneMenu id="cambiarTeclado" value="#{adminBean.tecladoSeleccionado}">
+                                                    <f:selectItems var="teclado" value="#{adminBean.consultarElementosDisponibles(TipoElemento.TECLADO)}" itemLabel="#{teclado.id}" itemValue="#{teclado.id}"/>
+                                                </h:selectOneMenu>
+                                            </div>
+                                            <h:commandButton value="Cambiar" class="btn btn-default btn-success btn-block" action="#{adminBean.actualizarTecladoDeEquipo(equipo)}"/>
 										</div>
 										<div class="modal-footer">
-											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+											<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 										</div>
 									</div>
 
@@ -314,10 +328,18 @@
 											<h4 class="modal-title">CAMBIAR TORRE</h4>
 										</div>
 										<div class="modal-body">
-
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <h:outputLabel for="cambiarTorre" value="Seleccione el nueva Torre:"/>
+                                                    <h:selectOneMenu id="cambiarTorre" value="#{adminBean.torreSeleccionada}">
+                                                        <f:selectItems var="torre" value="#{adminBean.consultarElementosDisponibles(TipoElemento.TORRE)}" itemLabel="#{torre.id}" itemValue="#{torre.id}"/>
+                                                    </h:selectOneMenu>
+                                                </div>
+                                                <h:commandButton value="Cambiar" class="btn btn-default btn-success btn-block" action="#{adminBean.actualizarTorreDeEquipo(equipo)}"/>
+                                            </div>
 										</div>
 										<div class="modal-footer">
-											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+											<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 										</div>
 									</div>
 
@@ -336,10 +358,18 @@
 											<h4 class="modal-title">CAMBIAR MOUSE</h4>
 										</div>
 										<div class="modal-body">
-
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <h:outputLabel for="cambiarMouse" value="Seleccione el nuevo mouse:"/>
+                                                    <h:selectOneMenu id="cambiarMouse" value="#{adminBean.mouseSeleccionado}">
+                                                        <f:selectItems var="mouse" value="#{adminBean.consultarElementosDisponibles(TipoElemento.MOUSE)}" itemLabel="#{mouse.id}" itemValue="#{mouse.id}"/>
+                                                    </h:selectOneMenu>
+                                                </div>
+                                                <h:commandButton value="Cambiar" class="btn btn-default btn-success btn-block" action="#{adminBean.actualizarMouseDeEquipo(equipo)}"/>
+                                            </div>
 										</div>
 										<div class="modal-footer">
-											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+											<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 										</div>
 									</div>
 
@@ -358,10 +388,18 @@
 											<h4 class="modal-title">CAMBIAR MONITOR</h4>
 										</div>
 										<div class="modal-body">
-
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <h:outputLabel for="cambiarMonitor" value="Seleccione el nuevo Monitor:"/>
+                                                    <h:selectOneMenu id="cambiarMonitor" value="#{adminBean.monitorSeleccionado}">
+                                                        <f:selectItems var="monitor" value="#{adminBean.consultarElementosDisponibles(TipoElemento.MONITOR)}" itemLabel="#{monitor.id}" itemValue="#{monitor.id}"/>
+                                                    </h:selectOneMenu>
+                                                </div>
+                                                <h:commandButton value="Cambiar" class="btn btn-default btn-success btn-block" action="#{adminBean.actualizarMonitorDeEquipo(equipo)}"/>
+                                            </div>
 										</div>
 										<div class="modal-footer">
-											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+											<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 										</div>
 									</div>
 

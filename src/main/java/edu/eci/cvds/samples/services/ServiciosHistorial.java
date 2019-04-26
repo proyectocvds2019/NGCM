@@ -28,5 +28,7 @@ public interface ServiciosHistorial {
 	public abstract Elemento consultarElemento(String id) throws ExcepcionServiciosHistorial;
 
 	public abstract Laboratorio consultarLaboratorio(Integer id) throws ExcepcionServiciosHistorial;
+
+	public abstract List<Elemento> consultarElementosDisponibles(TipoElemento tipo) throws  ExcepcionServiciosHistorial;
 	
 }

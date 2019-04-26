@@ -2,6 +2,7 @@ package edu.eci.cvds.sampleprj.dao.mybatis.mappers;
 
 import java.util.List;
 
+import edu.eci.cvds.samples.entities.TipoElemento;
 import org.apache.ibatis.annotations.Param;
 import edu.eci.cvds.samples.entities.Elemento;
 
@@ -20,6 +21,8 @@ public interface ElementoMapper {
 	public List<Elemento> consultarElementosDisponibles();
 
 	public Elemento consultarElemento(@Param("id") String id);
+
+	public List<Elemento> consultarElementosDisponibles2(@Param("tipo") TipoElemento tipo);
 	
 
 }

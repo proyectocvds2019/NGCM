@@ -114,6 +114,15 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 		}
 	}
 
+	@Override
+	public List<Elemento> consultarElementosDisponibles(TipoElemento tipo) throws ExcepcionServiciosHistorial{
+		try{
+			return elementoDAO.consultarElementosDisponibles(tipo);
+		}catch (PersistenceException e){
+			throw new ExcepcionServiciosHistorial("No se pudo consultar los elementos disponibles de tipo: "+tipo);
+		}
+	}
+
 
 
 }

@@ -81,6 +81,15 @@ public class adminBean implements Serializable{
 			return null;
 		}
 	}
+	public List<Elemento> consultarElementosDisponibles(TipoElemento tipo){
+		try{
+			return this.serviciosHistorial.consultarElementosDisponibles(tipo);
+		}catch (ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 	public Integer consultarEquipoDeElemento(Elemento elemento){
 		try{
 			Equipo equi = this.serviciosHistorial.consultarEquipoDeElemento(elemento);
@@ -186,6 +195,24 @@ public class adminBean implements Serializable{
 		List<Laboratorio> lis = new ArrayList<Laboratorio>();
 		lis.add(new Laboratorio(1,"laboratorio de redes",true));
 		return lis;
+	}
+
+	public void actualizarLaboratorioDeEquipo(Equipo equipo){
+
+	}
+
+	public void actualizarTecladoDeEquipo(Equipo equipo){
+
+	}
+
+	public void actualizarMouseDeEquipo(Equipo equipo){
+
+	}
+	public void actualizarMonitorDeEquipo(Equipo equipo){
+
+	}
+	public void actualizarTorreDeEquipo(Equipo equipo){
+
 	}
 	
 	public List<SelectItem> monitoresDisponibles(){

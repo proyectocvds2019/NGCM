@@ -7,6 +7,7 @@ import edu.eci.cvds.sampleprj.dao.ElementoDAO;
 import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.samples.entities.Elemento;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ElementoMapper;
+import edu.eci.cvds.samples.entities.TipoElemento;
 
 public class MyBATISElementoDAO implements ElementoDAO{
 	
@@ -33,6 +34,11 @@ public class MyBATISElementoDAO implements ElementoDAO{
 	@Override
 	public Elemento consultarElemento(String id) throws PersistenceException{
 		return ElementoMapper.consultarElemento(id);
+	}
+
+	@Override
+	public List<Elemento> consultarElementosDisponibles(TipoElemento tipo) throws PersistenceException{
+		return ElementoMapper.consultarElementosDisponibles2(tipo);
 	}
 	
 	

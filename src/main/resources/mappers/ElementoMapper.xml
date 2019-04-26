@@ -33,5 +33,9 @@
 	<select id="consultarElementosDisponibles" resultMap="ElementosResult">
 		SELECT * FROM elementos WHERE idequipo IS NULL AND activo = true;
 	</select>
+
+	<select parameterType="map" id="consultarElementosDisponibles2" resultMap="ElementosResult">
+		SELECT * FROM elementos WHERE idequipo IS NULL AND activo = true AND tipo = #{tipo};
+	</select>
 	
 </mapper>
