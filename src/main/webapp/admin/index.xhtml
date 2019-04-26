@@ -271,8 +271,8 @@
 										<div class="modal-body">
                                             <h:form>
                                                 <div class="form-group">
-                                                    <p:outputLabel for="nuevoLaboratorio" value="Seleccione el nuevo laboratorio:"/>
-                                                    <h:selectOneMenu id="nuevoLaboratorio" value="#{adminBean.laboratorioSeleccionado}">
+                                                    <p:outputLabel class="col-xs-6" for="nuevoLaboratorio" value="Seleccione el nuevo laboratorio:"/>
+                                                    <h:selectOneMenu class="col-xs-6" id="nuevoLaboratorio" value="#{adminBean.laboratorioSeleccionado}">
                                                         <f:selectItems var="laboratorio" value="#{adminBean.laboratoriosDisponibles()}" itemLabel="#{laboratorio.nombre}" itemValue="#{laboratorio.id}" />
                                                     </h:selectOneMenu>
                                                 </div>
@@ -301,8 +301,8 @@
 										</div>
 										<div class="modal-body">
                                             <div class="form-group">
-                                                <h:outputLabel for="cambiarTeclado" value="Seleccione el nuevo teclado:"/>
-                                                <h:selectOneMenu id="cambiarTeclado" value="#{adminBean.tecladoSeleccionado}">
+                                                <h:outputLabel class="col-xs-6" for="cambiarTeclado" value="Seleccione el nuevo teclado:"/>
+                                                <h:selectOneMenu class="col-xs-6" id="cambiarTeclado" value="#{adminBean.tecladoSeleccionado}">
                                                     <f:selectItems var="teclado" value="#{adminBean.consultarElementosDisponibles(TipoElemento.TECLADO)}" itemLabel="#{teclado.id}" itemValue="#{teclado.id}"/>
                                                 </h:selectOneMenu>
                                             </div>
@@ -330,8 +330,8 @@
 										<div class="modal-body">
                                             <div class="modal-body">
                                                 <div class="form-group">
-                                                    <h:outputLabel for="cambiarTorre" value="Seleccione el nueva Torre:"/>
-                                                    <h:selectOneMenu id="cambiarTorre" value="#{adminBean.torreSeleccionada}">
+                                                    <h:outputLabel class="col-xs-6" for="cambiarTorre" value="Seleccione el nueva Torre:"/>
+                                                    <h:selectOneMenu class="col-xs-6" id="cambiarTorre" value="#{adminBean.torreSeleccionada}">
                                                         <f:selectItems var="torre" value="#{adminBean.consultarElementosDisponibles(TipoElemento.TORRE)}" itemLabel="#{torre.id}" itemValue="#{torre.id}"/>
                                                     </h:selectOneMenu>
                                                 </div>
@@ -360,8 +360,8 @@
 										<div class="modal-body">
                                             <div class="modal-body">
                                                 <div class="form-group">
-                                                    <h:outputLabel for="cambiarMouse" value="Seleccione el nuevo mouse:"/>
-                                                    <h:selectOneMenu id="cambiarMouse" value="#{adminBean.mouseSeleccionado}">
+                                                    <h:outputLabel class="col-xs-6" for="cambiarMouse" value="Seleccione el nuevo mouse:"/>
+                                                    <h:selectOneMenu class="col-xs-6" id="cambiarMouse" value="#{adminBean.mouseSeleccionado}">
                                                         <f:selectItems var="mouse" value="#{adminBean.consultarElementosDisponibles(TipoElemento.MOUSE)}" itemLabel="#{mouse.id}" itemValue="#{mouse.id}"/>
                                                     </h:selectOneMenu>
                                                 </div>
@@ -390,8 +390,8 @@
 										<div class="modal-body">
                                             <div class="modal-body">
                                                 <div class="form-group">
-                                                    <h:outputLabel for="cambiarMonitor" value="Seleccione el nuevo Monitor:"/>
-                                                    <h:selectOneMenu id="cambiarMonitor" value="#{adminBean.monitorSeleccionado}">
+                                                    <h:outputLabel class="col-xs-6" for="cambiarMonitor" value="Seleccione el nuevo Monitor:"/>
+                                                    <h:selectOneMenu class="col-xs-6" id="cambiarMonitor" value="#{adminBean.monitorSeleccionado}">
                                                         <f:selectItems var="monitor" value="#{adminBean.consultarElementosDisponibles(TipoElemento.MONITOR)}" itemLabel="#{monitor.id}" itemValue="#{monitor.id}"/>
                                                     </h:selectOneMenu>
                                                 </div>
