@@ -210,32 +210,32 @@
 			    <h:panelGrid class="col-xs-12" columns="2" cellpadding="5">
 			    	<p:outputLabel for="laboratorio" value="Laboratorio:" />
 			    	<h:selectOneMenu id="laboratorio" value="#{adminBean.laboratorioSeleccionado}" style="width:196px">
-			    	<f:selectItem itemLabel="NULL" itemValue="null"/>
+			    	<f:selectItem itemLabel="NULL" itemValue="-1"/>
 	                    <f:selectItems  value="#{adminBean.laboratoriosDisponibles()}" var="laboratorio" itemLabel="#{laboratorio.nombre}" itemValue="#{laboratorio.id}"/>
 	                </h:selectOneMenu>
 
 
 	                <p:outputLabel for="monitor" value="Monitor:" />
 			    	<h:selectOneMenu id="monitor" value="#{adminBean.monitorSeleccionado}" style="width:196px">
-	                    <f:selectItems value="#{adminBean.monitoresDisponibles()}"/>
+	                    <f:selectItems value="#{adminBean.monitoresDisponibles()}" var="monitor" itemLabel="#{monitor.nombre}" itemValue="#{monitor.id}"/>
 	                </h:selectOneMenu>
 
 
 	                <p:outputLabel for="mouse" value="Mouse:" />
 			    	<h:selectOneMenu id="mouse" value="#{adminBean.mouseSeleccionado}" style="width:196px">
-	                    <f:selectItems value="#{adminBean.mousesDisponibles()}"/>
+	                    <f:selectItems value="#{adminBean.mousesDisponibles()}" var="mouse" itemLabel="#{mouse.nombre}" itemValue="#{mouse.id}"/>
 	                </h:selectOneMenu>
 
 
 	                <p:outputLabel for="torre" value="Torre:" />
-			    	<h:selectOneMenu id="torre" value="#{adminBean.tecladoSeleccionado}" style="width:196px">
-	                    <f:selectItems value="#{adminBean.torresDisponibles()}"/>
+			    	<h:selectOneMenu id="torre" value="#{adminBean.torreSeleccionada}" style="width:196px">
+	                    <f:selectItems value="#{adminBean.torresDisponibles()}" var="torre" itemValue="#{torre.id}" itemLabel="#{torre.nombre}"/>
 	                </h:selectOneMenu>
 
 
 	                <p:outputLabel for="teclado" value="Teclado:" />
 			    	<h:selectOneMenu id="teclado" value="#{adminBean.tecladoSeleccionado}" style="width:196px">
-	                    <f:selectItems value="#{adminBean.tecladosDisponibles()}"/>
+	                    <f:selectItems value="#{adminBean.tecladosDisponibles()}" var="teclado" itemLabel="#{teclado.nombre}" itemValue="#{teclado.id}"/>
 	                </h:selectOneMenu>
 				</h:panelGrid>
 

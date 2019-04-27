@@ -108,7 +108,13 @@ public class adminBean implements Serializable{
 			Elemento monitor = this.serviciosHistorial.consultarElemento(this.monitorSeleccionado);
 			ArrayList<Elemento> lista = new ArrayList<Elemento>();
 			lista.add(torre);lista.add(mouse);lista.add(teclado);lista.add(monitor);
-			Laboratorio laboratorio = this.serviciosHistorial.consultarLaboratorio(laboratorioSeleccionado);
+			Laboratorio laboratorio;
+			if(laboratorioSeleccionado == -1){
+				laboratorio = new Laboratorio();
+				laboratorio.setId(null);
+			}else{
+				laboratorio = this.serviciosHistorial.consultarLaboratorio(laboratorioSeleccionado);
+			}
 			Equipo equipo = new Equipo(1,lista,true,laboratorio);
 			this.serviciosHistorial.registrarEquipo(equipo);
 		}catch (ExcepcionServiciosHistorial e){
@@ -214,20 +220,41 @@ public class adminBean implements Serializable{
 
 	}
 	
-	public List<SelectItem> monitoresDisponibles(){
-		return null;
+	public List<Elemento> monitoresDisponibles(){
+		try{
+			return this.serviciosHistorial.consultarElementosDisponibles(TipoElemento.MONITOR);
+		}catch(ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+			return null;
+		}
+
 	}
 	
-	public List<SelectItem> mousesDisponibles(){
-		return null;
+	public List<Elemento> mousesDisponibles(){
+		try{
+			return this.serviciosHistorial.consultarElementosDisponibles(TipoElemento.MOUSE);
+		}catch (ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
-	public List<SelectItem> torresDisponibles(){
-		return null;
+	public List<Elemento> torresDisponibles(){
+		try{
+			return this.serviciosHistorial.consultarElementosDisponibles(TipoElemento.TORRE);
+		}catch (ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
-	public List<SelectItem> tecladosDisponibles(){
-		return null;
+	public List<Elemento> tecladosDisponibles(){
+		try{
+			return this.serviciosHistorial.consultarElementosDisponibles(TipoElemento.TECLADO);
+		}catch (ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	
