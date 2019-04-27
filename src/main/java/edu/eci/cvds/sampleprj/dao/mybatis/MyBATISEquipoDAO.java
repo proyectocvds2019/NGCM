@@ -35,6 +35,11 @@ public class MyBATISEquipoDAO implements EquipoDAO{
 	public Equipo consultarEquipoDeElemento(Elemento elemento) throws PersistenceException{
 		return equipoMapper.consultarEquipoDeElemento(elemento);
 	}
+
+	@Override
+	public Integer proximoIdEquipo() throws PersistenceException {
+		return equipoMapper.proximoIdEquipo();
+	}
 	
 	
 

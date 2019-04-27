@@ -24,5 +24,7 @@ public interface EquipoMapper {
 	public List<Equipo> consultarEquiposDisponiblesParaElemento(@Param("tipo") TipoElemento tipo);
 
 	public  Equipo consultarEquipoDeElemento(@Param("elemento") Elemento elemento);
+	
+	public Integer proximoIdEquipo();
 
 }

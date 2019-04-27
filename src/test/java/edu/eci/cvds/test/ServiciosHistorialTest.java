@@ -45,6 +45,8 @@ public class ServiciosHistorialTest {
 		qt().forAll(EquipoGenerator.genEquipos(), LaboratorioGenerator.genLaboratorio()).check((eq,lab) ->{
 			try {
 				eq.getLaboratorio().setId(null);
+				Integer id = this.serviciosHistorial.proximoIdEquipo();
+				eq.setId(id);
 				this.serviciosHistorial.registrarEquipo(eq);
 				Equipo e = this.serviciosHistorial.consultarEquipo(eq.getId());
 				return true;
@@ -62,6 +64,8 @@ public class ServiciosHistorialTest {
 		qt().forAll(EquipoGenerator.genEquipos()).check(eq->{
 			try {
 				eq.getLaboratorio().setId(null);
+				Integer id = this.serviciosHistorial.proximoIdEquipo();
+				eq.setId(id);
 				this.serviciosHistorial.registrarEquipo(eq);
 				return true;
 			}  catch(ExcepcionServiciosHistorial e) {

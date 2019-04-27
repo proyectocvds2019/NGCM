@@ -20,5 +20,4 @@ public interface ElementoDAO {
 	public void actualizarIdEquipo(String idElemento, int idEquipo) throws PersistenceException;
 	
     public void desactivarElemento(String id) throws PersistenceException;
-
 }

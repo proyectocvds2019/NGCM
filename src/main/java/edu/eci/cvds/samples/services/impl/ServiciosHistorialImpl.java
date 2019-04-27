@@ -147,6 +147,15 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 		
 	}
 
+	@Override
+	public Integer proximoIdEquipo() throws ExcepcionServiciosHistorial {
+		try {
+			return equipoDAO.proximoIdEquipo();
+		}catch(PersistenceException e) {
+			throw new ExcepcionServiciosHistorial("No se pudo consultar el proximo id de equipo.");
+		}
+	}
+
 
 
 }
