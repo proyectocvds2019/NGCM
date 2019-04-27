@@ -3,7 +3,7 @@ package edu.eci.cvds.test;
 import edu.eci.cvds.samples.entities.Equipo;
 import org.junit.Test;
 
-import static org.quicktheories.QuickTheory.qt;
+import  org.quicktheories.QuickTheory.qt;
 
 
 import edu.eci.cvds.samples.services.ExcepcionServiciosHistorial;
@@ -20,11 +20,13 @@ public class ServiciosHistorialTest {
 	
 	@Test
 	public void deberiaRegistrarElementos() {
-		qt().forAll(ElementoGenerator.genElementos()).check((elem) -> {
+		qt().forAll(ElementoGenerator.genElementos()).check(elem -> {
 			try {
 				this.serviciosHistorial.registrarElemento(elem, "gualdronsito@hotmail.com", null);
-				return true;
+				if(serviciosHistorial.consultarElemento(elem.getId())!=null) return true;
+				else return false;
 			}catch(ExcepcionServiciosHistorial e) {
+				System.out.println("No se puede registrar un elemento con el mismo id");
 				e.printStackTrace();
 				return false;
 			}
@@ -32,13 +34,17 @@ public class ServiciosHistorialTest {
 	}
 	
 	@Test
-	public void deberiaConsultarEquipos() {
-		qt().forAll(EquipoGenerator.genEquipos()).check(eq -> {
+	public void deberiaRegistrarEquipo() {
+		qt().forAll(EquipoGenerator.genEquipos()).check((eq) -> {
 			try {
-				this.serviciosHistorial.consultarEquipos();
-				return true;
+				this.serviciosHistorial.registrarEquipo(eq);
+				lista=serviciosHistorial.consultarEquipos();
+				if(lista.contains(eq))return true;
+				else return false;
+
 			}catch(ExcepcionServiciosHistorial e) {
-				System.out.println("jajaja");
+				System.out.println("No se pudo registrar un equipo con ese  id");
+
 				e.printStackTrace();
 				return false;
 			}
