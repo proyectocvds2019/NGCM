@@ -45,6 +45,10 @@ public class MyBATISElementoDAO implements ElementoDAO{
 		
 	}
 	
+        @Override
+        public void desasociarElemento(String id) throws PersistenceException{
+                ElementoMapper.desactivarElemento(id);        
+        }
 	
 
 }
