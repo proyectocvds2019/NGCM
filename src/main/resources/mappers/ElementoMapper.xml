@@ -38,4 +38,10 @@
 		SELECT * FROM elementos WHERE idequipo IS NULL AND activo = true AND tipo = #{tipo};
 	</select>
 	
+	<select id = "consultarElemento" resultMap = "ElementosResult">
+		SELECT *
+		FROM elementos
+		WHERE elementos.id = #{id};
+	</select>
+	
 </mapper>

@@ -5,21 +5,27 @@ CREATE TABLE Usuarios(
 	correo VARCHAR(100) PRIMARY KEY NOT NULL,
 	contrasena VARCHAR(100) NOT NULL,
 	rol VARCHAR(20) NOT NULL,
-	carnet INTEGER
+	carnet INTEGER,
+	fechaRegistro DATE,
+	fechaEliminacion DATE
 );
 
 CREATE SEQUENCE id_lab;
 CREATE TABLE Laboratorios(
 id INTEGER PRIMARY KEY NOT NULL,
 nombre VARCHAR(100) NOT NULL,
-activo BOOLEAN NOT NULL
+activo BOOLEAN NOT NULL,
+fechaRegistro DATE,
+fechaEliminacion DATE
 );
 
 CREATE SEQUENCE id_equipo;
 CREATE TABLE Equipos(
 	id INTEGER PRIMARY KEY NOT NULL,
-	activo boolean NOT null,
-	laboratorio INTEGER NOT NULL
+	activo boolean NOT NULL,
+	laboratorio INTEGER NOT NULL,
+	fechaRegistro DATE,
+	fechaEliminacion DATE
 );
 
 CREATE SEQUENCE id_elemento;
@@ -29,7 +35,9 @@ CREATE TABLE Elementos(
 	tipo VARCHAR(10) NOT NULL,
 	activo boolean NOT NULL,
 	idEquipo INTEGER,
-	registradoPor VARCHAR(100) NOT NULL
+	registradoPor VARCHAR(100) NOT NULL,
+	fechaRegistro DATE,
+	fechaEliminacion DATE
 );
 
 --- Foreigns
@@ -44,6 +52,12 @@ ALTER TABLE Elementos ADD CONSTRAINT Elementos_Usuario
 ALTER TABLE Equipos ADD CONSTRAINT Equipo_Laboratorio
 	FOREIGN KEY (laboratorio)
 	REFERENCES Laboratorios (id);
+
+--- Triggers
+
+-- Automatizar fecha actual
+
+
 
 --- Checks
 
