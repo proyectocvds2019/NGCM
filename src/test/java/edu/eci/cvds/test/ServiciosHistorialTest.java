@@ -63,7 +63,6 @@ public class ServiciosHistorialTest {
 			}
 		});
 	}
-
 	@Test
 	public void deberiaRegistrarEquipo() {
 		qt().forAll(EquipoGenerator.genEquipos()).check(eq->{
@@ -78,3 +77,4 @@ public class ServiciosHistorialTest {
 	}
 
 }
+
