@@ -46,8 +46,14 @@
 	
 	<update parameterType = 'map' id = 'actualizarIdEquipo'>
 		UPDATE Elementos
-		SET Elementos.idEquipo = #{equipo.id}
-		WHERE Elementos.id = #{elemento.id};
+		SET Elementos.idEquipo = #{idEq}
+		WHERE Elementos.id = #{idEl};
+	</update>
+	
+	<update parameterType = 'map' id = 'desactivarElemento'>
+		UPDATE Elementos
+		SET Elementos.activo = false
+		WHERE Elementos.id = #{id} AND Elementos.idEquipo IS NULL;
 	</update>
 	
 </mapper>

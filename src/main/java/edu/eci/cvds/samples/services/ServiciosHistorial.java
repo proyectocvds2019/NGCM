@@ -33,4 +33,6 @@ public interface ServiciosHistorial {
 	
 	public abstract void actualizarIdEquipoEnElemento(String idElemento, int idEquipo) throws ExcepcionServiciosHistorial;
 	
+	public abstract void desactivarElemento(String id) throws ExcepcionServiciosHistorial;
+	
 }

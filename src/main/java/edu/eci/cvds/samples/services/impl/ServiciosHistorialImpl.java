@@ -137,6 +137,12 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 		
 	}
 
+	@Override
+	public void desactivarElemento(String id) throws ExcepcionServiciosHistorial {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 
 }

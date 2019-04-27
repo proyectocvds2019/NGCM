@@ -1,6 +1,8 @@
 package edu.eci.cvds.test;
 
 import java.util.List;
+
+import edu.eci.cvds.samples.entities.Elemento;
 import edu.eci.cvds.samples.entities.Equipo;
 import org.junit.Test;
 
@@ -37,7 +39,7 @@ public class ServiciosHistorialTest {
 			}
 		});
 	}
-
+	
 	@Test
 	public void deberiaConsultarEquipo() {
 		qt().forAll(EquipoGenerator.genEquipos(), LaboratorioGenerator.genLaboratorio()).check((eq,lab) ->{
