@@ -50,4 +50,10 @@
 		SELECT nextval('id_equipo');
 	</select>
 	
+	<update parameterType = 'map' id = 'desactivarEquipo'>
+		UPDATE Equipos
+		SET Equipos.activo = false
+		WHERE Equipos.id = #{id};
+	</update>
+	
 </mapper>
