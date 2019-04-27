@@ -6,7 +6,7 @@ CREATE TABLE Usuarios(
 	contrasena VARCHAR(100) NOT NULL,
 	rol VARCHAR(20) NOT NULL,
 	carnet INTEGER,
-	fechaRegistro DATE NOT NULL,
+	fechaRegistro DATE,
 	fechaEliminacion DATE
 );
 
@@ -15,7 +15,7 @@ CREATE TABLE Laboratorios(
 id INTEGER PRIMARY KEY NOT NULL,
 nombre VARCHAR(100) NOT NULL,
 activo BOOLEAN NOT NULL,
-fechaRegistro DATE NOT NULL,
+fechaRegistro DATE,
 fechaEliminacion DATE
 );
 
@@ -24,7 +24,7 @@ CREATE TABLE Equipos(
 	id INTEGER PRIMARY KEY NOT NULL,
 	activo boolean NOT NULL,
 	laboratorio INTEGER NOT NULL,
-	fechaRegistro DATE NOT NULL,
+	fechaRegistro DATE,
 	fechaEliminacion DATE
 );
 
@@ -36,7 +36,7 @@ CREATE TABLE Elementos(
 	activo boolean NOT NULL,
 	idEquipo INTEGER,
 	registradoPor VARCHAR(100) NOT NULL,
-	fechaRegistro DATE NOT NULL,
+	fechaRegistro DATE,
 	fechaEliminacion DATE
 );
 
@@ -52,6 +52,12 @@ ALTER TABLE Elementos ADD CONSTRAINT Elementos_Usuario
 ALTER TABLE Equipos ADD CONSTRAINT Equipo_Laboratorio
 	FOREIGN KEY (laboratorio)
 	REFERENCES Laboratorios (id);
+
+--- Triggers
+
+-- Automatizar fecha actual
+
+
 
 --- Checks
 
