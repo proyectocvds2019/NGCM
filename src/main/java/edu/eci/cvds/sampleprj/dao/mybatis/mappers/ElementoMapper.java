@@ -26,5 +26,5 @@ public interface ElementoMapper {
 	
 	public void actualizarIdEquipo(@Param("idEl") String idEl, @Param("idEq") int idEq);
 	
-	public void desasociarElemento(@Param("id") String id);
+	public void desactivarElemento(@Param("id") String id);
 }

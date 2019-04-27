@@ -50,7 +50,7 @@
 		WHERE Elementos.id = #{idEl};
 	</update>
 	
-	<update parameterType = 'map' id = 'desasociarElemento'>
+	<update parameterType = 'map' id = 'desactivarElemento'>
 		UPDATE Elementos
 		SET Elementos.activo = false
 		WHERE Elementos.id = #{id} AND Elementos.idEquipo IS NULL;
