@@ -24,11 +24,8 @@ CREATE TABLE Equipos(
 	id INTEGER PRIMARY KEY NOT NULL,
 	activo boolean NOT NULL,
 	laboratorio INTEGER,
-<<<<<<< HEAD
 	fechaRegistro DATE,
-=======
 	fechaRegistro DATE DEFAULT CURRENT_DATE,
->>>>>>> 80392a11330a6ed8ea96cfaf10391c5a7890a9e8
 	fechaEliminacion DATE
 );
 
