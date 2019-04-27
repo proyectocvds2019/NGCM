@@ -115,7 +115,8 @@ public class adminBean implements Serializable{
 			}else{
 				laboratorio = this.serviciosHistorial.consultarLaboratorio(laboratorioSeleccionado);
 			}
-			Equipo equipo = new Equipo(1,lista,true,laboratorio);
+			Integer id = this.serviciosHistorial.proximoIdEquipo();
+			Equipo equipo = new Equipo(id,lista,true,laboratorio);
 			this.serviciosHistorial.registrarEquipo(equipo);
 		}catch (ExcepcionServiciosHistorial e){
 			e.printStackTrace();
