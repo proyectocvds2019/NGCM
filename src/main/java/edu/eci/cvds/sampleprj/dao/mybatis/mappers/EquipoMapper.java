@@ -26,5 +26,7 @@ public interface EquipoMapper {
 	public  Equipo consultarEquipoDeElemento(@Param("elemento") Elemento elemento);
 	
 	public Integer proximoIdEquipo();
+	
+	public void desactivarEquipo(@Param("id") int id);
 
 }
