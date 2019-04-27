@@ -12,6 +12,7 @@
 		<result property = 'contrasena' column = 'contrasena'/>
 		<result property = 'rol' column = 'rol'/>
 		<result property = 'carnet' column = 'carnet'/>
+		<collection property = 'elementosRegistrados' ofType = 'Elemento' resultMap = 'edu.eci.cvds.sampleprj.dao.mybatis.mappers.ElementoMapper.ElementosResult'></collection>
 	</resultMap>
 	
 </mapper>

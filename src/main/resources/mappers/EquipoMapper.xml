@@ -9,7 +9,7 @@
 	<resultMap type = 'Equipo' id = 'EquiposResult'>
 		<id property = 'id' column = 'id'/>
 		<result property="activo" column="activo"/>
-		<association property="laboratorio" javaType="Laboratorio" resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.LaboratorioMapper.LaboratoriosResult2"/>
+		<collection property = 'elementos' ofType = 'Elemento' resultMap = 'edu.eci.cvds.sampleprj.dao.mybatis.mappers.ElementoMapper.ElementosResult'></collection>
 	</resultMap>
 
 

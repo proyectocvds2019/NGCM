@@ -10,6 +10,7 @@
         <id property = 'id' column = 'laboratorio'/>
         <result property="nombre" column="laboratorioNombre"/>
         <result property="activo" column="laboratorioActivo"/>
+        <collection property = 'equipos' ofType = 'Equipo' resultMap = 'edu.eci.cvds.sampleprj.dao.mybatis.mappers.EquipoMapper.EquiposResult'></collection>
     </resultMap>
 
 

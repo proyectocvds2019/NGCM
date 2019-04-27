@@ -31,4 +31,6 @@ public interface ServiciosHistorial {
 
 	public abstract List<Elemento> consultarElementosDisponibles(TipoElemento tipo) throws  ExcepcionServiciosHistorial;
 	
+	public abstract void actualizarIdEquipoEnElemento(String idElemento, int idEquipo) throws ExcepcionServiciosHistorial;
+	
 }

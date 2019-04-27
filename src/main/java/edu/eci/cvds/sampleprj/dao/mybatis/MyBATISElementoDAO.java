@@ -15,8 +15,7 @@ public class MyBATISElementoDAO implements ElementoDAO{
 	private ElementoMapper ElementoMapper;
 	
 	public void registrarElemento(Elemento elemento, String correoUsuario, Integer equipo)  throws PersistenceException{
-		ElementoMapper.registrarElemento(
-				elemento,correoUsuario,equipo);
+		ElementoMapper.registrarElemento(elemento,correoUsuario,equipo);
 		
 	}
 
@@ -27,7 +26,6 @@ public class MyBATISElementoDAO implements ElementoDAO{
 
 	@Override
 	public List<Elemento> consultarElementosDisponibles() throws PersistenceException {
-		// TODO Ap�ndice de m�todo generado autom�ticamente
 		return ElementoMapper.consultarElementosDisponibles();
 	}
 
@@ -39,6 +37,12 @@ public class MyBATISElementoDAO implements ElementoDAO{
 	@Override
 	public List<Elemento> consultarElementosDisponibles(TipoElemento tipo) throws PersistenceException{
 		return ElementoMapper.consultarElementosDisponibles2(tipo);
+	}
+
+	@Override
+	public void actualizarIdEquipo(String idElemento, int idEquipo) throws PersistenceException {
+		ElementoMapper.actualizarIdEquipo(idElemento, idEquipo);
+		
 	}
 	
 	

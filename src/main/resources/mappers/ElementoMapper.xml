@@ -44,4 +44,10 @@
 		WHERE elementos.id = #{id};
 	</select>
 	
+	<update parameterType = 'map' id = 'actualizarIdEquipo'>
+		UPDATE Elementos
+		SET Elementos.idEquipo = #{equipo.id}
+		WHERE Elementos.id = #{elemento.id};
+	</update>
+	
 </mapper>
