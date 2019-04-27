@@ -43,11 +43,11 @@
 		FROM elementos
 		WHERE elementos.id = #{id};
 	</select>
-	
+
 	<update parameterType = 'map' id = 'actualizarIdEquipo'>
 		UPDATE Elementos
-		SET Elementos.idEquipo = #{idEq}
-		WHERE Elementos.id = #{idEl};
+		SET idEquipo = #{idEq}
+		WHERE id = #{idEl};
 	</update>
 	
 	<update parameterType = 'map' id = 'desactivarElemento'>
