@@ -42,13 +42,12 @@ public class ServiciosHistorialTest {
 	
 	@Test
 	public void deberiaConsultarElemento() {
-		
-		qt.forAll(ElementoGenerator.genElementos(),EquipoGenerator.genEquipos()).check((el,eq) ->{
+		qt().forAll(ElementoGenerator.genElementos(),EquipoGenerator.genEquipos()).check((el,eq) ->{
 			try {
-				this.serviciosHistorial.registrarElemento(e,"cesar.villamil@mail.escuelaing.edu.co", eq);
-				if(this.serviciosHistorial.consultarElemento(e.getId())!=null) return true;
+				this.serviciosHistorial.registrarElemento(el,"cesar.villamil@mail.escuelaing.edu.co", eq.getId());
+				if(this.serviciosHistorial.consultarElemento(el.getId())!=null) return true;
 				else return false;
-			} catch (ExcepcionServiciosHistorial e) {
+			} catch(ExcepcionServiciosHistorial e) {
 				System.out.println("No se puede registrar elemento");
 				e.printStackTrace();
 				return false;
