@@ -26,7 +26,6 @@ public class loginBean implements Serializable {
     private static final Logger log = LoggerFactory.getLogger(loginBean.class);
     private String username;
     private String password;
-    private Boolean rememberMe;
     private Subject subject;
 
 
@@ -43,7 +42,7 @@ public class loginBean implements Serializable {
     public void doLogin() {
        subject = SecurityUtils.getSubject();
 
-        UsernamePasswordToken token = new UsernamePasswordToken(getUsername(), getPassword(), getRememberMe());
+        UsernamePasswordToken token = new UsernamePasswordToken(getUsername(), getPassword());
 
         try {
             subject.login(token);
@@ -116,13 +115,6 @@ public class loginBean implements Serializable {
         this.password = new Sha256Hash(senha).toHex();
     }
 
-    public Boolean getRememberMe() {
-        return rememberMe;
-    }
-
-    public void setRememberMe(Boolean lembrar) {
-        this.rememberMe = lembrar;
-    }
     
     
     

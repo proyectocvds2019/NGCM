@@ -18,7 +18,7 @@ public class EquipoGenerator {
 	}
 	
 	public static Gen<Integer> genId(){
-		return integers().between(1,9999);
+		return integers().allPositive();
 	}
 	
 }

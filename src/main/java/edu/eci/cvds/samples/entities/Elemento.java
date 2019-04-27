@@ -62,6 +62,7 @@ public class Elemento implements Serializable{
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
+
 	
 
 }

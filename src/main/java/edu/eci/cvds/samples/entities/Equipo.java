@@ -47,7 +47,7 @@ public class Equipo implements Serializable{
 		this.id = id;
 	}
 
-	public boolean isActivo() {
+	public boolean getActivo() {
 		return activo;
 	}
 
