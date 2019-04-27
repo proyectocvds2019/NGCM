@@ -1,5 +1,6 @@
 package edu.eci.cvds.test;
 
+import java.util.List;
 import edu.eci.cvds.samples.entities.Equipo;
 import org.junit.Test;
 
@@ -7,11 +8,10 @@ import org.junit.Test;
 import org.quicktheories.QuickTheory.*;
 
 
+
 import edu.eci.cvds.samples.services.ExcepcionServiciosHistorial;
 import edu.eci.cvds.samples.services.ServiciosHistorial;
 import edu.eci.cvds.samples.services.ServiciosHistorialFactory;
-
-import java.util.List;
 
 import static org.quicktheories.QuickTheory.qt;
 
@@ -38,7 +38,6 @@ public class ServiciosHistorialTest {
 		});
 	}
 
-
 	@Test
 	public void deberiaConsultarEquipo() {
 		qt().forAll(EquipoGenerator.genEquipos(), LaboratorioGenerator.genLaboratorio()).check((eq,lab) ->{
@@ -53,13 +52,15 @@ public class ServiciosHistorialTest {
 			}
 		});
 	}
+
+
+
 	@Test
 	public void deberiaRegistrarEquipo() {
 		qt().forAll(EquipoGenerator.genEquipos()).check(eq->{
 			try {
 				eq.getLaboratorio().setId(null);
 				this.serviciosHistorial.registrarEquipo(eq);
-                              
 				return true;
 			}  catch(ExcepcionServiciosHistorial e) {
 				e.printStackTrace();
