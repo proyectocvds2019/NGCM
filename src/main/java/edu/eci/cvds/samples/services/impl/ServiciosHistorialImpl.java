@@ -1,5 +1,6 @@
 package edu.eci.cvds.samples.services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.inject.Inject;
@@ -65,6 +66,9 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 	public void registrarEquipo(Equipo equipo) throws ExcepcionServiciosHistorial {
 		try {
 			equipoDAO.registrarEquipo(equipo);
+			for(Elemento e: equipo.getElementos()) {
+				actualizarIdEquipoEnElemento(e.getId(), equipo.getId());
+			}
 		}catch(PersistenceException e) {
 			throw new ExcepcionServiciosHistorial("No se pudo registrar el equipo.");
 		}
@@ -121,6 +125,16 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 		}catch (PersistenceException e){
 			throw new ExcepcionServiciosHistorial("No se pudo consultar los elementos disponibles de tipo: "+tipo);
 		}
+	}
+
+	@Override
+	public void actualizarIdEquipoEnElemento(String idElemento, int idEquipo) throws ExcepcionServiciosHistorial {
+		try {
+			elementoDAO.actualizarIdEquipo(idElemento,idEquipo);
+		}catch (PersistenceException e) {
+			throw new ExcepcionServiciosHistorial("No se pudo actualizar el idEquipo en el elemento.");
+		}
+		
 	}
 
 
