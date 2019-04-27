@@ -139,7 +139,11 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 
 	@Override
 	public void desactivarElemento(String id) throws ExcepcionServiciosHistorial {
-		// TODO Auto-generated method stub
+		try {
+			elementoDAO.desactivarElemento(id);
+		}catch (PersistenceException e) {
+			throw new ExcepcionServiciosHistorial("No se pudo dar de baja al elemento.");
+		}
 		
 	}
 
