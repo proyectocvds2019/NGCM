@@ -10,4 +10,3 @@ DROP TABLE Usuarios;
 
 DROP SEQUENCE id_lab;
 DROP SEQUENCE id_equipo;
-DROP SEQUENCE id_elemento;

@@ -23,12 +23,11 @@ CREATE SEQUENCE id_equipo;
 CREATE TABLE Equipos(
 	id INTEGER PRIMARY KEY NOT NULL,
 	activo boolean NOT NULL,
-	laboratorio INTEGER NOT NULL,
+	laboratorio INTEGER,
 	fechaRegistro DATE DEFAULT CURRENT_DATE,
 	fechaEliminacion DATE
 );
 
-CREATE SEQUENCE id_elemento;
 CREATE TABLE Elementos(
 	id VARCHAR(100) PRIMARY KEY NOT NULL,
 	nombre VARCHAR(100) NOT NULL,
