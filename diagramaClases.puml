@@ -1,0 +1,27 @@
+@startuml
+
+interface ServiciosHistorial
+interface UsuarioDAO
+interface ElementoDAO
+interface EquipoDAO
+interface LaboratorioDAO
+
+class ServiciosHistorialImpl
+class MyBatisUsuarioDAO
+class MyBatisElementoDAO
+class MyBatisEquipoDAO
+class MyBatisLaboratorioDAO
+
+ServiciosHistorialImpl ..|> ServiciosHistorial
+ServiciosHistorialImpl --> UsuarioDAO : <<Injected>>
+ServiciosHistorialImpl --> ElementoDAO : <<Injected>>
+ServiciosHistorialImpl --> EquipoDAO : <<Injected>>
+ServiciosHistorialImpl --> LaboratorioDAO : <<Injected>>
+
+MyBatisUsuarioDAO ..|> UsuarioDAO
+MyBatisElementoDAO ..|> ElementoDAO
+MyBatisEquipoDAO ..|> EquipoDAO
+MyBatisLaboratorioDAO ..|> LaboratorioDAO
+
+
+@enduml

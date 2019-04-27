@@ -48,7 +48,6 @@ public class adminBean implements Serializable{
 		Subject subject = SecurityUtils.getSubject();
 		this.correo = (String) subject.getSession().getAttribute("correo");
 		this.serviciosHistorial = ServiciosHistorialFactory.getInstance().getServiciosHistorial();
-		//System.out.println("hola");
 	}
     
 	public void registrarElemento() throws ExcepcionServiciosHistorial {

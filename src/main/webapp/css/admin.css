@@ -13,3 +13,14 @@ body{
 .tituloNombre{
     font-size:25px;
 }
+
+#logo{
+    padding: 0px;
+    text-align: left;
+    object-fit: cover;
+    height: 100%;
+}
+
+.header{
+    max-height: 150px;
+}

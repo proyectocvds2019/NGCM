@@ -32,13 +32,8 @@
                     <h:outputText value="Contraseña:"/>
                     <p:password class="form-control" placeholder="Ingrese su contraseña" id="password" required="true" value="#{loginBean.password}"/>
                 </div>
-                <div class="col-xs-2">
-                    <h:outputText value="Remember me:"/>
-                    <p:selectBooleanCheckbox id="rememberMe" value="#{loginBean.rememberMe}"/>
-                    <h:outputText/>
-                </div>
                 <div class="col-xs-10">
-                    <p:commandButton class="btn btn-default btn-success" value="Entrar" action="#{loginBean.doLogin}" />
+                    <p:commandButton class="btn btn-default btn-success" value="Entrar" action="#{loginBean.doLogin()}" />
                 </div>
                 <div class="form-group">
                 <p:messages id="messages" autoUpdate="true" closable="true" />
