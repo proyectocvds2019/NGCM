@@ -1,7 +1,9 @@
 package edu.eci.cvds.test;
 
+import java.util.List;
 import edu.eci.cvds.samples.entities.Equipo;
 import org.junit.Test;
+
 
 import  org.quicktheories.QuickTheory.qt;
 
@@ -11,13 +13,13 @@ import edu.eci.cvds.samples.services.ServiciosHistorial;
 import edu.eci.cvds.samples.services.ServiciosHistorialFactory;
 
 public class ServiciosHistorialTest {
-	
+
 	private ServiciosHistorial serviciosHistorial;
-	
+
 	public ServiciosHistorialTest() {
 		this.serviciosHistorial = ServiciosHistorialFactory.getInstance().getServiciosHistorialTest();
 	}
-	
+
 	@Test
 	public void deberiaRegistrarElementos() {
 		qt().forAll(ElementoGenerator.genElementos()).check(elem -> {
@@ -32,11 +34,12 @@ public class ServiciosHistorialTest {
 			}
 		});
 	}
-	
+
 	@Test
 	public void deberiaRegistrarEquipo() {
 		qt().forAll(EquipoGenerator.genEquipos()).check((eq) -> {
 			try {
+				List<Equipo> lista;
 				this.serviciosHistorial.registrarEquipo(eq);
 				lista=serviciosHistorial.consultarEquipos();
 				if(lista.contains(eq))return true;
@@ -51,7 +54,33 @@ public class ServiciosHistorialTest {
 		});
 	}
 	
+	@Test
+	public void deberiaConsultarEquipo() {
+		qt().forAll(EquipoGenerator.genEquipos(), LaboratorioGenerator.genLaboratorio()).check((eq,lab) ->{
+			try {
 
+				this.serviciosHistorial.registrarEquipo(eq);
+				Equipo e = this.serviciosHistorial.consultarEquipo(eq.getId());
+                                return true;
+			} catch(ExcepcionServiciosHistorial e) {
+				e.printStackTrace();
+				return false;
+			}
+		});
+	}
 
+	@Test
+	public void deberiaRegistrarEquipo() {
+		qt().forAll(EquipoGenerator.genEquipos()).check(eq->{
+			try {
+				this.serviciosHistorial.registrarEquipo(eq);
+
+				return true;
+			}  catch(ExcepcionServiciosHistorial e) {
+				e.printStackTrace();
+				return false;
+			}
+		});
+	}
 	
 }
