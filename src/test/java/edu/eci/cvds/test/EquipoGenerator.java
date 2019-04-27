@@ -11,9 +11,10 @@ public class EquipoGenerator {
 	public static Gen<Equipo> genEquipos(){
 		return source->{
 			int id = genId().generate(source);
-			LaboratorioGenerator ge = new LaboratorioGenerator();
+			/*LaboratorioGenerator ge = new LaboratorioGenerator();
 			Laboratorio lab = ge.genLaboratorio().generate(source);
-			return new Equipo(id,true,lab);
+			*/
+                        return new Equipo(id,true,null);
 		};
 	}
 	
