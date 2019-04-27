@@ -38,7 +38,6 @@ public class ServiciosHistorialTest {
 				this.serviciosHistorial.consultarEquipos();
 				return true;
 			}catch(ExcepcionServiciosHistorial e) {
-				System.out.println("jajaja");
 				e.printStackTrace();
 				return false;
 			}
@@ -47,7 +46,7 @@ public class ServiciosHistorialTest {
 
 	@Test
 	public void deberiaConsultarEquipo() {
-		qt().forAll(EquipoGenerator.genEquipos()).check(eq ->{
+		qt().forAll(EquipoGenerator.genEquipos(), LaboratorioGenerator.genLaboratorio()).check((eq,lab) ->{
 			try {
 				eq.getLaboratorio().setId(null);
 				this.serviciosHistorial.registrarEquipo(eq);
@@ -65,6 +64,7 @@ public class ServiciosHistorialTest {
 			try {
 				eq.getLaboratorio().setId(null);
 				this.serviciosHistorial.registrarEquipo(eq);
+                              
 				return true;
 			}  catch(ExcepcionServiciosHistorial e) {
 				e.printStackTrace();
