@@ -1,6 +1,8 @@
 package edu.eci.cvds.test;
 
 import java.util.List;
+
+import edu.eci.cvds.samples.entities.Elemento;
 import edu.eci.cvds.samples.entities.Equipo;
 import org.junit.Test;
 
@@ -32,6 +34,24 @@ public class ServiciosHistorialTest {
 				else return false;
 			}catch(ExcepcionServiciosHistorial e) {
 				System.out.println("No se puede registrar un elemento con el mismo id");
+				e.printStackTrace();
+				return false;
+			}
+		});
+	}
+	
+	@Test
+	public void deberiaConsultarElemento() {
+		
+		qt.forAll(ElementoGenerator.genElementos(),EquipoGenerator.genEquipos()).check((el,eq) ->{
+			try {
+				this.serviciosHistorial.registrarElemento(e,"cesar.villamil@mail.escuelaing.edu.co", eq);
+				Elemento e;
+				e=this.serviciosHistorial.consultarElemento(e.getId());
+				if(e!=null) return true;
+				else return false;
+			} catch (ExcepcionServiciosHistorial e) {
+				System.out.println("No se puede registrar elemento");
 				e.printStackTrace();
 				return false;
 			}
