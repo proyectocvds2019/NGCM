@@ -1,5 +1,6 @@
 package edu.eci.cvds.test;
 
+import edu.eci.cvds.samples.entities.Equipo;
 import org.junit.Test;
 
 import  org.quicktheories.QuickTheory.qt;
@@ -49,5 +50,33 @@ public class ServiciosHistorialTest {
 			}
 		});
 	}
-
+	
+	@Test
+	public void deberiaConsultarEquipo() {
+		qt().forAll(EquipoGenerator.genEquipos(), LaboratorioGenerator.genLaboratorio()).check((eq,lab) ->{
+			try {
+                                this.serviciosHistorial.registrarEquipo(eq);
+				Equipo e = this.serviciosHistorial.consultarEquipo(eq.getId());
+                                return true;
+			} catch(ExcepcionServiciosHistorial e) {
+				e.printStackTrace();
+				return false;
+			}
+		});
+	}
+	
+	@Test
+	public void deberiaRegistrarEquipo() {
+		qt().forAll(EquipoGenerator.genEquipos()).check(eq->{
+			try {
+				this.serviciosHistorial.registrarEquipo(eq);
+                              
+				return true;
+			}  catch(ExcepcionServiciosHistorial e) {
+				e.printStackTrace();
+				return false;
+			}			
+		});
+	}
+	
 }
