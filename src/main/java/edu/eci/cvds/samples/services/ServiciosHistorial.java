@@ -35,4 +35,6 @@ public interface ServiciosHistorial {
 	
 	public abstract void desactivarElemento(String id) throws ExcepcionServiciosHistorial;
 	
+	public abstract Integer proximoIdEquipo() throws ExcepcionServiciosHistorial;
+	
 }

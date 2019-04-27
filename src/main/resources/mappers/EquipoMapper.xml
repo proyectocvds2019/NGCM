@@ -29,7 +29,7 @@
 	
 	<insert parameterType = "map" id = "registrarEquipo">
 		INSERT INTO equipos (id, activo, laboratorio)
-		VALUES (nextval('id_equipo'),#{equipo.activo},#{equipo.laboratorio.id});
+		VALUES (#{equipo.id},#{equipo.activo},#{equipo.laboratorio.id});
 	</insert>
 
 	<select parameterType="map" id="consultarEquiposDisponiblesParaElemento" resultMap="EquiposResult">
@@ -44,6 +44,10 @@
 		FROM Equipos, laboratorios
 		WHERE (equipos.id = (select elementos.idEquipo from elementos where elementos.id = #{elemento.id})) AND
 		equipos.laboratorio = laboratorios.id;
+	</select>
+	
+	<select id = "proximoIdEquipo" resultType = "Integer">
+		SELECT nextval('id_equipo');
 	</select>
 	
 </mapper>
