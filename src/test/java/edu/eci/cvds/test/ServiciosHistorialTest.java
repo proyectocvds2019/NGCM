@@ -41,21 +41,6 @@ public class ServiciosHistorialTest {
 	}
 	
 	@Test
-	public void deberiaConsultarElemento() {
-		qt().forAll(ElementoGenerator.genElementos(),EquipoGenerator.genEquipos()).check((el,eq) ->{
-			try {
-				this.serviciosHistorial.registrarElemento(el,"cesar.villamil@mail.escuelaing.edu.co", eq.getId());
-				if(this.serviciosHistorial.consultarElemento(el.getId())!=null) return true;
-				else return false;
-			} catch(ExcepcionServiciosHistorial e) {
-				System.out.println("No se puede registrar elemento");
-				e.printStackTrace();
-				return false;
-			}
-		});
-	}
-
-	@Test
 	public void deberiaConsultarEquipo() {
 		qt().forAll(EquipoGenerator.genEquipos(), LaboratorioGenerator.genLaboratorio()).check((eq,lab) ->{
 			try {
