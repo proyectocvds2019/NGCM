@@ -22,9 +22,10 @@
 	</select>
 	
 	<select id ="consultarEquipo" resultMap="EquiposResult">
-		SELECT equipos.id, equipos.activo, equipos.laboratorio
-		FROM equipos
-		WHERE equipos.id = #{id};
+		SELECT equipos.id, equipos.activo, equipos.laboratorio, elementos.id as idElemento,
+		elementos.tipo as tipoElemento, elementos.activo as activoElemento, elementos.nombre as nombreElemento
+		FROM equipos, elementos
+		WHERE equipos.id = #{id} AND equipos.id = elementos.idEquipo;
 	</select>
 	
 	<insert parameterType = "map" id = "registrarEquipo">

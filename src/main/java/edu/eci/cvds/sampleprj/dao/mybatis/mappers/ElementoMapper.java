@@ -25,7 +25,7 @@ public interface ElementoMapper {
 
 	public List<Elemento> consultarElementosDisponibles2(@Param("tipo") TipoElemento tipo);
 	
-	public void actualizarIdEquipo(@Param("idEl") String idEl, @Param("idEq") int idEq);
+	public void actualizarIdEquipo(@Param("idEl") String idEl, @Param("idEq") Integer idEq);
 	
 	public void desactivarElemento(@Param("id") String id);
 

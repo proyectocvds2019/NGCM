@@ -18,7 +18,7 @@ public interface ElementoDAO {
 
 	public List<Elemento> consultarElementosDisponibles(TipoElemento tipo) throws PersistenceException;
 
-	public void actualizarIdEquipo(String idElemento, int idEquipo) throws PersistenceException;
+	public void actualizarIdEquipo(String idElemento, Integer idEquipo) throws PersistenceException;
 	
     public void desactivarElemento(String id) throws PersistenceException;
 

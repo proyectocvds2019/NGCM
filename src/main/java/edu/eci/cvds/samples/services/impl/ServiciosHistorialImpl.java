@@ -29,6 +29,16 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 
 	public void registrarElemento(Elemento elemento, String correoUsuario, Integer equipo) throws ExcepcionServiciosHistorial {
 		try {
+			if(equipo != null){
+				Equipo equi = equipoDAO.consultarEquipo(equipo);
+				for (Elemento e: equi.getElementos()){
+					System.out.println(e.getId());
+					if(e.getTipo().name().equals(elemento.getTipo().name())){
+						System.out.println("entro "+e.getId());
+						elementoDAO.actualizarIdEquipo(e.getId(),null);
+					}
+				}
+			}
 			elementoDAO.registrarElemento(elemento,correoUsuario,equipo);
 		} catch (PersistenceException e) {
 			throw new ExcepcionServiciosHistorial("No se pudo registrar el elemento.");
@@ -128,8 +138,10 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 	}
 
 	@Override
-	public void actualizarIdEquipoEnElemento(String idElemento, int idEquipo) throws ExcepcionServiciosHistorial {
+	public void actualizarIdEquipoEnElemento(String idElemento, Integer idEquipo) throws ExcepcionServiciosHistorial {
 		try {
+			Elemento elem = elementoDAO.consultarElementoDelEquipo(elementoDAO.consultarElemento(idElemento).getTipo(),equipoDAO.consultarEquipo(idEquipo));
+			elementoDAO.actualizarIdEquipo(elem.getId(),null);
 			elementoDAO.actualizarIdEquipo(idElemento,idEquipo);
 		}catch (PersistenceException e) {
 			throw new ExcepcionServiciosHistorial("No se pudo actualizar el idEquipo en el elemento.");
@@ -173,6 +185,7 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 			throw new ExcepcionServiciosHistorial("No se pudo consulta el elemento de tipo "+tipo+" y equipo "+equipo.getId());
 		}
 	}
+
 
 
 

@@ -41,7 +41,7 @@ public class MyBATISElementoDAO implements ElementoDAO{
 	}
 
 	@Override
-	public void actualizarIdEquipo(String idElemento, int idEquipo) throws PersistenceException {
+	public void actualizarIdEquipo(String idElemento, Integer idEquipo) throws PersistenceException {
 		ElementoMapper.actualizarIdEquipo(idElemento, idEquipo);
 		
 	}

@@ -105,7 +105,7 @@
 			<div class="col-md-12 col-xs-12">
 				<h:form id="formElementos">
 					<p:fieldset id="tablaElementos" legend="Tabla de elementos">
-				        <p:dataTable id="elementos" var="elemento" value="#{adminBean.consultarElementos()}" rows="10" paginator="true"
+				        <p:dataTable id="elementosT" var="elemento" value="#{adminBean.consultarElementos()}" rows="10" paginator="true"
 									 paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}">
 
 				            <p:column headerText="Id">
@@ -139,7 +139,7 @@
 			<div class="col-md-12 col-xs-12">
 				<h:form id="formElementosDisponibles">
 					<p:fieldset id="tablaElementosDisponibles" legend="Tabla de elementos disponibles">
-				        <p:dataTable id="elementos" var="elemento" value="#{adminBean.consultarElementosDisponibles()}" rows="10" paginator="true"
+				        <p:dataTable id="elementosTabla" var="elemento" value="#{adminBean.consultarElementosDisponibles()}" rows="10" paginator="true"
 									 paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}">
 				 
 				            <p:column headerText="Id">
@@ -177,7 +177,7 @@
 														<hr/>
 														<p:outputLabel class="col-xs-12 col-md-6" value="Seleccionar Equipo"/>
 														<h:selectOneMenu style="" dynamic="true" class="col-xs-12 col-md-6" id="equipoAsociar#{elemento.id}" value="#{adminBean.equipo}">
-															<f:selectItems value="#{adminBean.getEquiposDisponiblesParaElemento(elemento)}"/>
+															<f:selectItems var="equipo" value="#{adminBean.getEquipos()}" itemValue="#{equipo.id}" itemLabel="#{equipo.id}"/>
 														</h:selectOneMenu>
 														<hr class="col-xs-11"/>
 														<h:commandButton  action="#{adminBean.enlazarElemento(elemento)}" class="btn btn-default btn-success btn-responsive col-xs-12 col-md-12" value="Enlazar" />

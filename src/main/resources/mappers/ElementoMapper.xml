@@ -27,7 +27,7 @@
 	</insert>
 
 	<select id = "consultarElementos" resultMap="ElementosResult">
-		SELECT * FROM elementos;
+		SELECT * FROM elementos ORDER BY idEquipo;
 	</select>
 
 	<select id="consultarElementosDisponibles" resultMap="ElementosResult">
@@ -52,7 +52,7 @@
 	
 	<update parameterType = 'map' id = 'desactivarElemento'>
 		UPDATE Elementos
-		SET Elementos.activo = false
+		SET activo = false
 		WHERE Elementos.id = #{id} AND Elementos.idEquipo IS NULL;
 	</update>
 

@@ -7,6 +7,14 @@ select * from equipos;
 
 select * from elementos;
 
+UPDATE Elementos SET activo = false   WHERE Elementos.id = 'sadf'  AND Elementos.idEquipo IS NULL;
+
+delete from elementos where id = 'moni';
+
+select *
+from equipos, elementos
+where equipos.id = elementos.idequipo;
+
 select equipos.id from equipos where equipos.id not in (select elementos.idequipo from elementos where elementos.tipo = 'MONITOR' and elementos.idequipo is not null group by elementos.idequipo);
 select * from equipos,elementos where equipos.id = elementos.idequipo;
 select elementos.idequipo from elementos where elementos.tipo = 'TORRE' and elementos.idequipo is not null group by elementos.idequipo;

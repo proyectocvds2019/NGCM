@@ -109,6 +109,8 @@ public class adminBean implements Serializable{
 			Elemento teclado = this.serviciosHistorial.consultarElemento(this.tecladoSeleccionado);
 			Elemento monitor = this.serviciosHistorial.consultarElemento(this.monitorSeleccionado);
 			Laboratorio laboratorio = this.serviciosHistorial.consultarLaboratorio(this.laboratorioSeleccionado);
+			if(this.laboratorioSeleccionado==-1) laboratorio = new Laboratorio();
+			System.out.println(laboratorio.getId());
 			ArrayList<Elemento> lista = new ArrayList<Elemento>();
 			lista.add(torre);lista.add(mouse);lista.add(teclado);lista.add(monitor);
 			Integer id = this.serviciosHistorial.proximoIdEquipo();
@@ -130,12 +132,29 @@ public class adminBean implements Serializable{
 		}
 	}
 
-	public void enlazarElemento(Elemento elemento){
+	public List<Equipo> consultarEquipos(){
+		try{
+			return this.serviciosHistorial.consultarEquipos();
+		}catch (ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+			return null;
+		}
+	}
 
+	public void enlazarElemento(Elemento elemento){
+		try{
+			this.serviciosHistorial.actualizarIdEquipoEnElemento(elemento.getId(),this.equipo);
+		}catch (ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+		}
 	}
 
 	public void eliminarElemento(Elemento elemento){
-
+		try{
+			this.serviciosHistorial.desactivarElemento(elemento.getId());
+		}catch (ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+		}
 	}
 
 	public void eliminarEquipo(Equipo equipo){
@@ -221,17 +240,33 @@ public class adminBean implements Serializable{
 	}
 
 	public void actualizarTecladoDeEquipo(Equipo equipo){
-
+		try{
+			this.serviciosHistorial.actualizarIdEquipoEnElemento(this.tecladoSeleccionado,equipo.getId());
+		}catch (ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+		}
 	}
 
 	public void actualizarMouseDeEquipo(Equipo equipo){
-
+		try{
+			this.serviciosHistorial.actualizarIdEquipoEnElemento(this.mouseSeleccionado, equipo.getId());
+		}catch (ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+		}
 	}
 	public void actualizarMonitorDeEquipo(Equipo equipo){
-
+		try{
+			this.serviciosHistorial.actualizarIdEquipoEnElemento(this.monitorSeleccionado,equipo.getId());
+		}catch (ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+		}
 	}
 	public void actualizarTorreDeEquipo(Equipo equipo){
-
+		try{
+			this.serviciosHistorial.actualizarIdEquipoEnElemento(this.torreSeleccionada,equipo.getId());
+		}catch (ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+		}
 	}
 	
 	public List<Elemento> monitoresDisponibles(){
