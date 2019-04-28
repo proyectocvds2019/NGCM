@@ -4,11 +4,12 @@ import java.util.List;
 
 import edu.eci.cvds.samples.entities.Elemento;
 import edu.eci.cvds.samples.entities.Equipo;
+import edu.eci.cvds.samples.entities.Laboratorio;
 import edu.eci.cvds.samples.entities.TipoElemento;
 
 public interface EquipoDAO {
 
-	public void registrarEquipo(Equipo equipo) throws PersistenceException;
+	public void registrarEquipo(Equipo equipo, Laboratorio laboratorio) throws PersistenceException;
 	
 	public Equipo consultarEquipo(int id) throws PersistenceException;
 	
@@ -16,7 +17,7 @@ public interface EquipoDAO {
 
 	public List<Equipo> consultarEquiposDisponiblesParaElemento(TipoElemento tipo) throws PersistenceException;
 
-	public Equipo consultarEquipoDeElemento(Elemento elemento) throws PersistenceException;
+	public Integer consultarEquipoDeElemento(Elemento elemento) throws PersistenceException;
 	
 	public Integer proximoIdEquipo() throws PersistenceException;
         

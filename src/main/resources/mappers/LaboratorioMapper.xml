@@ -13,5 +13,22 @@
         <collection property = 'equipos' ofType = 'Equipo' resultMap = 'edu.eci.cvds.sampleprj.dao.mybatis.mappers.EquipoMapper.EquiposResult'></collection>
     </resultMap>
 
+    <resultMap id="laboratorioResult" type="Laboratorio">
+        <id property="id" column="id"/>
+        <result property="nombre" column="nombre"/>
+        <result property="activo" column="activo"/>
+    </resultMap>
+
+    <select id="consultarLaboratorio" parameterType="map" resultMap="laboratorioResult">
+        SELECT *
+        FROM laboratorios
+    </select>
+
+    <select id="consultarLaboratorio2" parameterType="map" resultMap="laboratorioResult">
+        SELECT laboratorios.id, laboratorios.nombre, laboratorios.activo
+        FROM laboratorios, equipos
+        WHERE laboratorios.id = equipos.laboratorio AND equipos.id = #{equipo.id}
+    </select>
+
 
 </mapper>

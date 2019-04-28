@@ -63,9 +63,9 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 	}
 
 	@Override
-	public void registrarEquipo(Equipo equipo) throws ExcepcionServiciosHistorial {
+	public void registrarEquipo(Equipo equipo, Laboratorio laboratorio) throws ExcepcionServiciosHistorial {
 		try {
-			equipoDAO.registrarEquipo(equipo);
+			equipoDAO.registrarEquipo(equipo, laboratorio);
 			for(Elemento e: equipo.getElementos()) {
 				actualizarIdEquipoEnElemento(e.getId(), equipo.getId());
 			}
@@ -93,7 +93,7 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 	}
 
 	@Override
-	public  Equipo consultarEquipoDeElemento(Elemento elemento) throws  ExcepcionServiciosHistorial{
+	public  Integer consultarEquipoDeElemento(Elemento elemento) throws  ExcepcionServiciosHistorial{
 		try{
 			return equipoDAO.consultarEquipoDeElemento(elemento);
 		}catch (PersistenceException e){
@@ -153,6 +153,24 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 			return equipoDAO.proximoIdEquipo();
 		}catch(PersistenceException e) {
 			throw new ExcepcionServiciosHistorial("No se pudo consultar el proximo id de equipo.");
+		}
+	}
+
+	@Override
+	public Laboratorio consultarLaboratorio(Equipo equipo) throws ExcepcionServiciosHistorial{
+		try {
+			return laboratorioDAO.consultarLaboratorio(equipo);
+		}catch (PersistenceException e){
+			throw new ExcepcionServiciosHistorial("No se pudo consultar el laboratorio del equipo: "+equipo.getId());
+		}
+	}
+
+	@Override
+	public Elemento consultarElementoDelEquipo(TipoElemento tipo, Equipo equipo) throws ExcepcionServiciosHistorial{
+		try {
+			return elementoDAO.consultarElementoDelEquipo(tipo,equipo);
+		}catch (PersistenceException e){
+			throw new ExcepcionServiciosHistorial("No se pudo consulta el elemento de tipo "+tipo+" y equipo "+equipo.getId());
 		}
 	}
 

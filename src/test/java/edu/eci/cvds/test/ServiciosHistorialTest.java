@@ -4,12 +4,8 @@ import java.util.List;
 
 import edu.eci.cvds.samples.entities.Elemento;
 import edu.eci.cvds.samples.entities.Equipo;
+import edu.eci.cvds.samples.entities.Laboratorio;
 import org.junit.Test;
-
-
-import org.quicktheories.QuickTheory.*;
-
-
 
 import edu.eci.cvds.samples.services.ExcepcionServiciosHistorial;
 import edu.eci.cvds.samples.services.ServiciosHistorial;
@@ -42,12 +38,12 @@ public class ServiciosHistorialTest {
 	
 	@Test
 	public void deberiaConsultarEquipo() {
-		qt().forAll(EquipoGenerator.genEquipos(), LaboratorioGenerator.genLaboratorio()).check((eq,lab) ->{
+		qt().forAll(EquipoGenerator.genEquipos()).check((eq) ->{
 			try {
-				eq.getLaboratorio().setId(null);
 				Integer id = this.serviciosHistorial.proximoIdEquipo();
 				eq.setId(id);
-				this.serviciosHistorial.registrarEquipo(eq);
+				Laboratorio laboratorio = new Laboratorio();
+				this.serviciosHistorial.registrarEquipo(eq,laboratorio);
 				Equipo e = this.serviciosHistorial.consultarEquipo(eq.getId());
 				return true;
 			} catch(ExcepcionServiciosHistorial e) {
@@ -61,12 +57,12 @@ public class ServiciosHistorialTest {
 
 	@Test
 	public void deberiaRegistrarEquipo() {
-		qt().forAll(EquipoGenerator.genEquipos()).check(eq->{
+		qt().forAll(EquipoGenerator.genEquipos(), LaboratorioGenerator.genLaboratorio()).check((eq,lab)->{
 			try {
-				eq.getLaboratorio().setId(null);
 				Integer id = this.serviciosHistorial.proximoIdEquipo();
 				eq.setId(id);
-				this.serviciosHistorial.registrarEquipo(eq);
+				Laboratorio laboratorio = new Laboratorio();
+				this.serviciosHistorial.registrarEquipo(eq, laboratorio);
 				return true;
 			}  catch(ExcepcionServiciosHistorial e) {
 				e.printStackTrace();

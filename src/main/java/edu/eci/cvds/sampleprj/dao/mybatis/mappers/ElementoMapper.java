@@ -2,6 +2,7 @@ package edu.eci.cvds.sampleprj.dao.mybatis.mappers;
 
 import java.util.List;
 
+import edu.eci.cvds.samples.entities.Equipo;
 import edu.eci.cvds.samples.entities.TipoElemento;
 import org.apache.ibatis.annotations.Param;
 import edu.eci.cvds.samples.entities.Elemento;
@@ -27,4 +28,6 @@ public interface ElementoMapper {
 	public void actualizarIdEquipo(@Param("idEl") String idEl, @Param("idEq") int idEq);
 	
 	public void desactivarElemento(@Param("id") String id);
+
+	public Elemento consultarElementoDelEquipo(@Param("tipoElemento") TipoElemento tipo, @Param("equipo")Equipo equipo);
 }

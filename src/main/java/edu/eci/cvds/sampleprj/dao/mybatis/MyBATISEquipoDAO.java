@@ -8,6 +8,7 @@ import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.EquipoMapper;
 import edu.eci.cvds.samples.entities.Elemento;
 import edu.eci.cvds.samples.entities.Equipo;
+import edu.eci.cvds.samples.entities.Laboratorio;
 import edu.eci.cvds.samples.entities.TipoElemento;
 
 public class MyBATISEquipoDAO implements EquipoDAO{
@@ -15,8 +16,8 @@ public class MyBATISEquipoDAO implements EquipoDAO{
 	@Inject
 	private EquipoMapper equipoMapper;
 
-	public void registrarEquipo(Equipo equipo) throws PersistenceException {
-		equipoMapper.registrarEquipo(equipo);
+	public void registrarEquipo(Equipo equipo, Laboratorio laboratorio) throws PersistenceException {
+		equipoMapper.registrarEquipo(equipo, laboratorio);
 		
 	}
 
@@ -32,7 +33,7 @@ public class MyBATISEquipoDAO implements EquipoDAO{
 		return equipoMapper.consultarEquiposDisponiblesParaElemento(tipo);
 	}
 
-	public Equipo consultarEquipoDeElemento(Elemento elemento) throws PersistenceException{
+	public Integer consultarEquipoDeElemento(Elemento elemento) throws PersistenceException{
 		return equipoMapper.consultarEquipoDeElemento(elemento);
 	}
 

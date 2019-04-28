@@ -9,16 +9,16 @@
 	<resultMap type = 'Equipo' id = 'EquiposResult'>
 		<id property = 'id' column = 'id'/>
 		<result property="activo" column="activo"/>
-		<collection property = 'elementos' ofType = 'Elemento' resultMap = 'edu.eci.cvds.sampleprj.dao.mybatis.mappers.ElementoMapper.ElementosResult'></collection>
+		<collection property = 'elementos' ofType = 'Elemento' resultMap = 'edu.eci.cvds.sampleprj.dao.mybatis.mappers.ElementoMapper.ElementosResult2'></collection>
 	</resultMap>
 
 
 	
 	<select id="consultarEquipos" resultMap="EquiposResult">
-		SELECT equipos.id, equipos.activo, equipos.laboratorio, laboratorios.nombre as laboratorioNombre,
-		laboratorios.activo as laboratorioActivo
-		FROM Equipos,laboratorios
-		WHERE equipos.laboratorio = laboratorios.id;
+		select equipos.id as id, equipos.activo as activo, elementos.id as idElemento, elementos.tipo as tipoElemento,
+		elementos.nombre as nombreElemento, elementos.activo as activoElemento
+		from equipos, elementos
+		where equipos.id = elementos.idEquipo;
 	</select>
 	
 	<select id ="consultarEquipo" resultMap="EquiposResult">
@@ -29,7 +29,7 @@
 	
 	<insert parameterType = "map" id = "registrarEquipo">
 		INSERT INTO equipos (id, activo, laboratorio)
-		VALUES (#{equipo.id},#{equipo.activo},#{equipo.laboratorio.id});
+		VALUES (#{equipo.id},#{equipo.activo},#{laboratorio.id});
 	</insert>
 
 	<select parameterType="map" id="consultarEquiposDisponiblesParaElemento" resultMap="EquiposResult">
@@ -38,12 +38,10 @@
 		where equipos.id not in (select elementos.idequipo from elementos where elementos.tipo = #{tipo} and elementos.idequipo is not null group by elementos.idequipo);
 	</select>
 
-	<select id="consultarEquipoDeElemento" parameterType="map" resultMap="EquiposResult">
-		SELECT equipos.id, equipos.activo, equipos.laboratorio, laboratorios.nombre as laboratorioNombre,
-		laboratorios.activo as laboratorioActivo
-		FROM Equipos, laboratorios
-		WHERE (equipos.id = (select elementos.idEquipo from elementos where elementos.id = #{elemento.id})) AND
-		equipos.laboratorio = laboratorios.id;
+	<select id="consultarEquipoDeElemento" parameterType="map" resultType="Integer">
+		select elementos.idEquipo
+		from equipos, elementos
+		where equipos.id = elementos.idEquipo and elementos.id = #{elemento.id};
 	</select>
 	
 	<select id = "proximoIdEquipo" resultType = "Integer">

@@ -3,6 +3,7 @@ package edu.eci.cvds.sampleprj.dao;
 import java.util.List;
 
 import edu.eci.cvds.samples.entities.Elemento;
+import edu.eci.cvds.samples.entities.Equipo;
 import edu.eci.cvds.samples.entities.TipoElemento;
 
 public interface ElementoDAO {
@@ -20,4 +21,6 @@ public interface ElementoDAO {
 	public void actualizarIdEquipo(String idElemento, int idEquipo) throws PersistenceException;
 	
     public void desactivarElemento(String id) throws PersistenceException;
+
+    public Elemento consultarElementoDelEquipo(TipoElemento tipo, Equipo equipo) throws PersistenceException;
 }

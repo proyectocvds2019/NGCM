@@ -41,6 +41,10 @@ public class adminBean implements Serializable{
 	private String mouseSeleccionado;
 	private String torreSeleccionada;
 	private String tecladoSeleccionado;
+	private static final TipoElemento teclado = TipoElemento.TECLADO;
+	private static final TipoElemento mouse = TipoElemento.MOUSE;
+	private static final TipoElemento monitor = TipoElemento.MONITOR;
+	private static final TipoElemento torre = TipoElemento.TORRE;
     @Inject
     private ServiciosHistorial serviciosHistorial;
 	
@@ -91,9 +95,7 @@ public class adminBean implements Serializable{
 
 	public Integer consultarEquipoDeElemento(Elemento elemento){
 		try{
-			Equipo equi = this.serviciosHistorial.consultarEquipoDeElemento(elemento);
-			if(equi == null) return null;
-			else return equi.getId();
+			return this.serviciosHistorial.consultarEquipoDeElemento(elemento);
 		}catch (ExcepcionServiciosHistorial e){
 			e.printStackTrace();
 			return null;
@@ -106,20 +108,25 @@ public class adminBean implements Serializable{
 			Elemento mouse = this.serviciosHistorial.consultarElemento(this.mouseSeleccionado);
 			Elemento teclado = this.serviciosHistorial.consultarElemento(this.tecladoSeleccionado);
 			Elemento monitor = this.serviciosHistorial.consultarElemento(this.monitorSeleccionado);
+			Laboratorio laboratorio = this.serviciosHistorial.consultarLaboratorio(this.laboratorioSeleccionado);
 			ArrayList<Elemento> lista = new ArrayList<Elemento>();
 			lista.add(torre);lista.add(mouse);lista.add(teclado);lista.add(monitor);
-			Laboratorio laboratorio;
-			if(laboratorioSeleccionado == -1){
-				laboratorio = new Laboratorio();
-				laboratorio.setId(null);
-			}else{
-				laboratorio = this.serviciosHistorial.consultarLaboratorio(laboratorioSeleccionado);
-			}
 			Integer id = this.serviciosHistorial.proximoIdEquipo();
-			Equipo equipo = new Equipo(id,lista,true,laboratorio);
-			this.serviciosHistorial.registrarEquipo(equipo);
+			Equipo equipo = new Equipo(id,lista,true);
+			this.serviciosHistorial.registrarEquipo(equipo,laboratorio);
+			this.mensajeCorrecto();
 		}catch (ExcepcionServiciosHistorial e){
 			e.printStackTrace();
+			this.mensajeError();
+		}
+	}
+
+	public Laboratorio consultarLaboratorio(Equipo equipo){
+		try{
+			return this.serviciosHistorial.consultarLaboratorio(equipo);
+		}catch (ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+			return null;
 		}
 	}
 
@@ -136,18 +143,24 @@ public class adminBean implements Serializable{
 	}
 
 	public String consultarElementoDelEquipo(TipoElemento tipo, Equipo equipo){
-		return null;
+		try{
+			Elemento el = this.serviciosHistorial.consultarElementoDelEquipo(tipo,equipo);
+			return el.getId();
+		}catch ( ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 
 	
 	
 	public void mensajeCorrecto() {
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro Elemento registrado satisfactoriamente", "Elemento registrado satisfactoriamente"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrado satisfactoriamente", "Elemento registrado satisfactoriamente"));
 	}
 	
 	public void mensajeError() {
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error! No se pudo registrar el elemento", "No se pudo registrar el elemento"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error! No se pudo registrar", "No se pudo registrar el elemento"));
 	}
 
 	public TipoElemento[] getTipoElementos() {
@@ -334,6 +347,19 @@ public class adminBean implements Serializable{
 
 	public void setNombreElemento(String nombreElemento) {
 		this.nombreElemento = nombreElemento;
+	}
+
+	public TipoElemento getTeclado(){
+		return this.teclado;
+	}
+	public TipoElemento getMouse(){
+		return this.mouse;
+	}
+	public TipoElemento getMonitor(){
+		return this.monitor;
+	}
+	public TipoElemento getTorre(){
+		return this.torre;
 	}
 	
 

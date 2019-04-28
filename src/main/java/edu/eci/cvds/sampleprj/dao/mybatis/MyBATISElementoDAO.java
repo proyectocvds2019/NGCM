@@ -7,6 +7,7 @@ import edu.eci.cvds.sampleprj.dao.ElementoDAO;
 import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.samples.entities.Elemento;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ElementoMapper;
+import edu.eci.cvds.samples.entities.Equipo;
 import edu.eci.cvds.samples.entities.TipoElemento;
 
 public class MyBATISElementoDAO implements ElementoDAO{
@@ -45,10 +46,15 @@ public class MyBATISElementoDAO implements ElementoDAO{
 		
 	}
 	
-        @Override
-        public void desactivarElemento(String id) throws PersistenceException{
-                ElementoMapper.desactivarElemento(id);        
-        }
+	@Override
+	public void desactivarElemento(String id) throws PersistenceException{
+			ElementoMapper.desactivarElemento(id);
+	}
+
+	@Override
+	public Elemento consultarElementoDelEquipo(TipoElemento tipo, Equipo equipo){
+		return ElementoMapper.consultarElementoDelEquipo(tipo,equipo);
+	}
 	
 
 }

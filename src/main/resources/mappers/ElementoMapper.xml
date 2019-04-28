@@ -55,5 +55,11 @@
 		SET Elementos.activo = false
 		WHERE Elementos.id = #{id} AND Elementos.idEquipo IS NULL;
 	</update>
+
+	<select id="consultarElementoDelEquipo" parameterType="map" resultMap="ElementosResult">
+		SELECT elementos.id, elementos.tipo, elementos.nombre, elementos.activo
+		FROM elementos,equipos
+		WHERE elementos.idEquipo = equipos.id AND elementos.tipo = #{tipoElemento} AND equipos.id = #{equipo.id};
+	</select>
 	
 </mapper>

@@ -21,9 +21,9 @@ public interface ServiciosHistorial {
 
 	public abstract List<Equipo> consultarEquiposDisponiblesParaElemento(TipoElemento tipo) throws ExcepcionServiciosHistorial;
 	
-	public abstract void registrarEquipo(Equipo equipo) throws ExcepcionServiciosHistorial;
+	public abstract void registrarEquipo(Equipo equipo, Laboratorio laboratorio) throws ExcepcionServiciosHistorial;
 
-	public abstract Equipo consultarEquipoDeElemento(Elemento elemento) throws ExcepcionServiciosHistorial;
+	public abstract Integer consultarEquipoDeElemento(Elemento elemento) throws ExcepcionServiciosHistorial;
 
 	public abstract Elemento consultarElemento(String id) throws ExcepcionServiciosHistorial;
 
@@ -36,5 +36,9 @@ public interface ServiciosHistorial {
 	public abstract void desactivarElemento(String id) throws ExcepcionServiciosHistorial;
 	
 	public abstract Integer proximoIdEquipo() throws ExcepcionServiciosHistorial;
+
+	public abstract Laboratorio consultarLaboratorio(Equipo equipo) throws ExcepcionServiciosHistorial;
+
+	public abstract  Elemento consultarElementoDelEquipo(TipoElemento tipo, Equipo equipo) throws ExcepcionServiciosHistorial;
 	
 }

@@ -246,7 +246,7 @@
 		<div class="container">
 			<h:form id="formEquipos">
 				<p:fieldset id="tablaEquipos" legend="Tabla de equipos">
-					<p:dataTable id="equipos" var="equipo" value="#{adminBean.getEquipos()}" rows="10" paginator="true"
+					<p:dataTable id="equiposTabla" var="equipo" value="#{adminBean.getEquipos()}" rows="10" paginator="true"
 								 paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}">
 
 						<p:column headerText="Id">
@@ -256,7 +256,7 @@
 							<h:outputText value="#{equipo.activo}" />
 						</p:column>
 						<p:column headerText="Laboratorio">
-							<h:outputText value="#{equipo.laboratorio.nombre}" />
+							<h:outputText value="#{adminBean.consultarLaboratorio(equipo).id}" />
 							<button type="button" data-toggle="modal" data-target="#cambiarLaboratorioModal#{equipo.id}" class="btn btn-default btn-info btn-block col-xs-12">Cambiar</button>
 							<div class="modal fade" id="cambiarLaboratorioModal#{equipo.id}" role="dialog">
 								<div class="modal-dialog">
@@ -287,7 +287,7 @@
 						</p:column>
 
 						<p:column headerText="Teclado">
-							<h:outputText value="#{adminBean.consultarElementoDelEquipo(TipoElemento.TECLADO,equipo)}"/>
+							<h:outputText value="#{adminBean.consultarElementoDelEquipo(adminBean.teclado,equipo)}"/>
 							<button data-toggle="modal" data-target="#cambiarTeclado#{equipo.id}" type="button" class="btn btn-default btn-info btn-block col-xs-12">Cambiar</button>
 							<div class="modal fade" id="cambiarTeclado#{equipo.id}" role="dialog">
 								<div class="modal-dialog">
@@ -301,7 +301,7 @@
                                             <div class="form-group">
                                                 <h:outputLabel class="col-xs-6" for="cambiarTeclado" value="Seleccione el nuevo teclado:"/>
                                                 <h:selectOneMenu class="col-xs-6" id="cambiarTeclado" value="#{adminBean.tecladoSeleccionado}">
-                                                    <f:selectItems var="teclado" value="#{adminBean.consultarElementosDisponibles(TipoElemento.TECLADO)}" itemLabel="#{teclado.id}" itemValue="#{teclado.id}"/>
+                                                    <f:selectItems var="teclado" value="#{adminBean.consultarElementosDisponibles(adminBean.teclado)}" itemLabel="#{teclado.id}" itemValue="#{teclado.id}"/>
                                                 </h:selectOneMenu>
                                             </div>
                                             <h:commandButton value="Cambiar" class="btn btn-default btn-success btn-block" action="#{adminBean.actualizarTecladoDeEquipo(equipo)}"/>
@@ -315,7 +315,7 @@
 							</div>
 						</p:column>
 						<p:column headerText="Torre">
-							<h:outputText value="#{adminBean.consultarElementoDelEquipo(TipoElemento.TORRE,equipo)}"/>
+							<h:outputText value="#{adminBean.consultarElementoDelEquipo(adminBean.torre,equipo)}"/>
 							<button data-toggle="modal" data-target="#cambiarTorre#{equipo.id}" type="button" class="btn btn-default btn-info btn-block col-xs-12">Cambiar</button>
 							<div class="modal fade" id="cambiarTorre#{equipo.id}" role="dialog">
 								<div class="modal-dialog">
@@ -330,7 +330,7 @@
                                                 <div class="form-group">
                                                     <h:outputLabel class="col-xs-6" for="cambiarTorre" value="Seleccione el nueva Torre:"/>
                                                     <h:selectOneMenu class="col-xs-6" id="cambiarTorre" value="#{adminBean.torreSeleccionada}">
-                                                        <f:selectItems var="torre" value="#{adminBean.consultarElementosDisponibles(TipoElemento.TORRE)}" itemLabel="#{torre.id}" itemValue="#{torre.id}"/>
+                                                        <f:selectItems var="torre" value="#{adminBean.consultarElementosDisponibles(adminBean.torre)}" itemLabel="#{torre.id}" itemValue="#{torre.id}"/>
                                                     </h:selectOneMenu>
                                                 </div>
                                                 <h:commandButton value="Cambiar" class="btn btn-default btn-success btn-block" action="#{adminBean.actualizarTorreDeEquipo(equipo)}"/>
@@ -345,7 +345,7 @@
 							</div>
 						</p:column>
 						<p:column headerText="Mouse">
-							<h:outputText value="#{adminBean.consultarElementoDelEquipo(TipoElemento.MOUSE,equipo)}"/>
+							<h:outputText value="#{adminBean.consultarElementoDelEquipo(adminBean.mouse,equipo)}"/>
 							<button data-toggle="modal" data-target="#cambiarMouse#{equipo.id}" type="button" class="btn btn-default btn-info col-xs-12">Cambiar</button>
 							<div class="modal fade" id="cambiarMouse#{equipo.id}" role="dialog">
 								<div class="modal-dialog">
@@ -360,7 +360,7 @@
                                                 <div class="form-group">
                                                     <h:outputLabel class="col-xs-6" for="cambiarMouse" value="Seleccione el nuevo mouse:"/>
                                                     <h:selectOneMenu class="col-xs-6" id="cambiarMouse" value="#{adminBean.mouseSeleccionado}">
-                                                        <f:selectItems var="mouse" value="#{adminBean.consultarElementosDisponibles(TipoElemento.MOUSE)}" itemLabel="#{mouse.id}" itemValue="#{mouse.id}"/>
+                                                        <f:selectItems var="mouse" value="#{adminBean.consultarElementosDisponibles(adminBean.mouse)}" itemLabel="#{mouse.id}" itemValue="#{mouse.id}"/>
                                                     </h:selectOneMenu>
                                                 </div>
                                                 <h:commandButton value="Cambiar" class="btn btn-default btn-success btn-block" action="#{adminBean.actualizarMouseDeEquipo(equipo)}"/>
@@ -375,7 +375,7 @@
 							</div>
 						</p:column>
 						<p:column headerText="Monitor">
-							<h:outputText class="col-xs-12" value="#{adminBean.consultarElementoDelEquipo(TipoElemento.MONITOR,equipo)}"/>
+							<h:outputText class="col-xs-12" value="#{adminBean.consultarElementoDelEquipo(adminBean.monitor,equipo)}"/>
 							<button data-toggle="modal" data-target="#cambiarMonitor#{equipo.id}" type="button" class="btn btn-default btn-info btn-block col-xs-12">Cambiar</button>
 							<div class="modal fade" id="cambiarMonitor#{equipo.id}" role="dialog">
 								<div class="modal-dialog">
@@ -390,7 +390,7 @@
                                                 <div class="form-group">
                                                     <h:outputLabel class="col-xs-6" for="cambiarMonitor" value="Seleccione el nuevo Monitor:"/>
                                                     <h:selectOneMenu class="col-xs-6" id="cambiarMonitor" value="#{adminBean.monitorSeleccionado}">
-                                                        <f:selectItems var="monitor" value="#{adminBean.consultarElementosDisponibles(TipoElemento.MONITOR)}" itemLabel="#{monitor.id}" itemValue="#{monitor.id}"/>
+                                                        <f:selectItems var="monitor" value="#{adminBean.consultarElementosDisponibles(adminBean.monitor)}" itemLabel="#{monitor.id}" itemValue="#{monitor.id}"/>
                                                     </h:selectOneMenu>
                                                 </div>
                                                 <h:commandButton value="Cambiar" class="btn btn-default btn-success btn-block" action="#{adminBean.actualizarMonitorDeEquipo(equipo)}"/>
