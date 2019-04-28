@@ -24,6 +24,7 @@ import edu.eci.cvds.samples.services.ServiciosHistorial;
 import edu.eci.cvds.samples.services.ServiciosHistorialFactory;
 
 
+
 @ManagedBean(name = "adminBean")
 @ViewScoped
 public class adminBean implements Serializable{
@@ -126,15 +127,6 @@ public class adminBean implements Serializable{
 	public Laboratorio consultarLaboratorio(Equipo equipo){
 		try{
 			return this.serviciosHistorial.consultarLaboratorio(equipo);
-		}catch (ExcepcionServiciosHistorial e){
-			e.printStackTrace();
-			return null;
-		}
-	}
-
-	public List<Equipo> consultarEquipos(){
-		try{
-			return this.serviciosHistorial.consultarEquipos();
 		}catch (ExcepcionServiciosHistorial e){
 			e.printStackTrace();
 			return null;
@@ -304,6 +296,15 @@ public class adminBean implements Serializable{
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	public void esportarExcel(){
+		try{
+			this.serviciosHistorial.exportarExcelEquipos();
+		}catch (ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+		}
+
 	}
 	
 	

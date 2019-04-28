@@ -1,6 +1,6 @@
 package edu.eci.cvds.samples.services.impl;
 
-import java.util.ArrayList;
+import java.io.OutputStream;
 import java.util.List;
 
 import com.google.inject.Inject;
@@ -16,6 +16,13 @@ import edu.eci.cvds.samples.entities.Laboratorio;
 import edu.eci.cvds.samples.entities.TipoElemento;
 import edu.eci.cvds.samples.services.ExcepcionServiciosHistorial;
 import edu.eci.cvds.samples.services.ServiciosHistorial;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletResponse;
 
 @Singleton
 public class ServiciosHistorialImpl implements ServiciosHistorial{
@@ -184,6 +191,86 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 		}catch (PersistenceException e){
 			throw new ExcepcionServiciosHistorial("No se pudo consulta el elemento de tipo "+tipo+" y equipo "+equipo.getId());
 		}
+	}
+
+	@Override
+	public void exportarExcelEquipos() throws ExcepcionServiciosHistorial{
+		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+		response.addHeader("Content-disposition","attachment; filename=tabla.xls");
+		response.setContentType("application/vnd.ms-excel");
+		try{
+			HSSFWorkbook wb = new HSSFWorkbook(); // crea libro de excel
+			HSSFSheet sheet = wb.createSheet("Equipos"); // crea hoja
+			List<Equipo> equipos = this.consultarEquipos();
+			int rownum = 0;
+			int column = 0;
+			HSSFRow row = sheet.createRow(rownum);
+			HSSFCell celda = row.createCell(column);
+			celda.setCellValue("ID");
+			column++;
+			celda = row.createCell(column);
+			celda.setCellValue("ACTIVO");
+			column++;
+			celda = row.createCell(column);
+			celda.setCellValue("LABORATORIO");
+			column++;
+			celda = row.createCell(column);
+			celda.setCellValue("TECLADO");
+			column++;
+			celda = row.createCell(column);
+			celda.setCellValue("TORRE");
+			column++;
+			celda = row.createCell(column);
+			celda.setCellValue("MOUSE");
+			column++;
+			celda = row.createCell(column);
+			celda.setCellValue("MONITOR");
+			column++;
+			rownum = 1;
+			for(Equipo e: equipos){
+				column = 0;
+				row = sheet.createRow(rownum);
+				celda = row.createCell(column);
+				celda.setCellValue(e.getId());
+				column++;
+				celda = row.createCell(column);
+				celda.setCellValue(e.getActivo());
+				column++;
+				celda = row.createCell(column);
+				Laboratorio lab = this.consultarLaboratorio(e);
+				if(lab == null){
+					celda.setCellValue("");
+				}else{
+					celda.setCellValue(lab.getId());
+				}
+				column++;
+				celda = row.createCell(column);
+				celda.setCellValue(this.consultarElementoDelEquipo(TipoElemento.TECLADO,e).getNombre());
+				column++;
+				celda = row.createCell(column);
+				celda.setCellValue(this.consultarElementoDelEquipo(TipoElemento.TORRE,e).getNombre());
+				column++;
+				celda = row.createCell(column);
+				celda.setCellValue(this.consultarElementoDelEquipo(TipoElemento.MOUSE,e).getNombre());
+				column++;
+				celda = row.createCell(column);
+				celda.setCellValue(this.consultarElementoDelEquipo(TipoElemento.MONITOR,e).getNombre());
+				column++;
+				rownum++;
+			}
+			OutputStream out = response.getOutputStream();
+			wb.write(out);
+		}catch (ExcepcionServiciosHistorial e){
+			throw new ExcepcionServiciosHistorial("No se pudo exportar el excel de los equipos");
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		try {
+			response.getOutputStream().flush();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		FacesContext.getCurrentInstance().responseComplete();
 	}
 
 

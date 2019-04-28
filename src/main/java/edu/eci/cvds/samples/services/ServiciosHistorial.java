@@ -40,5 +40,7 @@ public interface ServiciosHistorial {
 	public abstract Laboratorio consultarLaboratorio(Equipo equipo) throws ExcepcionServiciosHistorial;
 
 	public abstract  Elemento consultarElementoDelEquipo(TipoElemento tipo, Equipo equipo) throws ExcepcionServiciosHistorial;
+
+	public abstract void exportarExcelEquipos() throws ExcepcionServiciosHistorial;
 	
 }
