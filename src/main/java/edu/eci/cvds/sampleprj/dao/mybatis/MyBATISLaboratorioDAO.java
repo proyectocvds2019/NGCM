@@ -7,11 +7,10 @@ import edu.eci.cvds.samples.entities.Equipo;
 import edu.eci.cvds.samples.entities.Laboratorio;
 
 import javax.inject.Inject;
-import javax.persistence.criteria.CriteriaBuilder;
 
 public class MyBATISLaboratorioDAO implements LaboratorioDAO {
     @Inject
-    LaboratorioMapper laboratorioMapper;
+    private LaboratorioMapper laboratorioMapper;
 
     public Laboratorio consultarLaboratorio(Integer id) throws PersistenceException{
         return laboratorioMapper.consultarLaboratorio(id);
