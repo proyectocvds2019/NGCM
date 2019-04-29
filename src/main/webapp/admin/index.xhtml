@@ -126,8 +126,30 @@
 
 							<p:column headerText="Eliminar">
 								<center>
-									<h:commandButton action="#{adminBean.eliminarElemento(elemento)}" class="btn btn-default btn-danger" value="ELIMINAR"/>
+									<button type="button" data-toggle="modal" data-target="#modalConfirmacion#{elemento.id}" class="btn btn-default btn-danger">
+										Eliminar
+									</button>
 								</center>
+								<div class="modal fade" id="modalConfirmacion#{elemento.id}" role="dialog">
+									<div class="modal-dialog">
+										<!-- Modal content-->
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal"></button>
+												<h4 class="modal-title">Confirmación</h4>
+											</div>
+											<div class="modal-body">
+												<p>¿Quiere dar de baja el elemento #{elemento.id}?</p>
+												<h:commandButton action="#{adminBean.eliminarElemento(elemento)}" styleClass="btn btn-default btn-success" value="SI"/>
+												<button data-dismiss="modal" type="button" class="btn btn-default btn-danger">NO</button>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+											</div>
+										</div>
+
+									</div>
+								</div>
 							</p:column>
 				        </p:dataTable>
 				    </p:fieldset>
