@@ -5,8 +5,6 @@ import org.quicktheories.core.Gen;
 import static org.quicktheories.generators.SourceDSL.integers;
 import static org.quicktheories.generators.SourceDSL.strings;
 
-import edu.eci.cvds.samples.entities.Equipo;
-
 public class LaboratorioGenerator {
 
     public static Gen<Laboratorio> genLaboratorio(){

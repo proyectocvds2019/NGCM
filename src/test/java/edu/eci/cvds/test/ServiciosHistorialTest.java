@@ -2,7 +2,6 @@ package edu.eci.cvds.test;
 
 import java.util.List;
 
-import edu.eci.cvds.samples.entities.Elemento;
 import edu.eci.cvds.samples.entities.Equipo;
 import edu.eci.cvds.samples.entities.Laboratorio;
 import org.junit.Test;

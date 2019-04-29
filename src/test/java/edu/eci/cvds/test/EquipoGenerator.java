@@ -1,9 +1,7 @@
 package edu.eci.cvds.test;
 
-import edu.eci.cvds.samples.entities.Laboratorio;
 import org.quicktheories.core.Gen;
 import static org.quicktheories.generators.SourceDSL.integers;
-
 import edu.eci.cvds.samples.entities.Equipo;
 
 public class EquipoGenerator {

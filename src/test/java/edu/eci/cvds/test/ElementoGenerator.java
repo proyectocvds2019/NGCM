@@ -3,9 +3,6 @@ package edu.eci.cvds.test;
 import org.quicktheories.core.Gen;
 import org.quicktheories.generators.Generate;
 import static org.quicktheories.generators.SourceDSL.strings;
-
-import static org.quicktheories.generators.SourceDSL.integers;
-
 import edu.eci.cvds.samples.entities.Elemento;
 import edu.eci.cvds.samples.entities.TipoElemento;
 
