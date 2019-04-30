@@ -105,9 +105,9 @@
 			<div class="col-md-12 col-xs-12">
 				<h:form>
 					<p:fieldset id="tablaElementos" legend="Tabla de elementos">
-				        <p:dataTable selection="#{adminBean.listaElementosSeleccionados}" id="elementosT" var="elemento" value="#{adminBean.listaElementos}" rows="10" paginator="true"
+				        <p:dataTable rowKey="#{elemento.id}" selection="#{adminBean.listaElementosSeleccionados}" id="elementosT" var="elemento" value="#{adminBean.listaElementos}" rows="10" paginator="true"
 									 paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}" sortBy="#{elemento.id}">
-							<p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+							<p:column selectionMode="multiple" style="text-align:center"/>
 
 				            <p:column sortBy="#{elemento.id}" filterBy="#{elemento.id}" headerText="Id">
 				                <h:outputText value="#{elemento.id}" />
@@ -127,15 +127,58 @@
 
 							<p:column headerText="Novedades">
 								<center>
-									<button type="button" data-toggle="modal" data-target="#modalConfirmacion#{elemento.id}" class="btn btn-default btn-info">
+									<button type="button" data-toggle="modal" data-target="#novedadElemento#{elemento.id}" class="btn btn-default btn-info">
 										VER
 									</button>
 								</center>
+								<!-- Modal -->
+								<div class="modal fade" id="novedadElemento#{equipo.id}" role="dialog">
+									<div class="modal-dialog">
+
+										<!-- Modal content-->
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">X</button>
+												<h4 class="modal-title">Confirmación</h4>
+											</div>
+											<div class="modal-body">
+
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+											</div>
+										</div>
+
+									</div>
+								</div>
 							</p:column>
 							<f:facet name="footer">
-								<h:commandButton process="elementosT" type="button" data-toggle="modal" data-target="#modalConfirmacion#{elemento.id}" styleClass="btn btn-default btn-danger">
-									Eliminar
-								</h:commandButton>
+								<button type="button" data-toggle="modal" data-target="#modalConfirmacion" class="btn btn-default btn-danger">
+										Eliminar
+								</button>
+
+								<div class="modal fade" id="modalConfirmacion" role="dialog">
+									<div class="modal-dialog">
+
+										<!-- Modal content-->
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">X</button>
+												<h4 class="modal-title">Confirmación</h4>
+											</div>
+											<div class="modal-body">
+												<p>¿Quiere dar de baja los elementos?.</p>
+												<h:commandButton action="#{adminBean.eliminarElementos()}" process="elementosT" value="SI" styleClass="btn btn-default btn-success"/>
+												<button class="btn btn-default btn-danger" type="button" data-dismiss="modal">NO</button>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+											</div>
+										</div>
+
+									</div>
+								</div>
+
 							</f:facet>
 				        </p:dataTable>
 				    </p:fieldset>
@@ -254,9 +297,9 @@
 		<div class="container">
 			<h:form id="formEquipos">
 				<p:fieldset id="tablaEquipos" legend="Tabla de equipos">
-					<p:dataTable sortBy="#{equipo.id}" id="equiposTabla" var="equipo" value="#{adminBean.listaEquipos}" rows="10" paginator="true"
+					<p:dataTable rowKey="#{equipo.id}" selection="#{adminBean.listaEquiposSeleccionados}" sortBy="#{equipo.id}" id="equiposTabla" var="equipo" value="#{adminBean.listaEquipos}" rows="10" paginator="true"
 								 paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}">
-
+						<p:column selectionMode="multiple" style="text-align: center" />
 						<p:column sortBy="#{equipo.id}" filterBy="#{equipo.id}" headerText="Id">
 							<h:outputText value="#{equipo.id}"/>
 						</p:column>
@@ -416,13 +459,13 @@
 							</div>
 						</p:column>
 
-						<p:column headerText="Eliminar">
+						<p:column headerText="Novedades">
 							<center>
-								<button style="padding:5px;" type="button" data-toggle="modal" data-target="#eliminarEquipo#{equipo.id}" class="btn btn-block btn-default btn-danger col-xs-12">ELIMINAR</button>
+								<button style="padding:5px;" type="button" data-toggle="modal" data-target="#novedadEquipo#{equipo.id}" class="btn btn-block btn-default btn-info col-xs-12">VER</button>
 							</center>
 
 							<!-- Modal -->
-							<div class="modal fade" id="eliminarEquipo#{equipo.id}" role="dialog">
+							<div class="modal fade" id="novedadEquipo#{equipo.id}" role="dialog">
 								<div class="modal-dialog">
 
 									<!-- Modal content-->
@@ -432,12 +475,10 @@
 											<h4 class="modal-title">Confirmación</h4>
 										</div>
 										<div class="modal-body">
-											<p>¿Quiere dar de baja el equipo Sistemas#{equipo.id}?.</p>
-											<h:commandButton action="#{adminBean.eliminarEquipo(equipo)}" class="btn btn-default btn-success" value="SI"/>
-											<button type="button" class="btn btn-default btn-danger" data-dismiss="modal">NO</button>
+											
 										</div>
 										<div class="modal-footer">
-											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+											<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 										</div>
 									</div>
 
@@ -446,6 +487,31 @@
 
 
 						</p:column>
+						<f:facet name="footer">
+							<button class="btn btn-default btn-danger" type="button" data-target="#eliminarEquipos" data-toggle="modal">
+								Eliminar
+							</button>
+							<div class="modal fade" id="eliminarEquipos" role="dialog">
+								<div class="modal-dialog">
+
+									<!-- Modal content-->
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">X</button>
+											<h4 class="modal-title">Confirmación</h4>
+										</div>
+										<div class="modal-body">
+											<p>¿Quiere eliminar los equipos?</p>
+											<h:commandButton value="SI" action="#{adminBean.eliminarEquipos()}" process="tablaEquipos"/>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</f:facet>
 					</p:dataTable>
 				</p:fieldset>
 			</h:form>

@@ -5,7 +5,7 @@
 |Julian Velasco|Product Owner|
 |Andres Gualdron|Team Developer|
 |Natalia Palacios|Team Developer|
-|Cesar Villamil |Team Developer|
+|Cesar Villamil|Team Developer|
 |Miguel ASG|Team Developer|
 
 ## Descripción del Producto

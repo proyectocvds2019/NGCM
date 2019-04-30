@@ -46,6 +46,7 @@ public class adminBean implements Serializable{
 	private List<Elemento> listaElementosDisponibles;
 	private List<Equipo> listaEquipos;
 	private List<Elemento> listaElementosSeleccionados;
+	private List<Equipo> listaEquiposSeleccionados;
 	private static final TipoElemento teclado = TipoElemento.TECLADO;
 	private static final TipoElemento mouse = TipoElemento.MOUSE;
 	private static final TipoElemento monitor = TipoElemento.MONITOR;
@@ -137,15 +138,17 @@ public class adminBean implements Serializable{
 		}
 	}
 
-	public void eliminarElemento(Elemento elemento){
+	public void eliminarElementos(){
 		try{
-			this.serviciosHistorial.desactivarElemento(elemento.getId());
+			for(Elemento e: this.listaElementosSeleccionados){
+				this.serviciosHistorial.desactivarElemento(e.getId());
+			}
 		}catch (ExcepcionServiciosHistorial e){
 			e.printStackTrace();
 		}
 	}
 
-	public void eliminarEquipo(Equipo equipo){
+	public void eliminarEquipos(){
 
 	}
 
@@ -412,6 +415,12 @@ public class adminBean implements Serializable{
 	}
 	public void setListaElementosSeleccionados(List<Elemento> listaElementosSeleccionados){
 		this.listaElementosSeleccionados = listaElementosSeleccionados;
+	}
+	public List<Equipo> getListaEquiposSeleccionados(){
+		return this.listaEquiposSeleccionados;
+	}
+	public void setListaEquiposSeleccionados(List<Equipo> listaEquiposSeleccionados){
+		this.listaEquiposSeleccionados = listaEquiposSeleccionados;
 	}
 
 
