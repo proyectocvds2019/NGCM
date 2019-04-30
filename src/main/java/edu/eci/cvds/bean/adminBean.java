@@ -42,6 +42,10 @@ public class adminBean implements Serializable{
 	private String mouseSeleccionado;
 	private String torreSeleccionada;
 	private String tecladoSeleccionado;
+	private List<Elemento> listaElementos;
+	private List<Elemento> listaElementosDisponibles;
+	private List<Equipo> listaEquipos;
+	private List<Elemento> listaElementosSeleccionados;
 	private static final TipoElemento teclado = TipoElemento.TECLADO;
 	private static final TipoElemento mouse = TipoElemento.MOUSE;
 	private static final TipoElemento monitor = TipoElemento.MONITOR;
@@ -53,6 +57,17 @@ public class adminBean implements Serializable{
 		Subject subject = SecurityUtils.getSubject();
 		this.correo = (String) subject.getSession().getAttribute("correo");
 		this.serviciosHistorial = ServiciosHistorialFactory.getInstance().getServiciosHistorial();
+		try{
+			this.listaElementos =  this.serviciosHistorial.consultarElementos();
+			this.listaElementosDisponibles = this.serviciosHistorial.consultarElementosDisponibles();
+			this.listaEquipos = this.serviciosHistorial.consultarEquipos();
+		}catch (ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+		}
+	}
+
+	public void ordenar(){
+		System.out.println("ñalskjfñlkdsajfñlkdsajfñlkdsafjñlkdsajfñlkdsaj");
 	}
     
 	public void registrarElemento() throws ExcepcionServiciosHistorial {
@@ -65,26 +80,7 @@ public class adminBean implements Serializable{
 			this.mensajeError();
 		}
 	}
-	
-	public List<Elemento> consultarElementos(){
-		try {
-			return this.serviciosHistorial.consultarElementos();
-		} catch (ExcepcionServiciosHistorial e) {
-			// TODO Bloque catch generado autom�ticamente
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
-	public List<Elemento> consultarElementosDisponibles(){
-		try {
-			return this.serviciosHistorial.consultarElementosDisponibles();
-		} catch (ExcepcionServiciosHistorial e) {
-			// TODO Bloque catch generado autom�ticamente
-			e.printStackTrace();
-			return null;
-		}
-	}
+
 	public List<Elemento> consultarElementosDisponibles(TipoElemento tipo){
 		try{
 			return this.serviciosHistorial.consultarElementosDisponibles(tipo);
@@ -192,15 +188,6 @@ public class adminBean implements Serializable{
 			return lis;
 		} catch (ExcepcionServiciosHistorial e) {
 			// TODO Bloque catch generado autom�ticamente
-			e.printStackTrace();
-			return null;
-		}
-	}
-
-	public List<Equipo> getEquipos(){
-		try{
-			return this.serviciosHistorial.consultarEquipos();
-		}catch (ExcepcionServiciosHistorial e){
 			e.printStackTrace();
 			return null;
 		}
@@ -397,7 +384,36 @@ public class adminBean implements Serializable{
 	public TipoElemento getTorre(){
 		return this.torre;
 	}
-	
+	public List<Elemento> getListaElementos(){
+		return this.listaElementos;
+	}
+
+	public void setListaElementos(List<Elemento> listaElementos){
+		this.listaElementos = listaElementos;
+	}
+
+	public List<Elemento> getListaElementosDisponibles(){
+		return this.listaElementosDisponibles;
+	}
+	public void setListaElementosDisponibles(List<Elemento> listaElementosDisponibles){
+		this.listaElementosDisponibles = listaElementosDisponibles;
+	}
+
+	public  List<Equipo> getListaEquipos(){
+		return this.listaEquipos;
+	}
+
+	public  void setListaEquipos(List<Equipo> listaEquipos){
+		this.listaEquipos = listaEquipos;
+	}
+
+	public List<Elemento> getListaElementosSeleccionados(){
+		return this.listaElementosSeleccionados;
+	}
+	public void setListaElementosSeleccionados(List<Elemento> listaElementosSeleccionados){
+		this.listaElementosSeleccionados = listaElementosSeleccionados;
+	}
+
 
 	
 }

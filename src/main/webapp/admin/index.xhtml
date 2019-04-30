@@ -103,54 +103,40 @@
 		</div>
 		<div class="row col-xs-12">
 			<div class="col-md-12 col-xs-12">
-				<h:form id="formElementos">
+				<h:form>
 					<p:fieldset id="tablaElementos" legend="Tabla de elementos">
-				        <p:dataTable id="elementosT" var="elemento" value="#{adminBean.consultarElementos()}" rows="10" paginator="true"
-									 paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}">
+				        <p:dataTable selection="#{adminBean.listaElementosSeleccionados}" id="elementosT" var="elemento" value="#{adminBean.listaElementos}" rows="10" paginator="true"
+									 paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}" sortBy="#{elemento.id}">
+							<p:column selectionMode="multiple" style="width:16px;text-align:center"/>
 
-				            <p:column headerText="Id">
+				            <p:column sortBy="#{elemento.id}" filterBy="#{elemento.id}" headerText="Id">
 				                <h:outputText value="#{elemento.id}" />
 				            </p:column>
-							<p:column headerText="Nombre">
+							<p:column sortBy="#{elemento.nombre}" filterBy="#{elemento.nombre}" headerText="Nombre">
 								<h:outputText value="#{elemento.nombre}" />
 							</p:column>
-				            <p:column headerText="Tipo">
+				            <p:column sortBy="#{elemento.tipo}" filterBy="#{elemento.tipo}" headerText="Tipo">
 				                <h:outputText value="#{elemento.tipo}" />
 				            </p:column>
-							<p:column headerText="Equipo">
+							<p:column sortBy="#{adminBean.consultarEquipoDeElemento(elemento)}" filterBy="#{adminBean.consultarEquipoDeElemento(elemento)}" headerText="Equipo">
 								<h:outputText value="#{adminBean.consultarEquipoDeElemento(elemento)}"/>
 							</p:column>
-							<p:column headerText="Activo">
+							<p:column sortBy="#{elemento.activo}" filterBy="#{elemento.activo}" headerText="Activo">
 								<h:outputText value="#{elemento.activo}"/>
 							</p:column>
 
-							<p:column headerText="Eliminar">
+							<p:column headerText="Novedades">
 								<center>
-									<button type="button" data-toggle="modal" data-target="#modalConfirmacion#{elemento.id}" class="btn btn-default btn-danger">
-										Eliminar
+									<button type="button" data-toggle="modal" data-target="#modalConfirmacion#{elemento.id}" class="btn btn-default btn-info">
+										VER
 									</button>
 								</center>
-								<div class="modal fade" id="modalConfirmacion#{elemento.id}" role="dialog">
-									<div class="modal-dialog">
-										<!-- Modal content-->
-										<div class="modal-content">
-											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal"></button>
-												<h4 class="modal-title">Confirmación</h4>
-											</div>
-											<div class="modal-body">
-												<p>¿Quiere dar de baja el elemento #{elemento.id}?</p>
-												<h:commandButton action="#{adminBean.eliminarElemento(elemento)}" styleClass="btn btn-default btn-success" value="SI"/>
-												<button data-dismiss="modal" type="button" class="btn btn-default btn-danger">NO</button>
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-											</div>
-										</div>
-
-									</div>
-								</div>
 							</p:column>
+							<f:facet name="footer">
+								<h:commandButton process="elementosT" type="button" data-toggle="modal" data-target="#modalConfirmacion#{elemento.id}" styleClass="btn btn-default btn-danger">
+									Eliminar
+								</h:commandButton>
+							</f:facet>
 				        </p:dataTable>
 				    </p:fieldset>
 				</h:form>
@@ -161,18 +147,18 @@
 			<div class="col-md-12 col-xs-12">
 				<h:form id="formElementosDisponibles">
 					<p:fieldset id="tablaElementosDisponibles" legend="Tabla de elementos disponibles">
-				        <p:dataTable id="elementosTabla" var="elemento" value="#{adminBean.consultarElementosDisponibles()}" rows="10" paginator="true"
+				        <p:dataTable sortBy="#{elemento.id}" id="elementosTabla" var="elemento" value="#{adminBean.listaElementosDisponibles}" rows="10" paginator="true"
 									 paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}">
 				 
-				            <p:column headerText="Id">
+				            <p:column sortBy="#{elemento.id}" filterBy="#{elemento.id}" headerText="Id">
 				                <h:outputText value="#{elemento.id}" />
 				            </p:column>
 
-							<p:column headerText="Nombre">
+							<p:column sortBy="#{elemento.nombre}" filterBy="#{elemento.nombre}" headerText="Nombre">
 								<h:outputText value="#{elemento.nombre}" />
 							</p:column>
 				 
-				            <p:column headerText="Tipo">
+				            <p:column sortBy="#{elemento.tipo}" filterBy="#{elemento.tipo}" headerText="Tipo">
 				                <h:outputText value="#{elemento.tipo}" />
 				            </p:column>
 							<p:column headerText="Enlazar">
@@ -199,7 +185,7 @@
 														<hr/>
 														<p:outputLabel class="col-xs-12 col-md-6" value="Seleccionar Equipo"/>
 														<h:selectOneMenu style="" dynamic="true" class="col-xs-12 col-md-6" id="equipoAsociar#{elemento.id}" value="#{adminBean.equipo}">
-															<f:selectItems var="equipo" value="#{adminBean.getEquipos()}" itemValue="#{equipo.id}" itemLabel="#{equipo.id}"/>
+															<f:selectItems var="equipo" value="#{adminBean.listaEquipos}" itemValue="#{equipo.id}" itemLabel="#{equipo.id}"/>
 														</h:selectOneMenu>
 														<hr class="col-xs-11"/>
 														<h:commandButton  action="#{adminBean.enlazarElemento(elemento)}" class="btn btn-default btn-success btn-responsive col-xs-12 col-md-12" value="Enlazar" />
@@ -268,16 +254,19 @@
 		<div class="container">
 			<h:form id="formEquipos">
 				<p:fieldset id="tablaEquipos" legend="Tabla de equipos">
-					<p:dataTable id="equiposTabla" var="equipo" value="#{adminBean.getEquipos()}" rows="10" paginator="true"
+					<p:dataTable sortBy="#{equipo.id}" id="equiposTabla" var="equipo" value="#{adminBean.listaEquipos}" rows="10" paginator="true"
 								 paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}">
 
-						<p:column headerText="Id">
+						<p:column sortBy="#{equipo.id}" filterBy="#{equipo.id}" headerText="Id">
 							<h:outputText value="#{equipo.id}"/>
 						</p:column>
-						<p:column headerText="Activo">
+						<p:column headerText="Nombre">
+							<h:outputText value="Sistemas#{equipo.id}"/>
+						</p:column>
+						<p:column sortBy="#{equipo.activo}" filterBy="#{equipo.activo}" headerText="Activo">
 							<h:outputText value="#{equipo.activo}" />
 						</p:column>
-						<p:column headerText="Laboratorio">
+						<p:column sortBy="#{adminBean.consultarLaboratorio(equipo).id}" filterBy="#{adminBean.consultarLaboratorio(equipo).id}" headerText="Laboratorio">
 							<h:outputText value="#{adminBean.consultarLaboratorio(equipo).id}" />
 							<button type="button" data-toggle="modal" data-target="#cambiarLaboratorioModal#{equipo.id}" class="btn btn-default btn-info btn-block col-xs-12">Cambiar</button>
 							<div class="modal fade" id="cambiarLaboratorioModal#{equipo.id}" role="dialog">
@@ -308,7 +297,7 @@
 							</div>
 						</p:column>
 
-						<p:column headerText="Teclado">
+						<p:column sortBy="#{adminBean.consultarElementoDelEquipo(adminBean.teclado,equipo)}" filterBy="#{adminBean.consultarElementoDelEquipo(adminBean.teclado,equipo)}" headerText="Teclado">
 							<h:outputText value="#{adminBean.consultarElementoDelEquipo(adminBean.teclado,equipo)}"/>
 							<button data-toggle="modal" data-target="#cambiarTeclado#{equipo.id}" type="button" class="btn btn-default btn-info btn-block col-xs-12">Cambiar</button>
 							<div class="modal fade" id="cambiarTeclado#{equipo.id}" role="dialog">
@@ -336,7 +325,7 @@
 								</div>
 							</div>
 						</p:column>
-						<p:column headerText="Torre">
+						<p:column sortBy="#{adminBean.consultarElementoDelEquipo(adminBean.torre,equipo)}" filterBy="#{adminBean.consultarElementoDelEquipo(adminBean.torre,equipo)}" headerText="Torre">
 							<h:outputText value="#{adminBean.consultarElementoDelEquipo(adminBean.torre,equipo)}"/>
 							<button data-toggle="modal" data-target="#cambiarTorre#{equipo.id}" type="button" class="btn btn-default btn-info btn-block col-xs-12">Cambiar</button>
 							<div class="modal fade" id="cambiarTorre#{equipo.id}" role="dialog">
@@ -366,7 +355,7 @@
 								</div>
 							</div>
 						</p:column>
-						<p:column headerText="Mouse">
+						<p:column sortBy="#{adminBean.consultarElementoDelEquipo(adminBean.mouse,equipo)}" filterBy="#{adminBean.consultarElementoDelEquipo(adminBean.mouse,equipo)}" headerText="Mouse">
 							<h:outputText value="#{adminBean.consultarElementoDelEquipo(adminBean.mouse,equipo)}"/>
 							<button data-toggle="modal" data-target="#cambiarMouse#{equipo.id}" type="button" class="btn btn-default btn-info col-xs-12">Cambiar</button>
 							<div class="modal fade" id="cambiarMouse#{equipo.id}" role="dialog">
@@ -396,7 +385,7 @@
 								</div>
 							</div>
 						</p:column>
-						<p:column headerText="Monitor">
+						<p:column sortBy="#{adminBean.consultarElementoDelEquipo(adminBean.monitor,equipo)}" filterBy="#{adminBean.consultarElementoDelEquipo(adminBean.monitor,equipo)}" headerText="Monitor">
 							<h:outputText class="col-xs-12" value="#{adminBean.consultarElementoDelEquipo(adminBean.monitor,equipo)}"/>
 							<button data-toggle="modal" data-target="#cambiarMonitor#{equipo.id}" type="button" class="btn btn-default btn-info btn-block col-xs-12">Cambiar</button>
 							<div class="modal fade" id="cambiarMonitor#{equipo.id}" role="dialog">
@@ -429,8 +418,32 @@
 
 						<p:column headerText="Eliminar">
 							<center>
-								<h:commandButton action="#{adminBean.eliminarEquipo(equipo)}" class="btn btn-default btn-danger" value="ELIMINAR"/>
+								<button style="padding:5px;" type="button" data-toggle="modal" data-target="#eliminarEquipo#{equipo.id}" class="btn btn-block btn-default btn-danger col-xs-12">ELIMINAR</button>
 							</center>
+
+							<!-- Modal -->
+							<div class="modal fade" id="eliminarEquipo#{equipo.id}" role="dialog">
+								<div class="modal-dialog">
+
+									<!-- Modal content-->
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">X</button>
+											<h4 class="modal-title">Confirmación</h4>
+										</div>
+										<div class="modal-body">
+											<p>¿Quiere dar de baja el equipo Sistemas#{equipo.id}?.</p>
+											<h:commandButton action="#{adminBean.eliminarEquipo(equipo)}" class="btn btn-default btn-success" value="SI"/>
+											<button type="button" class="btn btn-default btn-danger" data-dismiss="modal">NO</button>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+										</div>
+									</div>
+
+								</div>
+							</div>
+
 
 						</p:column>
 					</p:dataTable>
