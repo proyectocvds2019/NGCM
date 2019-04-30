@@ -132,7 +132,7 @@
 									</button>
 								</center>
 								<!-- Modal -->
-								<div class="modal fade" id="novedadElemento#{equipo.id}" role="dialog">
+								<div class="modal fade" id="novedadElemento#{elemento.id}" role="dialog">
 									<div class="modal-dialog">
 
 										<!-- Modal content-->
@@ -167,7 +167,7 @@
 												<h4 class="modal-title">Confirmación</h4>
 											</div>
 											<div class="modal-body">
-												<p>¿Quiere dar de baja los elementos?.</p>
+												<p>¿Quiere dar de baja los elementos seleccionados?.</p>
 												<h:commandButton action="#{adminBean.eliminarElementos()}" process="elementosT" value="SI" styleClass="btn btn-default btn-success"/>
 												<button class="btn btn-default btn-danger" type="button" data-dismiss="modal">NO</button>
 											</div>
@@ -472,7 +472,7 @@
 									<div class="modal-content">
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal">X</button>
-											<h4 class="modal-title">Confirmación</h4>
+											<h4 class="modal-title">Información novedades</h4>
 										</div>
 										<div class="modal-body">
 											
@@ -501,8 +501,9 @@
 											<h4 class="modal-title">Confirmación</h4>
 										</div>
 										<div class="modal-body">
-											<p>¿Quiere eliminar los equipos?</p>
-											<h:commandButton value="SI" action="#{adminBean.eliminarEquipos()}" process="tablaEquipos"/>
+											<p>¿Quiere eliminar los equipos seleccionados?</p>
+											<h:commandButton styleClass="btn btn-default btn-success" value="SI" action="#{adminBean.eliminarEquipos()}" process="tablaEquipos"/>
+											<button type="button" class="btn btn-default btn-danger" data-dismiss="modal">No</button>
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
