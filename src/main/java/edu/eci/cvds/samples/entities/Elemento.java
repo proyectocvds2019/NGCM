@@ -10,9 +10,6 @@ public class Elemento implements Serializable{
 	private String id;
 	private TipoElemento tipo;
 	private String nombre;
-
-
-
 	private boolean activo;
 
 	

@@ -283,6 +283,71 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 		
 	}
 
+	@Override
+	public void exportarElementos() throws ExcepcionServiciosHistorial{
+		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+		response.addHeader("Content-disposition","attachment; filename=tabla.xls");
+		response.setContentType("application/vnd.ms-excel");
+		try{
+			HSSFWorkbook wb = new HSSFWorkbook(); // crea libro de excel
+			HSSFSheet sheet = wb.createSheet("Equipos"); // crea hoja
+			List<Elemento> elementos = this.consultarElementos();
+			int rownum = 0;
+			int column = 0;
+			HSSFRow row = sheet.createRow(rownum);
+			HSSFCell celda = row.createCell(column);
+			celda.setCellValue("ID");
+			column++;
+			celda = row.createCell(column);
+			celda.setCellValue("NOMBRE");
+			column++;
+			celda = row.createCell(column);
+			celda.setCellValue("TIPO");
+			column++;
+			celda = row.createCell(column);
+			celda.setCellValue("EQUIPO");
+			column++;
+			celda = row.createCell(column);
+			celda.setCellValue("ACTIVO");
+			rownum = 1;
+			for(Elemento e: elementos){
+				column = 0;
+				row = sheet.createRow(rownum);
+				celda = row.createCell(column);
+				celda.setCellValue(e.getId());
+				column++;
+				celda = row.createCell(column);
+				celda.setCellValue(e.getNombre());
+				column++;
+				celda = row.createCell(column);
+				celda.setCellValue(e.getTipo().name());
+				Integer equi = this.consultarEquipoDeElemento(e);
+				if(equi == null){
+					celda.setCellValue("");
+				}else{
+					celda.setCellValue(equi);
+				}
+				column++;
+				celda = row.createCell(column);
+				celda.setCellValue(e.isActivo());
+				column++;
+				rownum++;
+			}
+			OutputStream out = response.getOutputStream();
+			wb.write(out);
+		}catch (ExcepcionServiciosHistorial e){
+			throw new ExcepcionServiciosHistorial("No se pudo exportar el excel de los equipos");
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		try {
+			response.getOutputStream().flush();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		FacesContext.getCurrentInstance().responseComplete();
+	}
+
 	
 
 

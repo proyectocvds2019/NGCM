@@ -296,6 +296,14 @@ public class adminBean implements Serializable{
 		}
 
 	}
+
+	public void exportarElementos(){
+		try {
+			this.serviciosHistorial.exportarElementos();
+		}catch (ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+		}
+	}
 	
 	
 	
