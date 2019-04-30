@@ -273,7 +273,17 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 		FacesContext.getCurrentInstance().responseComplete();
 	}
 
+	@Override
+	public void desactivarEquipo(int id) throws ExcepcionServiciosHistorial {
+		try {
+			equipoDAO.desactivarEquipo(id);
+		}catch(PersistenceException e) {
+			throw new ExcepcionServiciosHistorial("No se pudo dar de baja al equipo.");
+		}
+		
+	}
 
+	
 
 
 }

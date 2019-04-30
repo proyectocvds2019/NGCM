@@ -43,4 +43,5 @@ public interface ServiciosHistorial {
 
 	public abstract void exportarExcelEquipos() throws ExcepcionServiciosHistorial;
 	
+	public abstract void desactivarEquipo(int id) throws ExcepcionServiciosHistorial; 
 }
