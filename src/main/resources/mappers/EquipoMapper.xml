@@ -51,7 +51,7 @@
 	
 	<update parameterType = 'map' id = 'desactivarEquipo'>
 		UPDATE Equipos
-		SET Equipos.activo = false
+		SET activo = false, laboratorio = null
 		WHERE Equipos.id = #{id};
 	</update>
 	

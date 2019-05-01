@@ -11,11 +11,11 @@ public class ElementoGenerator {
 	
 	
 	public static Gen<String> genId(){
-		return strings().allPossible().ofLengthBetween(10,20);
+		return strings().allPossible().ofLength(50);
 	}
 
 	public static Gen<String> genNombre(){
-		return strings().allPossible().ofLengthBetween(10,20);
+		return strings().allPossible().ofLength(50);
 	}
 	
 	

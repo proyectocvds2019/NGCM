@@ -301,9 +301,9 @@
 		<div class="container">
 			<h:form id="formEquipos">
 				<p:fieldset id="tablaEquipos" legend="Tabla de equipos">
-					<p:dataTable rowKey="#{equipo.id}" selection="#{adminBean.listaEquiposSeleccionados}" sortBy="#{equipo.id}" id="equiposTabla" var="equipo" value="#{adminBean.listaEquipos}" rows="10" paginator="true"
+					<p:dataTable rowKey="#{equipo.id}" selection="#{adminBean.equipoSeleccionado}" sortBy="#{equipo.id}" id="equiposTabla" var="equipo" value="#{adminBean.listaEquipos}" rows="10" paginator="true"
 								 paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}">
-						<p:column selectionMode="multiple" style="text-align: center" />
+						<p:column selectionMode="single" style="text-align: center" />
 						<p:column sortBy="#{equipo.id}" filterBy="#{equipo.id}" headerText="Id">
 							<h:outputText value="#{equipo.id}"/>
 						</p:column>
@@ -315,11 +315,10 @@
 						</p:column>
 						<p:column sortBy="#{adminBean.consultarLaboratorio(equipo).id}" filterBy="#{adminBean.consultarLaboratorio(equipo).id}" headerText="Laboratorio">
 							<h:outputText value="#{adminBean.consultarLaboratorio(equipo).id}" />
-							<button type="button" data-toggle="modal" data-target="#cambiarLaboratorioModal#{equipo.id}" class="btn btn-default btn-info btn-block col-xs-12">Cambiar</button>
+							<!--<button type="button" data-toggle="modal" data-target="#cambiarLaboratorioModal#{equipo.id}" class="btn btn-default btn-info btn-block col-xs-12">Cambiar</button>
 							<div class="modal fade" id="cambiarLaboratorioModal#{equipo.id}" role="dialog">
 								<div class="modal-dialog">
 
-									<!-- Modal content-->
 									<div class="modal-content">
 										<div class="modal-header">
 											<h4 class="modal-title">CAMBIAR LABORATORIO</h4>
@@ -341,126 +340,24 @@
 									</div>
 
 								</div>
-							</div>
+							</div>-->
 						</p:column>
 
 						<p:column sortBy="#{adminBean.consultarElementoDelEquipo(adminBean.teclado,equipo)}" filterBy="#{adminBean.consultarElementoDelEquipo(adminBean.teclado,equipo)}" headerText="Teclado">
 							<h:outputText value="#{adminBean.consultarElementoDelEquipo(adminBean.teclado,equipo)}"/>
-							<button data-toggle="modal" data-target="#cambiarTeclado#{equipo.id}" type="button" class="btn btn-default btn-info btn-block col-xs-12">Cambiar</button>
-							<div class="modal fade" id="cambiarTeclado#{equipo.id}" role="dialog">
-								<div class="modal-dialog">
 
-									<!-- Modal content-->
-									<div class="modal-content">
-										<div class="modal-header">
-											<h4 class="modal-title">CAMBIAR TECLADO</h4>
-										</div>
-										<div class="modal-body">
-                                            <div class="form-group">
-                                                <h:outputLabel class="col-xs-6" for="cambiarTeclado" value="Seleccione el nuevo teclado:"/>
-                                                <h:selectOneMenu class="col-xs-6" id="cambiarTeclado" value="#{adminBean.tecladoSeleccionado}">
-                                                    <f:selectItems var="teclado" value="#{adminBean.consultarElementosDisponibles(adminBean.teclado)}" itemLabel="#{teclado.id}" itemValue="#{teclado.id}"/>
-                                                </h:selectOneMenu>
-                                            </div>
-                                            <h:commandButton value="Cambiar" class="btn btn-default btn-success btn-block" action="#{adminBean.actualizarTecladoDeEquipo(equipo)}"/>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-										</div>
-									</div>
-
-								</div>
-							</div>
 						</p:column>
 						<p:column sortBy="#{adminBean.consultarElementoDelEquipo(adminBean.torre,equipo)}" filterBy="#{adminBean.consultarElementoDelEquipo(adminBean.torre,equipo)}" headerText="Torre">
 							<h:outputText value="#{adminBean.consultarElementoDelEquipo(adminBean.torre,equipo)}"/>
-							<button data-toggle="modal" data-target="#cambiarTorre#{equipo.id}" type="button" class="btn btn-default btn-info btn-block col-xs-12">Cambiar</button>
-							<div class="modal fade" id="cambiarTorre#{equipo.id}" role="dialog">
-								<div class="modal-dialog">
 
-									<!-- Modal content-->
-									<div class="modal-content">
-										<div class="modal-header">
-											<h4 class="modal-title">CAMBIAR TORRE</h4>
-										</div>
-										<div class="modal-body">
-                                            <div class="modal-body">
-                                                <div class="form-group">
-                                                    <h:outputLabel class="col-xs-6" for="cambiarTorre" value="Seleccione el nueva Torre:"/>
-                                                    <h:selectOneMenu class="col-xs-6" id="cambiarTorre" value="#{adminBean.torreSeleccionada}">
-                                                        <f:selectItems var="torre" value="#{adminBean.consultarElementosDisponibles(adminBean.torre)}" itemLabel="#{torre.id}" itemValue="#{torre.id}"/>
-                                                    </h:selectOneMenu>
-                                                </div>
-                                                <h:commandButton value="Cambiar" class="btn btn-default btn-success btn-block" action="#{adminBean.actualizarTorreDeEquipo(equipo)}"/>
-                                            </div>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-										</div>
-									</div>
-
-								</div>
-							</div>
 						</p:column>
 						<p:column sortBy="#{adminBean.consultarElementoDelEquipo(adminBean.mouse,equipo)}" filterBy="#{adminBean.consultarElementoDelEquipo(adminBean.mouse,equipo)}" headerText="Mouse">
 							<h:outputText value="#{adminBean.consultarElementoDelEquipo(adminBean.mouse,equipo)}"/>
-							<button data-toggle="modal" data-target="#cambiarMouse#{equipo.id}" type="button" class="btn btn-default btn-info col-xs-12">Cambiar</button>
-							<div class="modal fade" id="cambiarMouse#{equipo.id}" role="dialog">
-								<div class="modal-dialog">
 
-									<!-- Modal content-->
-									<div class="modal-content">
-										<div class="modal-header">
-											<h4 class="modal-title">CAMBIAR MOUSE</h4>
-										</div>
-										<div class="modal-body">
-                                            <div class="modal-body">
-                                                <div class="form-group">
-                                                    <h:outputLabel class="col-xs-6" for="cambiarMouse" value="Seleccione el nuevo mouse:"/>
-                                                    <h:selectOneMenu class="col-xs-6" id="cambiarMouse" value="#{adminBean.mouseSeleccionado}">
-                                                        <f:selectItems var="mouse" value="#{adminBean.consultarElementosDisponibles(adminBean.mouse)}" itemLabel="#{mouse.id}" itemValue="#{mouse.id}"/>
-                                                    </h:selectOneMenu>
-                                                </div>
-                                                <h:commandButton value="Cambiar" class="btn btn-default btn-success btn-block" action="#{adminBean.actualizarMouseDeEquipo(equipo)}"/>
-                                            </div>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-										</div>
-									</div>
-
-								</div>
-							</div>
 						</p:column>
 						<p:column sortBy="#{adminBean.consultarElementoDelEquipo(adminBean.monitor,equipo)}" filterBy="#{adminBean.consultarElementoDelEquipo(adminBean.monitor,equipo)}" headerText="Monitor">
 							<h:outputText class="col-xs-12" value="#{adminBean.consultarElementoDelEquipo(adminBean.monitor,equipo)}"/>
-							<button data-toggle="modal" data-target="#cambiarMonitor#{equipo.id}" type="button" class="btn btn-default btn-info btn-block col-xs-12">Cambiar</button>
-							<div class="modal fade" id="cambiarMonitor#{equipo.id}" role="dialog">
-								<div class="modal-dialog">
 
-									<!-- Modal content-->
-									<div class="modal-content">
-										<div class="modal-header">
-											<h4 class="modal-title">CAMBIAR MONITOR</h4>
-										</div>
-										<div class="modal-body">
-                                            <div class="modal-body">
-                                                <div class="form-group">
-                                                    <h:outputLabel class="col-xs-6" for="cambiarMonitor" value="Seleccione el nuevo Monitor:"/>
-                                                    <h:selectOneMenu class="col-xs-6" id="cambiarMonitor" value="#{adminBean.monitorSeleccionado}">
-                                                        <f:selectItems var="monitor" value="#{adminBean.consultarElementosDisponibles(adminBean.monitor)}" itemLabel="#{monitor.id}" itemValue="#{monitor.id}"/>
-                                                    </h:selectOneMenu>
-                                                </div>
-                                                <h:commandButton value="Cambiar" class="btn btn-default btn-success btn-block" action="#{adminBean.actualizarMonitorDeEquipo(equipo)}"/>
-                                            </div>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-										</div>
-									</div>
-
-								</div>
-							</div>
 						</p:column>
 
 						<p:column headerText="Novedades">
@@ -505,9 +402,15 @@
 											<h4 class="modal-title">Confirmación</h4>
 										</div>
 										<div class="modal-body">
-											<p>¿Quiere eliminar los equipos seleccionados?</p>
-											<h:commandButton styleClass="btn btn-default btn-success" value="SI" action="#{adminBean.eliminarEquipos()}" process="tablaEquipos"/>
-											<button type="button" class="btn btn-default btn-danger" data-dismiss="modal">No</button>
+												<h3>Seleccione los elementos que quiere dar de baja</h3>
+												<p:dataTable var="ele" value="#{adminBean.tipoElementos}" rowKey="#{ele}" selection="#{adminBean.elementosSeleccionadoPorEquipo}">
+													<p:column headerText="Tipo">
+														<h:outputText value="#{ele}"/>
+													</p:column>
+													<p:column selectionMode="multiple" style="text-align: center" />
+												</p:dataTable>
+											<h:commandButton styleClass="btn btn-default btn-success" value="Confirmar" action="#{adminBean.eliminarEquipos()}" process="tablaEquipos"/>
+											<button type="button" class="btn btn-default btn-danger" data-dismiss="modal">Cancelar</button>
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
