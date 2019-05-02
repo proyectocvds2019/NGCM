@@ -30,4 +30,6 @@ public interface EquipoMapper {
 	
 	public void desactivarEquipo(@Param("id") int id);
 
+	public List<Equipo> consultarEquiposDisponibles();
+
 }

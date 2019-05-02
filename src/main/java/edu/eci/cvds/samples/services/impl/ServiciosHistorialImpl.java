@@ -353,6 +353,16 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 		FacesContext.getCurrentInstance().responseComplete();
 	}
 
+	@Override
+	public List<Equipo> consultarEquiposDisponibles() throws ExcepcionServiciosHistorial{
+		try {
+			return this.equipoDAO.consultarEquiposDisponibles();
+		}catch (PersistenceException e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 	
 
 

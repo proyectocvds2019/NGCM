@@ -39,6 +39,7 @@ public class adminBean implements Serializable{
 	private String nombreElemento;
 	private Integer laboratorioSeleccionado;
 	private String monitorSeleccionado;
+	private String nombreLaboratorio;
 	private String mouseSeleccionado;
 	private List<TipoElemento> tipoElementos = new ArrayList<TipoElemento>();
 	private String torreSeleccionada;
@@ -46,6 +47,9 @@ public class adminBean implements Serializable{
 	private List<Elemento> listaElementos;
 	private List<Elemento> listaElementosDisponibles;
 	private List<Equipo> listaEquipos;
+	private List<Equipo> listaEquiposActivos;
+	private List<String> listaEquiposRegistrarLaboratorio;
+	private List<Equipo> listaEquiposSeleccionados;
 	private List<Elemento> listaElementosSeleccionados;
 	private Equipo equipoSeleccionado;
 	private List<TipoElemento> elementosSeleccionadoPorEquipo;
@@ -67,6 +71,7 @@ public class adminBean implements Serializable{
 			this.listaElementos =  this.serviciosHistorial.consultarElementos();
 			this.listaElementosDisponibles = this.serviciosHistorial.consultarElementosDisponibles();
 			this.listaEquipos = this.serviciosHistorial.consultarEquipos();
+			this.listaEquiposActivos = this.serviciosHistorial.consultarEquiposDisponibles();
 		}catch (ExcepcionServiciosHistorial e){
 			e.printStackTrace();
 		}
@@ -83,14 +88,14 @@ public class adminBean implements Serializable{
 		}
 	}
 
-	public List<Elemento> consultarElementosDisponibles(TipoElemento tipo){
+	/*public List<Elemento> consultarElementosDisponibles(TipoElemento tipo){
 		try{
 			return this.serviciosHistorial.consultarElementosDisponibles(tipo);
 		}catch (ExcepcionServiciosHistorial e){
 			e.printStackTrace();
 			return null;
 		}
-	}
+	}*/
 
 	public Integer consultarEquipoDeElemento(Elemento elemento){
 		try{
@@ -120,6 +125,9 @@ public class adminBean implements Serializable{
 			e.printStackTrace();
 			this.mensajeError();
 		}
+	}
+	public  void registrarLaboratorio(){
+		this.mensajeCorrecto();
 	}
 
 	public Laboratorio consultarLaboratorio(Equipo equipo){
@@ -462,4 +470,35 @@ public class adminBean implements Serializable{
     public void setTipoElementos(List<TipoElemento> tipoElementos){
         this.tipoElementos = tipoElementos;
     }
+
+	public List<Equipo> getListaEquiposSeleccionados() {
+		return listaEquiposSeleccionados;
+	}
+
+	public void setListaEquiposSeleccionados(List<Equipo> listaEquiposSeleccionados) {
+		this.listaEquiposSeleccionados = listaEquiposSeleccionados;
+	}
+
+	public List<Equipo> getListaEquiposActivos() {
+		return listaEquiposActivos;
+	}
+
+	public void setListaEquiposActivos(List<Equipo> listaEquiposActivos) {
+		this.listaEquiposActivos = listaEquiposActivos;
+	}
+
+	public List<String> getListaEquiposRegistrarLaboratorio() {
+		return listaEquiposRegistrarLaboratorio;
+	}
+
+	public void setListaEquiposRegistrarLaboratorio(List<String> listaEquiposRegistrarLaboratorio) {
+		this.listaEquiposRegistrarLaboratorio = listaEquiposRegistrarLaboratorio;
+	}
+
+	public void setNombreLaboratorio(String nombreLaboratorio) {
+		this.nombreLaboratorio = nombreLaboratorio;
+	}
+	public String getNombreLaboratorio(){
+		return this.nombreLaboratorio;
+	}
 }

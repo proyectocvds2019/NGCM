@@ -22,4 +22,6 @@ public interface EquipoDAO {
 	public Integer proximoIdEquipo() throws PersistenceException;
         
     public void desactivarEquipo(int id) throws PersistenceException;
+
+    public List<Equipo> consultarEquiposDisponibles() throws PersistenceException;
 }

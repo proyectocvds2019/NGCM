@@ -42,9 +42,14 @@ public class MyBATISEquipoDAO implements EquipoDAO{
 		return equipoMapper.proximoIdEquipo();
 	}
 	
-        @Override
+	@Override
 	public void desactivarEquipo(int id) throws PersistenceException{
                 equipoMapper.desactivarEquipo(id);
-        }
+	}
+
+	@Override
+	public List<Equipo> consultarEquiposDisponibles() throws PersistenceException{
+		return equipoMapper.consultarEquiposDisponibles();
+	}
 
 }
