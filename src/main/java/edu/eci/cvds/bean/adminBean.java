@@ -188,6 +188,10 @@ public class adminBean implements Serializable{
 		}
 	}
 
+	public void equipoSeleccionado(){
+		System.out.println(this.equipoSeleccionado);
+	}
+
 
 	
 	
@@ -202,23 +206,8 @@ public class adminBean implements Serializable{
 	public TipoElemento getTipoSeleccionado() {
 		return this.tipoSeleccionado;
 	}
-	
-	public List<SelectItem> getEquiposSelectItem(){
-		List<SelectItem> lis = new ArrayList<SelectItem>();
-		try {
-			List<Equipo> l = this.serviciosHistorial.consultarEquipos();
-			for(Equipo e: l) {
-				lis.add(new SelectItem(e.getId()));
-			}
-			return lis;
-		} catch (ExcepcionServiciosHistorial e) {
-			// TODO Bloque catch generado autom�ticamente
-			e.printStackTrace();
-			return null;
-		}
-	}
 
-	public List<SelectItem> getEquiposDisponiblesParaElemento(Elemento elemento){
+	/*public List<SelectItem> getEquiposDisponiblesParaElemento(Elemento elemento){
 		List<SelectItem> lista = new ArrayList<SelectItem>();
 		try{
 			List<Equipo> l = this.serviciosHistorial.consultarEquiposDisponiblesParaElemento(elemento.getTipo());
@@ -230,7 +219,7 @@ public class adminBean implements Serializable{
 			e.printStackTrace();
 			return null;
 		}
-	}
+	}*/
 
 	
 	public List<Laboratorio> laboratoriosDisponibles(){

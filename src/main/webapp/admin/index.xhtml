@@ -87,7 +87,7 @@
 			       <p:outputLabel for="Equipo" value="Equipo:" />
 			       <h:selectOneMenu required="true" id="Equipo" value="#{adminBean.equipo}" style="width:196px">
 			       		<f:selectItem itemLabel="NULL" itemValue="-1"/>
-	                    <f:selectItems value="#{adminBean.getEquiposSelectItem()}"/>
+	                    <f:selectItems value="#{adminBean.listaEquiposActivos}" itemValue="#{equipo.id}" var="equipo" itemLabel="Sistemas#{equipo.id}"/>
 	                </h:selectOneMenu>
 
 			 
@@ -108,7 +108,6 @@
 				        <p:dataTable rowKey="#{elemento.id}" selection="#{adminBean.listaElementosSeleccionados}" id="elementosT" var="elemento" value="#{adminBean.listaElementos}" rows="10" paginator="true"
 									 paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}" sortBy="#{elemento.id}">
 							<p:column selectionMode="multiple" style="text-align:center"/>
-
 				            <p:column sortBy="#{elemento.id}" filterBy="#{elemento.id}" headerText="Id">
 				                <h:outputText value="#{elemento.id}" />
 				            </p:column>
@@ -301,9 +300,10 @@
 		<div class="container">
 			<h:form id="formEquipos">
 				<p:fieldset id="tablaEquipos" legend="Tabla de equipos">
-					<p:dataTable rowKey="#{equipo.id}" selection="#{adminBean.equipoSeleccionado}" sortBy="#{equipo.id}" id="equiposTabla" var="equipo" value="#{adminBean.listaEquipos}" rows="10" paginator="true"
+					<p:dataTable selectionMode="single" rowKey="#{equipo.id}" selection="#{adminBean.equipoSeleccionado}" sortBy="#{equipo.id}" id="equiposTabla" var="equipo" value="#{adminBean.listaEquipos}" rows="10" paginator="true"
 								 paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}">
-						<p:column selectionMode="single" style="text-align: center" />
+
+						<p:ajax event="rowSelect" listener="#{adminBean.equipoSeleccionado()}"/>
 						<p:column sortBy="#{equipo.id}" filterBy="#{equipo.id}" headerText="Id">
 							<h:outputText value="#{equipo.id}"/>
 						</p:column>
