@@ -126,7 +126,7 @@
 
 							<p:column headerText="Novedades">
 								<center>
-									<button type="button" data-toggle="modal" data-target="#novedadElemento#{elemento.id}" class="btn btn-default btn-info">
+									<button type="button" data-toggle="modal" data-target="#novedadElemento#{elemento.id}" class="btn btn-default btn-info botonNovedadElemento">
 										VER
 									</button>
 								</center>
@@ -457,9 +457,9 @@
 
 
 
-	//MODALES
+	<!-- MODALES -->
 
-	<h:form>
+	<h:form class="formModals" style="display: none;" >
 		<p:dataTable var="elemento" value="#{adminBean.listaElementos}">
 			<p:column>
 				<!-- Modal -->
@@ -469,14 +469,14 @@
 						<!-- Modal content-->
 						<div class="modal-content">
 							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">X</button>
+								<button type="button" class="close cerrarModal" data-dismiss="modal">X</button>
 								<h4 class="modal-title">Novedades</h4>
 							</div>
 							<div class="modal-body">
 
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+								<button type="button" class="btn btn-default cerrarModal" data-dismiss="modal">Cerrar</button>
 							</div>
 						</div>
 					</div>
@@ -489,7 +489,7 @@
 						<!-- Modal content-->
 						<div class="modal-content">
 							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">X</button>
+								<button type="button" class="close cerrarModal" data-dismiss="modal">X</button>
 								<h4 class="modal-title">Configuración Elemento #{elemento.nombre}</h4>
 							</div>
 							<div class="modal-body">
@@ -498,7 +498,7 @@
 								</h:form>
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+								<button type="button" class="btn btn-default cerrarModal" data-dismiss="modal">Cerrar</button>
 							</div>
 						</div>
 					</div>
@@ -511,7 +511,7 @@
 						<!-- Modal content-->
 						<div class="modal-content">
 							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">X</button>
+								<button type="button" class="close cerrarModal" data-dismiss="modal">X</button>
 								<h4 class="modal-title">Configuración Equipo #{elemento.nombre}</h4>
 							</div>
 							<div class="modal-body">
@@ -543,8 +543,8 @@
 								<div class="collapse collapseConfiguracion container-fluid in" id="configurarTeclado#{elemento.id}">
 									<h:form>
 										<h:outputText value="Seleccione el teclado:"/>
-										<h:selectOneMenu>
-											<f:selectItem itemValue="#{teclado.id}" itemLabel="#{teclado.id}" var="teclado" value="#{adminBean.consultarElementosDisponibles(getTeclado())}"/>
+										<h:selectOneMenu value="#{adminBean.tecladoSeleccionado}">
+											<f:selectItems itemValue="#{teclado.id}" itemLabel="#{teclado.id}" var="teclado" value="#{adminBean.consultarElementosDisponibles(adminBean.getTeclado())}"/>
 										</h:selectOneMenu>
 										<h:commandButton value="Cambiar" styleClass="btn btn-default btn-success" action="#{adminBean.actualizarTecladoDeEquipo(equipo)}"/>
 									</h:form>
@@ -552,8 +552,8 @@
 								<div class="collapse collapseConfiguracion container-fluid" id="configurarTorre#{elemento.id}">
 									<h:form>
 										<h:outputText value="Seleccione el terro:"/>
-										<h:selectOneMenu>
-											<f:selectItem itemValue="#{torre.id}" itemLabel="#{torre.id}" var="torre" value="#{adminBean.consultarElementosDisponibles(getTorre())}"/>
+										<h:selectOneMenu value="#{adminBean.torreSeleccionada}">
+											<f:selectItems itemValue="#{torre.id}" itemLabel="#{torre.id}" var="torre" value="#{adminBean.consultarElementosDisponibles(adminBean.getTorre())}"/>
 										</h:selectOneMenu>
 										<h:commandButton value="Cambiar" styleClass="btn btn-default btn-success" action="#{adminBean.actualizarTecladoDeEquipo(equipo)}"/>
 									</h:form>
@@ -566,7 +566,7 @@
 								</div>
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+								<button type="button" class="btn btn-default cerrarModal" data-dismiss="modal">Cerrar</button>
 							</div>
 						</div>
 					</div>
