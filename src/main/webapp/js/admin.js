@@ -6,4 +6,10 @@ $(".botonMenu").click(function(){
 	$(".collapse").collapse("hide");
 });
 
+$(".botonMenuConfiguracion").click(function(){
+	$(".botonMenuConfiguracion").removeClass("active");
+	$(this).addClass("active");
+	$(".collapseConfiguracion").collapse("hide");
+});
+
 

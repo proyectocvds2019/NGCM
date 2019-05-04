@@ -88,14 +88,14 @@ public class adminBean implements Serializable{
 		}
 	}
 
-	/*public List<Elemento> consultarElementosDisponibles(TipoElemento tipo){
+	public List<Elemento> consultarElementosDisponibles(TipoElemento tipo){
 		try{
 			return this.serviciosHistorial.consultarElementosDisponibles(tipo);
 		}catch (ExcepcionServiciosHistorial e){
 			e.printStackTrace();
 			return null;
 		}
-	}*/
+	}
 
 	public Integer consultarEquipoDeElemento(Elemento elemento){
 		try{
@@ -232,7 +232,7 @@ public class adminBean implements Serializable{
 
 	}
 
-	/*public void actualizarTecladoDeEquipo(Equipo equipo){
+	public void actualizarTecladoDeEquipo(Equipo equipo){
 		try{
 			System.out.println(equipo);
 			this.serviciosHistorial.actualizarIdEquipoEnElemento(this.tecladoSeleccionado,equipo.getId());
@@ -261,7 +261,7 @@ public class adminBean implements Serializable{
 		}catch (ExcepcionServiciosHistorial e){
 			e.printStackTrace();
 		}
-	}*/
+	}
 	
 	public List<Elemento> monitoresDisponibles(){
 		try{
