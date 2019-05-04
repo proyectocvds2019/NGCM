@@ -544,25 +544,37 @@
 									<h:form>
 										<h:outputText value="Seleccione el teclado:"/>
 										<h:selectOneMenu value="#{adminBean.tecladoSeleccionado}">
-											<f:selectItems itemValue="#{teclado.id}" itemLabel="#{teclado.id}" var="teclado" value="#{adminBean.consultarElementosDisponibles(adminBean.getTeclado())}"/>
+											<f:selectItems itemValue="#{teclado.id}" itemLabel="#{teclado.id}" var="teclado" value="#{adminBean.consultarElementosDisponibles(adminBean.teclado)}"/>
 										</h:selectOneMenu>
 										<h:commandButton value="Cambiar" styleClass="btn btn-default btn-success" action="#{adminBean.actualizarTecladoDeEquipo(equipo)}"/>
 									</h:form>
 								</div>
 								<div class="collapse collapseConfiguracion container-fluid" id="configurarTorre#{elemento.id}">
 									<h:form>
-										<h:outputText value="Seleccione el terro:"/>
+										<h:outputText value="Seleccione la torre:"/>
 										<h:selectOneMenu value="#{adminBean.torreSeleccionada}">
-											<f:selectItems itemValue="#{torre.id}" itemLabel="#{torre.id}" var="torre" value="#{adminBean.consultarElementosDisponibles(adminBean.getTorre())}"/>
+											<f:selectItems itemValue="#{torre.id}" itemLabel="#{torre.id}" var="torre" value="#{adminBean.consultarElementosDisponibles(adminBean.torre)}"/>
 										</h:selectOneMenu>
-										<h:commandButton value="Cambiar" styleClass="btn btn-default btn-success" action="#{adminBean.actualizarTecladoDeEquipo(equipo)}"/>
+										<h:commandButton value="Cambiar" styleClass="btn btn-default btn-success" action="#{adminBean.actualizarTorreDeEquipo(equipo)}"/>
 									</h:form>
 								</div>
 								<div class="collapse collapseConfiguracion container-fluid" id="configurarMouse#{elemento.id}">
-									<h1>#{elemento.id}</h1>
+									<h:form>
+										<h:outputText value="Seleccione el mouse:"/>
+										<h:selectOneMenu value="#{adminBean.mouseSeleccionado}">
+											<f:selectItems itemValue="#{mouse.id}" itemLabel="#{mouse.id}" var="mouse" value="#{adminBean.consultarElementosDisponibles(adminBean.mouse)}"/>
+										</h:selectOneMenu>
+										<h:commandButton value="Cambiar" styleClass="btn btn-default btn-success" action="#{adminBean.actualizarMouseDeEquipo(equipo)}"/>
+									</h:form>
 								</div>
 								<div class="collapse collapseConfiguracion container-fluid" id="configurarMonitor#{elemento.id}">
-									<h1>#{elemento.id}</h1>
+									<h:form>
+										<h:outputText value="Seleccione el monitor:"/>
+										<h:selectOneMenu value="#{adminBean.monitorSeleccionado}">
+											<f:selectItems itemValue="#{monitor.id}" itemLabel="#{monitor.id}" var="monitor" value="#{adminBean.consultarElementosDisponibles(adminBean.monitor)}"/>
+										</h:selectOneMenu>
+										<h:commandButton value="Cambiar" styleClass="btn btn-default btn-success" action="#{adminBean.actualizarTecladoDeEquipo(equipo)}"/>
+									</h:form>
 								</div>
 							</div>
 							<div class="modal-footer">
