@@ -23,4 +23,8 @@ public interface ElementoDAO {
     public void desactivarElemento(String id) throws PersistenceException;
 
     public Elemento consultarElementoDelEquipo(TipoElemento tipo, Equipo equipo) throws PersistenceException;
+
+    public void cambiarIDElemento(Elemento elemento, String id) throws PersistenceException;
+
+    public void cambiarNombreElemento(Elemento elemento, String nombre) throws PersistenceException;
 }

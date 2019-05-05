@@ -55,6 +55,16 @@ public class MyBATISElementoDAO implements ElementoDAO{
 	public Elemento consultarElementoDelEquipo(TipoElemento tipo, Equipo equipo){
 		return ElementoMapper.consultarElementoDelEquipo(tipo,equipo);
 	}
+
+	@Override
+	public void cambiarIDElemento(Elemento elemento, String id){
+		ElementoMapper.cambiarIDElemento(elemento,id);
+	}
+
+	@Override 
+	public void cambiarNombreElemento(Elemento elemento, String nombre){
+		ElementoMapper.cambiarNombreElemento(elemento,nombre);
+	}
 	
 
 }

@@ -48,4 +48,8 @@ public interface ServiciosHistorial {
 	public abstract void exportarElementos() throws ExcepcionServiciosHistorial;
 
 	public abstract List<Equipo> consultarEquiposDisponibles() throws ExcepcionServiciosHistorial;
+
+	public abstract void cambiarIDElemento(Elemento elemento, String id) throws ExcepcionServiciosHistorial;
+
+	public abstract void cambiarNombreElemento(Elemento elemento, String nombre) throws ExcepcionServiciosHistorial;
 }

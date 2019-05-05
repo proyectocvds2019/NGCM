@@ -363,6 +363,24 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 		}
 	}
 
+	@Override
+	public void cambiarIDElemento(Elemento elemento, String id) throws ExcepcionServiciosHistorial{
+		try{
+			this.elementoDAO.cambiarIDElemento(elemento,id);
+		}catch(PersistenceException e){
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void cambiarNombreElemento(Elemento elemento, String nombre) throws ExcepcionServiciosHistorial{
+		try{
+			this.elementoDAO.cambiarNombreElemento(elemento,nombre);
+		}catch(PersistenceException e){
+			e.printStackTrace();
+		}
+	}
+
 	
 
 

@@ -56,6 +56,18 @@
 		WHERE Elementos.id = #{id} AND Elementos.idEquipo IS NULL;
 	</update>
 
+	<update parameterType="map" id="cambiarIDElemento">
+		UPDATE Elementos
+		SET id = #{id}
+		WHERE Elementos.id = #{elemento.id};
+	</update>
+
+	<update parameterType="map" id="cambiarNombreElemento">
+		UPDATE Elementos
+		SET nombre = #{nombre}
+		WHERE Elementos.id = #{elemento.id};
+	</update>
+
 	<select id="consultarElementoDelEquipo" parameterType="map" resultMap="ElementosResult">
 		SELECT elementos.id, elementos.tipo, elementos.nombre, elementos.activo
 		FROM elementos,equipos

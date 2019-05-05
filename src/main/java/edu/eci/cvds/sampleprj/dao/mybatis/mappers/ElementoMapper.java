@@ -30,4 +30,8 @@ public interface ElementoMapper {
 	public void desactivarElemento(@Param("id") String id);
 
 	public Elemento consultarElementoDelEquipo(@Param("tipoElemento") TipoElemento tipo, @Param("equipo")Equipo equipo);
+
+	public void cambiarIDElemento(@Param("elemento") Elemento elemento, @Param("id") String id);
+
+	public void cambiarNombreElemento(@Param("elemento")Elemento elemento,@Param("nombre") String nombre);
 }

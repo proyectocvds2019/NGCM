@@ -12,12 +12,12 @@ $(".botonMenuConfiguracion").click(function(){
 	$(".collapseConfiguracion").collapse("hide");
 });
 
-$(".botonNovedadElemento").click(function(){
-	$(".formModals").css("display","block");
-});
+// $(".botonNovedadElemento").click(function(){
+// 	$(".formModals").css("display","block");
+// });
 
-$(".cerrarModal").click(function(){
-	$(".formModals").css("display","none");
-});
+// $(".cerrarModal").click(function(){
+// 	$(".formModals").css("display","none");
+// });
 
 

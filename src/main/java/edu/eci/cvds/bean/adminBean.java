@@ -44,6 +44,8 @@ public class adminBean implements Serializable{
 	private List<TipoElemento> tipoElementos = new ArrayList<TipoElemento>();
 	private String torreSeleccionada;
 	private String tecladoSeleccionado;
+	private String cambioIDElemento;
+	private String cambioNombreElemento;
 	private List<Elemento> listaElementos;
 	private List<Elemento> listaElementosDisponibles;
 	private List<Equipo> listaEquipos;
@@ -61,7 +63,11 @@ public class adminBean implements Serializable{
     private ServiciosHistorial serviciosHistorial;
 	
 	public adminBean() {
-	    for(TipoElemento t: TipoElemento.values()){
+	    this.recargar();
+	}
+
+	public void recargar(){
+		for(TipoElemento t: TipoElemento.values()){
 	        this.tipoElementos.add(t);
         }
 		Subject subject = SecurityUtils.getSubject();
@@ -221,7 +227,7 @@ public class adminBean implements Serializable{
 		}
 	}*/
 
-	
+	// FALTA CORREGIR ESTE MÉTODO
 	public List<Laboratorio> laboratoriosDisponibles(){
 		List<Laboratorio> lis = new ArrayList<Laboratorio>();
 		lis.add(new Laboratorio(1,"laboratorio de redes",true));
@@ -317,6 +323,26 @@ public class adminBean implements Serializable{
 		}
 	}
 	
+	public void CambiarIDElemento(Elemento elemento){
+		System.out.println(elemento.getId()+" "+this.cambioIDElemento+" "+this.torreSeleccionada);
+		try{
+			this.serviciosHistorial.cambiarIDElemento(elemento, this.cambioIDElemento);
+		}catch(ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+		}
+	}
+
+	public void cambiarNombreElemento(Elemento elemento){
+		System.out.println(elemento.getId()+" "+this.cambioNombreElemento);
+		try{
+			System.out.println(elemento.getId()+" "+this.cambioNombreElemento);
+			this.serviciosHistorial.cambiarNombreElemento(elemento, this.cambioNombreElemento);
+		}catch(ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+		}
+	}
+
+
 	
 	
 	
@@ -489,5 +515,22 @@ public class adminBean implements Serializable{
 	}
 	public String getNombreLaboratorio(){
 		return this.nombreLaboratorio;
+	}
+
+	public String getCambioIDElemento(){
+		return this.cambioIDElemento;
+	}
+
+	public void setCambioIDElemento(String cambioIDElemento){
+		this.cambioIDElemento = cambioIDElemento;
+	}
+
+	public String getCambioNombreElemento(){
+		return this.cambioNombreElemento;
+	}
+
+	public void setCambioNombreElemento(String cambioNombreElemento){
+		System.out.println("holaaaaaaaaaaaaaa "+cambioNombreElemento);
+		this.cambioNombreElemento = cambioNombreElemento;
 	}
 }
