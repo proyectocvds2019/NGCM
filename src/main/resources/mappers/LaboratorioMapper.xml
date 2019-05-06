@@ -30,5 +30,9 @@
         WHERE laboratorios.id = equipos.laboratorio AND equipos.id = #{equipo.id}
     </select>
 
+	<insert id = 'registrarLaboratorio' parameterType = 'map'>
+		INSERT INTO laboratorios (id, nombre, activo)
+		VALUES (#{lab.id},#{lab.nombre},#{lab.activo});
+	</insert>
 
 </mapper>
