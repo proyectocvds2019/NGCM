@@ -26,4 +26,6 @@ public interface EquipoDAO {
     public List<Equipo> consultarEquiposDisponibles() throws PersistenceException;
     
     public void actualizarIdLaboratorio(Integer idLab, Integer idEq) throws PersistenceException;
+
+	public Equipo consultarEquipoDelLaboratorio(Laboratorio lab) throws PersistenceException;
 }

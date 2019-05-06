@@ -52,4 +52,8 @@ public interface ServiciosHistorial {
 	public abstract void cambiarIDElemento(Elemento elemento, String id) throws ExcepcionServiciosHistorial;
 
 	public abstract void cambiarNombreElemento(Elemento elemento, String nombre) throws ExcepcionServiciosHistorial;
+	
+	public abstract void registrarLaboratorio(Laboratorio lab) throws ExcepcionServiciosHistorial;
+
+	public abstract Equipo consultarEquipoDelLaboratorio(Laboratorio lab) throws ExcepcionServiciosHistorial;
 }

@@ -58,4 +58,9 @@ public class MyBATISEquipoDAO implements EquipoDAO{
 		
 	}
 
+	@Override
+	public Equipo consultarEquipoDelLaboratorio(Laboratorio lab) throws PersistenceException{
+		return equipoMapper.consultarEquipoDelLaboratorio(lab);
+	}
+
 }

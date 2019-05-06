@@ -34,4 +34,6 @@ public interface EquipoMapper {
 	
 	public void actualizarIdLaboratorio(@Param("idLab") Integer idLab, @Param("idEq") Integer idEq);
 
+	public Equipo consultarEquipoDelLaboratorio(@Param("lab") Laboratorio lab);
+
 }

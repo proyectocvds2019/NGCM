@@ -389,7 +389,47 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 		}
 	}
 
-	
+	@Override
+	public void registrarLaboratorio(Laboratorio lab) throws ExcepcionServiciosHistorial {
+		try {
+			laboratorioDAO.registrarLaboratorio(lab);
+			for(Equipo e: lab.getEquipos()) {
+				actualizarIdLaboratorioEnEquipo(e.getId(), lab.getId());
+			}
+		}catch (PersistenceException ex) {
+			throw new ExcepcionServiciosHistorial("No se pudo registrar el laboratorio");
+		}
+	}	
 
+	private void actualizarIdLaboratorioEnEquipo(Integer idEquipo, Integer idLab) throws ExcepcionServiciosHistorial{
+		try {
+			if(idLab != null) {
+				Equipo eq = equipoDAO.consultarEquipo(idEquipo);
+				Laboratorio lab = laboratorioDAO.consultarLaboratorio(idLab);
+				Equipo eq2 = null;
+				if(lab != null) {
+					eq2 = equipoDAO.consultarEquipoDelLaboratorio(lab);
+				}
+				if(eq != null) {
+					equipoDAO.actualizarIdLaboratorio(null, eq.getId());
+				}
+				if(eq2 != null) {
+					equipoDAO.actualizarIdLaboratorio(null, eq2.getId());
+				}
+			}
+			equipoDAO.actualizarIdLaboratorio(idLab, idEquipo);
+		}catch(PersistenceException e) {
+			throw new ExcepcionServiciosHistorial("No se pudo actualizar el idLaboratorio en el equipo.");
+		}
+	}
+	
+	@Override
+	public Equipo consultarEquipoDelLaboratorio(Laboratorio lab) throws ExcepcionServiciosHistorial {
+		try {
+			return equipoDAO.consultarEquipoDelLaboratorio(lab);
+		} catch(PersistenceException e) {
+			throw new ExcepcionServiciosHistorial("No se pudo consultar el equipo del laboratorio"+lab.getId());
+		}
+	}
 
 }

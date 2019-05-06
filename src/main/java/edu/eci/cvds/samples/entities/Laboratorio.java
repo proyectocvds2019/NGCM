@@ -1,21 +1,32 @@
 package edu.eci.cvds.samples.entities;
 
+import java.util.ArrayList;
+
 public class Laboratorio {
 
     private Integer id;
     private String nombre;
     private boolean activo;
-
-    public Laboratorio(Integer id, String nombre, boolean activo){
-        setActivo(activo);
-        setId(id);
-        setNombre(nombre);
-    }
+    private ArrayList<Equipo> equipos;
+    
     public Laboratorio(){
 
     }
 
+    public Laboratorio(Integer id, String nombre, boolean activo){
+        this.setActivo(activo);
+        this.setId(id);
+        this.setNombre(nombre);
+        this.setEquipos(new ArrayList<Equipo>());
+    }
 
+	public Laboratorio(Integer id, String nombre, boolean activo, ArrayList<Equipo> equipos){
+    	this.setActivo(activo);
+    	this.setId(id);
+    	this.setNombre(nombre);
+    	this.setEquipos(equipos);
+    }
+    
     public String getNombre() {
         return nombre;
     }
@@ -40,4 +51,13 @@ public class Laboratorio {
     public void setId(Integer id) {
         this.id = id;
     }
+    
+	public ArrayList<Equipo> getEquipos() {
+		return equipos;
+	}
+	
+	private void setEquipos(ArrayList<Equipo> equipos) {
+		this.equipos = equipos;
+	}
+	
 }
