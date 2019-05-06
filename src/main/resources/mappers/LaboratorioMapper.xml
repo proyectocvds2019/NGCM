@@ -22,6 +22,7 @@
     <select id="consultarLaboratorio" parameterType="map" resultMap="laboratorioResult">
         SELECT *
         FROM laboratorios
+        WHERE laboratorios.id = #{id};
     </select>
 
     <select id="consultarLaboratorio2" parameterType="map" resultMap="laboratorioResult">
