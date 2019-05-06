@@ -35,5 +35,11 @@
 		INSERT INTO laboratorios (id, nombre, activo)
 		VALUES (#{lab.id},#{lab.nombre},#{lab.activo});
 	</insert>
+	
+	<update id = 'desactivarLaboratorio' parameterType = 'map'>
+		UPDATE Laboratorios
+		SET activo = false
+		WHERE Laboratorios.id = #{id};
+	</update>
 
 </mapper>
