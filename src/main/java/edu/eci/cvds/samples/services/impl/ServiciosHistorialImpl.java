@@ -150,7 +150,10 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 			if(idEquipo != null){
 				Elemento elem = elementoDAO.consultarElemento(idElemento);
 				Equipo equi = equipoDAO.consultarEquipo(idEquipo);
-				Elemento elem2 = elementoDAO.consultarElementoDelEquipo(elem.getTipo(),equi);
+				Elemento elem2 =null;
+				if(equi != null){
+					elem2 = elementoDAO.consultarElementoDelEquipo(elem.getTipo(),equi);
+				}
 				if(elem != null){
 					elementoDAO.actualizarIdEquipo(elem.getId(),null);
 				}
