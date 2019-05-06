@@ -157,7 +157,7 @@
 											<div class="modal-body">
 												<p>¿Quiere dar de baja los elementos seleccionados?.</p>
 												<h:commandButton action="#{adminBean.eliminarElementos()}" process="elementosT" value="SI" styleClass="btn btn-default btn-success"/>
-												<button class="btn btn-default btn-danger" data-dismiss="modal">NO</button>
+												<button type="button" class="btn btn-default btn-danger" data-dismiss="modal">NO</button>
 											</div>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -482,18 +482,18 @@
 							</nav>
 						</div>
 						<div class="in collapse collapseConfiguracion container-fluid" id="configurarID#{elemento.id}">
-							<h:form>
+							<h:form method="get">
 							    <p:messages>
 							        <p:autoUpdate />
 							    </p:messages>
 							 
 							    <h:panelGrid class="col-xs-12" columns="2" cellpadding="5">
 									<h:outputText value="Nuevo ID:"/>
-									<p:inputText required="true" id="idElemento" value="#{adminBean.cambioIDElemento}"/>
+									<h:inputText required="true" id="cambioElemento" value="#{adminBean.cambioIDElemento}"/>
 							    </h:panelGrid>
 								
 							 
-							    <p:commandButton  action="#{adminBean.CambiarIDElemento(elemento)}" styleClass="btn btn-default btn-success" value="Cambiar" />
+							    <p:commandButton  action="#{adminBean.CambiarIDElemento(elemento)}" styleClass="btn btn-default btn-success btn-block" value="Cambiar" />
 								
 
 							</h:form>
@@ -507,7 +507,7 @@
 									<h:outputText value="Nuevo Nombre:"/>
 									<p:inputText required="true" id="configurarNombreElementoValor#{elemento.id}" value="#{adminBean.cambioNombreElemento}"/>
 								</h:panelGrid>
-								<p:commandButton styleClass="btn btn-default btn-success btn-block" value="Cambiar" action="#{adminBean.cambiarNombreElemento(elemento)}"/>
+								<h:commandButton styleClass="btn btn-default btn-success btn-block" value="Cambiar" action="#{adminBean.cambiarNombreElemento(elemento)}"/>
 							</h:form>
 						</div>
 					</div>
@@ -517,8 +517,6 @@
 				</div>
 			</div>
 		</div>
-
-		
 	</ui:repeat>
 
 	<!-- EQUIPOS -->
