@@ -62,4 +62,10 @@
 		WHERE Equipos.id = #{id};
 	</update>
 	
+	<update parameterType = 'map' id = 'actualizarIdLaboratorio'>
+		UPDATE Equipos
+		SET laboratorio = #{idLab}
+		WHERE id = #{idEq};
+	</update>
+	
 </mapper>
