@@ -52,4 +52,10 @@ public class MyBATISEquipoDAO implements EquipoDAO{
 		return equipoMapper.consultarEquiposDisponibles();
 	}
 
+	@Override
+	public void actualizarIdLaboratorio(Integer idLab, Integer idEq) throws PersistenceException {
+		equipoMapper.actualizarIdLaboratorio(idLab, idEq);
+		
+	}
+
 }
