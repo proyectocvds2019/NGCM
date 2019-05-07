@@ -13,7 +13,7 @@ $(".botonMenuConfiguracion").click(function(){
 });
 
 
-function comprobarRegistroElemento(data){
+function comprobar(data){
     console.log(data);
     if(data.status != 'success'){
         $("#modalCargando").modal("show");

@@ -58,6 +58,7 @@ public class adminBean implements Serializable{
 	private List<Elemento> listaElementosSeleccionados;
 	private List<Equipo> equiposSeleccionados;
 	private Elemento configurarElemento;
+	private Elemento enlazarEquipoSeleccionado;
 	private List<TipoElemento> elementosSeleccionadoPorEquipo;
 	private static final TipoElemento teclado = TipoElemento.TECLADO;
 	private static final TipoElemento mouse = TipoElemento.MOUSE;
@@ -89,12 +90,10 @@ public class adminBean implements Serializable{
     
 	public void registrarElemento(){
 		try{
-			System.out.println("aca1");
 			Elemento elemento = new Elemento(idElemento,tipoSeleccionado,nombreElemento,true);
 			serviciosHistorial.registrarElemento(elemento,this.correo,this.equipo);
 			this.mensajeCorrecto();
 		}catch (ExcepcionServiciosHistorial e){
-			System.out.println("aca2");
 			e.printStackTrace();
 			this.mensajeError();
 		}catch (Exception e){
@@ -163,9 +162,17 @@ public class adminBean implements Serializable{
 	public void eliminarElementos(){
 		try{
 			for(Elemento e: this.listaElementosSeleccionados){
+				if(this.serviciosHistorial.consultarEquipoDeElemento(e) != null){
+					this.mensajeError();
+					return;
+				}
+			}
+			for(Elemento e: this.listaElementosSeleccionados){
 				this.serviciosHistorial.desactivarElemento(e.getId());
 			}
+			this.mensajeCorrecto();
 		}catch (ExcepcionServiciosHistorial e){
+			this.mensajeError();
 			e.printStackTrace();
 		}
 	}
@@ -564,5 +571,13 @@ public class adminBean implements Serializable{
 
 	public void setConfigurarElemento(Elemento configurarElemento){
 		this.configurarElemento = configurarElemento;
+	}
+
+	public Elemento getEnlazarEquipoSeleccionado() {
+		return enlazarEquipoSeleccionado;
+	}
+
+	public void setEnlazarEquipoSeleccionado(Elemento enlazarEquipoSeleccionado) {
+		this.enlazarEquipoSeleccionado = enlazarEquipoSeleccionado;
 	}
 }

@@ -96,7 +96,7 @@
 				
 			 
 			    <p:commandButton ajax="true" onsuccess="mensajeCorrecto('El elemento se ha registrado!')" onerror="mensajeError('No se ha podido registrar el elemento!')" id="botonRegistrarElemento" process="@form" action="#{adminBean.registrarElemento()}" icon="fa fa-check" styleClass="btn btn-default btn-success" value="Registrar" >
-					<f:ajax  onevent="comprobarRegistroElemento"/>
+					<f:ajax  onevent="comprobar"/>
 				</p:commandButton>
 				
 
@@ -109,7 +109,7 @@
 				<h:form>
 					<p:fieldset id="tablaElementos" legend="Tabla de elementos">
 				        <p:dataTable rowKey="#{elemento.id}" selection="#{adminBean.listaElementosSeleccionados}" id="elementosT" var="elemento" value="#{adminBean.listaElementos}" rows="10" paginator="true"
-									 paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}" sortBy="#{elemento.id}">
+									 paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}">
 							<p:column selectionMode="multiple" style="text-align: center;"/>
 				            <p:column sortBy="#{elemento.id}" filterBy="#{elemento.id}" headerText="Id">
 				                <h:outputText value="#{elemento.id}" />
@@ -127,23 +127,29 @@
 								<h:outputText value="#{elemento.activo}"/>
 							</p:column>
 
-							<p:column headerText="Novedades">
+							<p:column sortBy="#{elemento.id}" headerText="Novedades">
 								<center>
-									<h:commandButton type="button" styleClass="btn btn-default btn-info botonNovedadElemento" value="VER">
-										<p:ajax update="salidaTextoConfigurarElementoID" event="click" listener="#{adminBean.setConfigurarElemento(elemento)}" />
+									<h:commandButton ajax="true" action="#{adminBean.setConfigurarElemento(elemento)}" type="button" styleClass="btn btn-default btn-info botonNovedadElemento" value="VER">
+										<p:ajax update="salidaTextoConfigurarElementoID" />
 										<e:attribute name="data-target" value="#novedadElemento"/>
 										<e:attribute name="data-toggle" value="modal"/>
 									</h:commandButton>
 								</center>
 							</p:column>
-							<p:column headerText="Configurar">
+							<p:column sortBy="#{elemento}" headerText="Configurar">
+								#{elemento.id}
 								<center>
-									<h:commandButton type="button" action="#{adminBean.setConfigurarElemento(elemento)}" value="conf" styleClass="btn btn-default">
-										<!-- <i class="fas fa-wrench"></i> -->
-										<p:ajax update="salidaTextoConfigurarElementoID" event="click" listener="#{adminBean.setConfigurarElemento(elemento)}" />
-										<e:attribute name="data-target" value="#configurarElementoModal"/>
-										<e:attribute name="data-toggle" value="modal"/>
-									</h:commandButton>
+									<h:form>
+										<h:selectOneMenu value="#{adminBean.configurarElemento}">
+											<f:selectItem itemValue="#{elemento}" itemLabel="#{elemento.id}"/>
+										</h:selectOneMenu>
+										<h:commandButton style="display:none;" ajax="true" type="button" value="conf" styleClass="btn btn-default">
+											<!-- <i class="fas fa-wrench"></i> -->
+											<p:ajax update="salidaTextoConfigurarElementoID" />
+											<e:attribute name="data-target" value="#configurarElementoModal"/>
+											<e:attribute name="data-toggle" value="modal"/>
+										</h:commandButton>
+									</h:form>
 								</center>
 							</p:column>
 							<f:facet name="footer">
@@ -162,8 +168,8 @@
 											</div>
 											<div class="modal-body">
 												<p>¿Quiere dar de baja los elementos seleccionados?.</p>
-												<p:commandButton onsuccess="mensajeCorrecto('los elementos se han dado de baja correctamente')" onerror="mensajeError('No se ha podido dar de baja los elementos')" action="#{adminBean.eliminarElementos()}" process="elementosT" value="SI" styleClass="btn btn-default btn-success">
-													<f:ajax onevent="comprobarRegistroElemento"/>
+												<p:commandButton onsuccess="mensajeCorrecto('los elementos se han dado de baja correctamente')" onerror="mensajeError('No se puede realizar la solicitud!')" action="#{adminBean.eliminarElementos()}" process="elementosT" value="SI" styleClass="btn btn-default btn-success">
+													<f:ajax onevent="comprobar"/>
 												</p:commandButton>
 												<button type="button" class="btn btn-default btn-danger" data-dismiss="modal">NO</button>
 											</div>
@@ -192,7 +198,7 @@
 			<div class="col-md-12 col-xs-12">
 				<h:form id="formElementosDisponibles">
 					<p:fieldset id="tablaElementosDisponibles" legend="Tabla de elementos disponibles">
-				        <p:dataTable sortBy="#{elemento.id}" id="elementosTabla" var="elemento" value="#{adminBean.listaElementosDisponibles}" rows="10" paginator="true"
+				        <p:dataTable id="elementosTabla" var="elemento" value="#{adminBean.listaElementosDisponibles}" rows="10" paginator="true"
 									 paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}">
 				 
 				            <p:column sortBy="#{elemento.id}" filterBy="#{elemento.id}" headerText="Id">
@@ -206,49 +212,19 @@
 				            <p:column sortBy="#{elemento.tipo}" filterBy="#{elemento.tipo}" headerText="Tipo">
 				                <h:outputText value="#{elemento.tipo}" />
 				            </p:column>
-							<p:column headerText="Enlazar">
-								<center>
+							<p:column sortBy="#{elemento.id}" headerText="Enlazar">
+								<!--<center>
 									<button data-toggle="modal" data-target="#botonEnlazarEquipoModal#{elemento.id}" type="button" class="btn btn-default btn-responsive btn-primary"><i class="fas fa-star"></i>Enlazar equipo</button>
-								</center>
+								</center>-->
+
+								<h:commandButton type="button" styleClass="btn btn-default btn-responsive btn-primary" value="Enlazar equipo">
+									<p:ajax update="enlazarEquipoModal" event="click" listener="#{adminBean.setEnlazarEquipoSeleccionado(elemento)}" />
+									<e:attribute name="data-target" value="#botonEnlazarEquipoModal"/>
+									<e:attribute name="data-toggle" value="modal"/>
+								</h:commandButton>
 
 
-								<!-- MODAL -->
-								<div class="modal fade" id="botonEnlazarEquipoModal#{elemento.id}" role="dialog">
-									<div class="modal-dialog">
 
-										<!-- Modal content-->
-										<div class="modal-content">
-											<div class="modal-header">
-
-												<h4 class="modal-title">Enlazar equipo al elemento</h4>
-											</div>
-											<div class="modal-body">
-												<h:form id="formularioEnlazarElemento">
-													<p:messages>
-														<p:autoUpdate />
-													</p:messages>
-													<div class="row" style="padding:25px;">
-														<p:outputLabel class="col-xs-12 col-md-6" value="Elemento"/>
-														<input type="text" class="col-xs-12 col-md-6" value="#{elemento.id}" disabled="disabled"/>
-														<hr/>
-														<p:outputLabel class="col-xs-12 col-md-6" value="Seleccionar Equipo"/>
-														<h:selectOneMenu style="" dynamic="true" class="col-xs-12 col-md-6" id="equipoAsociar" value="#{adminBean.equipo}">
-															<f:selectItems var="equipo" value="#{adminBean.listaEquiposActivos}" itemValue="#{equipo.id}" itemLabel="Sistemas#{equipo.id}"/>
-														</h:selectOneMenu>
-														<hr class="col-xs-11"/>
-														<p:commandButton ajax="true" onsuccess="mensajeCorrecto('El elemento ha sido enlazado!')" onerror="mensajeError('No es posible enlazar el elemento!')" process="formularioEnlazarElemento" id="formularioEnlazarElemento#{elemento.id}" action="#{adminBean.enlazarElemento(elemento)}" styleClass="btn btn-default btn-success btn-responsive btn-block" value="Enlazar" >
-															<f:ajax  onevent="comprobarRegistroElemento"/>
-														</p:commandButton>
-													</div>
-												</h:form>
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-											</div>
-										</div>
-
-									</div>
-								</div>
 								
 							</p:column>
 							<f:facet name="footer">
@@ -300,7 +276,7 @@
 				</h:panelGrid>
 
 				<p:commandButton ajax="true" onsuccess="mensajeCorrecto('El elemento se ha registrado!')" onerror="mensajeError('No se ha podido registrar el elemento!')" action="#{adminBean.registrarEquipo()}" icon="fa fa-check" class="btn btn-default btn-success" value="Registrar" >
-					<f:ajax  onevent="comprobarRegistroElemento"/>
+					<f:ajax  onevent="comprobar"/>
 				</p:commandButton>
 			</h:form>
 			<hr/>
@@ -342,12 +318,12 @@
 
 						</p:column>
 
-						<p:column headerText="Novedades">
+						<p:column sortBy="#{equipo.id}" headerText="Novedades">
 							<center>
 								<button style="padding:5px;" type="button" data-toggle="modal" data-target="#novedadEquipo#{equipo.id}" class="btn btn-block btn-default btn-info col-xs-12">VER</button>
 							</center>
 						</p:column>
-						<p:column headerText="Configurar">
+						<p:column sortBy="#{equipo.id}" headerText="Configurar">
 							<center>
 								<button type="button" data-toggle="modal" data-target="#configurarEquipo#{equipo.id}" class="btn btn-default btn-info">
 									<i class="fas fa-wrench"></i>
@@ -486,7 +462,7 @@
 										<span class="icon-bar"></span>
 									</button>
 								</div>
-								<div class="collapse navbar-collapse" id="myNavbarCambioElementos">
+								<div class="collapse navbar-collapse" id="myNavbarCambioElementosModal">
 									<ul class="nav navbar-nav">
 										<li id="botonConfigurarIDElemento" data-toggle="collapse" data-target="#configurarID" class="active botonMenuConfiguracion"><a href="#">ID</a></li>
 
@@ -550,6 +526,42 @@
 					<button type="button" class="btn btn-default cerrarModal" data-dismiss="modal">Cerrar</button>
 				</div>
 			</div>
+		</div>
+	</div>
+
+
+	<!-- MODAL -->
+	<div class="modal fade" id="botonEnlazarEquipoModal" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+
+					<h4 class="modal-title">Enlazar equipo al elemento <h:outputText id="enlazarEquipoModal" value="#{adminBean.enlazarEquipoSeleccionado.nombre}"/> </h4>
+				</div>
+				<div class="modal-body">
+					<h:form id="formularioEnlazarElemento">
+						<p:messages>
+							<p:autoUpdate />
+						</p:messages>
+						<div class="row" style="padding:25px;">
+							<p:outputLabel class="col-xs-12 col-md-6" value="Seleccionar Equipo"/>
+							<h:selectOneMenu style="" dynamic="true" class="col-xs-12 col-md-6" id="equipoAsociar" value="#{adminBean.equipo}">
+								<f:selectItems var="equipo" value="#{adminBean.listaEquiposActivos}" itemValue="#{equipo.id}" itemLabel="Sistemas#{equipo.id}"/>
+							</h:selectOneMenu>
+							<hr class="col-xs-11"/>
+							<p:commandButton ajax="true" onsuccess="mensajeCorrecto('El elemento ha sido enlazado!')" onerror="mensajeError('No es posible enlazar el elemento!')" process="formularioEnlazarElemento" id="formularioEnlazarElemento#{adminBean.enlazarEquipoSeleccionado.id}" action="#{adminBean.enlazarElemento(adminBean.enlazarEquipoSeleccionado)}" styleClass="btn btn-default btn-success btn-responsive btn-block" value="Enlazar" >
+								<f:ajax  onevent="comprobar"/>
+							</p:commandButton>
+						</div>
+					</h:form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				</div>
+			</div>
+
 		</div>
 	</div>
 
