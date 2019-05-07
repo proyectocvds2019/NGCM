@@ -86,13 +86,8 @@ public class adminBean implements Serializable{
     
 	public void registrarElemento() throws ExcepcionServiciosHistorial {
 		Elemento elemento = new Elemento(idElemento,tipoSeleccionado,nombreElemento,true);
-		try {
-			serviciosHistorial.registrarElemento(elemento,this.correo,this.equipo);
-			this.mensajeCorrecto();
-		}catch(Exception e) {
-			e.printStackTrace();
-			this.mensajeError();
-		}
+		serviciosHistorial.registrarElemento(elemento,this.correo,this.equipo);
+		this.mensajeCorrecto();
 	}
 
 	public List<Elemento> consultarElementosDisponibles(TipoElemento tipo){
@@ -113,25 +108,21 @@ public class adminBean implements Serializable{
 		}
 	}
 	
-	public void registrarEquipo() {
-		try{
-			Elemento torre = this.serviciosHistorial.consultarElemento(this.torreSeleccionada);
-			Elemento mouse = this.serviciosHistorial.consultarElemento(this.mouseSeleccionado);
-			Elemento teclado = this.serviciosHistorial.consultarElemento(this.tecladoSeleccionado);
-			Elemento monitor = this.serviciosHistorial.consultarElemento(this.monitorSeleccionado);
-			Laboratorio laboratorio = this.serviciosHistorial.consultarLaboratorio(this.laboratorioSeleccionado);
-			if(this.laboratorioSeleccionado==-1) laboratorio = new Laboratorio();
-			System.out.println(laboratorio.getId());
-			ArrayList<Elemento> lista = new ArrayList<Elemento>();
-			lista.add(torre);lista.add(mouse);lista.add(teclado);lista.add(monitor);
-			Integer id = this.serviciosHistorial.proximoIdEquipo();
-			Equipo equipo = new Equipo(id,lista,true);
-			this.serviciosHistorial.registrarEquipo(equipo,laboratorio);
-			this.mensajeCorrecto();
-		}catch (ExcepcionServiciosHistorial e){
-			e.printStackTrace();
-			this.mensajeError();
-		}
+	public void registrarEquipo() throws ExcepcionServiciosHistorial{
+		Elemento torre = this.serviciosHistorial.consultarElemento(this.torreSeleccionada);
+		Elemento mouse = this.serviciosHistorial.consultarElemento(this.mouseSeleccionado);
+		Elemento teclado = this.serviciosHistorial.consultarElemento(this.tecladoSeleccionado);
+		Elemento monitor = this.serviciosHistorial.consultarElemento(this.monitorSeleccionado);
+		Laboratorio laboratorio = this.serviciosHistorial.consultarLaboratorio(this.laboratorioSeleccionado);
+		if(this.laboratorioSeleccionado==-1) laboratorio = new Laboratorio();
+		System.out.println(laboratorio.getId());
+		ArrayList<Elemento> lista = new ArrayList<Elemento>();
+		lista.add(torre);lista.add(mouse);lista.add(teclado);lista.add(monitor);
+		Integer id = this.serviciosHistorial.proximoIdEquipo();
+		Equipo equipo = new Equipo(id,lista,true);
+		this.serviciosHistorial.registrarEquipo(equipo,laboratorio);
+		this.mensajeCorrecto();
+
 	}
 	public  void registrarLaboratorio(){
 		this.mensajeCorrecto();
@@ -348,6 +339,11 @@ public class adminBean implements Serializable{
 		}catch(ExcepcionServiciosHistorial e){
 			e.printStackTrace();
 		}
+	}
+
+	public boolean probando(){
+		System.out.println("ñlakdsjfñlksadjf");
+		return false;
 	}
 
 

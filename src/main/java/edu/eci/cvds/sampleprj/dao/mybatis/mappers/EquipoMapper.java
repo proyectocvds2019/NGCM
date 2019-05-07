@@ -31,5 +31,9 @@ public interface EquipoMapper {
 	public void desactivarEquipo(@Param("id") int id);
 
 	public List<Equipo> consultarEquiposDisponibles();
+	
+	public void actualizarIdLaboratorio(@Param("idLab") Integer idLab, @Param("idEq") Integer idEq);
+
+	public Equipo consultarEquipoDelLaboratorio(@Param("lab") Laboratorio lab);
 
 }

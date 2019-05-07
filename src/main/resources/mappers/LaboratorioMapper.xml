@@ -22,6 +22,7 @@
     <select id="consultarLaboratorio" parameterType="map" resultMap="laboratorioResult">
         SELECT *
         FROM laboratorios
+        WHERE laboratorios.id = #{id};
     </select>
 
     <select id="consultarLaboratorio2" parameterType="map" resultMap="laboratorioResult">
@@ -30,5 +31,15 @@
         WHERE laboratorios.id = equipos.laboratorio AND equipos.id = #{equipo.id}
     </select>
 
+	<insert id = 'registrarLaboratorio' parameterType = 'map'>
+		INSERT INTO laboratorios (id, nombre, activo)
+		VALUES (#{lab.id},#{lab.nombre},#{lab.activo});
+	</insert>
+	
+	<update id = 'desactivarLaboratorio' parameterType = 'map'>
+		UPDATE Laboratorios
+		SET activo = false
+		WHERE Laboratorios.id = #{id};
+	</update>
 
 </mapper>

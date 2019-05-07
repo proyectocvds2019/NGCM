@@ -16,6 +16,7 @@
     
     <!-- JS plugins -->
     <script src="../js/plugins/bootstrap.min.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 	
 </h:head>
@@ -28,7 +29,7 @@
 
 			</div>
 			<div class="row col-xs-12 col-md-6" id="divLogo">
-				<img id="logo" class="img img-responsive col-xs-12" src="https://www.escuelaing.edu.co/uploads/descargables/1110_logotipo_institucional_vm300px.png"/>
+				<img id="logo" class="img img-responsive" src="https://www.escuelaing.edu.co/uploads/descargables/1110_logotipo_institucional_vm300px.png"/>
 			</div>
 		</div>
 		<div class="row col-xs-12">
@@ -70,9 +71,6 @@
 			<h1>Registrar Elemento</h1>
 			<hr/>
 			<h:form>
-			    <p:messages>
-			        <p:autoUpdate />
-			    </p:messages>
 			 
 			    <h:panelGrid class="col-xs-12" columns="2" cellpadding="5">
 					<p:outputLabel for="idElemento" value="Id del elemento:"/>
@@ -98,7 +96,9 @@
 			    </h:panelGrid>
 				
 			 
-			    <p:commandButton  action="#{adminBean.registrarElemento()}" icon="fa fa-check" styleClass="btn btn-default btn-success" value="Registrar" />
+			    <p:commandButton process="@this" action="#{adminBean.registrarElemento()}" icon="fa fa-check" styleClass="btn btn-default btn-success" value="Registrar" >
+					<p:ajax onerror="mensajeError" onsuccess="mensajeCorrecto('El elemento se ha registrado')" />
+				</p:commandButton>
 				
 
 			</h:form>
@@ -179,7 +179,9 @@
 				    </p:fieldset>
 				</h:form>
 				<h:form>
-					<i class="fas fa-download"></i><h:commandButton action="#{adminBean.exportarElementos()}" value="Descargar" styleClass="btn btn-default" />
+					<i class="fas fa-download"></i>
+					 <h:commandButton action="#{adminBean.exportarElementos()}" value="Descargar" styleClass="btn btn-default" >
+					</h:commandButton>
 				</h:form>
 
 				<hr/>
@@ -261,9 +263,6 @@
 
 			<h:form>
 				<h1>Registrar Equipo</h1>
-				<p:messages>
-			        <p:autoUpdate />
-			    </p:messages>
 
 			    <h:panelGrid class="col-xs-12" columns="2" cellpadding="5">
 			    	<p:outputLabel for="laboratorio" value="Laboratorio:" />
@@ -297,7 +296,9 @@
 	                </h:selectOneMenu>
 				</h:panelGrid>
 
-				<p:commandButton  action="#{adminBean.registrarEquipo()}" icon="fa fa-check" class="btn btn-default btn-success" value="Registrar" />
+				<p:commandButton action="#{adminBean.registrarEquipo()}" icon="fa fa-check" class="btn btn-default btn-success" value="Registrar" >
+					<p:ajax onerror="mensajeError" onsuccess="mensajeCorrecto('El elemento se ha registrado')" />
+				</p:commandButton>
 			</h:form>
 			<hr/>
 		</div>
@@ -367,7 +368,7 @@
 												<h4 class="modal-title">Confirmación</h4>
 											</div>
 											<div class="modal-body">
-													<h3>Seleccione los elementos que quiere dar de baja si solo selecciono un equipo. En el caso de haber seleccionado más de un equipo a cada elemento de cada equipo solo se le quitara la asosiación al dicho equipo.</h3>
+													<h3>Seleccione los elementos que quiere dar de baja si solo selecciono un equipo. En el caso de haber seleccionado más de un equipo a cada elemento de cada equipo solo se le quitara la asosiación a dicho equipo.</h3>
 													<p:dataTable var="ele" value="#{adminBean.tipoElementos}" rowKey="#{ele}" selection="#{adminBean.elementosSeleccionadoPorEquipo}">
 														<p:column headerText="Tipo">
 															<h:outputText value="#{ele}"/>

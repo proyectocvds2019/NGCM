@@ -209,7 +209,7 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 	@Override
 	public void exportarExcelEquipos() throws ExcepcionServiciosHistorial{
 		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-		response.addHeader("Content-disposition","attachment; filename=tabla.xls");
+		response.addHeader("Content-disposition","attachment; filename=equipos.xls");
 		response.setContentType("application/vnd.ms-excel");
 		try{
 			HSSFWorkbook wb = new HSSFWorkbook(); // crea libro de excel
@@ -258,16 +258,37 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 				}
 				column++;
 				celda = row.createCell(column);
-				celda.setCellValue(this.consultarElementoDelEquipo(TipoElemento.TECLADO,e).getNombre());
+				Elemento tec = this.consultarElementoDelEquipo(TipoElemento.TECLADO,e);
+				if(tec == null){
+					celda.setCellValue("");
+				}else{
+					celda.setCellValue(tec.getNombre());
+				}
+
 				column++;
 				celda = row.createCell(column);
-				celda.setCellValue(this.consultarElementoDelEquipo(TipoElemento.TORRE,e).getNombre());
+				Elemento tor = this.consultarElementoDelEquipo(TipoElemento.TORRE,e);
+				if(tor == null){
+					celda.setCellValue("");
+				}else{
+					celda.setCellValue(tor.getNombre());
+				}
 				column++;
 				celda = row.createCell(column);
-				celda.setCellValue(this.consultarElementoDelEquipo(TipoElemento.MOUSE,e).getNombre());
+				Elemento mou = this.consultarElementoDelEquipo(TipoElemento.MOUSE,e);
+				if(mou == null){
+					celda.setCellValue("");
+				}else{
+					celda.setCellValue(mou.getNombre());
+				}
 				column++;
 				celda = row.createCell(column);
-				celda.setCellValue(this.consultarElementoDelEquipo(TipoElemento.MONITOR,e).getNombre());
+				Elemento mon = this.consultarElementoDelEquipo(TipoElemento.MONITOR,e);
+				if(mon == null){
+					celda.setCellValue("");
+				}else{
+					celda.setCellValue(mon.getNombre());
+				}
 				column++;
 				rownum++;
 			}
@@ -299,11 +320,11 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 	@Override
 	public void exportarElementos() throws ExcepcionServiciosHistorial{
 		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-		response.addHeader("Content-disposition","attachment; filename=tabla.xls");
+		response.addHeader("Content-disposition","attachment; filename=elementos.xls");
 		response.setContentType("application/vnd.ms-excel");
 		try{
 			HSSFWorkbook wb = new HSSFWorkbook(); // crea libro de excel
-			HSSFSheet sheet = wb.createSheet("Equipos"); // crea hoja
+			HSSFSheet sheet = wb.createSheet("Elementos"); // crea hoja
 			List<Elemento> elementos = this.consultarElementos();
 			int rownum = 0;
 			int column = 0;
@@ -334,6 +355,8 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 				column++;
 				celda = row.createCell(column);
 				celda.setCellValue(e.getTipo().name());
+				column++;
+				celda = row.createCell(column);
 				Integer equi = this.consultarEquipoDeElemento(e);
 				if(equi == null){
 					celda.setCellValue("");
@@ -389,7 +412,47 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 		}
 	}
 
-	
+	@Override
+	public void registrarLaboratorio(Laboratorio lab) throws ExcepcionServiciosHistorial {
+		try {
+			laboratorioDAO.registrarLaboratorio(lab);
+			for(Equipo e: lab.getEquipos()) {
+				actualizarIdLaboratorioEnEquipo(e.getId(), lab.getId());
+			}
+		}catch (PersistenceException ex) {
+			throw new ExcepcionServiciosHistorial("No se pudo registrar el laboratorio");
+		}
+	}	
 
+	private void actualizarIdLaboratorioEnEquipo(Integer idEquipo, Integer idLab) throws ExcepcionServiciosHistorial{
+		try {
+			if(idLab != null) {
+				Equipo eq = equipoDAO.consultarEquipo(idEquipo);
+				Laboratorio lab = laboratorioDAO.consultarLaboratorio(idLab);
+				Equipo eq2 = null;
+				if(lab != null) {
+					eq2 = equipoDAO.consultarEquipoDelLaboratorio(lab);
+				}
+				if(eq != null) {
+					equipoDAO.actualizarIdLaboratorio(null, eq.getId());
+				}
+				if(eq2 != null) {
+					equipoDAO.actualizarIdLaboratorio(null, eq2.getId());
+				}
+			}
+			equipoDAO.actualizarIdLaboratorio(idLab, idEquipo);
+		}catch(PersistenceException e) {
+			throw new ExcepcionServiciosHistorial("No se pudo actualizar el idLaboratorio en el equipo.");
+		}
+	}
+	
+	@Override
+	public Equipo consultarEquipoDelLaboratorio(Laboratorio lab) throws ExcepcionServiciosHistorial {
+		try {
+			return equipoDAO.consultarEquipoDelLaboratorio(lab);
+		} catch(PersistenceException e) {
+			throw new ExcepcionServiciosHistorial("No se pudo consultar el equipo del laboratorio"+lab.getId());
+		}
+	}
 
 }
