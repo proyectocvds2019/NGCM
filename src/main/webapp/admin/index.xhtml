@@ -95,8 +95,8 @@
 			    </h:panelGrid>
 				
 			 
-			    <p:commandButton onevent="comprobarRegistroElemento" onerror="mensajeError()" ajax="true" id="botonRegistrarElemento" process="@form" action="#{adminBean.registrarElemento()}" icon="fa fa-check" styleClass="btn btn-default btn-success" value="Registrar" >
-					<f:ajax  onsuccess="mensajeCorrecto('asfd')"  />
+			    <p:commandButton ajax="true" onsuccess="mensajeCorrecto('El elemento se ha registrado!')" onerror="mensajeError('No se ha podido registrar el elemento!')" id="botonRegistrarElemento" process="@form" action="#{adminBean.registrarElemento()}" icon="fa fa-check" styleClass="btn btn-default btn-success" value="Registrar" >
+					<f:ajax  onevent="comprobarRegistroElemento"/>
 				</p:commandButton>
 				
 
@@ -162,7 +162,9 @@
 											</div>
 											<div class="modal-body">
 												<p>¿Quiere dar de baja los elementos seleccionados?.</p>
-												<h:commandButton action="#{adminBean.eliminarElementos()}" process="elementosT" value="SI" styleClass="btn btn-default btn-success"/>
+												<p:commandButton onsuccess="mensajeCorrecto('los elementos se han dado de baja correctamente')" onerror="mensajeError('No se ha podido dar de baja los elementos')" action="#{adminBean.eliminarElementos()}" process="elementosT" value="SI" styleClass="btn btn-default btn-success">
+													<f:ajax onevent="comprobarRegistroElemento"/>
+												</p:commandButton>
 												<button type="button" class="btn btn-default btn-danger" data-dismiss="modal">NO</button>
 											</div>
 											<div class="modal-footer">
@@ -234,7 +236,9 @@
 															<f:selectItems var="equipo" value="#{adminBean.listaEquiposActivos}" itemValue="#{equipo.id}" itemLabel="Sistemas#{equipo.id}"/>
 														</h:selectOneMenu>
 														<hr class="col-xs-11"/>
-														<p:commandButton process="formularioEnlazarElemento" id="formularioEnlazarElemento#{elemento.id}" action="#{adminBean.enlazarElemento(elemento)}" styleClass="btn btn-default btn-success btn-responsive btn-block" value="Enlazar" />
+														<p:commandButton ajax="true" onsuccess="mensajeCorrecto('El elemento ha sido enlazado!')" onerror="mensajeError('No es posible enlazar el elemento!')" process="formularioEnlazarElemento" id="formularioEnlazarElemento#{elemento.id}" action="#{adminBean.enlazarElemento(elemento)}" styleClass="btn btn-default btn-success btn-responsive btn-block" value="Enlazar" >
+															<f:ajax  onevent="comprobarRegistroElemento"/>
+														</p:commandButton>
 													</div>
 												</h:form>
 											</div>
@@ -295,8 +299,8 @@
 	                </h:selectOneMenu>
 				</h:panelGrid>
 
-				<p:commandButton action="#{adminBean.registrarEquipo()}" icon="fa fa-check" class="btn btn-default btn-success" value="Registrar" >
-					<p:ajax onerror="mensajeError" onsuccess="mensajeCorrecto('El elemento se ha registrado')" />
+				<p:commandButton ajax="true" onsuccess="mensajeCorrecto('El elemento se ha registrado!')" onerror="mensajeError('No se ha podido registrar el elemento!')" action="#{adminBean.registrarEquipo()}" icon="fa fa-check" class="btn btn-default btn-success" value="Registrar" >
+					<f:ajax  onevent="comprobarRegistroElemento"/>
 				</p:commandButton>
 			</h:form>
 			<hr/>
@@ -667,6 +671,22 @@
 		</div>
 	</ui:repeat>
 
+
+	<!-- Modal -->
+	<div class="modal fade" id="modalCargando" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-body">
+					<center>
+						<img class="img-circle img-responsive" src="../img/cargando.gif" alt=""/>
+					</center>
+				</div>
+			</div>
+
+		</div>
+	</div>
 
 </h:body>
 <footer>

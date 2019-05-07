@@ -1,5 +1,4 @@
 
-var errorRegistrarElemento = false;
 
 $(".botonMenu").click(function(){
 	$(".botonMenu").removeClass("active");
@@ -16,20 +15,20 @@ $(".botonMenuConfiguracion").click(function(){
 
 function comprobarRegistroElemento(data){
     console.log(data);
+    if(data.status != 'success'){
+        $("#modalCargando").modal("show");
+    }else{
+        $("#modalCargando").modal("hide");
+    }
 
 }
 
 function mensajeError(error){
-	console.log(error);
-    swal('¡Error!', 'no se ha podido realizar la solicitud', 'error');
-    errorRegistrarElemento = true;
+    swal('¡Error!', error, 'error');
 }
 
 function mensajeCorrecto(msg){
-	if(!errorRegistrarElemento){
-		swal('¡Perfecto!', 'Se ha procesado su solicitud!', 'success').then((value)=>{location.reload();});
-	}
-	errorRegistrarElemento = false;
+	swal('¡Perfecto!', msg, 'success').then((value)=>{location.reload();});
     
 }
 

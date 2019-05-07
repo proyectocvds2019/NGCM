@@ -219,6 +219,9 @@ public class adminBean implements Serializable{
 	
 	public void mensajeCorrecto() {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrado satisfactoriamente", "Elemento registrado satisfactoriamente"));
+		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+		HttpServletResponse response = (HttpServletResponse) context.getResponse();
+		response.setStatus(HttpServletResponse.SC_OK);
 	}
 	
 	public void mensajeError() {
