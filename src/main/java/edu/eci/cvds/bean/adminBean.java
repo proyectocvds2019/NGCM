@@ -7,6 +7,7 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
@@ -27,6 +28,7 @@ import edu.eci.cvds.samples.services.ServiciosHistorialFactory;
 
 @ManagedBean(name = "adminBean")
 @ViewScoped
+@RequestScoped
 public class adminBean implements Serializable{
 	/**
 	 * 
@@ -341,9 +343,8 @@ public class adminBean implements Serializable{
 		}
 	}
 
-	public boolean probando(){
-		System.out.println("ñlakdsjfñlksadjf");
-		return false;
+	public boolean probando() throws ExcepcionServiciosHistorial{
+		throw new ExcepcionServiciosHistorial("añldskfj");
 	}
 
 
