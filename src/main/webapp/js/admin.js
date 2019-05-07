@@ -12,12 +12,19 @@ $(".botonMenuConfiguracion").click(function(){
 	$(".collapseConfiguracion").collapse("hide");
 });
 
-// $(".botonNovedadElemento").click(function(){
-// 	$(".formModals").css("display","block");
-// });
 
-// $(".cerrarModal").click(function(){
-// 	$(".formModals").css("display","none");
-// });
+function comprobarRegistroElemento(){
+    console.log("holaaaaaaaaaaaaaaaaaaaaaaa");
+
+}
+
+function mensajeError(error){
+    Console.log("ñljfdñlksajfdds");
+    swal('¡Error!', 'No se ha podido registrar el elemento!', 'error');
+}
+
+function mensajeCorrecto(msg){
+    swal('¡Perfecto!', ''+msg+'!', 'success').then((value)=>{console.log(value);location.reload();});
+}
 
 
