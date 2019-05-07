@@ -62,4 +62,16 @@
 		WHERE Equipos.id = #{id};
 	</update>
 	
+	<update parameterType = 'map' id = 'actualizarIdLaboratorio'>
+		UPDATE Equipos
+		SET laboratorio = #{idLab}
+		WHERE id = #{idEq};
+	</update>
+	
+	<select id="consultarEquipoDelLaboratorio" parameterType="map" resultMap="EquiposResult">
+		SELECT equipos.id, equipos.activo
+		FROM laboratorios,equipos
+		WHERE equipos.laboratorio = laboratorios.id AND laboratorios.id = #{lab.id};
+	</select>
+	
 </mapper>

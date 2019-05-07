@@ -9,6 +9,8 @@ select * from elementos;
 
 UPDATE Elementos SET idequipo = null   WHERE Elementos.id = 'monitor'  AND Elementos.idEquipo = 2;
 
+/*update equipos set activo = true;*/
+
 delete from elementos where id = 'moni';
 
 select *
