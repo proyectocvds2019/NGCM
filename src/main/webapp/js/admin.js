@@ -20,14 +20,14 @@ function comprobarRegistroElemento(data){
 }
 
 function mensajeError(error){
-	console.log("sfdfasfsdfsdf");
-    swal('¡Error!', error, 'error');
+	console.log(error);
+    swal('¡Error!', 'no se ha podido realizar la solicitud', 'error');
     errorRegistrarElemento = true;
 }
 
 function mensajeCorrecto(msg){
 	if(!errorRegistrarElemento){
-		swal('¡Perfecto!', ''+msg+'!', 'success').then((value)=>{location.reload();});
+		swal('¡Perfecto!', 'Se ha procesado su solicitud!', 'success').then((value)=>{location.reload();});
 	}
 	errorRegistrarElemento = false;
     
