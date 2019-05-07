@@ -7,7 +7,7 @@ select * from equipos;
 
 select * from elementos;
 
-UPDATE Elementos SET activo = false   WHERE Elementos.id = 'sadf'  AND Elementos.idEquipo IS NULL;
+UPDATE Elementos SET idequipo = null   WHERE Elementos.id = 'monitor'  AND Elementos.idEquipo = 2;
 
 delete from elementos where id = 'moni';
 

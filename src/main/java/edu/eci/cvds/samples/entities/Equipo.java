@@ -51,5 +51,9 @@ public class Equipo implements Serializable{
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
+
+	public boolean equals(Equipo equipo){
+		return this.id == equipo.getId();
+	}
 	
 }

@@ -53,7 +53,8 @@ public class adminBean implements Serializable{
 	private List<String> listaEquiposRegistrarLaboratorio;
 	private List<Equipo> listaEquiposSeleccionados;
 	private List<Elemento> listaElementosSeleccionados;
-	private Equipo equipoSeleccionado;
+	private List<Equipo> equiposSeleccionados;
+	private Elemento configurarElemento;
 	private List<TipoElemento> elementosSeleccionadoPorEquipo;
 	private static final TipoElemento teclado = TipoElemento.TECLADO;
 	private static final TipoElemento mouse = TipoElemento.MOUSE;
@@ -147,6 +148,7 @@ public class adminBean implements Serializable{
 
 	public void enlazarElemento(Elemento elemento){
 		try{
+			System.out.println(elemento.getId()+" "+this.equipo);
 			this.serviciosHistorial.actualizarIdEquipoEnElemento(elemento.getId(),this.equipo);
 		}catch (ExcepcionServiciosHistorial e){
 			e.printStackTrace();
@@ -164,21 +166,34 @@ public class adminBean implements Serializable{
 	}
 
 	public void eliminarEquipos(){
-	    if(this.equipoSeleccionado != null){
-            try{
-                for(Elemento elemento:this.equipoSeleccionado.getElementos()){
-                    this.serviciosHistorial.actualizarIdEquipoEnElemento(elemento.getId(),null);
-                    for(TipoElemento tipo : this.elementosSeleccionadoPorEquipo){
-                        if(elemento.getTipo().name().equals(tipo.name())){
-                            this.serviciosHistorial.desactivarElemento(elemento.getId());
-                        }
-                    }
-                }
-                this.serviciosHistorial.desactivarEquipo(this.equipoSeleccionado.getId());
-            }catch (ExcepcionServiciosHistorial e){
-                e.printStackTrace();
-            }
-        }
+		try{
+			if(this.equiposSeleccionados.size() == 1){
+				if(this.equiposSeleccionados.get(0) != null){
+	                for(Elemento elemento:this.equiposSeleccionados.get(0).getElementos()){
+	                    this.serviciosHistorial.actualizarIdEquipoEnElemento(elemento.getId(),null);
+	                    for(TipoElemento tipo : this.elementosSeleccionadoPorEquipo){
+	                        if(elemento.getTipo().name().equals(tipo.name())){
+	                            this.serviciosHistorial.desactivarElemento(elemento.getId());
+	                        }
+	                    }
+	                }
+	                this.serviciosHistorial.desactivarEquipo(this.equiposSeleccionados.get(0).getId());
+		        }
+			}else{
+				for(Equipo e: this.equiposSeleccionados){
+					for(Elemento el: e.getElementos()){
+						this.serviciosHistorial.actualizarIdEquipoEnElemento(el.getId(),null);
+						
+					}
+					this.serviciosHistorial.desactivarEquipo(e.getId());
+				}
+			}
+			this.recargar();
+		}catch(ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+		}
+		
+	    
 	}
 
 	public String consultarElementoDelEquipo(TipoElemento tipo, Equipo equipo){
@@ -192,10 +207,6 @@ public class adminBean implements Serializable{
 			e.printStackTrace();
 			return null;
 		}
-	}
-
-	public void equipoSeleccionado(){
-		System.out.println(this.equipoSeleccionado);
 	}
 
 
@@ -324,7 +335,6 @@ public class adminBean implements Serializable{
 	}
 	
 	public void CambiarIDElemento(Elemento elemento){
-		System.out.println(elemento.getId()+" "+this.cambioIDElemento+" "+this.torreSeleccionada);
 		try{
 			this.serviciosHistorial.cambiarIDElemento(elemento, this.cambioIDElemento);
 		}catch(ExcepcionServiciosHistorial e){
@@ -333,14 +343,14 @@ public class adminBean implements Serializable{
 	}
 
 	public void cambiarNombreElemento(Elemento elemento){
-		System.out.println(elemento.getId()+" "+this.cambioNombreElemento);
 		try{
-			System.out.println(elemento.getId()+" "+this.cambioNombreElemento);
 			this.serviciosHistorial.cambiarNombreElemento(elemento, this.cambioNombreElemento);
 		}catch(ExcepcionServiciosHistorial e){
 			e.printStackTrace();
 		}
 	}
+
+
 
 
 	
@@ -464,12 +474,12 @@ public class adminBean implements Serializable{
 	}
 
 
-	public Equipo getEquipoSeleccionado() {
-		return equipoSeleccionado;
+	public List<Equipo> getEquiposSeleccionados() {
+		return equiposSeleccionados;
 	}
 
-	public void setEquipoSeleccionado(Equipo equipoSeleccionado) {
-		this.equipoSeleccionado = equipoSeleccionado;
+	public void setEquiposSeleccionados(List<Equipo> equiposSeleccionados) {
+		this.equiposSeleccionados = equiposSeleccionados;
 	}
 
     public List<TipoElemento> getElementosSeleccionadoPorEquipo() {
@@ -530,7 +540,14 @@ public class adminBean implements Serializable{
 	}
 
 	public void setCambioNombreElemento(String cambioNombreElemento){
-		System.out.println("holaaaaaaaaaaaaaa "+cambioNombreElemento);
 		this.cambioNombreElemento = cambioNombreElemento;
+	}
+
+	public Elemento getConfigurarElemento(){
+		return this.configurarElemento;
+	}
+
+	public void setConfigurarElemento(Elemento configurarElemento){
+		this.configurarElemento = configurarElemento;
 	}
 }
