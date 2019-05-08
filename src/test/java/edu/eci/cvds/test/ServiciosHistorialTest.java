@@ -131,5 +131,36 @@ public class ServiciosHistorialTest {
 			assertTrue(false);
 		}
 	}
+        
+        @Test
+        public void deberiaCrearLaboratorio(){
+            try{
+                Integer id = 24082000;
+                String nombre = "Laboratorio1";
+                Laboratorio n1 = new Laboratorio(id,nombre,true); 
+                this.serviciosHistorial.consultarLaboratorio(id);
+                assertTrue(true);
+            }catch(ExcepcionServiciosHistorial e){
+                e.printStackTrace();
+                assertTrue(false);
+            }
+        }
+        
+        @Test
+        public void deberiaAsociarEquipo(){
+            try{
+                String uwu = "Prueba mientras esta el asociar uwu";
+                Equipo eq = new Equipo(1,true);
+                this.serviciosHistorial.desactivarEquipo(1);
+                assertTrue(true);
+            }catch(ExcepcionServiciosHistorial e){
+                e.printStackTrace();
+                assertTrue(false);
+            }
+        
+        
+        }
+        
+        
 }
 
