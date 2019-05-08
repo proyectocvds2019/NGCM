@@ -8,8 +8,9 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpServletResponse;
 
 import edu.eci.cvds.samples.entities.Laboratorio;
 import org.apache.shiro.SecurityUtils;
@@ -57,6 +58,7 @@ public class adminBean implements Serializable{
 	private List<Elemento> listaElementosSeleccionados;
 	private List<Equipo> equiposSeleccionados;
 	private Elemento configurarElemento;
+	private Elemento enlazarEquipoSeleccionado;
 	private List<TipoElemento> elementosSeleccionadoPorEquipo;
 	private static final TipoElemento teclado = TipoElemento.TECLADO;
 	private static final TipoElemento mouse = TipoElemento.MOUSE;
@@ -88,15 +90,16 @@ public class adminBean implements Serializable{
     
 	public void registrarElemento(){
 		try{
-			System.out.println("entrando...");
 			Elemento elemento = new Elemento(idElemento,tipoSeleccionado,nombreElemento,true);
 			serviciosHistorial.registrarElemento(elemento,this.correo,this.equipo);
 			this.mensajeCorrecto();
-		}catch(ExcepcionServiciosHistorial e){
+		}catch (ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+			this.mensajeError();
+		}catch (Exception e){
 			e.printStackTrace();
 			this.mensajeError();
 		}
-		
 	}
 
 	public List<Elemento> consultarElementosDisponibles(TipoElemento tipo){
@@ -163,9 +166,17 @@ public class adminBean implements Serializable{
 	public void eliminarElementos(){
 		try{
 			for(Elemento e: this.listaElementosSeleccionados){
+				if(this.serviciosHistorial.consultarEquipoDeElemento(e) != null){
+					this.mensajeError();
+					return;
+				}
+			}
+			for(Elemento e: this.listaElementosSeleccionados){
 				this.serviciosHistorial.desactivarElemento(e.getId());
 			}
+			this.mensajeCorrecto();
 		}catch (ExcepcionServiciosHistorial e){
+			this.mensajeError();
 			e.printStackTrace();
 		}
 	}
@@ -219,12 +230,18 @@ public class adminBean implements Serializable{
 	
 	public void mensajeCorrecto() {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrado satisfactoriamente", "Elemento registrado satisfactoriamente"));
+		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+		HttpServletResponse response = (HttpServletResponse) context.getResponse();
+		response.setStatus(HttpServletResponse.SC_OK);
 	}
 	
 	public void mensajeError() {
 		Subject subject = SecurityUtils.getSubject();
 		subject.getSession().setAttribute("mensajeSolicitudAjax",true);
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error! No se pudo registrar", "No se pudo registrar el elemento"));
+		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+		HttpServletResponse response = (HttpServletResponse) context.getResponse();
+		response.setStatus(HttpServletResponse.SC_EXPECTATION_FAILED);
 	}
 	
 	public TipoElemento getTipoSeleccionado() {
@@ -559,6 +576,15 @@ public class adminBean implements Serializable{
 	}
 
 	public void setConfigurarElemento(Elemento configurarElemento){
+		System.out.println(configurarElemento.getNombre());
 		this.configurarElemento = configurarElemento;
+	}
+
+	public Elemento getEnlazarEquipoSeleccionado() {
+		return enlazarEquipoSeleccionado;
+	}
+
+	public void setEnlazarEquipoSeleccionado(Elemento enlazarEquipoSeleccionado) {
+		this.enlazarEquipoSeleccionado = enlazarEquipoSeleccionado;
 	}
 }

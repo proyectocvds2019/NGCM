@@ -1,5 +1,4 @@
 
-var errorRegistrarElemento = false;
 
 $(".botonMenu").click(function(){
 	$(".botonMenu").removeClass("active");
@@ -14,17 +13,18 @@ $(".botonMenuConfiguracion").click(function(){
 });
 
 
-function comprobarRegistroElemento(data){
+function comprobar(data){
     console.log(data);
-    if(data.status == 'success'){
-    	location.reload();
+    if(data.status != 'success'){
+        $("#modalCargando").modal("show");
+    }else{
+        $("#modalCargando").modal("hide");
     }
 
 }
 
 function mensajeError(error){
     swal('¡Error!', error, 'error');
-    errorRegistrarElemento = true;
 }
 
 function swalError(){
@@ -32,10 +32,7 @@ function swalError(){
 }
 
 function mensajeCorrecto(msg){
-	if(!errorRegistrarElemento){
-		swal('¡Perfecto!', ''+msg+'!', 'success').then((value)=>{location.reload();});
-	}
-	errorRegistrarElemento = false;
+	swal('¡Perfecto!', msg, 'success').then((value)=>{location.reload();});
     
 }
 function finalizar(data){
