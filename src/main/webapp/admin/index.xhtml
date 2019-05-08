@@ -107,7 +107,7 @@
 			<div class="col-md-12 col-xs-12">
 				<h:form>
 					<p:fieldset id="tablaElementos" legend="Tabla de elementos">
-				        <p:dataTable rowKey="#{elemento.id}" selection="#{adminBean.listaElementosSeleccionados}" id="elementosT" var="elemento" value="#{adminBean.listaElementos}" rows="10" paginator="true"
+				        <p:dataTable rowKey="#{elemento.id}" selection="#{adminBean.listaElementosSeleccionados}" id="elementosT" var="elemento" value="#{adminBean.listaElementosDisponibles}" rows="10" paginator="true"
 									 paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}">
 							<p:column selectionMode="multiple" style="text-align: center;"/>
 				            <p:column sortBy="#{elemento.id}" filterBy="#{elemento.id}" headerText="Id">
@@ -126,24 +126,19 @@
 								<h:outputText value="#{elemento.activo}"/>
 							</p:column>
 
-							<p:column sortBy="#{elemento.id}" headerText="Novedades">
+							<p:column headerText="Novedades">
 								<center>
-									<h:commandButton ajax="true" action="#{adminBean.setConfigurarElemento(elemento)}" type="button" styleClass="btn btn-default btn-info botonNovedadElemento" value="VER">
-										<p:ajax update="salidaTextoConfigurarElementoID" />
-										<e:attribute name="data-target" value="#novedadElemento"/>
-										<e:attribute name="data-toggle" value="modal"/>
-									</h:commandButton>
+									<button type="button" class="btn btn-default btn-block btn-info" data-target="#novedadElemento#{elemento.id}" data-toggle="modal">
+										VER
+									</button>
 								</center>
 							</p:column>
-							<p:column sortBy="#{elemento}" headerText="Configurar">
+							<p:column headerText="Configurar">
 								<center>
 									<h:form>
-										<h:commandButton type="button" ajax="true" action="#{adminBean.setConfigurarElemento(elemento)}" value="conf" styleClass="btn btn-default">
-											<!-- <i class="fas fa-wrench"></i> -->
-											<p:ajax update="salidaTextoConfigurarElementoID" />
-											<e:attribute name="data-target" value="#configurarElementoModal"/>
-											<e:attribute name="data-toggle" value="modal"/>
-										</h:commandButton>
+										<button type="button" class="btn btn-default btn-block btn-info" data-target="#configurarElementoModal#{elemento.id}" data-toggle="modal">
+											<i class="fas fa-wrench"></i>
+										</button>
 									</h:form>
 								</center>
 							</p:column>
@@ -207,7 +202,7 @@
 				            <p:column sortBy="#{elemento.tipo}" filterBy="#{elemento.tipo}" headerText="Tipo">
 				                <h:outputText value="#{elemento.tipo}" />
 				            </p:column>
-							<p:column sortBy="#{elemento.id}" headerText="Enlazar">
+							<p:column headerText="Enlazar">
 								<!--<center>
 									<button data-toggle="modal" data-target="#botonEnlazarEquipoModal#{elemento.id}" type="button" class="btn btn-default btn-responsive btn-primary"><i class="fas fa-star"></i>Enlazar equipo</button>
 								</center>-->
@@ -279,7 +274,7 @@
 		<div class="container">
 			<h:form id="formEquipos">
 				<p:fieldset id="tablaEquipos" legend="Tabla de equipos">
-					<p:dataTable rowKey="#{equipo.id}" selection="#{adminBean.equiposSeleccionados}" sortBy="#{equipo.id}" id="equiposTabla" var="equipo" value="#{adminBean.listaEquipos}" rows="10" paginator="true"
+					<p:dataTable rowKey="#{equipo.id}" selection="#{adminBean.equiposSeleccionados}" id="equiposTabla" var="equipo" value="#{adminBean.listaEquipos}" rows="10" paginator="true"
 								 paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}">
 						<p:column selectionMode="multiple" style="text-align: center;">
 						</p:column>
@@ -313,12 +308,12 @@
 
 						</p:column>
 
-						<p:column sortBy="#{equipo.id}" headerText="Novedades">
+						<p:column headerText="Novedades">
 							<center>
 								<button style="padding:5px;" type="button" data-toggle="modal" data-target="#novedadEquipo#{equipo.id}" class="btn btn-block btn-default btn-info col-xs-12">VER</button>
 							</center>
 						</p:column>
-						<p:column sortBy="#{equipo.id}" headerText="Configurar">
+						<p:column headerText="Configurar">
 							<center>
 								<button type="button" data-toggle="modal" data-target="#configurarEquipo#{equipo.id}" class="btn btn-default btn-info">
 									<i class="fas fa-wrench"></i>
@@ -434,95 +429,100 @@
 
 	<!-- MODALES -->
 
+	<ui:repeat var="elemento" value="#{adminBean.listaElementosDisponibles}">
+		<!-- Modal -->
+		<div class="modal fade" id="configurarElementoModal#{elemento.id}" role="dialog">
+			<div class="modal-dialog">
 
-	<!-- Modal -->
-	<div class="modal fade" id="configurarElementoModal" role="dialog">
-		<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close cerrarModal" data-dismiss="modal">X</button>
+						<h4 class="modal-title">Configuración Elemento #{elemento.id}</h4>
+					</div>
+					<div class="modal-body">
+						
+						<div class="row col-xs-12">
+							<nav class="navbar navbar-inverse">
+								<div class="container-fluid">
+									<div class="navbar-header">
+										<button type="button" class="navbar-toggle" data-target="#myNavbar">
+											<span class="icon-bar"></span>
+											<span class="icon-bar"></span>
+											<span class="icon-bar"></span>
+										</button>
+									</div>
+									<div class="collapse navbar-collapse" id="myNavbarCambioElementosModal">
+										<ul class="nav navbar-nav">
+											<li id="botonConfigurarIDElemento" data-toggle="collapse" data-target="#configurarIDModal#{elemento.id}" class="active botonMenuConfiguracion"><a href="#">ID</a></li>
 
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close cerrarModal" data-dismiss="modal">X</button>
-					<h4 class="modal-title">Configuración Elemento <h:outputText id="salidaTextoConfigurarElementoID" value="#{adminBean.configurarElemento.nombre}"/></h4>
-				</div>
-				<div class="modal-body">
-					
-					<div class="row col-xs-12">
-						<nav class="navbar navbar-inverse">
-							<div class="container-fluid">
-								<div class="navbar-header">
-									<button type="button" class="navbar-toggle" data-target="#myNavbar">
-										<span class="icon-bar"></span>
-										<span class="icon-bar"></span>
-										<span class="icon-bar"></span>
-									</button>
+											<li id="botonConfigurarNombreElemento" data-toggle="collapse" data-target="#configurarNombreModal#{elemento.id}" class="botonMenuConfiguracion"><a href="#">NOMBRE</a></li>
+
+										</ul>
+									</div>
 								</div>
-								<div class="collapse navbar-collapse" id="myNavbarCambioElementosModal">
-									<ul class="nav navbar-nav">
-										<li id="botonConfigurarIDElemento" data-toggle="collapse" data-target="#configurarID" class="active botonMenuConfiguracion"><a href="#">ID</a></li>
+							</nav>
+						</div>
+						<div class="in collapse collapseConfiguracion container-fluid" id="configurarIDModal#{elemento.id}">
+							<h:form>
+							    <h:panelGrid class="col-xs-12" columns="2" cellpadding="5">
+									<h:outputText value="Nuevo ID para #{elemento.id}:"/>
+									<h:inputText required="true" id="idElementoCambio" value="#{adminBean.cambioIDElemento}"/>
+							    </h:panelGrid>
+								
+							 
+							    <p:commandButton process="@parent" ajax="true" onsuccess="mensajeCorrecto('El ID se ha modificado correctamente')" onerror="mensajeError('No se ha podido modificar el ID')" action="#{adminBean.CambiarIDElemento(elemento)}" styleClass="btn btn-default btn-success" value="Cambiar" >
+							    	<f:ajax onevent="comprobar"/>
+							    </p:commandButton>
+								
 
-										<li id="botonConfigurarNombreElemento" data-toggle="collapse" data-target="#configurarNombre" class="botonMenuConfiguracion"><a href="#">NOMBRE</a></li>
-
-									</ul>
-								</div>
-							</div>
-						</nav>
+							</h:form>
+						</div>
+						<div class="collapse collapseConfiguracion container-fluid" id="configurarNombreModal#{elemento.id}">
+							<h:form>
+							    <h:panelGrid columns="2">
+									<h:outputText value="Nuevo Nombre:"/>
+									<p:inputText id="nombreElementoCambio" required="true" value="#{adminBean.cambioNombreElemento}"/>
+								</h:panelGrid>
+								<p:commandButton process="@parent" ajax="true" onsuccess="mensajeCorrecto('El nombre se ha modificado correctamente')" onerror="mensajeError('No se ha podido modificar el ID')" styleClass="btn btn-default btn-success btn-block" value="Cambiar" action="#{adminBean.cambiarNombreElemento(elemento)}">
+									<f:ajax onevent="comprobar"/>
+								</p:commandButton>
+							</h:form>
+						</div>
 					</div>
-					<div class="in collapse collapseConfiguracion container-fluid" id="configurarID">
-						<h:form>
-						    <p:messages>
-						        <p:autoUpdate />
-						    </p:messages>
-						 
-						    <h:panelGrid class="col-xs-12" columns="2" cellpadding="5">
-								<h:outputText value="Nuevo ID para #{adminBean.configurarElemento.id}:"/>
-								<h:inputText required="true" id="idElementoCambio" value="#{adminBean.cambioIDElemento}"/>
-						    </h:panelGrid>
-							
-						 
-						    <p:commandButton  action="#{adminBean.CambiarIDElemento(adminBean.configurarElemento)}" styleClass="btn btn-default btn-success" value="Cambiar" />
-							
-
-						</h:form>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default cerrarModal" data-dismiss="modal">Cerrar</button>
 					</div>
-					<div class="collapse collapseConfiguracion container-fluid" id="configurarNombre">
-						<h:form>
-							<p:messages>
-						        <p:autoUpdate />
-						    </p:messages>
-						    <h:panelGrid columns="2">
-								<h:outputText value="Nuevo Nombre:"/>
-								<p:inputText id="nombreElementoCambio" required="true" value="#{adminBean.cambioNombreElemento}"/>
-							</h:panelGrid>
-							<p:commandButton styleClass="btn btn-default btn-success btn-block" value="Cambiar" action="#{adminBean.cambiarNombreElemento(adminBean.configurarElemento)}"/>
-						</h:form>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default cerrarModal" data-dismiss="modal">Cerrar</button>
 				</div>
 			</div>
 		</div>
-	</div>
 
-	<!-- Modal -->
-	<div class="modal fade" id="novedadElemento" role="dialog">
-		<div class="modal-dialog">
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close cerrarModal" data-dismiss="modal">X</button>
-					<h4 class="modal-title">Novedades</h4>
-				</div>
-				<div class="modal-body">
 
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default cerrarModal" data-dismiss="modal">Cerrar</button>
+		<!-- Modal -->
+		<div class="modal fade" id="novedadElemento#{elemento.id}" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close cerrarModal" data-dismiss="modal">X</button>
+						<h4 class="modal-title">Novedades del elemento #{elemento.id}</h4>
+					</div>
+					<div class="modal-body">
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default cerrarModal" data-dismiss="modal">Cerrar</button>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	</ui:repeat>
+
+
+
+	
+
+	
 
 
 	<!-- MODAL -->
@@ -573,7 +573,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">X</button>
-						<h4 class="modal-title">Información novedades</h4>
+						<h4 class="modal-title">Información novedades equipo #{equipo.id}</h4>
 					</div>
 					<div class="modal-body">
 						
@@ -630,7 +630,9 @@
 								<h:selectOneMenu value="#{adminBean.tecladoSeleccionado}">
 									<f:selectItems itemValue="#{teclado.id}" itemLabel="#{teclado.id}" var="teclado" value="#{adminBean.consultarElementosDisponibles(adminBean.teclado)}"/>
 								</h:selectOneMenu>
-								<h:commandButton value="Cambiar" styleClass="btn btn-default btn-success" action="#{adminBean.actualizarTecladoDeEquipo(equipo)}"/>
+								<h:commandButton process="@parent" ajax="true" onsuccess="mensajeCorrecto('Se ha cambiado el teclado correctamente')" onerror="mensajeError('No se ha podido cambiar el teclado')" value="Cambiar" styleClass="btn btn-default btn-success" action="#{adminBean.actualizarTecladoDeEquipo(equipo)}">
+									<f:ajax onevent="comprobar"/>
+								</h:commandButton>
 							</h:form>
 						</div>
 						<div class="collapse collapseConfiguracion container-fluid" id="configurarTorre#{equipo.id}">
@@ -639,7 +641,9 @@
 								<h:selectOneMenu value="#{adminBean.torreSeleccionada}">
 									<f:selectItems itemValue="#{torre.id}" itemLabel="#{torre.id}" var="torre" value="#{adminBean.consultarElementosDisponibles(adminBean.torre)}"/>
 								</h:selectOneMenu>
-								<h:commandButton value="Cambiar" styleClass="btn btn-default btn-success" action="#{adminBean.actualizarTorreDeEquipo(equipo)}"/>
+								<h:commandButton process="@parent" onsuccess="mensajeCorrecto('Se ha cambiado la torre correctamente')" onerror="mensajeError('No se ha podido cambiar la torre')" value="Cambiar" styleClass="btn btn-default btn-success" action="#{adminBean.actualizarTorreDeEquipo(equipo)}">
+									<f:ajax onevent="comprobar"/>
+								</h:commandButton>
 							</h:form>
 						</div>
 						<div class="collapse collapseConfiguracion container-fluid" id="configurarMouse#{equipo.id}">
@@ -648,7 +652,9 @@
 								<h:selectOneMenu value="#{adminBean.mouseSeleccionado}">
 									<f:selectItems itemValue="#{mouse.id}" itemLabel="#{mouse.id}" var="mouse" value="#{adminBean.consultarElementosDisponibles(adminBean.mouse)}"/>
 								</h:selectOneMenu>
-								<h:commandButton value="Cambiar" styleClass="btn btn-default btn-success" action="#{adminBean.actualizarMouseDeEquipo(equipo)}"/>
+								<h:commandButton process="@parent" onsuccess="mensaCorrecto('El mouse se ha cambiado correctamente')" onerror="mensajeError('No se ha podido cambiar el mouse')" value="Cambiar" styleClass="btn btn-default btn-success" action="#{adminBean.actualizarMouseDeEquipo(equipo)}">
+									<f:ajax onevent="procesando"/>
+								</h:commandButton>
 							</h:form>
 						</div>
 						<div class="collapse collapseConfiguracion container-fluid" id="configurarMonitor#{equipo.id}">
@@ -657,7 +663,9 @@
 								<h:selectOneMenu value="#{adminBean.monitorSeleccionado}">
 									<f:selectItems itemValue="#{monitor.id}" itemLabel="#{monitor.id}" var="monitor" value="#{adminBean.consultarElementosDisponibles(adminBean.monitor)}"/>
 								</h:selectOneMenu>
-								<h:commandButton value="Cambiar" styleClass="btn btn-default btn-success" action="#{adminBean.actualizarTecladoDeEquipo(equipo)}"/>
+								<h:commandButton process="@parent" onsuccess="mensajeCorrecto('El monitor se ha cambiado correctamente')" onerror="mensajeError('No se ha podido cambiar el monitor')" value="Cambiar" styleClass="btn btn-default btn-success" action="#{adminBean.actualizarTecladoDeEquipo(equipo)}">
+									<f:ajax onevent="comprobar"/>
+								</h:commandButton>
 							</h:form>
 						</div>
 						<div class="collapse collapseConfiguracion container-fluid" id="configurarLaboratorio#{equipo.id}">
@@ -666,7 +674,9 @@
 								<h:selectOneMenu value="#{adminBean.monitorSeleccionado}">
 									<f:selectItems itemValue="#{laboratorio.id}" itemLabel="#{laboratorio.nombre}" var="laboratorio" value="#{adminBean.laboratoriosDisponibles()}"/>
 								</h:selectOneMenu>
-								<h:commandButton value="Cambiar" styleClass="btn btn-default btn-success" action="#{adminBean.actualizarLaboratorioDeEquipo(equipo)}"/>
+								<h:commandButton process="@parent" onsuccess="mensajeCorrecto('Se ha cambiado el laboratorio correctamente')" onerror="mensajeError('No se ha podido cambiar el laboratorio')" value="Cambiar" styleClass="btn btn-default btn-success" action="#{adminBean.actualizarLaboratorioDeEquipo(equipo)}">
+									<f:ajax onevent="comprobar"/>
+								</h:commandButton>
 							</h:form>
 						</div>
 					</div>
@@ -677,6 +687,11 @@
 			</div>
 		</div>
 	</ui:repeat>
+
+
+
+
+
 
 
 	<!-- Modal -->

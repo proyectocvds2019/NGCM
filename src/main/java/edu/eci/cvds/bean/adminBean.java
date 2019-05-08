@@ -57,7 +57,6 @@ public class adminBean implements Serializable{
 	private List<Equipo> listaEquiposSeleccionados;
 	private List<Elemento> listaElementosSeleccionados;
 	private List<Equipo> equiposSeleccionados;
-	private Elemento configurarElemento;
 	private Elemento enlazarEquipoSeleccionado;
 	private List<TipoElemento> elementosSeleccionadoPorEquipo;
 	private static final TipoElemento teclado = TipoElemento.TECLADO;
@@ -275,9 +274,14 @@ public class adminBean implements Serializable{
 
 	public void actualizarTecladoDeEquipo(Equipo equipo){
 		try{
-			System.out.println(equipo);
+			System.out.println(this.tecladoSeleccionado+" "+equipo.getId());
 			this.serviciosHistorial.actualizarIdEquipoEnElemento(this.tecladoSeleccionado,equipo.getId());
+			this.mensajeCorrecto();
 		}catch (ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+			this.mensajeError();
+		}catch(Exception e){
+			this.mensajeError();
 			e.printStackTrace();
 		}
 	}
@@ -285,22 +289,37 @@ public class adminBean implements Serializable{
 	public void actualizarMouseDeEquipo(Equipo equipo){
 		try{
 			this.serviciosHistorial.actualizarIdEquipoEnElemento(this.mouseSeleccionado, equipo.getId());
+			this.mensajeCorrecto();
 		}catch (ExcepcionServiciosHistorial e){
 			e.printStackTrace();
+			this.mensajeError();
+		}catch(Exception e){
+			e.printStackTrace();
+			this.mensajeError();
 		}
 	}
 	public void actualizarMonitorDeEquipo(Equipo equipo){
 		try{
 			this.serviciosHistorial.actualizarIdEquipoEnElemento(this.monitorSeleccionado,equipo.getId());
+			this.mensajeCorrecto();
 		}catch (ExcepcionServiciosHistorial e){
 			e.printStackTrace();
+			this.mensajeError();
+		}catch(Exception e){
+			e.printStackTrace();
+			this.mensajeError();
 		}
 	}
 	public void actualizarTorreDeEquipo(Equipo equipo){
 		try{
 			this.serviciosHistorial.actualizarIdEquipoEnElemento(this.torreSeleccionada,equipo.getId());
+			this.mensajeCorrecto();
 		}catch (ExcepcionServiciosHistorial e){
 			e.printStackTrace();
+			this.mensajeError();
+		}catch(Exception e){
+			e.printStackTrace();
+			this.mensajeError();
 		}
 	}
 	
@@ -361,21 +380,27 @@ public class adminBean implements Serializable{
 	public void CambiarIDElemento(Elemento elemento){
 		try{
 			this.serviciosHistorial.cambiarIDElemento(elemento, this.cambioIDElemento);
+			this.mensajeCorrecto();
 		}catch(ExcepcionServiciosHistorial e){
 			e.printStackTrace();
+			this.mensajeError();
+		}catch(Exception e){
+			e.printStackTrace();
+			this.mensajeError();
 		}
 	}
 
 	public void cambiarNombreElemento(Elemento elemento){
 		try{
 			this.serviciosHistorial.cambiarNombreElemento(elemento, this.cambioNombreElemento);
+			this.mensajeCorrecto();
 		}catch(ExcepcionServiciosHistorial e){
 			e.printStackTrace();
+			this.mensajeError();
+		}catch(Exception e){
+			e.printStackTrace();
+			this.mensajeError();
 		}
-	}
-
-	public boolean probando() throws ExcepcionServiciosHistorial{
-		throw new ExcepcionServiciosHistorial("añldskfj");
 	}
 
 
@@ -569,15 +594,6 @@ public class adminBean implements Serializable{
 
 	public void setCambioNombreElemento(String cambioNombreElemento){
 		this.cambioNombreElemento = cambioNombreElemento;
-	}
-
-	public Elemento getConfigurarElemento(){
-		return this.configurarElemento;
-	}
-
-	public void setConfigurarElemento(Elemento configurarElemento){
-		System.out.println(configurarElemento.getNombre());
-		this.configurarElemento = configurarElemento;
 	}
 
 	public Elemento getEnlazarEquipoSeleccionado() {

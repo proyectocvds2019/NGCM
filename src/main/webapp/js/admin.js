@@ -27,16 +27,9 @@ function mensajeError(error){
     swal('¡Error!', error, 'error');
 }
 
-function swalError(){
-	swal('¡Error!', "no se puede realizar la solicitud", 'error');
-}
-
 function mensajeCorrecto(msg){
 	swal('¡Perfecto!', msg, 'success').then((value)=>{location.reload();});
     
-}
-function finalizar(data){
-	location.reload();
 }
 
 
