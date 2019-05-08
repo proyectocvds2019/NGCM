@@ -34,7 +34,19 @@ class Elementos{
 	Fecha fechaEliminacion[0..1]
 }
 
+class Novedades{
+    + Entero id
+    Fecha fechaRegistro
+    Cadena titulo
+    Cadena detalle
+}
+
+
 Elementos "1..*" <- "1" Equipos : tiene
 Equipos "1..*" <- "1" Laboratorios : tiene
 Elementos "1..*" <- "1" Usuarios : registra
+Novedades "0..*" <- "1" Usuarios : registra
+Novedades "0..*" <- "1" Elementos : tiene
+Novedades "0..*" <- "1" Equipos : tiene
+Novedades "0..*" <- "1" Laboratorios : tiene
 @enduml
