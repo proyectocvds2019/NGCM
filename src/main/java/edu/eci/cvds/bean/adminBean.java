@@ -57,7 +57,6 @@ public class adminBean implements Serializable{
 	private List<Equipo> listaEquiposSeleccionados;
 	private List<Elemento> listaElementosSeleccionados;
 	private List<Equipo> equiposSeleccionados;
-	private Elemento enlazarEquipoSeleccionado;
 	private List<TipoElemento> elementosSeleccionadoPorEquipo;
 	private static final TipoElemento teclado = TipoElemento.TECLADO;
 	private static final TipoElemento mouse = TipoElemento.MOUSE;
@@ -155,10 +154,15 @@ public class adminBean implements Serializable{
 
 	public void enlazarElemento(Elemento elemento){
 		try{
-			System.out.println(elemento.getId()+" "+this.equipo);
+			System.out.println(elemento+" "+this.equipo);
 			this.serviciosHistorial.actualizarIdEquipoEnElemento(elemento.getId(),this.equipo);
+			this.mensajeCorrecto();
 		}catch (ExcepcionServiciosHistorial e){
 			e.printStackTrace();
+			this.mensajeError();
+		}catch(Exception e){
+			e.printStackTrace();
+			this.mensajeError();
 		}
 	}
 
@@ -594,13 +598,5 @@ public class adminBean implements Serializable{
 
 	public void setCambioNombreElemento(String cambioNombreElemento){
 		this.cambioNombreElemento = cambioNombreElemento;
-	}
-
-	public Elemento getEnlazarEquipoSeleccionado() {
-		return enlazarEquipoSeleccionado;
-	}
-
-	public void setEnlazarEquipoSeleccionado(Elemento enlazarEquipoSeleccionado) {
-		this.enlazarEquipoSeleccionado = enlazarEquipoSeleccionado;
 	}
 }

@@ -203,15 +203,9 @@
 				                <h:outputText value="#{elemento.tipo}" />
 				            </p:column>
 							<p:column headerText="Enlazar">
-								<!--<center>
+								<center>
 									<button data-toggle="modal" data-target="#botonEnlazarEquipoModal#{elemento.id}" type="button" class="btn btn-default btn-responsive btn-primary"><i class="fas fa-star"></i>Enlazar equipo</button>
-								</center>-->
-
-								<h:commandButton type="button" styleClass="btn btn-default btn-responsive btn-primary" value="Enlazar equipo">
-									<p:ajax update="enlazarEquipoModal" event="click" listener="#{adminBean.setEnlazarEquipoSeleccionado(elemento)}" />
-									<e:attribute name="data-target" value="#botonEnlazarEquipoModal"/>
-									<e:attribute name="data-toggle" value="modal"/>
-								</h:commandButton>
+								</center>
 
 
 
@@ -516,6 +510,39 @@
 				</div>
 			</div>
 		</div>
+
+
+		<!-- MODAL -->
+		<div class="modal fade" id="botonEnlazarEquipoModal#{elemento.id}" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+
+						<h4 class="modal-title">Enlazar equipo al elemento <h:outputText id="enlazarEquipoModal" value="#{elemento.nombre}"/> </h4>
+					</div>
+					<div class="modal-body">
+						<h:form id="formularioEnlazarElemento">
+							<div class="row" style="padding:25px;">
+								<p:outputLabel class="col-xs-12 col-md-6" value="Seleccionar Equipo"/>
+								<h:selectOneMenu style="" dynamic="true" class="col-xs-12 col-md-6" id="equipoAsociar" value="#{adminBean.equipo}">
+									<f:selectItems var="equipo" value="#{adminBean.listaEquiposActivos}" itemValue="#{equipo.id}" itemLabel="Sistemas#{equipo.id}"/>
+								</h:selectOneMenu>
+								<hr class="col-xs-11"/>
+								<p:commandButton ajax="true" onsuccess="mensajeCorrecto('El elemento ha sido enlazado!')" onerror="mensajeError('No es posible enlazar el elemento!')" process="@parent" id="formularioEnlazarElemento" action="#{adminBean.enlazarElemento(elemento)}" styleClass="btn btn-default btn-success btn-responsive btn-block" value="Enlazar" >
+									<f:ajax  onevent="comprobar"/>
+								</p:commandButton>
+							</div>
+						</h:form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
 	</ui:repeat>
 
 
@@ -525,40 +552,7 @@
 	
 
 
-	<!-- MODAL -->
-	<div class="modal fade" id="botonEnlazarEquipoModal" role="dialog">
-		<div class="modal-dialog">
-
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-
-					<h4 class="modal-title">Enlazar equipo al elemento <h:outputText id="enlazarEquipoModal" value="#{adminBean.enlazarEquipoSeleccionado.nombre}"/> </h4>
-				</div>
-				<div class="modal-body">
-					<h:form id="formularioEnlazarElemento">
-						<p:messages>
-							<p:autoUpdate />
-						</p:messages>
-						<div class="row" style="padding:25px;">
-							<p:outputLabel class="col-xs-12 col-md-6" value="Seleccionar Equipo"/>
-							<h:selectOneMenu style="" dynamic="true" class="col-xs-12 col-md-6" id="equipoAsociar" value="#{adminBean.equipo}">
-								<f:selectItems var="equipo" value="#{adminBean.listaEquiposActivos}" itemValue="#{equipo.id}" itemLabel="Sistemas#{equipo.id}"/>
-							</h:selectOneMenu>
-							<hr class="col-xs-11"/>
-							<p:commandButton ajax="true" onsuccess="mensajeCorrecto('El elemento ha sido enlazado!')" onerror="mensajeError('No es posible enlazar el elemento!')" process="formularioEnlazarElemento" id="formularioEnlazarElemento#{adminBean.enlazarEquipoSeleccionado.id}" action="#{adminBean.enlazarElemento(adminBean.enlazarEquipoSeleccionado)}" styleClass="btn btn-default btn-success btn-responsive btn-block" value="Enlazar" >
-								<f:ajax  onevent="comprobar"/>
-							</p:commandButton>
-						</div>
-					</h:form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-				</div>
-			</div>
-
-		</div>
-	</div>
+	
 
 
 
@@ -686,6 +680,9 @@
 				</div>
 			</div>
 		</div>
+
+
+
 	</ui:repeat>
 
 
