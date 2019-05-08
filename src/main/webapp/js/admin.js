@@ -16,13 +16,19 @@ $(".botonMenuConfiguracion").click(function(){
 
 function comprobarRegistroElemento(data){
     console.log(data);
+    if(data.status == 'success'){
+    	location.reload();
+    }
 
 }
 
 function mensajeError(error){
-	console.log("sfdfasfsdfsdf");
     swal('¡Error!', error, 'error');
     errorRegistrarElemento = true;
+}
+
+function swalError(){
+	swal('¡Error!', "no se puede realizar la solicitud", 'error');
 }
 
 function mensajeCorrecto(msg){
@@ -31,6 +37,9 @@ function mensajeCorrecto(msg){
 	}
 	errorRegistrarElemento = false;
     
+}
+function finalizar(data){
+	location.reload();
 }
 
 
