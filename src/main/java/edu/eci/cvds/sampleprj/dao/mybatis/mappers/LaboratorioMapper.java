@@ -4,6 +4,8 @@ import edu.eci.cvds.samples.entities.Equipo;
 import edu.eci.cvds.samples.entities.Laboratorio;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface LaboratorioMapper {
 	
     public Laboratorio consultarLaboratorio(@Param("id") Integer id);
@@ -13,4 +15,8 @@ public interface LaboratorioMapper {
     public void registrarLaboratorio(@Param("lab") Laboratorio lab);
     
     public void desactivarLaboratorio(@Param("id") int id);
+
+    public List<Laboratorio> consultarLaboratoriosDisponibles();
+
+    public Integer consultarSiguienteIdLaboratorio();
 }

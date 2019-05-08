@@ -92,7 +92,7 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 	}
 	
 	@Override
-	public Equipo consultarEquipo(int id) throws ExcepcionServiciosHistorial {
+	public Equipo consultarEquipo(Integer id) throws ExcepcionServiciosHistorial {
 		try {
 			return equipoDAO.consultarEquipo(id);
 		}catch(PersistenceException e) {
@@ -308,7 +308,7 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 	}
 
 	@Override
-	public void desactivarEquipo(int id) throws ExcepcionServiciosHistorial {
+	public void desactivarEquipo(Integer id) throws ExcepcionServiciosHistorial {
 		try {
 			equipoDAO.desactivarEquipo(id);
 		}catch(PersistenceException e) {
@@ -424,7 +424,8 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 		}
 	}	
 
-	private void actualizarIdLaboratorioEnEquipo(Integer idEquipo, Integer idLab) throws ExcepcionServiciosHistorial{
+	@Override
+	public void actualizarIdLaboratorioEnEquipo(Integer idEquipo, Integer idLab) throws ExcepcionServiciosHistorial{
 		try {
 			if(idLab != null) {
 				Equipo eq = equipoDAO.consultarEquipo(idEquipo);
@@ -452,6 +453,24 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 			return equipoDAO.consultarEquipoDelLaboratorio(lab);
 		} catch(PersistenceException e) {
 			throw new ExcepcionServiciosHistorial("No se pudo consultar el equipo del laboratorio"+lab.getId());
+		}
+	}
+
+	@Override
+	public List<Laboratorio> consultarLaboratoriosDisponibles() throws ExcepcionServiciosHistorial{
+		try{
+			return laboratorioDAO.consultarLaboratoriosDisponibles();
+		}catch (PersistenceException e){
+			throw new ExcepcionServiciosHistorial("no se pudo consultar los laboratorios");
+		}
+	}
+
+	@Override
+	public Integer consultarSiguienteIdLaboratorio() throws ExcepcionServiciosHistorial{
+		try{
+			return laboratorioDAO.consultarSiguienteIdLaboratorio();
+		}catch (PersistenceException e){
+			throw new ExcepcionServiciosHistorial("No se ha podido consultar el siguiente id de laboratorios");
 		}
 	}
 

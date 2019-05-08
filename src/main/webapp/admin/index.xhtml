@@ -107,7 +107,7 @@
 			<div class="col-md-12 col-xs-12">
 				<h:form>
 					<p:fieldset id="tablaElementos" legend="Tabla de elementos">
-				        <p:dataTable rowKey="#{elemento.id}" selection="#{adminBean.listaElementosSeleccionados}" id="elementosT" var="elemento" value="#{adminBean.listaElementosDisponibles}" rows="10" paginator="true"
+				        <p:dataTable rowKey="#{elemento.id}" selection="#{adminBean.listaElementosSeleccionados}" id="elementosT" var="elemento" value="#{adminBean.listaElementos}" rows="10" paginator="true"
 									 paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}">
 							<p:column selectionMode="multiple" style="text-align: center;"/>
 				            <p:column sortBy="#{elemento.id}" filterBy="#{elemento.id}" headerText="Id">
@@ -282,7 +282,7 @@
 							<h:outputText value="#{equipo.activo}" />
 						</p:column>
 						<p:column sortBy="#{adminBean.consultarLaboratorio(equipo).id}" filterBy="#{adminBean.consultarLaboratorio(equipo).id}" headerText="Laboratorio">
-							<h:outputText value="#{adminBean.consultarLaboratorio(equipo).id}" />
+							<h:outputText value="#{adminBean.consultarLaboratorio(equipo).nombre}" />
 						</p:column>
 
 						<p:column sortBy="#{adminBean.consultarElementoDelEquipo(adminBean.teclado,equipo)}" filterBy="#{adminBean.consultarElementoDelEquipo(adminBean.teclado,equipo)}" headerText="Teclado">
@@ -386,15 +386,18 @@
 			<div class="row" id="registroLaboratorio">
 				<h1>Registrar Laboratorio</h1>
 				<h:form>
-					<p:messages>
-						<p:autoUpdate />
-					</p:messages>
 					<div class="">
 						<div class="form-group col-xs-12">
 							<h:outputLabel for="equiposLaboratorio" value="Selecciones los equipos: "/>
-							<p:selectCheckboxMenu id="equiposLaboratorio" value="#{adminBean.listaEquiposRegistrarLaboratorio}" label="Equipos" multiple="true"
-												  filter="true" filterMatchMode="startsWith">
-								<f:selectItems value="#{adminBean.listaEquiposActivos}" var="equipo" itemLabel="Sistemas#{equipo.id}" itemValue="#{equipo.id}" />
+							<p:selectCheckboxMenu id="equiposLaboratorio"
+												  value="#{adminBean.listaEquiposRegistrarLaboratorio}"
+												  label="Equipos" multiple="true"
+												  filter="true"
+												  filterMatchMode="startsWith">
+								<f:selectItems value="#{adminBean.listaEquiposActivos}"
+											   var="equipo"
+											   itemLabel="Sistemas#{equipo.id}"
+											   itemValue="#{equipo.id}" />
 							</p:selectCheckboxMenu>
 						</div>
 						<div class="form-group col-xs-12">
@@ -402,7 +405,15 @@
 							<h:inputText value="#{adminBean.nombreLaboratorio}" id="registroNombreLaboratorio"/>
 						</div>
 
-						<p:commandButton icon="fa fa-check" styleClass="btn btn-default btn-success" value="Requistrar" action="#{adminBean.registrarLaboratorio()}"/>
+						<p:commandButton process="@parent"
+										 ajax="true"
+										 onerror="mensajeError('no se ha podido registrar el laboratorio')"
+										 onsuccess="mensajeCorrecto('El laboratorio se ha registrado correctamente')"
+										 icon="fa fa-check" styleClass="btn btn-default btn-success"
+										 value="Requistrar"
+										 action="#{adminBean.registrarLaboratorio()}">
+							<f:ajax onevent="comprobar"/>
+						</p:commandButton>
 					</div>
 				</h:form>
 			</div>
@@ -423,7 +434,7 @@
 
 	<!-- MODALES -->
 
-	<ui:repeat var="elemento" value="#{adminBean.listaElementosDisponibles}">
+	<ui:repeat var="elemento" value="#{adminBean.listaElementos}">
 		<!-- Modal -->
 		<div class="modal fade" id="configurarElementoModal#{elemento.id}" role="dialog">
 			<div class="modal-dialog">
@@ -624,9 +635,9 @@
 								<h:selectOneMenu value="#{adminBean.tecladoSeleccionado}">
 									<f:selectItems itemValue="#{teclado.id}" itemLabel="#{teclado.id}" var="teclado" value="#{adminBean.consultarElementosDisponibles(adminBean.teclado)}"/>
 								</h:selectOneMenu>
-								<h:commandButton process="@parent" ajax="true" onsuccess="mensajeCorrecto('Se ha cambiado el teclado correctamente')" onerror="mensajeError('No se ha podido cambiar el teclado')" value="Cambiar" styleClass="btn btn-default btn-success" action="#{adminBean.actualizarTecladoDeEquipo(equipo)}">
+								<p:commandButton process="@parent" ajax="true" onsuccess="mensajeCorrecto('Se ha cambiado el teclado correctamente')" onerror="mensajeError('No se ha podido cambiar el teclado')" value="Cambiar" styleClass="btn btn-default btn-success" action="#{adminBean.actualizarTecladoDeEquipo(equipo)}">
 									<f:ajax onevent="comprobar"/>
-								</h:commandButton>
+								</p:commandButton>
 							</h:form>
 						</div>
 						<div class="collapse collapseConfiguracion container-fluid" id="configurarTorre#{equipo.id}">
@@ -635,9 +646,9 @@
 								<h:selectOneMenu value="#{adminBean.torreSeleccionada}">
 									<f:selectItems itemValue="#{torre.id}" itemLabel="#{torre.id}" var="torre" value="#{adminBean.consultarElementosDisponibles(adminBean.torre)}"/>
 								</h:selectOneMenu>
-								<h:commandButton process="@parent" onsuccess="mensajeCorrecto('Se ha cambiado la torre correctamente')" onerror="mensajeError('No se ha podido cambiar la torre')" value="Cambiar" styleClass="btn btn-default btn-success" action="#{adminBean.actualizarTorreDeEquipo(equipo)}">
+								<p:commandButton process="@parent" onsuccess="mensajeCorrecto('Se ha cambiado la torre correctamente')" onerror="mensajeError('No se ha podido cambiar la torre')" value="Cambiar" styleClass="btn btn-default btn-success" action="#{adminBean.actualizarTorreDeEquipo(equipo)}">
 									<f:ajax onevent="comprobar"/>
-								</h:commandButton>
+								</p:commandButton>
 							</h:form>
 						</div>
 						<div class="collapse collapseConfiguracion container-fluid" id="configurarMouse#{equipo.id}">
@@ -646,9 +657,9 @@
 								<h:selectOneMenu value="#{adminBean.mouseSeleccionado}">
 									<f:selectItems itemValue="#{mouse.id}" itemLabel="#{mouse.id}" var="mouse" value="#{adminBean.consultarElementosDisponibles(adminBean.mouse)}"/>
 								</h:selectOneMenu>
-								<h:commandButton process="@parent" onsuccess="mensaCorrecto('El mouse se ha cambiado correctamente')" onerror="mensajeError('No se ha podido cambiar el mouse')" value="Cambiar" styleClass="btn btn-default btn-success" action="#{adminBean.actualizarMouseDeEquipo(equipo)}">
+								<p:commandButton process="@parent" onsuccess="mensaCorrecto('El mouse se ha cambiado correctamente')" onerror="mensajeError('No se ha podido cambiar el mouse')" value="Cambiar" styleClass="btn btn-default btn-success" action="#{adminBean.actualizarMouseDeEquipo(equipo)}">
 									<f:ajax onevent="procesando"/>
-								</h:commandButton>
+								</p:commandButton>
 							</h:form>
 						</div>
 						<div class="collapse collapseConfiguracion container-fluid" id="configurarMonitor#{equipo.id}">
@@ -657,20 +668,20 @@
 								<h:selectOneMenu value="#{adminBean.monitorSeleccionado}">
 									<f:selectItems itemValue="#{monitor.id}" itemLabel="#{monitor.id}" var="monitor" value="#{adminBean.consultarElementosDisponibles(adminBean.monitor)}"/>
 								</h:selectOneMenu>
-								<h:commandButton process="@parent" onsuccess="mensajeCorrecto('El monitor se ha cambiado correctamente')" onerror="mensajeError('No se ha podido cambiar el monitor')" value="Cambiar" styleClass="btn btn-default btn-success" action="#{adminBean.actualizarTecladoDeEquipo(equipo)}">
+								<p:commandButton process="@parent" onsuccess="mensajeCorrecto('El monitor se ha cambiado correctamente')" onerror="mensajeError('No se ha podido cambiar el monitor')" value="Cambiar" styleClass="btn btn-default btn-success" action="#{adminBean.actualizarTecladoDeEquipo(equipo)}">
 									<f:ajax onevent="comprobar"/>
-								</h:commandButton>
+								</p:commandButton>
 							</h:form>
 						</div>
 						<div class="collapse collapseConfiguracion container-fluid" id="configurarLaboratorio#{equipo.id}">
 							<h:form>
 								<h:outputText value="Seleccione el laboratorio:"/>
-								<h:selectOneMenu value="#{adminBean.monitorSeleccionado}">
+								<h:selectOneMenu value="#{adminBean.laboratorioSeleccionado}">
 									<f:selectItems itemValue="#{laboratorio.id}" itemLabel="#{laboratorio.nombre}" var="laboratorio" value="#{adminBean.laboratoriosDisponibles()}"/>
 								</h:selectOneMenu>
-								<h:commandButton process="@parent" onsuccess="mensajeCorrecto('Se ha cambiado el laboratorio correctamente')" onerror="mensajeError('No se ha podido cambiar el laboratorio')" value="Cambiar" styleClass="btn btn-default btn-success" action="#{adminBean.actualizarLaboratorioDeEquipo(equipo)}">
+								<p:commandButton process="@parent" onsuccess="mensajeCorrecto('Se ha cambiado el laboratorio correctamente')" onerror="mensajeError('No se ha podido cambiar el laboratorio')" value="Cambiar" styleClass="btn btn-default btn-success" action="#{adminBean.actualizarLaboratorioDeEquipo(equipo)}">
 									<f:ajax onevent="comprobar"/>
-								</h:commandButton>
+								</p:commandButton>
 							</h:form>
 						</div>
 					</div>

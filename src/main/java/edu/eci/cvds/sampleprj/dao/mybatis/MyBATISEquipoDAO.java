@@ -15,24 +15,24 @@ public class MyBATISEquipoDAO implements EquipoDAO{
 	
 	@Inject
 	private EquipoMapper equipoMapper;
-
+	@Override
 	public void registrarEquipo(Equipo equipo, Laboratorio laboratorio) throws PersistenceException {
 		equipoMapper.registrarEquipo(equipo, laboratorio);
 		
 	}
-
-	public Equipo consultarEquipo(int id) throws PersistenceException {
+	@Override
+	public Equipo consultarEquipo(Integer id) throws PersistenceException {
 		return equipoMapper.consultarEquipo(id);
 	}
-
+	@Override
 	public List<Equipo> consultarEquipos() throws PersistenceException {
 		return equipoMapper.consultarEquipos();
 	}
-
+	@Override
 	public List<Equipo> consultarEquiposDisponiblesParaElemento(TipoElemento tipo) throws PersistenceException{
 		return equipoMapper.consultarEquiposDisponiblesParaElemento(tipo);
 	}
-
+	@Override
 	public Integer consultarEquipoDeElemento(Elemento elemento) throws PersistenceException{
 		return equipoMapper.consultarEquipoDeElemento(elemento);
 	}
@@ -43,7 +43,7 @@ public class MyBATISEquipoDAO implements EquipoDAO{
 	}
 	
 	@Override
-	public void desactivarEquipo(int id) throws PersistenceException{
+	public void desactivarEquipo(Integer id) throws PersistenceException{
                 equipoMapper.desactivarEquipo(id);
 	}
 

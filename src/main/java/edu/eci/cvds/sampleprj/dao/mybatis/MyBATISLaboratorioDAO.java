@@ -7,6 +7,7 @@ import edu.eci.cvds.samples.entities.Equipo;
 import edu.eci.cvds.samples.entities.Laboratorio;
 
 import javax.inject.Inject;
+import java.util.List;
 
 public class MyBATISLaboratorioDAO implements LaboratorioDAO {
     @Inject
@@ -25,4 +26,14 @@ public class MyBATISLaboratorioDAO implements LaboratorioDAO {
 		laboratorioMapper.registrarLaboratorio(lab);
 		
 	}
+
+	@Override
+    public List<Laboratorio> consultarLaboratoriosDisponibles() throws PersistenceException{
+        return laboratorioMapper.consultarLaboratoriosDisponibles();
+    }
+
+    @Override
+    public Integer consultarSiguienteIdLaboratorio() throws PersistenceException{
+        return laboratorioMapper.consultarSiguienteIdLaboratorio();
+    }
 }

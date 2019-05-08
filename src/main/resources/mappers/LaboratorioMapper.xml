@@ -19,10 +19,18 @@
         <result property="activo" column="activo"/>
     </resultMap>
 
+    <select id="consultarLaboratoriosDisponibles" resultMap="laboratorioResult">
+        SELECT * FROM laboratorios WHERE laboratorios.activo = true;
+    </select>
+
     <select id="consultarLaboratorio" parameterType="map" resultMap="laboratorioResult">
         SELECT *
         FROM laboratorios
         WHERE laboratorios.id = #{id};
+    </select>
+
+    <select id="consultarSiguienteIdLaboratorio" resultType="Integer">
+        SELECT nextval('id_lab');
     </select>
 
     <select id="consultarLaboratorio2" parameterType="map" resultMap="laboratorioResult">

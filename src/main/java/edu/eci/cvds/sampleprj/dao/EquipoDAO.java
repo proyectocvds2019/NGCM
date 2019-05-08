@@ -11,7 +11,7 @@ public interface EquipoDAO {
 
 	public void registrarEquipo(Equipo equipo, Laboratorio laboratorio) throws PersistenceException;
 	
-	public Equipo consultarEquipo(int id) throws PersistenceException;
+	public Equipo consultarEquipo(Integer id) throws PersistenceException;
 	
 	public List<Equipo> consultarEquipos() throws PersistenceException;
 
@@ -21,7 +21,7 @@ public interface EquipoDAO {
 	
 	public Integer proximoIdEquipo() throws PersistenceException;
         
-    public void desactivarEquipo(int id) throws PersistenceException;
+    public void desactivarEquipo(Integer id) throws PersistenceException;
 
     public List<Equipo> consultarEquiposDisponibles() throws PersistenceException;
     

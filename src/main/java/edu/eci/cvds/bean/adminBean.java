@@ -140,7 +140,21 @@ public class adminBean implements Serializable{
 
 	}
 	public  void registrarLaboratorio(){
-		this.mensajeCorrecto();
+		try{
+			Integer id = this.serviciosHistorial.consultarSiguienteIdLaboratorio();
+			this.serviciosHistorial.registrarLaboratorio(new Laboratorio(id,this.nombreLaboratorio,true));
+			for(int i=0;i<this.listaEquiposRegistrarLaboratorio.size();i++){
+				Integer x = Integer.parseInt(this.listaEquiposRegistrarLaboratorio.get(i));
+				this.serviciosHistorial.actualizarIdLaboratorioEnEquipo(x,id);
+			}
+			this.mensajeCorrecto();
+		}catch (ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+			this.mensajeError();
+		}catch (Exception e){
+			e.printStackTrace();
+			this.mensajeError();
+		}
 	}
 
 	public Laboratorio consultarLaboratorio(Equipo equipo){
@@ -267,13 +281,25 @@ public class adminBean implements Serializable{
 
 	// FALTA CORREGIR ESTE MÉTODO
 	public List<Laboratorio> laboratoriosDisponibles(){
-		List<Laboratorio> lis = new ArrayList<Laboratorio>();
-		lis.add(new Laboratorio(1,"laboratorio de redes",true));
-		return lis;
+		try{
+			return this.serviciosHistorial.consultarLaboratoriosDisponibles();
+		}catch (ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public void actualizarLaboratorioDeEquipo(Equipo equipo){
-
+		try{
+			this.serviciosHistorial.actualizarIdLaboratorioEnEquipo(equipo.getId(),this.laboratorioSeleccionado);
+			this.mensajeCorrecto();
+		}catch (ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+			this.mensajeError();
+		}catch (Exception e){
+			e.printStackTrace();
+			this.mensajeError();
+		}
 	}
 
 	public void actualizarTecladoDeEquipo(Equipo equipo){

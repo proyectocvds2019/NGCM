@@ -18,7 +18,7 @@ public interface EquipoMapper {
 	
 	public List<Equipo> consultarEquipos();
 	
-	public Equipo consultarEquipo(@Param("id") int id);
+	public Equipo consultarEquipo(@Param("id") Integer id);
 	
 	public void registrarEquipo(@Param("equipo") Equipo equipo, @Param("laboratorio") Laboratorio laboratorio);
 
@@ -28,7 +28,7 @@ public interface EquipoMapper {
 	
 	public Integer proximoIdEquipo();
 	
-	public void desactivarEquipo(@Param("id") int id);
+	public void desactivarEquipo(@Param("id") Integer id);
 
 	public List<Equipo> consultarEquiposDisponibles();
 	
