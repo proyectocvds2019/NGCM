@@ -18,7 +18,7 @@
 		select equipos.id as id, equipos.activo as activo, elementos.id as idElemento, elementos.tipo as tipoElemento,
 		elementos.nombre as nombreElemento, elementos.activo as activoElemento
 		from equipos, elementos
-		where equipos.id = elementos.idEquipo OR equipos.id IN (SELECT equipos.id FROM equipos);
+		where equipos.activo = true AND (equipos.id = elementos.idEquipo OR equipos.id IN (SELECT equipos.id FROM equipos));
 	</select>
 
 	<select id="consultarEquiposDisponibles" resultMap="EquiposResult">
