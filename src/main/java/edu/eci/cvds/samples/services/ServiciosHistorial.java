@@ -1,5 +1,6 @@
 package edu.eci.cvds.samples.services;
 
+import java.util.Date;
 import java.util.List;
 
 import edu.eci.cvds.samples.entities.Elemento;
@@ -62,5 +63,19 @@ public interface ServiciosHistorial {
 	public abstract void actualizarIdLaboratorioEnEquipo(Integer idEquipo, Integer idLab) throws ExcepcionServiciosHistorial;
 
 	public abstract Integer consultarSiguienteIdLaboratorio() throws ExcepcionServiciosHistorial;
+
+	public abstract List<Laboratorio> consultarLaboratorios() throws ExcepcionServiciosHistorial;
+
+	public abstract Integer consultarNumeroEquipos(Laboratorio laboratorio) throws ExcepcionServiciosHistorial;
+
+	public abstract Date consultarFechaRegistro(Laboratorio laboratorio) throws ExcepcionServiciosHistorial;
+
+	public abstract void eliminarLaboratorio(Laboratorio laboratorio) throws ExcepcionServiciosHistorial;
+
+	public abstract void desasociarLaboratorioDeEquipos(Laboratorio laboratorio) throws ExcepcionServiciosHistorial;
+
+	public abstract void importarTablaLaboratorios() throws ExcepcionServiciosHistorial;
+
+	public abstract Integer consultarEquiposEliminadosLaboratorio(Laboratorio laboratorio) throws ExcepcionServiciosHistorial;
 
 }

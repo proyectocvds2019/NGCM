@@ -3,6 +3,7 @@ package edu.eci.cvds.sampleprj.dao;
 import edu.eci.cvds.samples.entities.Equipo;
 import edu.eci.cvds.samples.entities.Laboratorio;
 
+import java.util.Date;
 import java.util.List;
 
 public interface LaboratorioDAO {
@@ -16,4 +17,16 @@ public interface LaboratorioDAO {
     public List<Laboratorio> consultarLaboratoriosDisponibles() throws PersistenceException;
 
     public Integer consultarSiguienteIdLaboratorio() throws PersistenceException;
+
+    public List<Laboratorio> consultarLaboratorios() throws PersistenceException;
+
+    public Integer consultarNumeroEquipos(Laboratorio laboratorio) throws PersistenceException;
+
+    public Date consultarFechaRegistro(Laboratorio laboratorio) throws PersistenceException;
+
+    public void eliminarLaboratorio(Laboratorio laboratorio) throws PersistenceException;
+
+    public void desasociarLaboratorioDeEquipos(Laboratorio laboratorio) throws PersistenceException;
+
+    public Integer consultarEquiposEliminadosLaboratorio(Laboratorio laboratorio) throws PersistenceException;
 }

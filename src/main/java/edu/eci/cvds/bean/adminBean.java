@@ -1,8 +1,7 @@
 package edu.eci.cvds.bean;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -24,7 +23,8 @@ import edu.eci.cvds.samples.entities.TipoElemento;
 import edu.eci.cvds.samples.services.ExcepcionServiciosHistorial;
 import edu.eci.cvds.samples.services.ServiciosHistorial;
 import edu.eci.cvds.samples.services.ServiciosHistorialFactory;
-
+import org.primefaces.event.ItemSelectEvent;
+import org.primefaces.model.chart.*;
 
 
 @ManagedBean(name = "adminBean")
@@ -58,12 +58,15 @@ public class adminBean implements Serializable{
 	private List<Elemento> listaElementosSeleccionados;
 	private List<Equipo> equiposSeleccionados;
 	private List<TipoElemento> elementosSeleccionadoPorEquipo;
+	private List<Laboratorio> listaLaboratorios;
+	private PieChartModel modeloTablaEquipoPorLaboratorio;
 	private static final TipoElemento teclado = TipoElemento.TECLADO;
 	private static final TipoElemento mouse = TipoElemento.MOUSE;
 	private static final TipoElemento monitor = TipoElemento.MONITOR;
 	private static final TipoElemento torre = TipoElemento.TORRE;
     @Inject
     private ServiciosHistorial serviciosHistorial;
+
 	
 	public adminBean() {
 	    this.recargar();
@@ -81,10 +84,13 @@ public class adminBean implements Serializable{
 			this.listaElementosDisponibles = this.serviciosHistorial.consultarElementosDisponibles();
 			this.listaEquipos = this.serviciosHistorial.consultarEquipos();
 			this.listaEquiposActivos = this.serviciosHistorial.consultarEquiposDisponibles();
+			this.listaLaboratorios = this.serviciosHistorial.consultarLaboratorios();
+
 		}catch (ExcepcionServiciosHistorial e){
 			e.printStackTrace();
 		}
 	}
+
     
 	public void registrarElemento(){
 		try{
@@ -125,8 +131,11 @@ public class adminBean implements Serializable{
 			Elemento teclado = this.serviciosHistorial.consultarElemento(this.tecladoSeleccionado);
 			Elemento monitor = this.serviciosHistorial.consultarElemento(this.monitorSeleccionado);
 			Laboratorio laboratorio = this.serviciosHistorial.consultarLaboratorio(this.laboratorioSeleccionado);
+			if(torre == null || mouse == null || teclado==null || monitor == null){
+				this.mensajeError();
+				return;
+			}
 			if(this.laboratorioSeleccionado==-1) laboratorio = new Laboratorio();
-			System.out.println(laboratorio.getId());
 			ArrayList<Elemento> lista = new ArrayList<Elemento>();
 			lista.add(torre);lista.add(mouse);lista.add(teclado);lista.add(monitor);
 			Integer id = this.serviciosHistorial.proximoIdEquipo();
@@ -134,6 +143,9 @@ public class adminBean implements Serializable{
 			this.serviciosHistorial.registrarEquipo(equipo,laboratorio);
 			this.mensajeCorrecto();
 		}catch(ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+			this.mensajeError();
+		}catch(Exception e){
 			e.printStackTrace();
 			this.mensajeError();
 		}
@@ -145,6 +157,7 @@ public class adminBean implements Serializable{
 			this.serviciosHistorial.registrarLaboratorio(new Laboratorio(id,this.nombreLaboratorio,true));
 			for(int i=0;i<this.listaEquiposRegistrarLaboratorio.size();i++){
 				Integer x = Integer.parseInt(this.listaEquiposRegistrarLaboratorio.get(i));
+				System.out.println(x);
 				this.serviciosHistorial.actualizarIdLaboratorioEnEquipo(x,id);
 			}
 			this.mensajeCorrecto();
@@ -168,7 +181,6 @@ public class adminBean implements Serializable{
 
 	public void enlazarElemento(Elemento elemento){
 		try{
-			System.out.println(elemento+" "+this.equipo);
 			this.serviciosHistorial.actualizarIdEquipoEnElemento(elemento.getId(),this.equipo);
 			this.mensajeCorrecto();
 		}catch (ExcepcionServiciosHistorial e){
@@ -222,8 +234,13 @@ public class adminBean implements Serializable{
 				}
 			}
 			this.recargar();
+			this.mensajeCorrecto();
 		}catch(ExcepcionServiciosHistorial e){
 			e.printStackTrace();
+			this.mensajeError();
+		}catch (Exception e){
+			e.printStackTrace();
+			this.mensajeError();
 		}
 		
 	    
@@ -304,7 +321,6 @@ public class adminBean implements Serializable{
 
 	public void actualizarTecladoDeEquipo(Equipo equipo){
 		try{
-			System.out.println(this.tecladoSeleccionado+" "+equipo.getId());
 			this.serviciosHistorial.actualizarIdEquipoEnElemento(this.tecladoSeleccionado,equipo.getId());
 			this.mensajeCorrecto();
 		}catch (ExcepcionServiciosHistorial e){
@@ -432,6 +448,83 @@ public class adminBean implements Serializable{
 			this.mensajeError();
 		}
 	}
+
+	public Integer consultarNumeroEquipos(Laboratorio laboratorio){
+		try{
+			return this.serviciosHistorial.consultarNumeroEquipos(laboratorio);
+		}catch (ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public Date consultarFechaRegistroLaboratorio(Laboratorio laboratorio){
+		try{
+			Date fecha = this.serviciosHistorial.consultarFechaRegistro(laboratorio);
+
+			return fecha;
+		}catch (ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public void eliminarLaboratorio(Laboratorio laboratorio){
+		try{
+			this.serviciosHistorial.eliminarLaboratorio(laboratorio);
+			this.serviciosHistorial.desasociarLaboratorioDeEquipos(laboratorio);
+			this.mensajeCorrecto();
+		}catch (ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+			this.mensajeError();
+		}catch (Exception e){
+			e.printStackTrace();
+			this.mensajeError();
+		}
+	}
+
+	public void importarTablaLaboratorios(){
+		try{
+			this.serviciosHistorial.importarTablaLaboratorios();
+		}catch (ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+		}
+	}
+
+	public String imprimirListaLaboratorios(){
+		String rta = new String();
+		for(Laboratorio lab: this.listaLaboratorios){
+			rta += "\""+lab.getNombre()+"\",";
+		}
+		return rta;
+	}
+
+	public Integer consultarEquiposEliminadosLaboratorio(Laboratorio laboratorio){
+		try{
+			return this.serviciosHistorial.consultarEquiposEliminadosLaboratorio(laboratorio);
+		}catch (ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public String imprimirNumeroEquiposLaboratorios(){
+		String rta = new String();
+		for(Laboratorio lab: this.listaLaboratorios){
+			rta += "\""+this.consultarNumeroEquipos(lab)+"\",";
+		}
+		return rta;
+	}
+
+	public String imprimirEquiposEliminadosLaboratorio(){
+		String rta = new String();
+		for(Laboratorio lab: this.listaLaboratorios){
+			rta += "\""+this.consultarEquiposEliminadosLaboratorio(lab)+"\",";
+		}
+		return rta;
+	}
+
+
 
 
 
@@ -625,4 +718,22 @@ public class adminBean implements Serializable{
 	public void setCambioNombreElemento(String cambioNombreElemento){
 		this.cambioNombreElemento = cambioNombreElemento;
 	}
+
+	public List<Laboratorio> getListaLaboratorios() {
+		return listaLaboratorios;
+	}
+
+	public void setListaLaboratorios(List<Laboratorio> listaLaboratorios) {
+		this.listaLaboratorios = listaLaboratorios;
+	}
+
+	public PieChartModel getModeloTablaEquipoPorLaboratorio() {
+		return modeloTablaEquipoPorLaboratorio;
+	}
+
+	public void setModeloTablaEquipoPorLaboratorio(PieChartModel modeloTablaEquipoPorLaboratorio) {
+		this.modeloTablaEquipoPorLaboratorio = modeloTablaEquipoPorLaboratorio;
+	}
+
+
 }

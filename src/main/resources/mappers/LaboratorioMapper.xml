@@ -23,6 +23,10 @@
         SELECT * FROM laboratorios WHERE laboratorios.activo = true;
     </select>
 
+    <select id="consultarLaboratorios" resultMap="laboratorioResult">
+        SELECT * FROM laboratorios;
+    </select>
+
     <select id="consultarLaboratorio" parameterType="map" resultMap="laboratorioResult">
         SELECT *
         FROM laboratorios
@@ -44,10 +48,28 @@
 		VALUES (#{lab.id},#{lab.nombre},#{lab.activo});
 	</insert>
 	
-	<update id = 'desactivarLaboratorio' parameterType = 'map'>
+	<update id = 'eliminarLaboratorio' parameterType = 'map'>
 		UPDATE Laboratorios
 		SET activo = false
-		WHERE Laboratorios.id = #{id};
+		WHERE Laboratorios.id = #{lab.id};
 	</update>
+
+    <update id="desasociarLaboratorioDeEquipos" parameterType="map">
+        UPDATE Equipos
+        SET laboratorio = null
+        WHERE laboratorio = #{lab.id};
+    </update>
+
+    <select parameterType="map" id="consultarEquiposEliminadosLaboratorio" resultType="Integer">
+        SELECT COUNT(equipos.id) FROM equipos WHERE equipos.laboratorio = #{lab.id} AND equipos.activo = false;
+    </select>
+
+    <select parameterType="map" id="consultarNumeroEquipos" resultType="Integer">
+        SELECT COUNT(equipos.id) FROM laboratorios, equipos WHERE laboratorios.id = equipos.laboratorio AND laboratorios.id = #{lab.id};
+    </select>
+
+    <select id="consultarFechaRegistro" parameterType="map" resultType="Date">
+        SELECT fechaRegistro FROM laboratorios WHERE laboratorios.id = #{lab.id};
+    </select>
 
 </mapper>

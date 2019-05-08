@@ -43,6 +43,9 @@ public class Laboratorio {
         this.activo = activo;
     }
 
+    public boolean getActivo(){
+        return this.activo;
+    }
 
     public Integer getId() {
         return id;

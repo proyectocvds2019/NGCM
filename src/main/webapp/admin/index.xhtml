@@ -17,7 +17,7 @@
     <!-- JS plugins -->
     <script src="../js/plugins/bootstrap.min.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"/>
 	
 </h:head>
 <h:body>
@@ -418,6 +418,72 @@
 				</h:form>
 			</div>
 			<hr/>
+			<div class="row">
+				<p:fieldset id="tablaLaboratorios" legend="Tabla de Laboratorios">
+					<p:dataTable value="#{adminBean.listaLaboratorios}" var="laboratorio">
+						<p:column headerText="Nombre">
+							<h:outputText value="#{laboratorio.nombre}"/>
+						</p:column>
+						<p:column headerText="# Equipos">
+							<h:outputText value="#{adminBean.consultarNumeroEquipos(laboratorio)}"/>
+						</p:column>
+						<p:column headerText="Activo">
+							<h:outputText value="#{laboratorio.activo}"/>
+						</p:column>
+						<p:column headerText="Fecha Creación">
+							<h:outputText value="#{adminBean.consultarFechaRegistroLaboratorio(laboratorio)}"/>
+						</p:column>
+						<p:column headerText="Eliminar">
+							<button type="button" class="btn btn-default btn-danger btn-block" data-target="#eliminarLaboratorio#{laboratorio.id}" data-toggle="modal">
+								Eliminar
+							</button>
+							<!-- Modal -->
+							<div class="modal fade" id="eliminarLaboratorio#{laboratorio.id}" role="dialog">
+								<div class="modal-dialog">
+									<!-- Modal content-->
+									<div class="modal-content">
+										<div class="modal-body">
+											<h:form>
+												<p>¿Desea dar de baja este laboratorio?</p>
+												<p:commandButton ajax="true"
+																 styleClass="btn btn-default btn-success"
+																 value="Si"
+																 process="@parent"
+																 action="#{adminBean.eliminarLaboratorio(laboratorio)}"
+																 onerror="mensajeError('No se ha podido dar de baja el laboratoroi')"
+																 onsuccess="mensajeCorrecto('El laboratorio se ha eliminado correctamente')">
+													<f:ajax onevent="comprobar"/>
+												</p:commandButton>
+												<button class="btn btn-default btn-danger" data-dismiss="modal">
+													No
+												</button>
+											</h:form>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default cerrarModal" data-dismiss="modal">Cerrar</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</p:column>
+						<f:facet name="footer">
+							<form>
+								<h:commandButton style="color:white;" value="Recargar" action="#{adminBean.recargar()}" styleClass="btn btn-default btn-info" />
+							</form>
+						</f:facet>
+					</p:dataTable>
+				</p:fieldset>
+				<h:form>
+					<i class="fas fa-download"></i><h:commandLink value="Descargar" action="#{adminBean.importarTablaLaboratorios()}" styleClass="btn btn-default"/>
+				</h:form>
+			</div>
+			<hr/>
+			<div class="row col-xs-12 col-md-6">
+				<canvas id="equiposPorLaboratorio"/>
+			</div>
+			<div class="row col-xs-12 col-md-6">
+				<canvas id="eliminadosLaboratorio"/>
+			</div>
 		</div>
 	</div>
 
@@ -717,7 +783,87 @@
 
 		</div>
 	</div>
+	<script>
+	  var ctx = document.getElementById("equiposPorLaboratorio").getContext('2d');
+	  var myChart = new Chart(ctx, {
+		type: 'bar',
+		data: {
+		  //labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+		  labels: [#{adminBean.imprimirListaLaboratorios()}],
+		  datasets: [{
+			label: '# Equipos por Laboratorio',
+			data: [#{adminBean.imprimirNumeroEquiposLaboratorios()}],
+			backgroundColor: [
+			  'rgba(255, 99, 132, 0.2)',
+			  'rgba(54, 162, 235, 0.2)',
+			  'rgba(255, 206, 86, 0.2)',
+			  'rgba(75, 192, 192, 0.2)',
+			  'rgba(153, 102, 255, 0.2)',
+			  'rgba(255, 159, 64, 0.2)'
+			],
+			borderColor: [
+			  'rgba(255,99,132,1)',
+			  'rgba(54, 162, 235, 1)',
+			  'rgba(255, 206, 86, 1)',
+			  'rgba(75, 192, 192, 1)',
+			  'rgba(153, 102, 255, 1)',
+			  'rgba(255, 159, 64, 1)'
+			],
+			borderWidth: 1
+		  }]
+		},
+		options: {
+		  scales: {
+			yAxes: [{
+			  ticks: {
+				beginAtZero: true
+			  }
+			}]
+		  }
+		}
+	  });
 
+
+	  var ctx = document.getElementById("eliminadosLaboratorio").getContext('2d');
+	  var myChart = new Chart(ctx, {
+		type: 'bar',
+		data: {
+		  //labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+		  labels: [#{adminBean.imprimirListaLaboratorios()}],
+		  datasets: [{
+			label: '# Equipos eliminados por Laboratorio',
+			data: [#{adminBean.imprimirEquiposEliminadosLaboratorio()}],
+			backgroundColor: [
+			  'rgba(255, 99, 132, 0.2)',
+			  'rgba(54, 162, 235, 0.2)',
+			  'rgba(255, 206, 86, 0.2)',
+			  'rgba(75, 192, 192, 0.2)',
+			  'rgba(153, 102, 255, 0.2)',
+			  'rgba(255, 159, 64, 0.2)'
+			],
+			borderColor: [
+			  'rgba(255,99,132,1)',
+			  'rgba(54, 162, 235, 1)',
+			  'rgba(255, 206, 86, 1)',
+			  'rgba(75, 192, 192, 1)',
+			  'rgba(153, 102, 255, 1)',
+			  'rgba(255, 159, 64, 1)'
+			],
+			borderWidth: 1
+		  }]
+		},
+		options: {
+		  scales: {
+			yAxes: [{
+			  ticks: {
+				beginAtZero: true
+			  }
+			}]
+		  }
+		}
+	  });
+
+	</script>
 </h:body>
 <footer>
 

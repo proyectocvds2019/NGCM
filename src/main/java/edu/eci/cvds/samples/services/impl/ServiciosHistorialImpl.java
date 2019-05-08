@@ -1,6 +1,7 @@
 package edu.eci.cvds.samples.services.impl;
 
 import java.io.OutputStream;
+import java.util.Date;
 import java.util.List;
 
 import com.google.inject.Inject;
@@ -26,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Singleton
 public class ServiciosHistorialImpl implements ServiciosHistorial{
-	
+
 	@Inject
 	private ElementoDAO elementoDAO;
 	@Inject
@@ -39,9 +40,7 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 			if(equipo != null){
 				Equipo equi = equipoDAO.consultarEquipo(equipo);
 				for (Elemento e: equi.getElementos()){
-					System.out.println(e.getId());
 					if(e.getTipo().name().equals(elemento.getTipo().name())){
-						System.out.println("entro "+e.getId());
 						elementoDAO.actualizarIdEquipo(e.getId(),null);
 					}
 				}
@@ -324,7 +323,7 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 		response.setContentType("application/vnd.ms-excel");
 		try{
 			HSSFWorkbook wb = new HSSFWorkbook(); // crea libro de excel
-			HSSFSheet sheet = wb.createSheet("Elementos"); // crea hoja
+			HSSFSheet sheet = wb.createSheet("Equipos"); // crea hoja
 			List<Elemento> elementos = this.consultarElementos();
 			int rownum = 0;
 			int column = 0;
@@ -427,20 +426,6 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 	@Override
 	public void actualizarIdLaboratorioEnEquipo(Integer idEquipo, Integer idLab) throws ExcepcionServiciosHistorial{
 		try {
-			if(idLab != null) {
-				Equipo eq = equipoDAO.consultarEquipo(idEquipo);
-				Laboratorio lab = laboratorioDAO.consultarLaboratorio(idLab);
-				Equipo eq2 = null;
-				if(lab != null) {
-					eq2 = equipoDAO.consultarEquipoDelLaboratorio(lab);
-				}
-				if(eq != null) {
-					equipoDAO.actualizarIdLaboratorio(null, eq.getId());
-				}
-				if(eq2 != null) {
-					equipoDAO.actualizarIdLaboratorio(null, eq2.getId());
-				}
-			}
 			equipoDAO.actualizarIdLaboratorio(idLab, idEquipo);
 		}catch(PersistenceException e) {
 			throw new ExcepcionServiciosHistorial("No se pudo actualizar el idLaboratorio en el equipo.");
@@ -461,7 +446,7 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 		try{
 			return laboratorioDAO.consultarLaboratoriosDisponibles();
 		}catch (PersistenceException e){
-			throw new ExcepcionServiciosHistorial("no se pudo consultar los laboratorios");
+			throw new ExcepcionServiciosHistorial("no se pudo consultar los laboratorios disponibles");
 		}
 	}
 
@@ -471,6 +456,120 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 			return laboratorioDAO.consultarSiguienteIdLaboratorio();
 		}catch (PersistenceException e){
 			throw new ExcepcionServiciosHistorial("No se ha podido consultar el siguiente id de laboratorios");
+		}
+	}
+
+	@Override
+	public List<Laboratorio> consultarLaboratorios() throws ExcepcionServiciosHistorial{
+		try{
+			return laboratorioDAO.consultarLaboratorios();
+		}catch (PersistenceException e){
+			throw new ExcepcionServiciosHistorial("No se han podido consultar los laboratorios");
+		}
+	}
+
+	@Override
+	public Integer consultarNumeroEquipos(Laboratorio laboratorio) throws ExcepcionServiciosHistorial{
+		try{
+			return laboratorioDAO.consultarNumeroEquipos(laboratorio);
+		}catch (PersistenceException e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public Date consultarFechaRegistro(Laboratorio laboratorio) throws ExcepcionServiciosHistorial {
+		try{
+			return laboratorioDAO.consultarFechaRegistro(laboratorio);
+		}catch (PersistenceException e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public void eliminarLaboratorio(Laboratorio laboratorio) throws ExcepcionServiciosHistorial{
+		try{
+			laboratorioDAO.eliminarLaboratorio(laboratorio);
+
+		}catch (PersistenceException e){
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void desasociarLaboratorioDeEquipos(Laboratorio laboratorio) throws ExcepcionServiciosHistorial{
+		try{
+			laboratorioDAO.desasociarLaboratorioDeEquipos(laboratorio);
+		}catch (PersistenceException e){
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void importarTablaLaboratorios() throws ExcepcionServiciosHistorial{
+		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+		response.addHeader("Content-disposition","attachment; filename=laboratorios.xls");
+		response.setContentType("application/vnd.ms-excel");
+		try{
+			HSSFWorkbook wb = new HSSFWorkbook(); // crea libro de excel
+			HSSFSheet sheet = wb.createSheet("Laboratorios"); // crea hoja
+			List<Laboratorio> laboratorios = this.consultarLaboratorios();
+			int rownum = 0;
+			int column = 0;
+			HSSFRow row = sheet.createRow(rownum);
+			HSSFCell celda = row.createCell(column);
+			celda.setCellValue("NOMBRE");
+			column++;
+			celda = row.createCell(column);
+			celda.setCellValue("# EQUIPOS");
+			column++;
+			celda = row.createCell(column);
+			celda.setCellValue("ACTIVO");
+			column++;
+			celda = row.createCell(column);
+			celda.setCellValue("FECHA CREACION");
+			rownum = 1;
+			for(Laboratorio l: laboratorios){
+				column = 0;
+				row = sheet.createRow(rownum);
+				celda = row.createCell(column);
+				celda.setCellValue(l.getNombre());
+				column++;
+				celda = row.createCell(column);
+				celda.setCellValue(this.consultarNumeroEquipos(l));
+				column++;
+				celda = row.createCell(column);
+				celda.setCellValue(l.getActivo());
+				column++;
+				celda = row.createCell(column);
+				celda.setCellValue(this.consultarFechaRegistro(l).toString());
+				column++;
+				rownum++;
+			}
+			OutputStream out = response.getOutputStream();
+			wb.write(out);
+		}catch (ExcepcionServiciosHistorial e){
+			throw new ExcepcionServiciosHistorial("No se pudo exportar el excel de los Laboratorios");
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		try {
+			response.getOutputStream().flush();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		FacesContext.getCurrentInstance().responseComplete();
+	}
+
+	@Override
+	public Integer consultarEquiposEliminadosLaboratorio(Laboratorio laboratorio){
+		try{
+			return laboratorioDAO.consultarEquiposEliminadosLaboratorio(laboratorio);
+		}catch (PersistenceException e){
+			e.printStackTrace();
+			return null;
 		}
 	}
 

@@ -7,6 +7,7 @@ import edu.eci.cvds.samples.entities.Equipo;
 import edu.eci.cvds.samples.entities.Laboratorio;
 
 import javax.inject.Inject;
+import java.util.Date;
 import java.util.List;
 
 public class MyBATISLaboratorioDAO implements LaboratorioDAO {
@@ -35,5 +36,35 @@ public class MyBATISLaboratorioDAO implements LaboratorioDAO {
     @Override
     public Integer consultarSiguienteIdLaboratorio() throws PersistenceException{
         return laboratorioMapper.consultarSiguienteIdLaboratorio();
+    }
+
+    @Override
+    public List<Laboratorio> consultarLaboratorios() throws PersistenceException{
+        return laboratorioMapper.consultarLaboratorios();
+    }
+
+    @Override
+    public Integer consultarNumeroEquipos(Laboratorio laboratorio) throws PersistenceException{
+        return laboratorioMapper.consultarNumeroEquipos(laboratorio);
+    }
+
+    @Override
+    public Date consultarFechaRegistro(Laboratorio laboratorio) throws PersistenceException{
+        return laboratorioMapper.consultarFechaRegistro(laboratorio);
+    }
+
+    @Override
+    public void eliminarLaboratorio(Laboratorio laboratorio) throws PersistenceException{
+        laboratorioMapper.eliminarLaboratorio(laboratorio);
+    }
+
+    @Override
+    public void desasociarLaboratorioDeEquipos(Laboratorio laboratorio) throws PersistenceException{
+        laboratorioMapper.desasociarLaboratorioDeEquipos(laboratorio);
+    }
+
+    @Override
+    public Integer consultarEquiposEliminadosLaboratorio(Laboratorio laboratorio) throws PersistenceException{
+        return laboratorioMapper.consultarEquiposEliminadosLaboratorio(laboratorio);
     }
 }
