@@ -96,3 +96,7 @@ ALTER TABLE Usuarios ADD CONSTRAINT Rol
 insert into usuarios (nombre, correo, contrasena, carnet, rol) values ('Andres Gualdron','gualdronsito@hotmail.com','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3',2128884,'admin');
 --El equipo para las pruebas
 insert into laboratorios (id,nombre,activo) values (nextval('id_lab'),'laboratorio de redes',true);
+--El elemento para pruebas
+insert into elementos (id,nombre,activo,tipo,registradoPor) values ('ttt','rrr',true,'TECLADO','gualdronsito@hotmail.com');
+--La novedad para pruebas
+insert into Novedades (id,titulo,detalle,clase,idElemento,idEquipo,idUsuario) values (nextval('id_novedad'),'titulo','detalle','novedadEliminar','ttt',null,'gualdronsito@hotmail.com');

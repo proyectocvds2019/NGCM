@@ -11,15 +11,12 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletResponse;
 
-import edu.eci.cvds.samples.entities.Laboratorio;
+import edu.eci.cvds.samples.entities.*;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 
 import com.google.inject.Inject;
 
-import edu.eci.cvds.samples.entities.Elemento;
-import edu.eci.cvds.samples.entities.Equipo;
-import edu.eci.cvds.samples.entities.TipoElemento;
 import edu.eci.cvds.samples.services.ExcepcionServiciosHistorial;
 import edu.eci.cvds.samples.services.ServiciosHistorial;
 import edu.eci.cvds.samples.services.ServiciosHistorialFactory;
@@ -64,6 +61,7 @@ public class adminBean implements Serializable{
 	private List<Equipo> equiposSeleccionados;
 	private List<TipoElemento> elementosSeleccionadoPorEquipo;
 	private List<Laboratorio> listaLaboratorios;
+	private List<Novedad> listaNovedades;
 	private PieChartModel modeloTablaEquipoPorLaboratorio;
 	private static final TipoElemento teclado = TipoElemento.TECLADO;
 	private static final TipoElemento mouse = TipoElemento.MOUSE;
@@ -558,6 +556,14 @@ public class adminBean implements Serializable{
 		}
 	}
 
+	public void importarTablaNovedades(){
+		try{
+			this.serviciosHistorial.importarTablaNovedades();
+		}catch (ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+		}
+	}
+
 
 
 
@@ -808,5 +814,13 @@ public class adminBean implements Serializable{
 
 	public String getNovedadEquipo(){
 		return this.novedadEquipo;
+	}
+
+	public List<Novedad> getListaNovedades() {
+		return listaNovedades;
+	}
+
+	public void setListaNovedades(List<Novedad> listaNovedades) {
+		this.listaNovedades = listaNovedades;
 	}
 }

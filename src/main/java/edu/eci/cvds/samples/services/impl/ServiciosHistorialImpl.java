@@ -12,11 +12,13 @@ import edu.eci.cvds.sampleprj.dao.EquipoDAO;
 import edu.eci.cvds.sampleprj.dao.LaboratorioDAO;
 import edu.eci.cvds.sampleprj.dao.NovedadDAO;
 import edu.eci.cvds.sampleprj.dao.PersistenceException;
+
 import edu.eci.cvds.samples.entities.Elemento;
 import edu.eci.cvds.samples.entities.Equipo;
 import edu.eci.cvds.samples.entities.Laboratorio;
 import edu.eci.cvds.samples.entities.Novedad;
 import edu.eci.cvds.samples.entities.TipoElemento;
+
 import edu.eci.cvds.samples.services.ExcepcionServiciosHistorial;
 import edu.eci.cvds.samples.services.ServiciosHistorial;
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -616,12 +618,67 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 		}
 	}
 
+
 	@Override
 	public List<Novedad> consultarNovedades() throws ExcepcionServiciosHistorial {
 		try {
 			return novedadDAO.consultarNovedades();
 		} catch(PersistenceException e) {
 			throw new ExcepcionServiciosHistorial("No se pudo consultar las novedades.");
+		}
+	}
+
+	@Override public void importarTablaNovedades() throws ExcepcionServiciosHistorial{
+		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+		response.addHeader("Content-disposition","attachment; filename=laboratorios.xls");
+		response.setContentType("application/vnd.ms-excel");
+		try{
+			HSSFWorkbook wb = new HSSFWorkbook(); // crea libro de excel
+			HSSFSheet sheet = wb.createSheet("Laboratorios"); // crea hoja
+			List<Novedad> novedades = this.consultarNovedades();
+			int rownum = 0;
+			int column = 0;
+			HSSFRow row = sheet.createRow(rownum);
+			HSSFCell celda = row.createCell(column);
+			celda.setCellValue("TIPO");
+			column++;
+			celda = row.createCell(column);
+			celda.setCellValue("ELEMENTO/EQUIPO");
+			column++;
+			celda = row.createCell(column);
+			celda.setCellValue("USUARIO");
+			column++;
+			celda = row.createCell(column);
+			celda.setCellValue("FECHA");
+			rownum = 1;
+			for(Novedad novedad: novedades){
+				column = 0;
+				row = sheet.createRow(rownum);
+				celda = row.createCell(column);
+				celda.setCellValue(novedad.getTipo());
+				column++;
+				celda = row.createCell(column);
+
+				if(novedad.getEquipo()==null){
+					celda.setCellValue(novedad.getElemento().getId());
+				}else{
+					celda.setCellValue(novedad.getEquipo().getId());
+				}
+				column++;
+				celda = row.createCell(column);
+				celda.setCellValue(novedad.getUsuario());
+				column++;
+				celda = row.createCell(column);
+				celda.setCellValue(novedad.getFecha());
+				column++;
+				rownum++;
+			}
+			OutputStream out = response.getOutputStream();
+			wb.write(out);
+		}catch (ExcepcionServiciosHistorial e){
+			throw new ExcepcionServiciosHistorial("No se pudo exportar el excel de los Laboratorios");
+		}catch (Exception e){
+			e.printStackTrace();
 		}
 	}
 

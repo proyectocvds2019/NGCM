@@ -107,8 +107,15 @@
 			<div class="col-md-12 col-xs-12">
 				<h:form>
 					<p:fieldset id="tablaElementos" legend="Tabla de elementos">
-				        <p:dataTable rowKey="#{elemento.id}" selection="#{adminBean.listaElementosSeleccionados}" id="elementosT" var="elemento" value="#{adminBean.listaElementos}" rows="10" paginator="true"
-									 paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}">
+				        <p:dataTable paginator="true"
+									 rows="10"
+									 paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}"
+									 rowKey="#{elemento.id}"
+									 selection="#{adminBean.listaElementosSeleccionados}"
+									 id="elementosT"
+									 var="elemento"
+									 value="#{adminBean.listaElementos}"
+									 >
 							<p:column selectionMode="multiple" style="text-align: center;"/>
 				            <p:column sortBy="#{elemento.id}" filterBy="#{elemento.id}" headerText="Id">
 				                <h:outputText value="#{elemento.id}" />
@@ -564,6 +571,38 @@
 				</div>
 			</div>
 			<hr/>
+			<div class="row">
+				<p:fieldset id="tablaNovedades" legend="Tabla de Laboratorios">
+					<p:dataTable value="#{adminBean.listaNovedades}"
+								 var="novedad"
+								 paginator="true"
+								 rows="10"
+								 paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}"
+								 rowKey="#{elemento.id}">
+						<p:column headerText="Tipo">
+							<h:outputText value="#{novedad.tipo}"/>
+						</p:column>
+						<p:column headerText="# Elemento/Equipo">
+							<h:outputText value="#{novedad.equipo==null?novedad.elemento.id:novedad.equipo.id}"/>
+						</p:column>
+						<p:column headerText="Usuario">
+							<h:outputText value="#{novedad.usuario}"/>
+						</p:column>
+						<p:column headerText="Fecha">
+							<h:outputText value="#{novedad.fecha}"/>
+						</p:column>
+
+						<f:facet name="footer">
+							<form>
+								<h:commandButton style="color:white;" value="Recargar" action="#{adminBean.recargar()}" styleClass="btn btn-default btn-info" />
+							</form>
+						</f:facet>
+						<h:form>
+							<i class="fas fa-download"></i><h:commandLink value="Descargar" action="#{adminBean.importarTablaNovedades()}" styleClass="btn btn-default"/>
+						</h:form>
+					</p:dataTable>
+				</p:fieldset>
+			</div>
 		</div>
 
 	</div>
