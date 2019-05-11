@@ -34,4 +34,5 @@ public interface ElementoMapper {
 	public void cambiarIDElemento(@Param("elemento") Elemento elemento, @Param("id") String id);
 
 	public void cambiarNombreElemento(@Param("elemento")Elemento elemento,@Param("nombre") String nombre);
+	
 }

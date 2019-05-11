@@ -10,6 +10,7 @@ import com.google.inject.Singleton;
 import edu.eci.cvds.sampleprj.dao.ElementoDAO;
 import edu.eci.cvds.sampleprj.dao.EquipoDAO;
 import edu.eci.cvds.sampleprj.dao.LaboratorioDAO;
+import edu.eci.cvds.sampleprj.dao.NovedadDAO;
 import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.samples.entities.*;
 import edu.eci.cvds.samples.services.ExcepcionServiciosHistorial;
@@ -31,6 +32,8 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 	private EquipoDAO equipoDAO;
 	@Inject
 	private LaboratorioDAO laboratorioDAO;
+	@Inject
+	private NovedadDAO novedadDAO;
 
 	public void registrarElemento(Elemento elemento, String correoUsuario, Integer equipo) throws ExcepcionServiciosHistorial {
 		try {
@@ -392,8 +395,7 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 		try {
 			return this.equipoDAO.consultarEquiposDisponibles();
 		}catch (PersistenceException e){
-			e.printStackTrace();
-			return null;
+			throw new ExcepcionServiciosHistorial("No se pudo consultar los equipos disponibles.");
 		}
 	}
 
@@ -402,7 +404,7 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 		try{
 			this.elementoDAO.cambiarIDElemento(elemento,id);
 		}catch(PersistenceException e){
-			e.printStackTrace();
+			throw new ExcepcionServiciosHistorial("No se pudo cambiar el id del elemento.");
 		}
 	}
 
@@ -411,7 +413,7 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 		try{
 			this.elementoDAO.cambiarNombreElemento(elemento,nombre);
 		}catch(PersistenceException e){
-			e.printStackTrace();
+			throw new ExcepcionServiciosHistorial("No se pudo cambiar el nombre del elemento.");
 		}
 	}
 
@@ -486,8 +488,7 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 		try{
 			return laboratorioDAO.consultarNumeroEquipos(laboratorio);
 		}catch (PersistenceException e){
-			e.printStackTrace();
-			return null;
+			throw new ExcepcionServiciosHistorial("No se pudo consultar el número de equipos.");
 		}
 	}
 
@@ -496,8 +497,7 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 		try{
 			return laboratorioDAO.consultarFechaRegistro(laboratorio);
 		}catch (PersistenceException e){
-			e.printStackTrace();
-			return null;
+			throw new ExcepcionServiciosHistorial("No se pudo consultar la fecha de registro.");
 		}
 	}
 
@@ -507,7 +507,7 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 			laboratorioDAO.eliminarLaboratorio(laboratorio);
 
 		}catch (PersistenceException e){
-			e.printStackTrace();
+			throw new ExcepcionServiciosHistorial("No se pudo eliminar el laboratorio.");
 		}
 	}
 
@@ -516,7 +516,7 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 		try{
 			laboratorioDAO.desasociarLaboratorioDeEquipos(laboratorio);
 		}catch (PersistenceException e){
-			e.printStackTrace();
+			throw new ExcepcionServiciosHistorial("No se pudo desasociar.");
 		}
 	}
 
@@ -577,18 +577,39 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 	}
 
 	@Override
-	public Integer consultarEquiposEliminadosLaboratorio(Laboratorio laboratorio){
+	public Integer consultarEquiposEliminadosLaboratorio(Laboratorio laboratorio) throws ExcepcionServiciosHistorial{
 		try{
 			return laboratorioDAO.consultarEquiposEliminadosLaboratorio(laboratorio);
 		}catch (PersistenceException e){
-			e.printStackTrace();
-			return null;
+			throw new ExcepcionServiciosHistorial("No se pudo consultar los equipos del laboratorio.");
 		}
 	}
 
 	@Override
-	public void registrarNovedad(String titulo, String detalle, String clase, String usuario, Integer idEquipo, String idElemento){
-
+	public void registrarNovedad(String titulo, String detalle, String clase, String usuario, Integer idEquipo, String idElemento) throws ExcepcionServiciosHistorial{
+		try {
+			if(idElemento != null) {
+				Elemento elem = elementoDAO.consultarElemento(idElemento);
+				if(elem != null) {
+					Integer idEq = consultarEquipoDeElemento(elem);
+					if(idEq != null) {
+						novedadDAO.registrarNovedad(titulo, detalle, clase, usuario, idEq, null);
+					}
+					novedadDAO.registrarNovedad(titulo, detalle, clase, usuario, idEquipo, idElemento);
+				}else {
+					throw new ExcepcionServiciosHistorial("No se pudo registrar la novedad.");
+				}
+			}else if (idEquipo != null){
+				Equipo eq = equipoDAO.consultarEquipo(idEquipo);
+				if(eq != null) {
+					novedadDAO.registrarNovedad(titulo, detalle, clase, usuario, idEquipo, idElemento);
+				}else {
+					throw new ExcepcionServiciosHistorial("No se pudo registrar la novedad.");
+				}
+			}
+		}catch (PersistenceException e) {
+			throw new ExcepcionServiciosHistorial("No se pudo registrar la novedad.");
+		}
 	}
 
 	@Override public void importarTablaNovedades() throws ExcepcionServiciosHistorial{
