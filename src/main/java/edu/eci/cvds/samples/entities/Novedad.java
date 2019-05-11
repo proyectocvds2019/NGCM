@@ -1,5 +1,7 @@
 package edu.eci.cvds.samples.entities;
 
+import java.util.Date;
+
 public class Novedad {
     private Integer id;
     private String titulo;
@@ -8,6 +10,7 @@ public class Novedad {
     private String tipo;
     private Elemento elemento;
     private Equipo equipo;
+    private Date fecha;
 
     public Novedad(){
 
@@ -67,5 +70,13 @@ public class Novedad {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+    
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 }
