@@ -45,6 +45,7 @@ create table Novedades(
 	fechaRegistro DATE default CURRENT_DATE,
 	titulo VARCHAR(100) not null,
 	detalle VARCHAR(200) not null,
+	clase VARCHAR(100) not null,
 	idElemento VARCHAR(100),
 	idUsuario VARCHAR(100) not null,
 	idEquipo INTEGER
