@@ -39,7 +39,30 @@ CREATE TABLE Elementos(
 	fechaEliminacion DATE
 );
 
+CREATE SEQUENCE id_novedad;
+create table Novedades(
+	id INTEGER primary key not null,
+	fechaRegistro DATE default CURRENT_DATE,
+	titulo VARCHAR(100) not null,
+	detalle VARCHAR(200) not null,
+	idElemento VARCHAR(100),
+	idUsuario VARCHAR(100) not null,
+	idEquipo INTEGER
+);
+
 --- Foreigns
+alter table Novedades add constraint fk_novedadEquipo
+	foreign key(idEquipo)
+	references Equipos(id);
+
+alter table Novedades add constraint fk_novedadUsuario
+	foreign key(idUsuario)
+	references usuarios(correo);
+
+alter table Novedades add constraint fk_novedadElemento
+	foreign key(idElemento)
+	references Elementos(id);
+
 ALTER TABLE Elementos ADD CONSTRAINT Elementos_Equipo
 	FOREIGN KEY (idEquipo)
 	REFERENCES Equipos (id);
