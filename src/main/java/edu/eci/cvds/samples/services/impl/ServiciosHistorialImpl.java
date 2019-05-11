@@ -146,6 +146,7 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 	@Override
 	public void actualizarIdEquipoEnElemento(String idElemento, Integer idEquipo) throws ExcepcionServiciosHistorial {
 		try {
+			
 			if(idEquipo != null){
 				Elemento elem = elementoDAO.consultarElemento(idElemento);
 				Equipo equi = equipoDAO.consultarEquipo(idEquipo);
@@ -165,8 +166,7 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 				if(elem2 != null){
 					elementoDAO.actualizarIdEquipo(elem2.getId(),null);
 				}
-			}
-			else {
+			}else {
 				throw new ExcepcionServiciosHistorial("No se pudo actualizar el idEquipo en el elemento.");
 			}
 		}catch (PersistenceException e) {
