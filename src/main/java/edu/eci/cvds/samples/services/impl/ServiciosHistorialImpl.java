@@ -15,6 +15,7 @@ import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.samples.entities.Elemento;
 import edu.eci.cvds.samples.entities.Equipo;
 import edu.eci.cvds.samples.entities.Laboratorio;
+import edu.eci.cvds.samples.entities.Novedad;
 import edu.eci.cvds.samples.entities.TipoElemento;
 import edu.eci.cvds.samples.services.ExcepcionServiciosHistorial;
 import edu.eci.cvds.samples.services.ServiciosHistorial;
@@ -612,6 +613,15 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 			}
 		}catch (PersistenceException e) {
 			throw new ExcepcionServiciosHistorial("No se pudo registrar la novedad.");
+		}
+	}
+
+	@Override
+	public List<Novedad> consultarNovedades() throws ExcepcionServiciosHistorial {
+		try {
+			return novedadDAO.consultarNovedades();
+		} catch(PersistenceException e) {
+			throw new ExcepcionServiciosHistorial("No se pudo consultar las novedades.");
 		}
 	}
 

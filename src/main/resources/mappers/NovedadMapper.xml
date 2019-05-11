@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.NovedadMapper">
+
+	<resultMap type = 'Novedad' id = 'NovedadesResult'>
+		<id property = 'id' column = 'id'/>
+		<result property="titulo" column="titulo"/>
+		<result property="detalle" column="detalle"/>
+		<result property="usuario" column="idUsuario"/>
+		<result property="tipo" column="clase"/>
+		<result property="fecha" column="fechaRegistro"/>
+		<association property = 'elemento' column = 'idElemento' javaType = 'Elemento' resultMap = 'edu.eci.cvds.sampleprj.dao.mybatis.mappers.ElementoMapper.ElementosResult'></association>
+		<association property = 'equipo' column = 'idEquipo' javaType = 'Equipo' resultMap = 'edu.eci.cvds.sampleprj.dao.mybatis.mappers.EquipoMapper.EquiposResult'></association>
+	</resultMap>
+	
+	<select id= 'consultarNovedades' parameterType = 'map' resultMap = 'NovedadesResult'>
+		SELECT * FROM Novedades ORDER BY fechaRegistro;
+	</select>
+	
+</mapper>

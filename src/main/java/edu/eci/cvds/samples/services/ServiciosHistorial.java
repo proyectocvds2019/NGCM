@@ -6,6 +6,7 @@ import java.util.List;
 import edu.eci.cvds.samples.entities.Elemento;
 import edu.eci.cvds.samples.entities.Equipo;
 import edu.eci.cvds.samples.entities.Laboratorio;
+import edu.eci.cvds.samples.entities.Novedad;
 import edu.eci.cvds.samples.entities.TipoElemento;
 
 public interface ServiciosHistorial {
@@ -80,4 +81,5 @@ public interface ServiciosHistorial {
 
 	public abstract void registrarNovedad(String titulo, String detalle, String clase, String usuario, Integer idEquipo, String idElemento) throws ExcepcionServiciosHistorial;
 
+	public abstract List<Novedad> consultarNovedades() throws ExcepcionServiciosHistorial;
 }
