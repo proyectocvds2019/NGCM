@@ -491,8 +491,79 @@
 
 		<div class="container">
 			<div class="row">
-				<h1>NOVEDADES</h1>
+				<h1>REGISTRAR NOVEDAD</h1>
+				<br/>
+				<button data-target="#modalRequistrarNovedadElemento" data-toggle="modal" class="btn btn-default">Novedad Elemento</button>
+				<button data-target="#modalRegistrarNovedadEquipo" data-toggle="modal" class="btn btn-default">Novedad Equipo</button>
+				<!-- Modal -->
+				<div class="modal fade" id="modalRequistrarNovedadElemento" role="dialog">
+					<div class="modal-dialog">
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close cerrarModal" data-dismiss="modal">X</button>
+								<h4 class="modal-title">Registrar Novedad Elementos</h4>
+							</div>
+							<div class="modal-body">
+								<h:form>
+									<h:outputLabel for="registrarNovedadElemento" value="Seleccione el elemento: "/>
+									<h:selectOneMenu id="registrarNovedadElemento" value="#{adminBean.novedadElemento}">
+										<f:selectItems value="#{adminBean.listaElementos}" var="elemento" itemLabel="#{elemento.id}" itemValue="#{elemento.id}"/>
+									</h:selectOneMenu>
+									<h:outputLabel for="registrarNovedadElementoTitulo" value="Escriba el título de la novedad: "/>
+									<h:inputText id="registrarNovedadElementoTitulo" value="#{adminBean.tituloRegistrarNovedad}"/>
+									<h:outputLabel for="registrarNovedadElementoDetalle" value="Escriba el detalle de la novedad: "/>
+									<h:inputTextarea id="registrarNovedadElementoDetalle" value="#{adminBean.detalleRegistrarNovedad}" />
+									<p:commandButton id="registrarNovedadElementoBoton" process="@parent" onsuccess="mensajeCorrecto('Se ha registrado la novedad correctamente')" onerror="mensajeError('No se pudo registrar la novedad')" ajax="true" styleClass="btn btn-default btn-success" value="Registrar" action="#{adminBean.registrarNovedadElemento()}">
+										<f:ajax onevent="comprobar"/>
+									</p:commandButton>
+								</h:form>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default cerrarModal" data-dismiss="modal">Cerrar</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Modal -->
+				<div class="modal fade" id="modalRegistrarNovedadEquipo" role="dialog">
+					<div class="modal-dialog">
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close cerrarModal" data-dismiss="modal">X</button>
+								<h4 class="modal-title">Registrar Novedad Equipos</h4>
+							</div>
+							<div class="modal-body">
+								<h:form>
+									<h:form>
+										<h:outputLabel for="registrarNovedadElemento" value="Seleccione el elemento: "/>
+										<h:selectOneMenu id="registrarNovedadElemento" value="#{adminBean.novedadElemento}">
+											<f:selectItems value="#{adminBean.listaElementos}" var="elemento" itemLabel="#{elemento.id}" itemValue="#{elemento.id}"/>
+										</h:selectOneMenu>
+										<h:outputLabel for="registrarNovedadElementoTitulo" value="Escriba el título de la novedad: "/>
+										<h:inputText id="registrarNovedadElementoTitulo" value="#{adminBean.tituloRegistrarNovedad}"/>
+										<h:outputLabel for="registrarNovedadElementoDetalle" value="Escriba el detalle de la novedad: "/>
+										<h:inputTextarea id="registrarNovedadElementoDetalle" value="#{adminBean.detalleRegistrarNovedad}" />
+										<h:outputLabel for="registrarNovedadAjuste" value="Seleccione el tipo de ajuste: "/>
+										<h:selectOneMenu id="registrarNovedadAjuste" value="#{adminBean.novedadAjuste}">
+											<f:selectItem itemLabel="Eliminar" itemValue="novedadEliminar"/>
+											<f:selectItem itemLabel="Modificar" itemValue="novedadModificar"/>
+										</h:selectOneMenu>
+										<p:commandButton id="registrarNovedadElementoBoton" process="@parent" onsuccess="mensajeCorrecto('Se ha registrado la novedad correctamente')" onerror="mensajeError('No se pudo registrar la novedad')" ajax="true" styleClass="btn btn-default btn-success" value="Registrar" action="#{adminBean.registrarNovedadElemento()}">
+											<f:ajax onevent="comprobar"/>
+										</p:commandButton>
+									</h:form>
+								</h:form>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default cerrarModal" data-dismiss="modal">Cerrar</button>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
+			<hr/>
 		</div>
 
 	</div>

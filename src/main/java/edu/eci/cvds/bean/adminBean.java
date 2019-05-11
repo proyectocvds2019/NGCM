@@ -49,6 +49,11 @@ public class adminBean implements Serializable{
 	private String tecladoSeleccionado;
 	private String cambioIDElemento;
 	private String cambioNombreElemento;
+	private String novedadElemento;
+	private String detalleRegistrarNovedad;
+	private String tituloRegistrarNovedad;
+	private String novedadAjuste;
+	private String novedadEquipo;
 	private List<Elemento> listaElementos;
 	private List<Elemento> listaElementosDisponibles;
 	private List<Equipo> listaEquipos;
@@ -85,6 +90,8 @@ public class adminBean implements Serializable{
 			this.listaEquipos = this.serviciosHistorial.consultarEquipos();
 			this.listaEquiposActivos = this.serviciosHistorial.consultarEquiposDisponibles();
 			this.listaLaboratorios = this.serviciosHistorial.consultarLaboratorios();
+
+
 
 		}catch (ExcepcionServiciosHistorial e){
 			e.printStackTrace();
@@ -524,6 +531,33 @@ public class adminBean implements Serializable{
 		return rta;
 	}
 
+	public void registrarNovedadElemento(){
+		try{
+			this.serviciosHistorial.registrarNovedad(this.tituloRegistrarNovedad,this.detalleRegistrarNovedad,this.novedadAjuste,this.correo,null,this.novedadElemento);
+			this.mensajeCorrecto();
+		}catch (ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+			this.mensajeError();
+		}catch (Exception e){
+			e.printStackTrace();
+			this.mensajeError();
+		}
+	}
+
+	public void registrarNovedadEquipo(){
+		try{
+			Integer equi = Integer.parseInt(this.novedadEquipo);
+			this.serviciosHistorial.registrarNovedad(this.tituloRegistrarNovedad,this.detalleRegistrarNovedad,this.novedadAjuste,this.correo,equi,null);
+			this.mensajeCorrecto();
+		}catch (ExcepcionServiciosHistorial e){
+			e.printStackTrace();
+			this.mensajeError();
+		}catch (Exception e){
+			e.printStackTrace();
+			this.mensajeError();
+		}
+	}
+
 
 
 
@@ -736,4 +770,43 @@ public class adminBean implements Serializable{
 	}
 
 
+	public String  getNovedadElemento() {
+		return novedadElemento;
+	}
+
+	public void setNovedadElemento(String novedadElemento) {
+		this.novedadElemento = novedadElemento;
+	}
+
+	public String getDetalleRegistrarNovedad() {
+		return detalleRegistrarNovedad;
+	}
+
+	public void setDetalleRegistrarNovedad(String detalleRegistrarElemento) {
+		this.detalleRegistrarNovedad = detalleRegistrarElemento;
+	}
+
+	public String getTituloRegistrarNovedad() {
+		return tituloRegistrarNovedad;
+	}
+
+	public void setTituloRegistrarNovedad(String tituloRegistrarNovedad) {
+		this.tituloRegistrarNovedad = tituloRegistrarNovedad;
+	}
+
+	public String getNovedadAjuste() {
+		return novedadAjuste;
+	}
+
+	public void setNovedadAjuste(String novedadAjuste) {
+		this.novedadAjuste = novedadAjuste;
+	}
+
+	public void setNovedadEquipo(String novedadEquipo) {
+		this.novedadEquipo = novedadEquipo;
+	}
+
+	public String getNovedadEquipo(){
+		return this.novedadEquipo;
+	}
 }

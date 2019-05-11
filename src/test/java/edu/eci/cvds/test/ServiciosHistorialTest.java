@@ -124,7 +124,7 @@ public class ServiciosHistorialTest {
 			}
 		});*/
 		try{
-			this.serviciosHistorial.actualizarIdEquipoEnElemento("1",1);
+			this.serviciosHistorial.actualizarIdEquipoEnElemento("3",2);
 			assertTrue(true);
 		}catch (ExcepcionServiciosHistorial e){
 			e.printStackTrace();
