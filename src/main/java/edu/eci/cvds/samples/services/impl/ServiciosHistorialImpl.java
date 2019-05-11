@@ -146,12 +146,19 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 	@Override
 	public void actualizarIdEquipoEnElemento(String idElemento, Integer idEquipo) throws ExcepcionServiciosHistorial {
 		try {
+			
 			if(idEquipo != null){
 				Elemento elem = elementoDAO.consultarElemento(idElemento);
 				Equipo equi = equipoDAO.consultarEquipo(idEquipo);
 				Elemento elem2 =null;
 				if(equi != null){
 					elem2 = elementoDAO.consultarElementoDelEquipo(elem.getTipo(),equi);
+					if(equi.getActivo()) {
+						elementoDAO.actualizarIdEquipo(idElemento, idEquipo);
+					}
+					else {
+						throw new ExcepcionServiciosHistorial("No se pudo actualizar el idEquipo en el elemento.");
+					}
 				}
 				if(elem != null){
 					elementoDAO.actualizarIdEquipo(elem.getId(),null);
@@ -159,9 +166,9 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 				if(elem2 != null){
 					elementoDAO.actualizarIdEquipo(elem2.getId(),null);
 				}
-
+			}else {
+				throw new ExcepcionServiciosHistorial("No se pudo actualizar el idEquipo en el elemento.");
 			}
-			elementoDAO.actualizarIdEquipo(idElemento,idEquipo);
 		}catch (PersistenceException e) {
 			throw new ExcepcionServiciosHistorial("No se pudo actualizar el idEquipo en el elemento.");
 		}
@@ -426,7 +433,16 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 	@Override
 	public void actualizarIdLaboratorioEnEquipo(Integer idEquipo, Integer idLab) throws ExcepcionServiciosHistorial{
 		try {
-			equipoDAO.actualizarIdLaboratorio(idLab, idEquipo);
+			if(idLab != null) {
+				Laboratorio lab = laboratorioDAO.consultarLaboratorio(idLab);
+				if(lab != null && lab.isActivo()) {
+					equipoDAO.actualizarIdLaboratorio(idLab, idEquipo);
+				}else {
+					throw new ExcepcionServiciosHistorial("No se pudo actualizar el idLaboratorio en el equipo.");
+				}
+			}else {
+				throw new ExcepcionServiciosHistorial("No se pudo actualizar el idLaboratorio en el equipo.");
+			}
 		}catch(PersistenceException e) {
 			throw new ExcepcionServiciosHistorial("No se pudo actualizar el idLaboratorio en el equipo.");
 		}
