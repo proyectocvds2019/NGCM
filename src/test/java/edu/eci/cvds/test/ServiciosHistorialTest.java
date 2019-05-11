@@ -138,6 +138,7 @@ public class ServiciosHistorialTest {
                 Integer id = 24082000;
                 String nombre = "Laboratorio1";
                 Laboratorio n1 = new Laboratorio(id,nombre,true); 
+                this.serviciosHistorial.registrarLaboratorio(n1);
                 this.serviciosHistorial.consultarLaboratorio(id);
                 assertTrue(true);
             }catch(ExcepcionServiciosHistorial e){
@@ -151,6 +152,7 @@ public class ServiciosHistorialTest {
             try{
                 Equipo eq = new Equipo(1,true);
                 Laboratorio la = new Laboratorio(24921, "Plataformas", true);
+                this.serviciosHistorial.registrarLaboratorio(la);
                 this.serviciosHistorial.actualizarIdLaboratorioEnEquipo(eq.getId(), la.getId());
                 assertTrue(true);
             }catch(ExcepcionServiciosHistorial e){
@@ -160,6 +162,24 @@ public class ServiciosHistorialTest {
         
         
         }
+        
+        @Test
+        public void deberiaCerrarLaboratorio(){
+            try{
+                Equipo eq = new Equipo(27,true);
+                Laboratorio la = new Laboratorio(20, "OwO", true);
+                this.serviciosHistorial.registrarEquipo(eq, null);
+                this.serviciosHistorial.registrarLaboratorio(la);
+                this.serviciosHistorial.actualizarIdLaboratorioEnEquipo(eq.getId(), la.getId());
+                this.serviciosHistorial.eliminarLaboratorio(la);
+                assertTrue(true);
+            }catch(ExcepcionServiciosHistorial e){
+                e.printStackTrace();
+                assertTrue(false);
+            
+            }
+        }
+            
         
         
 }
