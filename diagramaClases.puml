@@ -5,23 +5,38 @@ interface UsuarioDAO
 interface ElementoDAO
 interface EquipoDAO
 interface LaboratorioDAO
+interface NovedadesDAO
+
+interface UsuarioMapper
+interface ElementoMapper
+interface EquipoMapper
+interface LaboratorioMapper
+interface NovedadesMapper
 
 class ServiciosHistorialImpl
 class MyBatisUsuarioDAO
 class MyBatisElementoDAO
 class MyBatisEquipoDAO
 class MyBatisLaboratorioDAO
+class MyBatisNovedadesDAO
 
 ServiciosHistorialImpl ..|> ServiciosHistorial
 ServiciosHistorialImpl --> UsuarioDAO : <<Injected>>
 ServiciosHistorialImpl --> ElementoDAO : <<Injected>>
 ServiciosHistorialImpl --> EquipoDAO : <<Injected>>
 ServiciosHistorialImpl --> LaboratorioDAO : <<Injected>>
+ServiciosHistorialImpl --> NovedadesDAO : <<Injected>>
 
 MyBatisUsuarioDAO ..|> UsuarioDAO
 MyBatisElementoDAO ..|> ElementoDAO
 MyBatisEquipoDAO ..|> EquipoDAO
 MyBatisLaboratorioDAO ..|> LaboratorioDAO
+MyBatisNovedadesDAO ..|> NovedadesDAO
 
+MyBatisElementoDAO --> ElementoMapper : <<Injected>>
+MyBatisEquipoDAO --> EquipoMapper : <<Injected>>
+MyBatisLaboratorioDAO --> LaboratorioMapper : <<Injected>>
+MyBatisUsuarioDAO --> UsuarioMapper : <<Injected>>
+MyBatisNovedadesDAO --> NovedadesMapper : <<Injected>>
 
 @enduml
