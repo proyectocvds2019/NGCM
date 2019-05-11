@@ -78,4 +78,6 @@ public interface ServiciosHistorial {
 
 	public abstract Integer consultarEquiposEliminadosLaboratorio(Laboratorio laboratorio) throws ExcepcionServiciosHistorial;
 
+	public abstract void registrarNovedad(String titulo, String detalle, String clase, String usuario, Integer idEquipo, String idElemento) throws ExcepcionServiciosHistorial;
+
 }

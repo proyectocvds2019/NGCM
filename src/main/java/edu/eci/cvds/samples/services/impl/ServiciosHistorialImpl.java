@@ -573,4 +573,9 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 		}
 	}
 
+	@Override
+	public void registrarNovedad(String titulo, String detalle, String clase, String usuario, Integer idEquipo, String idElemento){
+
+	}
+
 }
