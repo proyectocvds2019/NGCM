@@ -27,4 +27,6 @@ public interface ElementoDAO {
     public void cambiarIDElemento(Elemento elemento, String id) throws PersistenceException;
 
     public void cambiarNombreElemento(Elemento elemento, String nombre) throws PersistenceException;
+
+	public void registrarNovedad(String titulo, String detalle, String clase, String usuario, String idElemento);
 }

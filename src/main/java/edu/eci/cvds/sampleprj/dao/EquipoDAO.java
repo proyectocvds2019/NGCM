@@ -28,4 +28,11 @@ public interface EquipoDAO {
     public void actualizarIdLaboratorio(Integer idLab, Integer idEq) throws PersistenceException;
 
 	public Equipo consultarEquipoDelLaboratorio(Laboratorio lab) throws PersistenceException;
+
+	public void registrarNovedadconElem(String titulo, String detalle, String clase, String usuario, Integer idEq,
+			String idElemento);
+
+	public void registrarNovedad(String titulo, String detalle, String clase, String usuario, Integer idEquipo);
+
+	
 }
