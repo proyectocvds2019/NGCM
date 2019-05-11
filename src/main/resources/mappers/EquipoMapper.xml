@@ -6,6 +6,11 @@
  
 <mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.EquipoMapper">
 
+	<resultMap type = 'Equipo' id = 'EquiposNovedadResult'>
+		<id property = 'id' column = 'idEquipo'/>
+		<result property="activo" column="activoEquipo"/>
+	</resultMap>
+
 	<resultMap type = 'Equipo' id = 'EquiposResult'>
 		<id property = 'id' column = 'id'/>
 		<result property="activo" column="activo"/>

@@ -582,8 +582,11 @@
 						<p:column headerText="Tipo">
 							<h:outputText value="#{novedad.tipo}"/>
 						</p:column>
-						<p:column headerText="# Elemento/Equipo">
+						<p:column headerText="ID Elemento/Equipo">
 							<h:outputText value="#{novedad.equipo==null?novedad.elemento.id:novedad.equipo.id}"/>
+						</p:column>
+						<p:column headerText="Elemento/Equipo">
+							<h:outputText value="#{novedad.equipo==null?'Elemento':'Equipo'}"/>
 						</p:column>
 						<p:column headerText="Usuario">
 							<h:outputText value="#{novedad.usuario}"/>

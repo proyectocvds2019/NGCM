@@ -13,12 +13,39 @@
 		<result property="usuario" column="idUsuario"/>
 		<result property="tipo" column="clase"/>
 		<result property="fecha" column="fechaRegistro"/>
-		<association property = 'elemento' column = 'idElemento' javaType = 'Elemento' resultMap = 'edu.eci.cvds.sampleprj.dao.mybatis.mappers.ElementoMapper.ElementosResult'></association>
-		<association property = 'equipo' column = 'idEquipo' javaType = 'Equipo' resultMap = 'edu.eci.cvds.sampleprj.dao.mybatis.mappers.EquipoMapper.EquiposResult'></association>
+		<association property = 'elemento' column = 'idElemento' resultMap = 'edu.eci.cvds.sampleprj.dao.mybatis.mappers.ElementoMapper.ElementosResult2'></association>
+		<association property = 'equipo' column = 'idEquipo' resultMap = 'edu.eci.cvds.sampleprj.dao.mybatis.mappers.EquipoMapper.EquiposNovedadResult'></association>
 	</resultMap>
 	
 	<select id= 'consultarNovedades' parameterType = 'map' resultMap = 'NovedadesResult'>
-		SELECT * FROM Novedades ORDER BY fechaRegistro;
+		SELECT novedades.id,
+			novedades.titulo, 
+			novedades.detalle, 
+			novedades.idUsuario, 
+			novedades.clase,
+			novedades.fechaRegistro,
+	
+	
+			elementos.id as idElemento,
+			elementos.tipo as tipoElemento,
+			elementos.nombre as nombreElemento,
+			elementos.activo as activoElemento,
+			elementos.fechaRegistro as ff,
+			
+			equipos.id as idEquipo,
+			equipos.activo as activoEquipo,
+			equipos.fechaRegistro as fff
+		FROM Novedades, elementos, equipos
+		WHERE (Novedades.idEquipo = equipos.id AND
+				Novedades.idElemento = elementos.id)
+				or
+				(novedades.id not in (select novedades.id from novedades,elementos,equipos where Novedades.idEquipo = equipos.id AND
+				Novedades.idElemento = elementos.id))
+				
+		ORDER BY fechaRegistro;
 	</select>
+	<insert id="registrarNovedad">
+		
+	</insert>
 	
 </mapper>

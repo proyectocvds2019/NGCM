@@ -88,6 +88,7 @@ public class adminBean implements Serializable{
 			this.listaEquipos = this.serviciosHistorial.consultarEquipos();
 			this.listaEquiposActivos = this.serviciosHistorial.consultarEquiposDisponibles();
 			this.listaLaboratorios = this.serviciosHistorial.consultarLaboratorios();
+			this.listaNovedades = this.serviciosHistorial.consultarNovedades();
 
 
 

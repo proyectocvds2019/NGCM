@@ -7,6 +7,32 @@ select * from equipos;
 
 select * from elementos;
 
+SELECT novedades.id,
+		novedades.titulo, 
+		novedades.detalle, 
+		novedades.idUsuario, 
+		novedades.clase,
+		novedades.fechaRegistro,
+
+
+		elementos.id as idElemento,
+		elementos.tipo as tipoElemento,
+		elementos.nombre as nombreElemento,
+		elementos.activo as activoElemento,
+		elementos.fechaRegistro as ff,
+		
+		equipos.id as idEquipo,
+		equipos.activo as activoEquipo,
+		equipos.fechaRegistro as fff
+FROM Novedades, elementos, equipos
+WHERE (Novedades.idEquipo = equipos.id AND
+		Novedades.idElemento = elementos.id)
+		OR
+		(novedades.idelemento is null and novedades.idequipo is not null)
+		or
+		(novedades.idelemento is not null and novedades.idequipo is null)
+ORDER BY fechaRegistro;
+
 UPDATE Elementos SET idequipo = null   WHERE Elementos.id = 'monitor'  AND Elementos.idEquipo = 2;
 
 /*update equipos set activo = true;*/
