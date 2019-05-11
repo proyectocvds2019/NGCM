@@ -149,9 +149,9 @@ public class ServiciosHistorialTest {
         @Test
         public void deberiaAsociarEquipo(){
             try{
-                String uwu = "Prueba mientras esta el asociar uwu";
                 Equipo eq = new Equipo(1,true);
-                this.serviciosHistorial.desactivarEquipo(1);
+                Laboratorio la = new Laboratorio(24921, "Plataformas", true);
+                this.serviciosHistorial.actualizarIdLaboratorioEnEquipo(eq.getId(), la.getId());
                 assertTrue(true);
             }catch(ExcepcionServiciosHistorial e){
                 e.printStackTrace();
