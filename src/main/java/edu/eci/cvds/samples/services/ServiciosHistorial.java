@@ -84,5 +84,9 @@ public interface ServiciosHistorial {
 	public abstract List<Novedad> consultarNovedades() throws ExcepcionServiciosHistorial;
 
 	public abstract void importarTablaNovedades() throws ExcepcionServiciosHistorial;
+	
+	public abstract List<Novedad> consultarNovedadesElemento(Elemento elemento) throws ExcepcionServiciosHistorial;
+	
+	public abstract List<Novedad> consultarNovedadesEquipo(Equipo equipo) throws ExcepcionServiciosHistorial;
 
 }

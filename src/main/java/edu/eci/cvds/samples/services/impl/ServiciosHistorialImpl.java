@@ -630,7 +630,7 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 
 	@Override public void importarTablaNovedades() throws ExcepcionServiciosHistorial{
 		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-		response.addHeader("Content-disposition","attachment; filename=laboratorios.xls");
+		response.addHeader("Content-disposition","attachment; filename=novedades.xls");
 		response.setContentType("application/vnd.ms-excel");
 		try{
 			HSSFWorkbook wb = new HSSFWorkbook(); // crea libro de excel
@@ -641,6 +641,9 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 			HSSFRow row = sheet.createRow(rownum);
 			HSSFCell celda = row.createCell(column);
 			celda.setCellValue("TIPO");
+			column++;
+			celda = row.createCell(column);
+			celda.setCellValue("ID ELEMENTO/EQUIPO");
 			column++;
 			celda = row.createCell(column);
 			celda.setCellValue("ELEMENTO/EQUIPO");
@@ -659,17 +662,25 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 				column++;
 				celda = row.createCell(column);
 
-				if(novedad.getEquipo()==null){
+				if(novedad.getEquipo().getId()==null){
 					celda.setCellValue(novedad.getElemento().getId());
 				}else{
 					celda.setCellValue(novedad.getEquipo().getId());
 				}
 				column++;
 				celda = row.createCell(column);
+
+				if(novedad.getEquipo().getId()==null){
+					celda.setCellValue("Elemento");
+				}else{
+					celda.setCellValue("Equipo");
+				}
+				column++;
+				celda = row.createCell(column);
 				celda.setCellValue(novedad.getUsuario());
 				column++;
 				celda = row.createCell(column);
-				celda.setCellValue(novedad.getFecha());
+				celda.setCellValue(novedad.getFecha().toString());
 				column++;
 				rownum++;
 			}
@@ -679,6 +690,32 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 			throw new ExcepcionServiciosHistorial("No se pudo exportar el excel de los Laboratorios");
 		}catch (Exception e){
 			e.printStackTrace();
+		}
+		try {
+			response.getOutputStream().flush();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		FacesContext.getCurrentInstance().responseComplete();
+	}
+
+	@Override
+	public List<Novedad> consultarNovedadesElemento(Elemento elemento) throws ExcepcionServiciosHistorial {
+		try {
+			return novedadDAO.consultarNovedadesElemento(elemento);
+		}catch(PersistenceException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public List<Novedad> consultarNovedadesEquipo(Equipo equipo) throws ExcepcionServiciosHistorial {
+		try {
+			return novedadDAO.consultarNovedadesEquipo(equipo);
+		}catch(PersistenceException e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 

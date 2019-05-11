@@ -5,7 +5,7 @@
 insert into equipos (id) values (nextval('id_equipo'));
 select * from equipos;
 
-select * from elementos;
+select * from novedades;
 
 SELECT novedades.id,
 		novedades.titulo, 
@@ -25,13 +25,15 @@ SELECT novedades.id,
 		equipos.activo as activoEquipo,
 		equipos.fechaRegistro as fff
 FROM Novedades, elementos, equipos
-WHERE (Novedades.idEquipo = equipos.id AND
-		Novedades.idElemento = elementos.id)
-		OR
-		(novedades.idelemento is null and novedades.idequipo is not null)
+WHERE (Novedades.idEquipo = equipos.id and
+		novedades.idelemento is null)
 		or
-		(novedades.idelemento is not null and novedades.idequipo is null)
+		(novedades.idelemento = elementos.id and
+		novedades.idequipo == null)
+		
 ORDER BY fechaRegistro;
+
+select idElemento from novedades;
 
 UPDATE Elementos SET idequipo = null   WHERE Elementos.id = 'monitor'  AND Elementos.idEquipo = 2;
 

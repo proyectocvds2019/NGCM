@@ -564,6 +564,27 @@ public class adminBean implements Serializable{
 			e.printStackTrace();
 		}
 	}
+	
+	public List<Novedad> listaNovedadesElementos(Elemento elemento) {
+		try {
+			return this.serviciosHistorial.consultarNovedadesElemento(elemento);
+		}catch(ExcepcionServiciosHistorial e) {
+			e.printStackTrace();
+			return null;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public List<Novedad> listaNovedadesEquipos(Equipo equipo){
+		try {
+			return this.serviciosHistorial.consultarNovedadesEquipo(equipo);
+		}catch(ExcepcionServiciosHistorial e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 
 

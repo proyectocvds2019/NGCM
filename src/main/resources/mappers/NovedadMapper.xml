@@ -26,26 +26,82 @@
 			novedades.fechaRegistro,
 	
 	
-			elementos.id as idElemento,
+			novedades.idelemento as idElemento,
 			elementos.tipo as tipoElemento,
 			elementos.nombre as nombreElemento,
 			elementos.activo as activoElemento,
 			elementos.fechaRegistro as ff,
 			
-			equipos.id as idEquipo,
+			novedades.idequipo as idEquipo,
 			equipos.activo as activoEquipo,
 			equipos.fechaRegistro as fff
 		FROM Novedades, elementos, equipos
-		WHERE (Novedades.idEquipo = equipos.id AND
-				Novedades.idElemento = elementos.id)
+		WHERE (novedades.idelemento = elementos.id and
+				novedades.idequipo is null)
 				or
-				(novedades.id not in (select novedades.id from novedades,elementos,equipos where Novedades.idEquipo = equipos.id AND
-				Novedades.idElemento = elementos.id))
+				(novedades.idequipo = equipos.id and
+				novedades.idelemento is null)
 				
 		ORDER BY fechaRegistro;
 	</select>
-	<insert id="registrarNovedad">
-		
+	<insert parameterType = "map" id="registrarNovedad">
+		INSERT INTO Novedades (id,titulo,detalle,clase,idUsuario, idEquipo,idElemento) VALUES (nextval('id_novedad'),#{titulo},#{detalle},#{clase},#{usuario},#{idEq},#{idElem});
 	</insert>
+	
+	<select id="consultarNovedadesElemento" parameterType = 'map' resultMap = 'NovedadesResult'>
+		SELECT novedades.id,
+			novedades.titulo, 
+			novedades.detalle, 
+			novedades.idUsuario, 
+			novedades.clase,
+			novedades.fechaRegistro,
+	
+	
+			novedades.idelemento as idElemento,
+			elementos.tipo as tipoElemento,
+			elementos.nombre as nombreElemento,
+			elementos.activo as activoElemento,
+			elementos.fechaRegistro as ff,
+			
+			novedades.idequipo as idEquipo,
+			equipos.activo as activoEquipo,
+			equipos.fechaRegistro as fff
+		FROM Novedades, elementos, equipos
+		WHERE ((novedades.idelemento = elementos.id and
+				novedades.idequipo is null)
+				or
+				(novedades.idequipo = equipos.id and
+				novedades.idelemento is null)) AND novedades.idElemento = #{elemento.id}
+				
+		ORDER BY fechaRegistro;
+	</select>
+	
+	<select id="consultarNovedadesEquipo" parameterType = 'map' resultMap = 'NovedadesResult'>
+		SELECT novedades.id,
+			novedades.titulo, 
+			novedades.detalle, 
+			novedades.idUsuario, 
+			novedades.clase,
+			novedades.fechaRegistro,
+	
+	
+			novedades.idelemento as idElemento,
+			elementos.tipo as tipoElemento,
+			elementos.nombre as nombreElemento,
+			elementos.activo as activoElemento,
+			elementos.fechaRegistro as ff,
+			
+			novedades.idequipo as idEquipo,
+			equipos.activo as activoEquipo,
+			equipos.fechaRegistro as fff
+		FROM Novedades, elementos, equipos
+		WHERE ((novedades.idelemento = elementos.id and
+				novedades.idequipo is null)
+				or
+				(novedades.idequipo = equipos.id and
+				novedades.idelemento is null)) AND Novedades.idEquipo = #{equipo.id}
+				
+		ORDER BY fechaRegistro;
+	</select>
 	
 </mapper>

@@ -521,6 +521,11 @@
 									<h:inputText id="registrarNovedadElementoTitulo" value="#{adminBean.tituloRegistrarNovedad}"/>
 									<h:outputLabel for="registrarNovedadElementoDetalle" value="Escriba el detalle de la novedad: "/>
 									<h:inputTextarea id="registrarNovedadElementoDetalle" value="#{adminBean.detalleRegistrarNovedad}" />
+									<h:outputLabel for="registrarNovedadAjusteEle" value="Seleccione el tipo de ajuste: "/>
+									<h:selectOneMenu id="registrarNovedadAjusteEle" value="#{adminBean.novedadAjuste}">
+										<f:selectItem itemLabel="Eliminar" itemValue="novedadEliminar"/>
+										<f:selectItem itemLabel="Modificar" itemValue="novedadModificar"/>
+									</h:selectOneMenu>
 									<p:commandButton id="registrarNovedadElementoBoton" process="@parent" onsuccess="mensajeCorrecto('Se ha registrado la novedad correctamente')" onerror="mensajeError('No se pudo registrar la novedad')" ajax="true" styleClass="btn btn-default btn-success" value="Registrar" action="#{adminBean.registrarNovedadElemento()}">
 										<f:ajax onevent="comprobar"/>
 									</p:commandButton>
@@ -583,13 +588,19 @@
 							<h:outputText value="#{novedad.tipo}"/>
 						</p:column>
 						<p:column headerText="ID Elemento/Equipo">
-							<h:outputText value="#{novedad.equipo==null?novedad.elemento.id:novedad.equipo.id}"/>
+							<h:outputText value="#{novedad.equipo.id==null?novedad.elemento.id:novedad.equipo.id}"/>
 						</p:column>
 						<p:column headerText="Elemento/Equipo">
-							<h:outputText value="#{novedad.equipo==null?'Elemento':'Equipo'}"/>
+							<h:outputText value="#{novedad.equipo.id==null?'Elemento':'Equipo'}"/>
 						</p:column>
 						<p:column headerText="Usuario">
 							<h:outputText value="#{novedad.usuario}"/>
+						</p:column>
+						<p:column headerText="Titulo">
+							<h:outputText value="#{novedad.titulo}"/>
+						</p:column>
+						<p:column headerText="Detalle">
+							<h:outputText value="#{novedad.detalle}"/>
 						</p:column>
 						<p:column headerText="Fecha">
 							<h:outputText value="#{novedad.fecha}"/>
@@ -600,11 +611,11 @@
 								<h:commandButton style="color:white;" value="Recargar" action="#{adminBean.recargar()}" styleClass="btn btn-default btn-info" />
 							</form>
 						</f:facet>
-						<h:form>
-							<i class="fas fa-download"></i><h:commandLink value="Descargar" action="#{adminBean.importarTablaNovedades()}" styleClass="btn btn-default"/>
-						</h:form>
 					</p:dataTable>
 				</p:fieldset>
+				<h:form>
+					<i class="fas fa-download"></i><h:commandLink value="Descargar" action="#{adminBean.importarTablaNovedades()}" styleClass="btn btn-default"/>
+				</h:form>
 			</div>
 		</div>
 
@@ -692,7 +703,34 @@
 						<h4 class="modal-title">Novedades del elemento #{elemento.id}</h4>
 					</div>
 					<div class="modal-body">
-
+						<p:dataTable value="#{adminBean.listaNovedadesElementos(elemento)}"
+								 var="novedad"
+								 paginator="true"
+								 rows="10"
+								 paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}"
+								 rowKey="#{elemento.id}">
+							<p:column headerText="Tipo">
+								<h:outputText value="#{novedad.tipo}"/>
+							</p:column>
+							<p:column headerText="ID Elemento">
+								<h:outputText value="#{elemento.id}"/>
+							</p:column>
+							<p:column headerText="Usuario">
+								<h:outputText value="#{novedad.usuario}"/>
+							</p:column>
+							<p:column headerText="Titulo">
+								<h:outputText value="#{novedad.titulo}"/>
+							</p:column>
+							<p:column headerText="Detalle">
+								<h:outputText value="#{novedad.detalle}"/>
+							</p:column>
+							<p:column headerText="Fecha">
+								<h:outputText value="#{novedad.fecha}"/>
+							</p:column>
+	
+							<f:facet name="footer">
+							</f:facet>
+						</p:dataTable>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default cerrarModal" data-dismiss="modal">Cerrar</button>
@@ -760,7 +798,34 @@
 						<h4 class="modal-title">Información novedades equipo #{equipo.id}</h4>
 					</div>
 					<div class="modal-body">
-						
+						<p:dataTable value="#{adminBean.listaNovedadesEquipos(equipo)}"
+								 var="novedad"
+								 paginator="true"
+								 rows="10"
+								 paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}"
+								 rowKey="#{elemento.id}">
+							<p:column headerText="Tipo">
+								<h:outputText value="#{novedad.tipo}"/>
+							</p:column>
+							<p:column headerText="ID Elemento">
+								<h:outputText value="#{equipo.id}"/>
+							</p:column>
+							<p:column headerText="Usuario">
+								<h:outputText value="#{novedad.usuario}"/>
+							</p:column>
+							<p:column headerText="Titulo">
+								<h:outputText value="#{novedad.titulo}"/>
+							</p:column>
+							<p:column headerText="Detalle">
+								<h:outputText value="#{novedad.detalle}"/>
+							</p:column>
+							<p:column headerText="Fecha">
+								<h:outputText value="#{novedad.fecha}"/>
+							</p:column>
+	
+							<f:facet name="footer">
+							</f:facet>
+						</p:dataTable>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
