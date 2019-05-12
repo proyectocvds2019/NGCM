@@ -25,6 +25,8 @@ import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletResponse;
@@ -48,10 +50,12 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 				for (Elemento e: equi.getElementos()){
 					if(e.getTipo().name().equals(elemento.getTipo().name())){
 						elementoDAO.actualizarIdEquipo(e.getId(),null);
+						this.registrarNovedad("Desasociando equipo", "Se ha desasociado el equipo "+equi.getId(), "novedadModificar", correoUsuario, null, e.getId());
 					}
 				}
 			}
 			elementoDAO.registrarElemento(elemento,correoUsuario,equipo);
+			this.registrarNovedad("Registro", "Se ha registrado este elemento", "novedadRegistro", correoUsuario, null, elemento.getId());
 		} catch (PersistenceException e) {
 			throw new ExcepcionServiciosHistorial("No se pudo registrar el elemento.");
 		}
@@ -87,12 +91,19 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 	@Override
 	public void registrarEquipo(Equipo equipo, Laboratorio laboratorio) throws ExcepcionServiciosHistorial {
 		try {
+			Subject subject = SecurityUtils.getSubject();
 			equipoDAO.registrarEquipo(equipo, laboratorio);
+			System.out.println(equipo.getId());
+			this.registrarNovedad("Registro", "Se ha registrado el equipo "+equipo.getId(), "novedadRegistro", (String) subject.getSession().getAttribute("correo"), equipo.getId(), null);
 			for(Elemento e: equipo.getElementos()) {
+				System.out.println(e.getId());
+				Integer ee = this.consultarEquipoDeElemento(e);
 				actualizarIdEquipoEnElemento(e.getId(), equipo.getId());
 			}
 		}catch(PersistenceException e) {
 			throw new ExcepcionServiciosHistorial("No se pudo registrar el equipo.");
+		}catch(Exception e) {
+			
 		}
 	}
 	
@@ -152,14 +163,18 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 	@Override
 	public void actualizarIdEquipoEnElemento(String idElemento, Integer idEquipo) throws ExcepcionServiciosHistorial {
 		try {
-			
-			if(idEquipo != null){
+			Subject subject = SecurityUtils.getSubject();
+			System.out.println("#######################");
+			if(idEquipo != null || idEquipo == null){
 				Elemento elem = elementoDAO.consultarElemento(idElemento);
 				Equipo equi = equipoDAO.consultarEquipo(idEquipo);
 				Elemento elem2 =null;
+				System.out.println(elem+" "+equi+" "+elem2);
 				if(equi != null){
 					elem2 = elementoDAO.consultarElementoDelEquipo(elem.getTipo(),equi);
 					if(equi.getActivo()) {
+						System.out.println("siiiiiiiiiiiiiiiiii");
+						this.registrarNovedad("Asociar", "el elemeto "+idElemento+" Se ha asociado al equipo "+idEquipo, "novedadModificar", (String) subject.getSession().getAttribute("correo"), null, idElemento);
 						elementoDAO.actualizarIdEquipo(idElemento, idEquipo);
 					}
 					else {
@@ -167,9 +182,11 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 					}
 				}
 				if(elem != null){
-					elementoDAO.actualizarIdEquipo(elem.getId(),null);
+					this.registrarNovedad("asosiacion", "el elemento "+idElemento+" se ha asociado al equipo "+idEquipo, "novedadCambio", (String) subject.getSession().getAttribute("correo"), idEquipo, idElemento);
+					elementoDAO.actualizarIdEquipo(elem.getId(),idEquipo);
 				}
 				if(elem2 != null){
+					this.registrarNovedad("desasosiacion", "el elemento "+elem2.getId()+" se ha desasociado del equipo "+equi.getId(), "novedadCambio", (String) subject.getSession().getAttribute("correo"), idEquipo, idElemento);
 					elementoDAO.actualizarIdEquipo(elem2.getId(),null);
 				}
 			}else {
@@ -177,6 +194,8 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 			}
 		}catch (PersistenceException e) {
 			throw new ExcepcionServiciosHistorial("No se pudo actualizar el idEquipo en el elemento.");
+		}catch(Exception e) {
+			
 		}
 		
 	}
@@ -184,9 +203,13 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 	@Override
 	public void desactivarElemento(String id) throws ExcepcionServiciosHistorial {
 		try {
+			Subject subject = SecurityUtils.getSubject();
+			this.registrarNovedad("Eliminando", "Se dio de baja el elemento "+id, " novedadEliminar", (String) subject.getSession().getAttribute("correo"), null, id);
 			elementoDAO.desactivarElemento(id);
 		}catch (PersistenceException e) {
 			throw new ExcepcionServiciosHistorial("No se pudo dar de baja al elemento.");
+		}catch(Exception e) {
+			
 		}
 		
 	}
@@ -322,9 +345,14 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 	@Override
 	public void desactivarEquipo(Integer id) throws ExcepcionServiciosHistorial {
 		try {
+			System.out.println("hhhhhhhhhhhhhh");
+			Subject subject = SecurityUtils.getSubject();
+			this.registrarNovedad("Eliminado", "Se ha dado de baja el equipo "+id, "novedadEliminar", (String) subject.getSession().getAttribute("correo"), id, null);
 			equipoDAO.desactivarEquipo(id);
 		}catch(PersistenceException e) {
 			throw new ExcepcionServiciosHistorial("No se pudo dar de baja al equipo.");
+		}catch(Exception e) {
+			
 		}
 		
 	}
@@ -408,18 +436,26 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 	@Override
 	public void cambiarIDElemento(Elemento elemento, String id) throws ExcepcionServiciosHistorial{
 		try{
+			Subject subject = SecurityUtils.getSubject();
+			this.registrarNovedad("Cambio", "se cambio el id del elemento "+elemento.getId(), "novedadCambio", (String) subject.getSession().getAttribute("correo"), null, elemento.getId());
 			this.elementoDAO.cambiarIDElemento(elemento,id);
 		}catch(PersistenceException e){
 			throw new ExcepcionServiciosHistorial("No se pudo cambiar el id del elemento.");
+		}catch(Exception e) {
+			
 		}
 	}
 
 	@Override
 	public void cambiarNombreElemento(Elemento elemento, String nombre) throws ExcepcionServiciosHistorial{
 		try{
+			Subject subject = SecurityUtils.getSubject();
+			this.registrarNovedad("Cambio", "se cambio el nombre del elemento "+elemento.getId(), "novedadCambio", (String) subject.getSession().getAttribute("correo"), null, elemento.getId());
 			this.elementoDAO.cambiarNombreElemento(elemento,nombre);
 		}catch(PersistenceException e){
 			throw new ExcepcionServiciosHistorial("No se pudo cambiar el nombre del elemento.");
+		}catch(Exception e) {
+			
 		}
 	}
 
@@ -610,10 +646,11 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 				if(eq != null) {
 					novedadDAO.registrarNovedad(titulo, detalle, clase, usuario, idEquipo, idElemento);
 				}else {
-					throw new ExcepcionServiciosHistorial("No se pudo registrar la novedad.");
+					novedadDAO.registrarNovedad(titulo, detalle, clase, usuario, idEquipo, idElemento);
 				}
 			}
 		}catch (PersistenceException e) {
+			e.printStackTrace();
 			throw new ExcepcionServiciosHistorial("No se pudo registrar la novedad.");
 		}
 	}

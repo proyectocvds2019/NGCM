@@ -345,7 +345,9 @@
 														</p:column>
 														<p:column selectionMode="multiple" style="text-align: center" />
 													</p:dataTable>
-												<h:commandButton styleClass="btn btn-default btn-success" value="Confirmar" action="#{adminBean.eliminarEquipos()}"/>
+												<p:commandButton process="@form" ajax="true" onsuccess="mensajeCorrecto('Se ha dado de baja el equipo')" onerror="mensajeError('No se ha podido dar de baja el equipo')" styleClass="btn btn-default btn-success" value="Confirmar" action="#{adminBean.eliminarEquipos()}">
+													<f:ajax onevent="comprobar"/>
+												</p:commandButton>
 												<button type="button" class="btn btn-default btn-danger" data-dismiss="modal">Cancelar</button>
 											</div>
 											<div class="modal-footer">

@@ -213,14 +213,20 @@ public class adminBean implements Serializable{
 		}catch (ExcepcionServiciosHistorial e){
 			this.mensajeError();
 			e.printStackTrace();
+		}catch (Exception e) {
+			e.printStackTrace();
+			this.mensajeError();
 		}
 	}
 
 	public void eliminarEquipos(){
 		try{
+			System.out.println(this.equiposSeleccionados.get(0));
 			if(this.equiposSeleccionados.size() == 1){
 				if(this.equiposSeleccionados.get(0) != null){
+					System.out.println(this.equiposSeleccionados.get(0).getElementos().size());
 	                for(Elemento elemento:this.equiposSeleccionados.get(0).getElementos()){
+	                	System.out.println("ffffff");
 	                    this.serviciosHistorial.actualizarIdEquipoEnElemento(elemento.getId(),null);
 	                    for(TipoElemento tipo : this.elementosSeleccionadoPorEquipo){
 	                        if(elemento.getTipo().name().equals(tipo.name())){
@@ -239,7 +245,6 @@ public class adminBean implements Serializable{
 					this.serviciosHistorial.desactivarEquipo(e.getId());
 				}
 			}
-			this.recargar();
 			this.mensajeCorrecto();
 		}catch(ExcepcionServiciosHistorial e){
 			e.printStackTrace();

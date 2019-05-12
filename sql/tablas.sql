@@ -85,7 +85,7 @@ ALTER TABLE Usuarios ADD CONSTRAINT Correo
 		
 -- Tipo Elementos
 ALTER TABLE Elementos ADD CONSTRAINT Tipo
-		CHECK (Elementos.tipo IN ('PANTALLA') OR Elementos.tipo IN ('TECLADO') OR Elementos.tipo IN ('MOUSE') OR Elementos.tipo IN('TORRE'));
+		CHECK (Elementos.tipo IN ('PANTALLA') OR Elementos.tipo IN ('TECLADO') OR Elementos.tipo IN ('MOUSE') OR Elementos.tipo IN('TORRE') OR elementos.tipo IN('MONITOR') );
 
 -- Roles
 /*

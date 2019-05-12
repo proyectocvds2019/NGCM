@@ -3,9 +3,11 @@
 
 /*insert into elementos (id,tipo,idequipo,registradopor) values (nextval('id_elemento'),'TECLADO',null,'gualdronsito@hotmail.com');*/
 insert into equipos (id) values (nextval('id_equipo'));
+select * from novedades order by id desc;
+select * from elementos;
 select * from equipos;
 
-select * from novedades;
+select * from novedades where idequipo is null;
 
 SELECT novedades.id,
 		novedades.titulo, 
@@ -13,25 +15,27 @@ SELECT novedades.id,
 		novedades.idUsuario, 
 		novedades.clase,
 		novedades.fechaRegistro,
-
-
-		elementos.id as idElemento,
+		
+		
+		
 		elementos.tipo as tipoElemento,
 		elementos.nombre as nombreElemento,
 		elementos.activo as activoElemento,
 		elementos.fechaRegistro as ff,
 		
-		equipos.id as idEquipo,
+		novedades.idequipo as idEquipo,
 		equipos.activo as activoEquipo,
 		equipos.fechaRegistro as fff
 FROM Novedades, elementos, equipos
-WHERE (Novedades.idEquipo = equipos.id and
-		novedades.idelemento is null)
+WHERE (novedades.idelemento = elementos.id and
+		novedades.idequipo is null)
 		or
-		(novedades.idelemento = elementos.id and
-		novedades.idequipo == null)
+		(novedades.idequipo = equipos.id and
+		novedades.idelemento is null)
 		
 ORDER BY fechaRegistro;
+
+
 
 select idElemento from novedades;
 
@@ -56,3 +60,20 @@ SELECT equipos.id, equipos.activo, equipos.laboratorio, laboratorios.nombre as l
 		FROM Equipos, laboratorios
 		WHERE (equipos.id = (select elementos.idEquipo from elementos where elementos.id = 'asdf')) AND
 		equipos.laboratorio = laboratorios.id;
+
+	
+	
+	
+	
+select * from equipos;
+	
+	
+select *
+from elementos,novedades,equipos
+where 
+(novedades.idelemento = elementos.id and
+novedades.idequipo is null)
+or
+(equipos.id = novedades.idequipo or true);
+
+

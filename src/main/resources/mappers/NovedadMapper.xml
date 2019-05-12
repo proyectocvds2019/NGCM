@@ -101,7 +101,7 @@
 				(novedades.idequipo = equipos.id and
 				novedades.idelemento is null)) AND Novedades.idEquipo = #{equipo.id}
 				
-		ORDER BY fechaRegistro;
+		ORDER BY novedades.id DESC;
 	</select>
 	
 </mapper>
