@@ -688,6 +688,20 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 			celda = row.createCell(column);
 			celda.setCellValue("USUARIO");
 			column++;
+
+			column++;
+			celda = row.createCell(column);
+			celda.setCellValue("TITULO");
+			column++;
+
+			column++;
+			celda = row.createCell(column);
+			celda.setCellValue("DETALLE");
+			column++;
+
+
+
+
 			celda = row.createCell(column);
 			celda.setCellValue("FECHA");
 			rownum = 1;
@@ -716,6 +730,19 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 				celda = row.createCell(column);
 				celda.setCellValue(novedad.getUsuario());
 				column++;
+
+				column++;
+				celda = row.createCell(column);
+				celda.setCellValue(novedad.getTitulo());
+				column++;
+
+				column++;
+				celda = row.createCell(column);
+				celda.setCellValue(novedad.getDetalle());
+				column++;
+
+
+
 				celda = row.createCell(column);
 				celda.setCellValue(novedad.getFecha().toString());
 				column++;

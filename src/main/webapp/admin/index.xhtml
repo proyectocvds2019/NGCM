@@ -269,6 +269,7 @@
 				<p:commandButton ajax="true" onsuccess="mensajeCorrecto('El elemento se ha registrado!')" onerror="mensajeError('No se ha podido registrar el elemento!')" action="#{adminBean.registrarEquipo()}" icon="fa fa-check" class="btn btn-default btn-success" value="Registrar" >
 					<f:ajax  onevent="comprobar"/>
 				</p:commandButton>
+				<button type="button" class="btn btn-default btn-info" data-toggle="modal" data-target="#registrarElementoModal">Registrar Nuevo Elemento</button>
 			</h:form>
 			<hr/>
 		</div>
@@ -525,7 +526,6 @@
 									<h:inputTextarea id="registrarNovedadElementoDetalle" value="#{adminBean.detalleRegistrarNovedad}" />
 									<h:outputLabel for="registrarNovedadAjusteEle" value="Seleccione el tipo de ajuste: "/>
 									<h:selectOneMenu id="registrarNovedadAjusteEle" value="#{adminBean.novedadAjuste}">
-										<f:selectItem itemLabel="Eliminar" itemValue="novedadEliminar"/>
 										<f:selectItem itemLabel="Modificar" itemValue="novedadModificar"/>
 									</h:selectOneMenu>
 									<p:commandButton id="registrarNovedadElementoBoton" process="@parent" onsuccess="mensajeCorrecto('Se ha registrado la novedad correctamente')" onerror="mensajeError('No se pudo registrar la novedad')" ajax="true" styleClass="btn btn-default btn-success" value="Registrar" action="#{adminBean.registrarNovedadElemento()}">
@@ -551,20 +551,19 @@
 							<div class="modal-body">
 								<h:form>
 									<h:form>
-										<h:outputLabel for="registrarNovedadElemento" value="Seleccione el elemento: "/>
-										<h:selectOneMenu id="registrarNovedadElemento" value="#{adminBean.novedadElemento}">
-											<f:selectItems value="#{adminBean.listaElementos}" var="elemento" itemLabel="#{elemento.id}" itemValue="#{elemento.id}"/>
+										<h:outputLabel for="registrarNovedadEquipo" value="Seleccione el equipo: "/>
+										<h:selectOneMenu id="registrarNovedadEquipo" value="#{adminBean.novedadEquipo}">
+											<f:selectItems value="#{adminBean.listaEquiposActivos}" var="equipo" itemLabel="Sistemas#{equipo.id}" itemValue="#{equipo.id}"/>
 										</h:selectOneMenu>
-										<h:outputLabel for="registrarNovedadElementoTitulo" value="Escriba el título de la novedad: "/>
-										<h:inputText id="registrarNovedadElementoTitulo" value="#{adminBean.tituloRegistrarNovedad}"/>
-										<h:outputLabel for="registrarNovedadElementoDetalle" value="Escriba el detalle de la novedad: "/>
-										<h:inputTextarea id="registrarNovedadElementoDetalle" value="#{adminBean.detalleRegistrarNovedad}" />
+										<h:outputLabel for="registrarNovedadEquipoTitulo" value="Escriba el título de la novedad: "/>
+										<h:inputText id="registrarNovedadEquipoTitulo" value="#{adminBean.tituloRegistrarNovedad}"/>
+										<h:outputLabel for="registrarNovedadEquipoDetalle" value="Escriba el detalle de la novedad: "/>
+										<h:inputTextarea id="registrarNovedadEquipoDetalle" value="#{adminBean.detalleRegistrarNovedad}" />
 										<h:outputLabel for="registrarNovedadAjuste" value="Seleccione el tipo de ajuste: "/>
 										<h:selectOneMenu id="registrarNovedadAjuste" value="#{adminBean.novedadAjuste}">
-											<f:selectItem itemLabel="Eliminar" itemValue="novedadEliminar"/>
 											<f:selectItem itemLabel="Modificar" itemValue="novedadModificar"/>
 										</h:selectOneMenu>
-										<p:commandButton id="registrarNovedadElementoBoton" process="@parent" onsuccess="mensajeCorrecto('Se ha registrado la novedad correctamente')" onerror="mensajeError('No se pudo registrar la novedad')" ajax="true" styleClass="btn btn-default btn-success" value="Registrar" action="#{adminBean.registrarNovedadElemento()}">
+										<p:commandButton id="registrarNovedadElementoBoton" process="@parent" onsuccess="mensajeCorrecto('Se ha registrado la novedad correctamente')" onerror="mensajeError('No se pudo registrar la novedad')" ajax="true" styleClass="btn btn-default btn-success" value="Registrar" action="#{adminBean.registrarNovedadEquipo()}">
 											<f:ajax onevent="comprobar"/>
 										</p:commandButton>
 									</h:form>
@@ -581,6 +580,8 @@
 			<div class="row">
 				<p:fieldset id="tablaNovedades" legend="Tabla de Laboratorios">
 					<p:dataTable value="#{adminBean.listaNovedades}"
+								sortBy="#{novedad.id}"
+								sortOrder="DESCENDING"
 								 var="novedad"
 								 paginator="true"
 								 rows="10"
@@ -625,6 +626,55 @@
 
 
 	<!-- MODALES -->
+
+
+	
+
+	<div class="modal fade" id="registrarElementoModal" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+
+					<h4 class="modal-title">Registrar Elemento </h4>
+				</div>
+				<div class="modal-body">
+					<h:form id="formularioRegistrarElementoModal">
+						<h:panelGrid class="col-xs-12" columns="2" cellpadding="5">
+							<p:outputLabel for="idElemento" value="Id del elemento:"/>
+							<p:inputText required="true" id="idElemento" value="#{adminBean.idElemento}"/>
+
+							<p:outputLabel for="nombreElemento" value="Nombre del elemento:" />
+							<p:inputText required="true" id="nombreElemento" value="#{adminBean.nombreElemento}"/>
+
+					        <p:outputLabel for="tipoElemento" value="Tipo de elemento:" />
+
+							<h:selectOneMenu required="true" id="tipoElemento" value="#{adminBean.tipoSeleccionado}" style="width:196px">
+			                    <f:selectItems value="#{adminBean.tipoElementos}"/>
+			                </h:selectOneMenu>
+					       	
+			
+					       <p:outputLabel for="Equipo" value="Equipo:" />
+					       <h:selectOneMenu required="true" id="Equipo" value="#{adminBean.equipo}" style="width:196px">
+					       		<f:selectItem itemLabel="NULL" itemValue="-1"/>
+			                    <f:selectItems value="#{adminBean.listaEquiposActivos}" itemValue="#{equipo.id}" var="equipo" itemLabel="Sistemas#{equipo.id}"/>
+			                </h:selectOneMenu>
+
+					 
+					    </h:panelGrid>
+					    <p:commandButton ajax="true" onsuccess="mensajeCorrecto('El elemento se ha registrado!')" onerror="mensajeError('No se ha podido registrar el elemento!')" id="botonRegistrarElemento" process="@form" action="#{adminBean.registrarElemento()}" icon="fa fa-check" styleClass="btn btn-default btn-success" value="Registrar" >
+							<f:ajax  onevent="comprobar"/>
+						</p:commandButton>
+					</h:form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
 
 	<ui:repeat var="elemento" value="#{adminBean.listaElementos}">
 		<!-- Modal -->

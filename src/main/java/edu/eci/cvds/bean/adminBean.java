@@ -1,4 +1,4 @@
-package edu.eci.cvds.bean;
+ package edu.eci.cvds.bean;
 
 import java.io.Serializable;
 import java.util.*;
@@ -549,6 +549,7 @@ public class adminBean implements Serializable{
 	}
 
 	public void registrarNovedadEquipo(){
+		System.out.println("entre");
 		try{
 			Integer equi = Integer.parseInt(this.novedadEquipo);
 			this.serviciosHistorial.registrarNovedad(this.tituloRegistrarNovedad,this.detalleRegistrarNovedad,this.novedadAjuste,this.correo,equi,null);
