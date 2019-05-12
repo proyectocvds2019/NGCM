@@ -97,6 +97,13 @@ insert into usuarios (nombre, correo, contrasena, carnet, rol) values ('Andres G
 --El equipo para las pruebas
 insert into laboratorios (id,nombre,activo) values (nextval('id_lab'),'laboratorio de redes',true);
 --El elemento para pruebas
-insert into elementos (id,nombre,activo,tipo,registradoPor) values ('ttt','rrr',true,'TECLADO','gualdronsito@hotmail.com');
+
+insert into equipos (id,activo,laboratorio) values (nextval('id_equipo'),true,null);
+
+insert into elementos (id,nombre,activo,tipo,registradoPor,idequipo) values ('teclado1','teclado1',true,'TECLADO','gualdronsito@hotmail.com',1);
+insert into elementos (id,nombre,activo,tipo,registradoPor,idequipo) values ('mouse1','mouse1',true,'MOUSE','gualdronsito@hotmail.com',1);
+insert into elementos (id,nombre,activo,tipo,registradoPor,idequipo) values ('monitor1','monitor1',true,'MONITOR','gualdronsito@hotmail.com',1);
+insert into elementos (id,nombre,activo,tipo,registradoPor,idequipo) values ('torre1','torre1',true,'TORRE','gualdronsito@hotmail.com',1);
+
 --La novedad para pruebas
-insert into Novedades (id,titulo,detalle,clase,idElemento,idEquipo,idUsuario) values (nextval('id_novedad'),'titulo','detalle','novedadEliminar','ttt',null,'gualdronsito@hotmail.com');
+--insert into Novedades (id,titulo,detalle,clase,idElemento,idEquipo,idUsuario) values (nextval('id_novedad'),'titulo','detalle','novedadEliminar','ttt',null,'gualdronsito@hotmail.com');
