@@ -84,8 +84,8 @@ ALTER TABLE Usuarios ADD CONSTRAINT Correo
 		CHECK (Usuarios.correo LIKE '%@%.%');
 		
 -- Tipo Elementos
-/*ALTER TABLE Elementos ADD CONSTRAINT Tipo
-		CHECK (Elementos.tipo IN ('PANTALLA') OR Elementos.tipo IN ('TECLADO') OR Elementos.tipo IN ('MOUSE') OR Elementos.tipo IN('TORRE'));*/
+ALTER TABLE Elementos ADD CONSTRAINT Tipo
+		CHECK (Elementos.tipo IN ('PANTALLA') OR Elementos.tipo IN ('TECLADO') OR Elementos.tipo IN ('MOUSE') OR Elementos.tipo IN('TORRE'));
 
 -- Roles
 /*
