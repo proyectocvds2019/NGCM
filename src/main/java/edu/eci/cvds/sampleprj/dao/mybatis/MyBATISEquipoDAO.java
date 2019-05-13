@@ -63,4 +63,9 @@ public class MyBATISEquipoDAO implements EquipoDAO{
 		return equipoMapper.consultarEquipoDelLaboratorio(lab);
 	}
 
+	@Override
+	public List<Equipo> consultarEquiposDelLaboratorio(Laboratorio laboratorio){
+		return equipoMapper.consultarEquiposDelLaboratorio(laboratorio);
+	}
+
 }

@@ -78,5 +78,10 @@
 		FROM laboratorios,equipos
 		WHERE equipos.laboratorio = laboratorios.id AND laboratorios.id = #{lab.id};
 	</select>
+
+
+	<select id="consultarEquiposDelLaboratorio" parameterType="map" resultMap="EquiposResult">
+		SELECT equipos.id, equipos.activo FROM laboratorios,equipos WHERE laboratorios.id = #{laboratorio.id} AND laboratorios.id = equipos.laboratorio;
+	</select>
 	
 </mapper>

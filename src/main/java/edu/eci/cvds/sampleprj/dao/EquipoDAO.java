@@ -21,13 +21,15 @@ public interface EquipoDAO {
 	
 	public Integer proximoIdEquipo() throws PersistenceException;
         
-        public void desactivarEquipo(Integer id) throws PersistenceException;
+    public void desactivarEquipo(Integer id) throws PersistenceException;
 
-        public List<Equipo> consultarEquiposDisponibles() throws PersistenceException;
-    
-        public void actualizarIdLaboratorio(Integer idLab, Integer idEq) throws PersistenceException;
+    public List<Equipo> consultarEquiposDisponibles() throws PersistenceException;
+
+    public void actualizarIdLaboratorio(Integer idLab, Integer idEq) throws PersistenceException;
 
 	public Equipo consultarEquipoDelLaboratorio(Laboratorio lab) throws PersistenceException;
+
+	public List<Equipo> consultarEquiposDelLaboratorio(Laboratorio laboratorio) throws  PersistenceException;
 
 	
 }

@@ -36,4 +36,6 @@ public interface EquipoMapper {
 
 	public Equipo consultarEquipoDelLaboratorio(@Param("lab") Laboratorio lab);
 
+	public List<Equipo> consultarEquiposDelLaboratorio(@Param("laboratorio") Laboratorio laboratorio);
+
 }

@@ -468,24 +468,28 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 			}
 		}catch (PersistenceException ex) {
 			throw new ExcepcionServiciosHistorial("No se pudo registrar el laboratorio");
+		}catch (Exception e){
+
 		}
 	}	
 
 	@Override
 	public void actualizarIdLaboratorioEnEquipo(Integer idEquipo, Integer idLab) throws ExcepcionServiciosHistorial{
 		try {
-			if(idLab != null) {
-				Laboratorio lab = laboratorioDAO.consultarLaboratorio(idLab);
-				if(lab != null && lab.isActivo()) {
-					equipoDAO.actualizarIdLaboratorio(idLab, idEquipo);
-				}else {
-					throw new ExcepcionServiciosHistorial("No se pudo actualizar el idLaboratorio en el equipo.");
-				}
+			System.out.println("en");
+			Subject subject = SecurityUtils.getSubject();
+			Laboratorio lab = laboratorioDAO.consultarLaboratorio(idLab);
+			if(lab != null && lab.isActivo()) {
+				System.out.println("en2");
+				equipoDAO.actualizarIdLaboratorio(idLab, idEquipo);
+				this.registrarNovedad("Asosiacion", "Se ha asosiado el equipo "+idEquipo+" al laboratorio "+lab.getNombre(), "novedadModificar", (String) subject.getSession().getAttribute("correo"), idEquipo, null);
 			}else {
 				throw new ExcepcionServiciosHistorial("No se pudo actualizar el idLaboratorio en el equipo.");
 			}
 		}catch(PersistenceException e) {
 			throw new ExcepcionServiciosHistorial("No se pudo actualizar el idLaboratorio en el equipo.");
+		}catch (Exception e){
+			System.out.println("fallo");
 		}
 	}
 	
@@ -530,7 +534,7 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 		try{
 			return laboratorioDAO.consultarNumeroEquipos(laboratorio);
 		}catch (PersistenceException e){
-			throw new ExcepcionServiciosHistorial("No se pudo consultar el número de equipos.");
+			throw new ExcepcionServiciosHistorial("No se pudo consultar el nï¿½mero de equipos.");
 		}
 	}
 
@@ -546,10 +550,17 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 	@Override
 	public void eliminarLaboratorio(Laboratorio laboratorio) throws ExcepcionServiciosHistorial{
 		try{
+			Subject subject = SecurityUtils.getSubject();
 			laboratorioDAO.eliminarLaboratorio(laboratorio);
-
+			List<Equipo> lE =  equipoDAO.consultarEquiposDelLaboratorio(laboratorio);
+			for(Equipo e: lE){
+				this.registrarNovedad("Desasociacion", "Se ha desasociado el equipo "+e.getId()+" del laboratorio "+laboratorio.getNombre(), "novedadModificar", (String) subject.getSession().getAttribute("correo"), e.getId(), null);
+				this.registrarNovedad("Asociacion", "Se ha asociado el equipo "+e.getId()+" al laboratorio "+null, "novedadModificar", (String) subject.getSession().getAttribute("correo"), e.getId(), null);
+			}
 		}catch (PersistenceException e){
 			throw new ExcepcionServiciosHistorial("No se pudo eliminar el laboratorio.");
+		}catch (Exception e){
+
 		}
 	}
 

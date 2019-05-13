@@ -756,6 +756,8 @@
 					</div>
 					<div class="modal-body">
 						<p:dataTable value="#{adminBean.listaNovedadesElementos(elemento)}"
+									 sortBy="#{novedad.id}"
+									 sortOrder="DESCENDING"
 								 var="novedad"
 								 paginator="true"
 								 rows="10"
@@ -851,7 +853,9 @@
 					</div>
 					<div class="modal-body">
 						<p:dataTable value="#{adminBean.listaNovedadesEquipos(equipo)}"
-								 var="novedad"
+									 sortBy="#{novedad.id}"
+									 sortOrder="DESCENDING"
+									 var="novedad"
 								 paginator="true"
 								 rows="10"
 								 paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}"

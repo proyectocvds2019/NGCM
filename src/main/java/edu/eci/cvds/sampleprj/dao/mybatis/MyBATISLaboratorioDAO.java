@@ -67,4 +67,5 @@ public class MyBATISLaboratorioDAO implements LaboratorioDAO {
     public Integer consultarEquiposEliminadosLaboratorio(Laboratorio laboratorio) throws PersistenceException{
         return laboratorioMapper.consultarEquiposEliminadosLaboratorio(laboratorio);
     }
+
 }
