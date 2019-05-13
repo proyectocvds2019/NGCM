@@ -70,14 +70,14 @@
 		<div class="row col-xs-12">
 			<h1>Registrar Elemento</h1>
 			<hr/>
-			<h:form>
+			<h:form onsubmit="comprobarRegistroElemento();">
 			 
 			    <h:panelGrid class="col-xs-12" columns="2" cellpadding="5">
 					<p:outputLabel for="idElemento" value="Id del elemento:"/>
-					<p:inputText required="true" id="idElemento" value="#{adminBean.idElemento}"/>
+					<p:inputText id="idElemento" value="#{adminBean.idElemento}"/>
 
 					<p:outputLabel for="nombreElemento" value="Nombre del elemento:" />
-					<p:inputText required="true" id="nombreElemento" value="#{adminBean.nombreElemento}"/>
+					<p:inputText id="nombreElemento" value="#{adminBean.nombreElemento}"/>
 
 			        <p:outputLabel for="tipoElemento" value="Tipo de elemento:" />
 
@@ -94,7 +94,15 @@
 
 			 
 			    </h:panelGrid>
-			    <p:commandButton ajax="true" onsuccess="mensajeCorrecto('El elemento se ha registrado!')" onerror="mensajeError('No se ha podido registrar el elemento!')" id="botonRegistrarElemento" process="@form" action="#{adminBean.registrarElemento()}" icon="fa fa-check" styleClass="btn btn-default btn-success" value="Registrar" >
+			    <p:commandButton ajax="true"
+								 onsuccess="mensajeCorrecto('El elemento se ha registrado!')"
+								 onerror="mensajeError('No se ha podido registrar el elemento!')"
+								 id="botonRegistrarElemento"
+								 process="@parent"
+								 action="#{adminBean.registrarElemento()}"
+								 icon="fa fa-check"
+								 styleClass="btn btn-default btn-success"
+								 value="Registrar">
 					<f:ajax  onevent="comprobar"/>
 				</p:commandButton>
 				
@@ -266,7 +274,7 @@
 	                </h:selectOneMenu>
 				</h:panelGrid>
 
-				<p:commandButton ajax="true" onsuccess="mensajeCorrecto('El elemento se ha registrado!')" onerror="mensajeError('No se ha podido registrar el elemento!')" action="#{adminBean.registrarEquipo()}" icon="fa fa-check" class="btn btn-default btn-success" value="Registrar" >
+				<p:commandButton ajax="true" onsuccess="mensajeCorrecto('El elemento se ha registrado!')" onerror="mensajeError('No se ha podido registrar el equipo!')" action="#{adminBean.registrarEquipo()}" icon="fa fa-check" class="btn btn-default btn-success" value="Registrar" >
 					<f:ajax  onevent="comprobar"/>
 				</p:commandButton>
 				<button type="button" class="btn btn-default btn-info" data-toggle="modal" data-target="#registrarElementoModal">Registrar Nuevo Elemento</button>

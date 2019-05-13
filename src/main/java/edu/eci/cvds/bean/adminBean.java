@@ -100,6 +100,10 @@ public class adminBean implements Serializable{
     
 	public void registrarElemento(){
 		try{
+			System.out.println(idElemento+" "+nombreElemento);
+			if(idElemento.equals("") || nombreElemento.equals("")){
+				throw new ExcepcionServiciosHistorial("no se puede registrar el elemento");
+			}
 			Elemento elemento = new Elemento(idElemento,tipoSeleccionado,nombreElemento,true);
 			serviciosHistorial.registrarElemento(elemento,this.correo,this.equipo);
 			this.mensajeCorrecto();

@@ -32,4 +32,8 @@ function mensajeCorrecto(msg){
     
 }
 
+function comprobarRegistroElemento(){
+    console.log($("#idElemento"));
+}
+
 
