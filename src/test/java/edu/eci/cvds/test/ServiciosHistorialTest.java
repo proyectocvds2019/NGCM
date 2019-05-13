@@ -179,6 +179,24 @@ public class ServiciosHistorialTest {
             
             }
         }
+        
+        @Test
+        public void deberiaRegistrarNovedad(){
+            try{
+                Equipo eq = new Equipo(24, true);
+                Elemento el = new Elemento("08", TipoElemento.TECLADO,"teclado",true);
+                this.serviciosHistorial.registrarEquipo(eq,null);
+                this.serviciosHistorial.registrarElemento(el,"gualdronsito@hotmail.com",null);
+                this.serviciosHistorial.consultarNovedades();
+                assertTrue(true);
+            }catch(ExcepcionServiciosHistorial e){
+                e.printStackTrace();
+                assertTrue(false);
+            }
+        
+        
+        
+        }
             
         
         
