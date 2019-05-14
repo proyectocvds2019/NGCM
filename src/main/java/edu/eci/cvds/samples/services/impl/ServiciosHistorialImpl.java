@@ -704,8 +704,6 @@ public class ServiciosHistorialImpl implements ServiciosHistorial{
 			celda = row.createCell(column);
 			celda.setCellValue("TITULO");
 			column++;
-
-			column++;
 			celda = row.createCell(column);
 			celda.setCellValue("DETALLE");
 			column++;
