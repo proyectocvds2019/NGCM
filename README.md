@@ -33,7 +33,7 @@ Aparte de registrar un elemento nuevo, la aplicación me permite ver un listado 
 
 ![](https://raw.githubusercontent.com/proyectocvds2019/NGCM/master/images/4.png "Tabla de Elementos")
 
-Adicional a esto puedo conocer las novedades de cada elemento que estén registradas en el historial y modificar el nombre e identificador del mismo.
+Adicional a esto puedo conocer las novedades de cada elemento que estén registradas en el historial y modificar el nombre del mismo.
 
 ![](https://raw.githubusercontent.com/proyectocvds2019/NGCM/master/images/5.png "Novedades del Elemento")
 
