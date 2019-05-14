@@ -121,7 +121,6 @@ https://circleci.com/gh/proyectocvds2019/NGCM
 
 ## **Descripción del Proceso**
 ### Integrantes
-- Julian Velasco - Product Owner
 - Andres Gualdron - Scrum Master
 - Natalia Palacios - Team Developer
 - Cesar Villamil - Team Developer
