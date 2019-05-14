@@ -9,7 +9,7 @@
 |Miguel Sanchez|Team Developer|
 
 ## **Descripción del Producto**
-###Descripción General
+### Descripción General
 Esta aplicacion busca llevar un historial de novedades de los elementos del laboratorio de informatica de la decanatura de ingenieria de sistemas de la Escuela Colombiana de Ingenieria Julio Garavito. Esto permitira una gestion mas facil de los recursos y un acceso sencillo a la informacion de cada elemento de las salas. 
 La Plataforma esta fundamentada en tres pilares: elementos, equipos y laboratorios. Sobre estos tres componentes guarda registros de las novedades que ocurren con ellos. Tambien tiene la funcionalidad de asociar elementos a un equipo y equipos a un laboratorio, a su vez registra o muestra el estado de los tres componentes. 
  
