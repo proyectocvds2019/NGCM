@@ -69,7 +69,7 @@ La aplicación también me permite ver el listado de los laboratorios registrado
 
 ![](https://raw.githubusercontent.com/proyectocvds2019/NGCM/master/images/14.png "Eliminar Laboratorio")
 
-Este modulo nos permite ver algunas estadísticas que facilitan la administración de los recursos del laboratorio. Encontramos dos gráficas que nos indican la cantidad de equipos registrados y eliminados por laboratorio.
+Este módulo nos permite ver algunas estadísticas que facilitan la administración de los recursos del laboratorio. Encontramos dos gráficas que nos indican la cantidad de equipos registrados y eliminados por laboratorio.
 
 ![](https://raw.githubusercontent.com/proyectocvds2019/NGCM/master/images/15.png "Tablas de Laboratorios")
 
