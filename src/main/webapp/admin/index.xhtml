@@ -709,8 +709,6 @@
 									</div>
 									<div class="collapse navbar-collapse" id="myNavbarCambioElementosModal">
 										<ul class="nav navbar-nav">
-											<li id="botonConfigurarIDElemento" data-toggle="collapse" data-target="#configurarIDModal#{elemento.id}" class="active botonMenuConfiguracion"><a href="#">ID</a></li>
-
 											<li id="botonConfigurarNombreElemento" data-toggle="collapse" data-target="#configurarNombreModal#{elemento.id}" class="botonMenuConfiguracion"><a href="#">NOMBRE</a></li>
 
 										</ul>
@@ -718,21 +716,7 @@
 								</div>
 							</nav>
 						</div>
-						<div class="in collapse collapseConfiguracion container-fluid" id="configurarIDModal#{elemento.id}">
-							<h:form>
-							    <h:panelGrid class="col-xs-12" columns="2" cellpadding="5">
-									<h:outputText value="Nuevo ID para #{elemento.id}:"/>
-									<h:inputText required="true" id="idElementoCambio" value="#{adminBean.cambioIDElemento}"/>
-							    </h:panelGrid>
-								
-							 
-							    <p:commandButton process="@parent" ajax="true" onsuccess="mensajeCorrecto('El ID se ha modificado correctamente')" onerror="mensajeError('No se ha podido modificar el ID')" action="#{adminBean.CambiarIDElemento(elemento)}" styleClass="btn btn-default btn-success" value="Cambiar" >
-							    	<f:ajax onevent="comprobar"/>
-							    </p:commandButton>
-								
-
-							</h:form>
-						</div>
+						
 						<div class="collapse collapseConfiguracion container-fluid" id="configurarNombreModal#{elemento.id}">
 							<h:form>
 							    <h:panelGrid columns="2">

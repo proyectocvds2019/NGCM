@@ -58,6 +58,7 @@ public class MyBATISElementoDAO implements ElementoDAO{
 
 	@Override
 	public void cambiarIDElemento(Elemento elemento, String id){
+		System.out.println("entro: "+id);
 		ElementoMapper.cambiarIDElemento(elemento,id);
 	}
 
