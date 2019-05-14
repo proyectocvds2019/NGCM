@@ -1,17 +1,19 @@
-# Plataforma Historial de equipos laboratorio de sistemas. Equipo NGCM
-### CVDS 2019 - 1
+# **Plataforma Historial de equipos laboratorio de sistemas. Equipo NGCM**
+### **CVDS 2019 - 1**
 |     Nombre    |     Rol         |
 |:--------------:|:-------------: |
 |Julian Velasco|Product Owner|
 |Andres Gualdron|Scrum Master|
 |Natalia Palacios|Team Developer|
 |Cesar Villamil|Team Developer|
-|Miguel ASG|Team Developer|
+|Miguel Sanchez|Team Developer|
 
-## Descripción del Producto
+## **Descripción del Producto**
+###Descripción General
 Esta aplicacion busca llevar un historial de novedades de los elementos del laboratorio de informatica de la decanatura de ingenieria de sistemas de la Escuela Colombiana de Ingenieria Julio Garavito. Esto permitira una gestion mas facil de los recursos y un acceso sencillo a la informacion de cada elemento de las salas. 
-La Plataforma esta fundamentada en tres pilares: elementos, equipos y laboratorios. Sobre estos tres componentes guarda registros de las novedades que ocurren con ellos. Tambien tiene la funcionalidad de asociar elementos a un equipo y equipos a un laboratorio, a su vez registra o muestra el estado de los tres componentes.  
-#### Manual de Usuario
+La Plataforma esta fundamentada en tres pilares: elementos, equipos y laboratorios. Sobre estos tres componentes guarda registros de las novedades que ocurren con ellos. Tambien tiene la funcionalidad de asociar elementos a un equipo y equipos a un laboratorio, a su vez registra o muestra el estado de los tres componentes. 
+ 
+### Manual de Usuario
 Es necesario iniciar sesión para poder utilizar la aplicación.
 + **Usuario:** *gualdronsito@hotmail.com*
 + **Contraseña:** *123*
@@ -87,20 +89,84 @@ Al igual que en los demas modulos, la aplicacion me permite desplegar una tabla 
 ![](https://raw.githubusercontent.com/proyectocvds2019/NGCM/master/images/19.png "Tabla de Novedades")
 
 ![](https://raw.githubusercontent.com/proyectocvds2019/NGCM/master/images/20.png "Descargar Novedades")
-## MODELO DE BASE DE DATOS DE LA APLICACIÓN
-![](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.github.com/proyectocvds2019/NGCM/master/modeloBaseDatos.puml)
-
-## DIAGRAMA DE CLASES DE LA APLICACIÓN
-![](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.github.com/proyectocvds2019/NGCM/master/diagramaClases.puml)
-
-## Link de la aplicación: https://proyectocvds2019.herokuapp.com/admin/index.xhtml
-
-# SPRINTS
 
 
+## **Arquitectura y Diseño detallado**
+### Modelo Entidad - Relacion
+![](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.github.com/proyectocvds2019/NGCM/master/modeloBaseDatos.puml "Modelo Entidad-Relacion")
 
-## Estado del proyecto
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2c430545fff64cf8a324cf969958f1c7)](https://www.codacy.com/app/AndresFelipeGualdron/NGCM?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=proyectocvds2019/NGCM&amp;utm_campaign=Badge_Grade)
-[![CircleCI](https://circleci.com/gh/proyectocvds2019/NGCM.svg?style=svg)](https://circleci.com/gh/proyectocvds2019/NGCM)
+### Diagrama de Clases
+![](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.github.com/proyectocvds2019/NGCM/master/diagramaClases.puml "Diagrama de Clases")
+
+### Arquitectura de la Aplicacion
+#### Front-End
+- Login
+	- Apache Shiro
+- Elementos Visuales
+	- PrimeFaces
+	- JavaScript
+#### Back-End
+- Test
+	- QuickTheories 
+- Dependency Injection and Mappers
+	- MyBatis
+	-  Guice
+#### Database
+- PostgreSQL
+### Despliegue
+https://proyectocvds2019.herokuapp.com
+
+### Integracion Continua
+https://circleci.com/gh/proyectocvds2019/NGCM
+
+## **Descripción del Proceso**
+### Integrantes
+- Julian Velasco - Product Owner
+- Andres Gualdron - Scrum Master
+- Natalia Palacios - Team Developer
+- Cesar Villamil - Team Developer
+- Miguel Sanchez -Team Developer
+### Metodología
+Se utilizo la metodologia agil de proyectos Scrum, se realizaron sprints de 15 dias de los cuales su resultado era un producto funcional y con valor. El trabajo a realizar en cada sprint fue planeado por el equipo antes de su inicio, dividiendo este en tareas de usuario muy especificas, por lo cual habia gran numero de estas. Las tareas que no se pudieron realizar en los sprints fueron postergadas al siguiente ciclo.
+
+### Backlog
+
 [Taiga backlog](https://tree.taiga.io/project/gualdronsito-historial-de-equipos-labinfo/backlog)
 
+### Release-Burndown Chart
+#### Puntos de Historia
+Se lograron completar todos los puntos de historia propuestos en el backlog del proyecto.
+
+![](https://raw.githubusercontent.com/proyectocvds2019/NGCM/master/images/PuntosHistoriaProyecto.png "Puntos de Historia del Proyecto")
+
+### Sprint 1
+#### Sprint Backlog 
+![](https://raw.githubusercontent.com/proyectocvds2019/NGCM/master/images/BacklogSprint1.png "Backlog del Primer Sprint")
+#### Sprint Burndown Chart
+![](https://raw.githubusercontent.com/proyectocvds2019/NGCM/master/images/RBDCSprint1.png "Burndown Chart del Primer Sprint")
+
+En este sprint el equipo estaba entendiendo la problematica, esto combinado con la falta de comunicacion provoco cierto retraso en la realizacion y completitud de las tareas. No se lograron terminar todas las historias de usuario, por lo que la tarea faltante fue movida al segundo ciclo.
+ 
+### Sprint 2
+#### Sprint Backlog
+![](https://raw.githubusercontent.com/proyectocvds2019/NGCM/master/images/BacklogSprint2.png "Backlog del Segundo Sprint")
+#### Sprint Burndown Chart
+![](https://raw.githubusercontent.com/proyectocvds2019/NGCM/master/images/RBDCSprint2.png "Burndown Chart del Segundo Sprint")
+
+El equipo tomo mas historias de usuario. La mejor comunicacion mejoro el desempeno general del trabajo, por lo que las historias y tareas fueron completadas con gran agilidad.
+
+### Sprint 3
+#### Sprint Backlog
+![](https://raw.githubusercontent.com/proyectocvds2019/NGCM/master/images/BacklogSprint3.png "Backlog del Tercer Sprint")
+#### Sprint Burndown Chart
+![](https://raw.githubusercontent.com/proyectocvds2019/NGCM/master/images/RBDCSprint3.png "Burndown Chart del Tercer Sprint")
+
+En este sprint el equipo siguio con el buen trabajo realizado en el segundo ciclo, adicionalmente se logro trabajar en conjunto mucho mas tiempo, permitiendo aplicar practicas de la programacion extrema. A pesar de que uno de los miembros del equipo estuvo ausente durante la gran mayoria del proyecto, el desempeno del resto del equipo, y su habilidad de gestionar las tareas y el tiempo, permitieron obtener un resultado satisfactorio.
+
+### Reporte de Pruebas
+Se probaron los registros de cada modulo, los enlaces entre elementos y equipos, los enlaces entre equipos y laboratorios y las eliminaciones de los diversos componentes de la aplicacion. De igual manera se probaron las distintas consultas realizadas en las funcionalidades.
+[![CircleCI](https://circleci.com/gh/proyectocvds2019/NGCM.svg?style=svg)](https://circleci.com/gh/proyectocvds2019/NGCM)
+
+### Analisis de Codigo
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2c430545fff64cf8a324cf969958f1c7)](https://www.codacy.com/app/AndresFelipeGualdron/NGCM?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=proyectocvds2019/NGCM&amp;utm_campaign=Badge_Grade)
